@@ -2,15 +2,15 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "Product API",
-        "description": "REST API for Products"
+        "title": "Trabalho PAW",
+        "description": "REST API para a milestone 1"
     },
     "host": "localhost:3000",
-    "basePatch": "/api/v1",
+    "basePatch": "/api/",
     "tags": [
         {
-            "name": "Products",
-            "description": "API for products in the system"
+            "name": "Pedidos",
+            "description": "API for pedidos in the system"
         }
     ],
     "schemes": [
@@ -23,19 +23,19 @@
         "aplication/json"
     ],
     "paths": {
-        "/products": {
+        "/pedido": {
             "post": {
                 "tags": [
-                    "Products"
+                    "Pedidos"
                 ],
-                "description": "Create new user in system",
+                "description": "Criar um novo pedido no sistema",
                 "parameters": [
                     {
-                        "name": "product",
+                        "informacao": "informação útil que o utilizador queira acrescentar ao pedido",
                         "in": "body",
-                        "description": "Product that we want to create",
+                        "estadoUtilizador": "Indicar estado do utilizado",
                         "shema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/Pedido"
                         }
                     }
                 ],
@@ -44,28 +44,93 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "New product is created",
+                        "description": "Um novo pedido é criado",
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/Pedido"
                         }
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Products"
+                    "Pedidos"
                 ],
-                "summary": "Get all products in system",
+                "summary": "Get all pedidos in system",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/Pedidos"
+                        }
+                    }
+                }
+            },
+            "/pedidos/{pedidoId}": {
+                "parameters": [
+                    {
+                        "informacao": "informação útil que o utilizador queira acrescentar ao pedido",
+                        "in": "patch",
+                        "require": true,
+                        "estadoUtilizador": "Indicar estado do utilizado"
+                        
+
+                    }
+                ],
+                "get": {
+                    "tags": [
+                        "Pedidos"
+                    ],
+                    "summary": "Get all pedidos with given ID",
+                    "responses": {
+                        "200": {
+                            "description": "Pedido is found",
+                            "schema": {
+                                "$ref": "#/definitions/Pedido"
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Delete product with given ID",
+                    "tags": [
+                        "Products"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Product is delected",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Update product with given ID",
+                    "tags": [
+                        "Products"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "product",
+                            "in": "body",
+                            "description": "Product with new  values of properties",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Product is updated",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
                         }
                     }
                 }
             }
         },
+        
         "defenitions": {
             "Product": {
                 "required": [
