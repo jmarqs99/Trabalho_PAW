@@ -15,4 +15,19 @@ pedidoController.criarPedido = function (req,res,next) {
     });
 };
 
+pedidoController.getAllPedidos = function(req, res, next) {
+    Pedido.find(function(err, pedidos){
+        if(err) {
+            next(err)
+        }else {
+            res.json(pedidos)
+        }
+    })
+}
+
+pedidoController.getOnePedido = function(req, res) {
+    res.json(req.pedido)
+}
+
+
 module.exports = pedidoController;
