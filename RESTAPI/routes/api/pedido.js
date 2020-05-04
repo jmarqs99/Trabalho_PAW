@@ -8,9 +8,10 @@ router.get('/', function(req, res, next) {
 });
 router.get('/pedidos', pedidoController.getAllPedidos);
 router.get('/:pedidoId', pedidoController.getOnePedido);
+
 router.post('/', pedidoController.criarPedido);
 
-router.param('pedidoId', pedidoController.getByIdProduct)
+//router.param('pedidoId', pedidoController.getByIdProduct)
 
 
 
