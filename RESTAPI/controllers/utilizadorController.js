@@ -45,5 +45,15 @@ utilizadorController.verUtilizadorInterno = function(id,user){
      });
 };
 
+utilizadorController.verTodosUtilizadores = function(req,res,next){
+    Utilizador.find(function (err, utilizadores ) {
+        if (err) {
+            next(err);
+        } else {
+            res.json(utilizadores);
+        }
+    });
+}
+
 
 module.exports = utilizadorController;

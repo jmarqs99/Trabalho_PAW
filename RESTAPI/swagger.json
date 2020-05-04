@@ -130,6 +130,51 @@
                 }
             }
         },
+        "/utilizador": {
+            "post":{
+                "summary": "Guarda um utilizador com as informações passadas",
+                "tags":["Utilizador"],
+                "parameters":[
+                    {
+                        "name": "Utilizador",
+                        "in": "body",
+                        "description" : "Utilizador com as propriedades dadas",
+                        "schema":{
+                            "$ref": "#/models/utilizador.js#"
+                        }
+                    }
+                ]
+            },
+            "get":{
+                "summary": "Retorna todos os utilizadores existentes",
+                "tags":["Utilizador"]
+            }
+        },
+        "/utilizador/:utilizadorId":{
+            "get":{
+                "summary":"Retorna todos o utilizador com o id dado",
+                "tags":["Utilizador"],
+                "parameters":[
+                    {
+                        "name": "Utilizador",
+                        "in": "Header",
+                        "description" : "Utilizador com as propriedades dadas"
+                    }
+                ]
+            },
+            "put":{
+                "summary":"Atualiza o utilizador com o id dado",
+                "tags":["Utilizador"],
+                "parameters":[
+                    {
+                        "name": "Utilizador",
+                        "in": "body",
+                        "description" : "Utilizador com as novas propriedades"
+                    }
+                ]
+            }
+        },
+        
         
         "defenitions": {
             "Product": {
@@ -159,5 +204,7 @@
                 "$ref": "#/definitions/Product"
             }
         }
+    
     }
+
 }
