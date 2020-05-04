@@ -1,0 +1,98 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Product API",
+        "description": "REST API for Products"
+    },
+    "host": "localhost:3000",
+    "basePatch": "/api/v1",
+    "tags": [
+        {
+            "name": "Products",
+            "description": "API for products in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "aplication/json"
+    ],
+    "produces": [
+        "aplication/json"
+    ],
+    "paths": {
+        "/products": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "Create new user in system",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "body",
+                        "description": "Product that we want to create",
+                        "shema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "produces": [
+                    "aplication/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New product is created",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                }
+            }
+        },
+        "defenitions": {
+            "Product": {
+                "required": [
+                    "name",
+                    "_id"
+                ],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "uniqueItems": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "uniqueItems": true
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "Number"
+                    }
+                }
+            },
+            "Products": {
+                "type": "array",
+                "$ref": "#/definitions/Product"
+            }
+        }
+    }
+}
