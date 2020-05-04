@@ -64,6 +64,70 @@
                         }
                     }
                 }
+            },
+            "/pedidos/{pedidoId}": {
+                "parameters": [
+                    {
+                        "informacao": "informação útil que o utilizador queira acrescentar ao pedido",
+                        "in": "patch",
+                        "require": true,
+                        "estadoUtilizador": "Indicar estado do utilizado"
+                        
+
+                    }
+                ],
+                "get": {
+                    "tags": [
+                        "Pedidos"
+                    ],
+                    "summary": "Get all pedidos with given ID",
+                    "responses": {
+                        "200": {
+                            "description": "Pedido is found",
+                            "schema": {
+                                "$ref": "#/definitions/Pedido"
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Delete product with given ID",
+                    "tags": [
+                        "Products"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Product is delected",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Update product with given ID",
+                    "tags": [
+                        "Products"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "product",
+                            "in": "body",
+                            "description": "Product with new  values of properties",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Product is updated",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                }
             }
         },
         
