@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
   res.send({working: true})
 });
 
-router.post('/utilizadores', utilizadorController.createUtilizador);
-router.put('/utilizador/:utilizadorId', utilizadorController.updateUtilizador);
+router.post('/', utilizadorController.createUtilizador);
+router.put('/:utilizadorId', utilizadorController.updateUtilizador);
+router.get('/:utilizadorId' , utilizadorController.verPerfil)
 
 module.exports = router;

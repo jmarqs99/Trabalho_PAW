@@ -26,14 +26,15 @@ utilizadorController.updateUtilizador = function (req, res, next) {
 };
 
 utilizadorController.verPerfil = function(req,res,next){
-    Utilizador.findOne({ _id: id }, function (err, product) {
-        if (err) {
-            next(err);
-        } else {
-            req.utilizador = product;
-            next();
-        }
-    });
-}
+    Utilizador.findById(req.params.utilizadorId, req.body, { new: true },
+        function (err, utilizador) {
+            if (err) {
+                next(err);
+            } else {
+                res.json(utilizador);
+            }
+        });
+};
+
 
 module.exports = utilizadorController;
