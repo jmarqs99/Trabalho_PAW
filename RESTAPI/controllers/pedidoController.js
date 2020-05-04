@@ -29,5 +29,16 @@ pedidoController.getOnePedido = function(req, res) {
     res.json(req.pedido)
 }
 
+pedidoController.getByIdProduct = function(req, res, next, id) {
+    Pedido.findOne({_id: id}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            req.pedido = pedido
+            next()
+        }
+    })
+}
 
 module.exports = pedidoController;
