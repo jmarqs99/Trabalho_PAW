@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const tecnicoController = require("../../controllers/tecnicoController");
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.send({working: true})
+});
+
+
+module.exports = router;

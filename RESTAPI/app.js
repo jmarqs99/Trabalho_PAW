@@ -4,7 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const apiRouter = require('./routes/api');
+const apiUtilizadorRouter = require('./routes/api/utilizador');
+const apiTecnicoRouter = require('./routes/api/tecnico');
+const apiPedidoRouter = require('./routes/api/pedido');
 
 const app = express();
 
@@ -24,7 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1', apiRouter);
+app.use('/api/utilizador', apiUtilizadorRouter);
+app.use('/api/tecnico', apiTecnicoRouter);
+app.use('/api/pedido', apiPedidoRouter);
+
 
 app.use('/api-docs',swaggerUi.serve , swaggerUi.setup(swaggerDocumment));
 
