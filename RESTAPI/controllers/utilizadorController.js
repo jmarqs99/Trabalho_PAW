@@ -25,15 +25,24 @@ utilizadorController.updateUtilizador = function (req, res, next) {
         });
 };
 
-utilizadorController.verPerfil = function(req,res,next){
-    Utilizador.findById(req.params.utilizadorId, req.body, { new: true },
-        function (err, utilizador) {
+utilizadorController.verUtilizador = function(req,res,next){
+    Utilizador.findOne({_id:req.params.utilizadorId},function (err, utilizador) {
             if (err) {
                 next(err);
             } else {
                 res.json(utilizador);
             }
         });
+};
+
+utilizadorController.verUtilizadorInterno = function(id,user){
+    Utilizador.findOne({_id:id},function (err, utilizador) {
+        if (err) {
+            user(null);
+        } else {
+            user(utilizador);
+        }
+     });
 };
 
 

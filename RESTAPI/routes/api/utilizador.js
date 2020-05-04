@@ -9,6 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/', utilizadorController.createUtilizador);
 router.put('/:utilizadorId', utilizadorController.updateUtilizador);
-router.get('/:utilizadorId' , utilizadorController.verPerfil)
+router.get('/:utilizadorId' , utilizadorController.verUtilizador)
 
 module.exports = router;
