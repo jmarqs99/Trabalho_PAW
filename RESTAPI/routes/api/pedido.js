@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
   res.send({working: true})
 });
 router.get('/pedidos', pedidoController.getAllPedidos);
-router.get('/pedido/:pedidoId', pedidoController.getOnePedido);
-router.post('/pedidos', pedidoController.criarPedido);
+router.get('/:pedidoId', pedidoController.getOnePedido);
+router.post('/', pedidoController.criarPedido);
 
 router.param('pedidoId', pedidoController.getByIdProduct)
 
