@@ -23,7 +23,7 @@
         "aplication/json"
     ],
     "paths": {
-        "/pedido": {
+        "/api/pedido": {
             "post": {
                 "summary": "Criar um pedido na plataforma",
                 "tags": [
@@ -47,7 +47,7 @@
                 ]
             }
         },
-        "/pedido/:pedidoId": {
+        "/api/pedido/:pedidoId": {
             "get": {
                 "summary": "Retorna um pedido com um determinado id",
                 "tags": [
@@ -62,7 +62,7 @@
                 ]
             }
         },
-        "/utilizador": {
+        "/api/utilizador": {
             "post": {
                 "summary": "Guarda um utilizador com as informações passadas",
                 "tags": [
@@ -86,7 +86,7 @@
                 ]
             }
         },
-        "/utilizador/:utilizadorId": {
+        "/api/utilizador/:utilizadorId": {
             "get": {
                 "summary": "Retorna todos o utilizador com o id dado",
                 "tags": [
@@ -110,6 +110,59 @@
                         "name": "Utilizador",
                         "in": "body",
                         "description": "Utilizador com as novas propriedades"
+                    }
+                ]
+            }
+        },
+        "/api/tecnico": {
+            "get": {
+                "summary": "Retorna todos os técnicos existentes",
+                "tags": [
+                    "Técnico"
+                ],
+                "produces":[
+                    "application/json"
+                 ]
+            }
+        },
+        "/api/tecnico/:userID": {
+            "post": {
+                "summary": "Define um utilizador como técnico",
+                "tags": [
+                    "Técnico"
+                ],
+                "parameters": [
+                    {
+                        "name": "userID",
+                        "in": "Query Params",
+                        "description": "ID do Utilizador"
+                    }
+                ]
+            }
+        },"/api/tecnico/:tecnicoID": {
+            "get": {
+                "summary": "Retorna um técnio dado um determinado ID",
+                "tags": [
+                    "Técnico"
+                ],
+                "parameters": [
+                    {
+                        "name": "tecnicoID",
+                        "in": "Query Params",
+                        "description": "ID do Técnico"
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Remove um utilizador da posição de técnico",
+                "tags": [
+                    "Técnico"
+                ],
+                "parameters": [
+                    {
+                        "name": "tecnicoID",
+                        "in": "Query Params",
+                        "description": "ID do Técnico"
                     }
                 ]
             }

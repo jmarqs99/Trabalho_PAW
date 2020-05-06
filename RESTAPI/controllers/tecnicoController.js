@@ -52,7 +52,7 @@ tecnicoController.verTecnico = async function (req,res,next) {
      });
 };
 
-tecnicoController.verTecnicos = async function (req,res,next) {
+tecnicoController.verTecnicos = function (req,res,next) {
     Tecnico.find(function (err,tecnicos)  {
         if(err) {
             next(err);
