@@ -10,7 +10,7 @@ utilizadorController.createUtilizador = function (req, res, next) {
         if (err) {
             next(err);
         } else {
-            if (req.body.nmrCC && req.body.password) {
+            if (req.body.nmrCC && req.body.password && req.body.primeiroNome && req.body.ultimoNome) {
                 if (utilizador == null) {
                     bcrypt.hash(req.body.password, 10, function (err, hash) {
                         req.body.password = hash;
