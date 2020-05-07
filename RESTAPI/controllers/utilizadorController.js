@@ -47,6 +47,15 @@ utilizadorController.updateUtilizador = function (req, res, next) {
         });
 };
 
+utilizadorController.updateUtilizadorInterno = function (id,update) {
+    Utilizador.findByIdAndUpdate(id, update, { new: true },
+        function (err, utilizador) {
+            if (err) {
+                next(err);
+            } 
+        });
+};
+
 utilizadorController.verUtilizador = function (req, res, next) {
     Utilizador.findOne({ _id: req.params.utilizadorId }, function (err, utilizador) {
         if (err) {

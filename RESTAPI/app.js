@@ -10,7 +10,7 @@ const sessionMiddleware = require('./middlewares/session')
 const apiUtilizadorRouter = require('./routes/api/utilizador');
 const apiTecnicoRouter = require('./routes/api/tecnico');
 const apiPedidoRouter = require('./routes/api/pedido');
-const sessionRouter = require('./routes/api/session')
+const sessionRouter = require('./routes/api/session');
 
 const app = express();
 
@@ -53,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message || 'error');
 });
 
 module.exports = app;

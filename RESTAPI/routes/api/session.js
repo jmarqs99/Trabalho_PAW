@@ -1,7 +1,8 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const mongoose = require("mongoose");
 const Utilizador = require("../../models/utilizador");
+const Tecnico = require("../../models/tecnico");
+const authorize = require('../../middlewares/authorize')
 const bcrypt = require('bcrypt');
 
 const sessionRouter = express.Router()
@@ -17,16 +18,28 @@ sessionRouter.post('/login', (req, res, next) => {
 				if (utilizador) {
 					bcrypt.compare(req.body.password, utilizador.password, function(err, result) {
 						if(result){
-							const jwtToken = jwt.sign(req.body, process.env.JWT_SECRET);
-							res.cookie(
-								'session',
-								jwtToken,
-								{
-									expires: new Date(Date.now() + SESSION_EXP),
-									httpOnly: true
+							const cookie = req.body;
+							Tecnico.findOne({utilizadorId:utilizador._id},function (err, tecnico) {
+								if(err){
+									next(err);
+								} else {
+									if (tecnico) {
+										cookie.role = "TECNICO";
+									} else {
+										cookie.role = "UTILIZADOR"
+									}
+									const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
+									res.cookie(
+										'session',
+										jwtToken,
+										{
+											expires: new Date(Date.now() + SESSION_EXP),
+											httpOnly: true
+										}
+									)
+									res.json({status:'logged In'})
 								}
-							)
-							res.json({status:'logged In'})
+							})
 						} else {
 							res.json({status:"Wrong Password"})
 						}

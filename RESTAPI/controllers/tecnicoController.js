@@ -12,6 +12,7 @@ tecnicoController.criarTecnico = function (req,res,next) {
                 if(err) {
                     next(err);
                 } else {
+                    utilizadorController.updateUtilizadorInterno(req.params.userId,{changed:true})
                     res.json(tecnico);
                 }
             });
@@ -22,13 +23,20 @@ tecnicoController.criarTecnico = function (req,res,next) {
 };
 
 tecnicoController.removerTecnico = function (req,res,next) {
-    Tecnico.deleteOne({_id:req.params.tecnicoID},function (err)  {
+    Tecnico.findOne({_id:req.params.tecnicoID},function (err,tecnico)  {
         if(err) {
             next(err);
         } else {
-            res.json({status:"Done"});
+            Tecnico.deleteOne({_id:req.params.tecnicoID},function (err)  {
+                if(err) {
+                    next(err);
+                } else {
+                    utilizadorController.updateUtilizadorInterno(tecnico.utilizadorId,{changed:true})
+                    res.json({status:"Done"});
+                }
+            });
         }
-      });
+    });
 };
 
 tecnicoController.verTecnico = async function (req,res,next) {
@@ -64,6 +72,7 @@ tecnicoController.verTecnicos = function (req,res,next) {
                 result.forEach(function(item,index){
                     result[index] = result[index].toObject();
                     utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
+                        console.log(utilizador);
                         result[index].primeiroNome = utilizador.primeiroNome;
                         result[index].ultimoNome = utilizador.ultimoNome;
                         result[index].estado = utilizador.estado;
