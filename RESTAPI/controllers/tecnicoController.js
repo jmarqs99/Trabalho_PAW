@@ -53,6 +53,7 @@ tecnicoController.verTecnico = async function (req,res,next) {
 };
 
 tecnicoController.verTecnicos = function (req,res,next) {
+    console.log(process.env.JWT_SECRET);
     Tecnico.find(function (err,tecnicos)  {
         if(err) {
             next(err);

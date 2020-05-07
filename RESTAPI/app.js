@@ -3,10 +3,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
+
+const sessionMiddleware = require('./middlewares/session')
 
 const apiUtilizadorRouter = require('./routes/api/utilizador');
 const apiTecnicoRouter = require('./routes/api/tecnico');
 const apiPedidoRouter = require('./routes/api/pedido');
+const sessionRouter = require('./routes/api/session')
 
 const app = express();
 
@@ -20,17 +24,20 @@ mongoose.connect('mongodb+srv://admin:pawtrabalhopaw2020@cluster0-6uaiy.mongodb.
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
+
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(sessionMiddleware);
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/api/utilizador', apiUtilizadorRouter);
 app.use('/api/tecnico', apiTecnicoRouter);
 app.use('/api/pedido', apiPedidoRouter);
-
-
+app.use('/api', sessionRouter);
 app.use('/api-docs',swaggerUi.serve , swaggerUi.setup(swaggerDocumment));
 
 // catch 404 and forward to error handler
