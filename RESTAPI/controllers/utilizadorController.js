@@ -14,14 +14,14 @@ utilizadorController.createUtilizador = function (req, res, next) {
             if(utilizador == null){
                 bcrypt.hash(req.body.password, 10, function(err, hash) {
                     req.body.password = hash;
-                });
-                const newUtilizador = new Utilizador(req.body);
-                newUtilizador.save(function (err) {
-                    if (err) {
-                        next(err);
-                    } else {
-                        res.json(newUtilizador);
-                    }
+                    const newUtilizador = new Utilizador(req.body);
+                    newUtilizador.save(function (err) {
+                        if (err) {
+                            next(err);
+                        } else {
+                            res.json({status: "Criado"});
+                        }
+                    });
                 });
             }
             else{
