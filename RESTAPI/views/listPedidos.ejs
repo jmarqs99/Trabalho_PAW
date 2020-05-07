@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lista de pedidos</title>
+    </head>
+
+    <body>
+
+       <h3> <a href="/createPedido">Criar um pedido</a> </h3>
+
+        <h1>Lista de Pedidos</h1>
+
+        <div id = "result">
+
+        </div>
+
+        <script>
+
+            function getPedidoList() {
+                var url = "http://localhost:3000/api/pedido";
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', url, true);
+                xhr.onload = function() {
+                    var pedidos = JSON.parse(xhr.responseText);
+
+                    if(xhr.readyState == 4 && xhr.status == "200") {
+                        
+                        updateWithPedidoList(pedidos);
+                        console.table(pedidos)
+                    } else {
+                        console.error(pedidos)
+                    }
+                }
+                xhr.send()
+            }
+
+            function updateWithPedidoList(pedidos) {
+                var resultDiv = document.getElementById("result");
+                var temp = "";
+
+                if(pedidos.length > 0) {
+                    for(var i=0; i<pedidos.length; i++) {
+                        temp += '<p>';
+                        temp += "informacao: " + pedidos[i].informacao + ", estadoUtilizador: " + pedidos[i].estadoUtilizador + 
+                        ", estadoTeste: " + pedidos[i].estadoTeste + ", resultadoTeste: " + pedidos[i].resultadoTeste + "</p>"
+                    }
+                } else {
+                    temp = "Sem pedidos"
+                }
+                resultDiv.innerHTML = temp
+            }
+
+            getPedidoList()
+
+        </script>
+
+    </body>
+</html>

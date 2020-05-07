@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Criar Pedido</title>
+</head>
+
+<body>
+    <h1>Criar um novo pedido</h1>
+    <form id="pedidoForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td>informacao</td>
+                    <td><input type="text" name="informacao"></td>
+                </tr>
+                <tr>
+                    <td>estadoUtilizador</td>
+                    <td><input type="text" name="estadoUtilizador"></td>
+                </tr>
+                <tr>
+                    <td>estadoTeste</td>
+                    <td><input type="text" name="estadoTeste"></td>
+                </tr>
+                <tr>
+                    <td>resultadoTeste</td>
+                    <td><input type="text" name="resultadoTeste"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        var myForm = document.getElementById("pedidoForm")
+
+        myForm.addEventListener('submit', function(ev){
+            ev.preventDefault();
+
+            var url = "http://localhost:3000/api/pedido";
+            var data = {};
+
+            data.informacao = myForm.querySelector('input[name="informacao"]').value;
+            data.estadoUtilizador = myForm.querySelector('input[name="estadoUtilizador"]').value;
+            data.estadoTeste = myForm.querySelector('input[name="estadoTeste"]').value;
+            data.resultadoTeste = myForm.querySelector('input[name="resultadoTeste"]').value;
+
+            var json = JSON.stringify(data);
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            
+            xhr.onload = function() {
+                var pedido = JSON.parse(xhr.responseText);
+
+                if(xhr.readyState == 4 && xhr.status == "200") {
+                    console.table(pedido);
+
+                    location.replace("listPedidos");
+                } else {
+                    console.error(pedido)
+                    alert("erro ao criar um pedido")
+                }
+            }
+            xhr.send(json)
+
+        })
+
+    </script>
+</body>
+
+</html>
