@@ -1,16 +1,21 @@
 const mongoose = require("mongoose");
 const Utilizador = require("../models/utilizador");
+const bcrypt = require('bcrypt');
 
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
-    const newUtilizador = new Utilizador(req.body);
+    
 
     Utilizador.findOne({nmrCC:req.body.nmrCC},function (err, utilizador) {
         if (err) {
             next(err);
         } else {
             if(utilizador == null){
+                bcrypt.hash(req.body.password, 10, function(err, hash) {
+                    req.body.password = hash;
+                });
+                const newUtilizador = new Utilizador(req.body);
                 newUtilizador.save(function (err) {
                     if (err) {
                         next(err);
