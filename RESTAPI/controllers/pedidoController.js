@@ -39,4 +39,16 @@ pedidoController.getOnePedido = function(req, res, next) {
     
 }
 
+pedidoController.updatePedido = function(req, res, next) {
+
+    Pedido.findByIdAndUpdate(req.params.pedidoId, req.body, { new: true },
+        function (err, pedido) {
+            if (err) {
+                next(err);
+            } else {
+                res.json(pedido);
+            }
+        });
+}
+
 module.exports = pedidoController;
