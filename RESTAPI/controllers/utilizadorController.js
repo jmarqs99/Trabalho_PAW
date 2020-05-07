@@ -4,16 +4,31 @@ const Utilizador = require("../models/utilizador");
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
-    const utilizador = new Utilizador(req.body);
+    const newUtilizador = new Utilizador(req.body);
 
-    utilizador.save(function (err) {
+    Utilizador.findOne({nmrCC:req.body.nmrCC},function (err, utilizador) {
         if (err) {
             next(err);
         } else {
-            res.json(utilizador);
+            if(utilizador == null){
+                newUtilizador.save(function (err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        res.json(newUtilizador);
+                    }
+                });
+            }
+            else{
+                res.send("Já existe um utilizador com esse nr de cc");
+            }
+            
         }
     });
+
 };
+
+
 utilizadorController.updateUtilizador = function (req, res, next) {
     Utilizador.findByIdAndUpdate(req.params.utilizadorId, req.body, { new: true },
         function (err, utilizador) {
