@@ -6,7 +6,7 @@
         "description": "REST API para a milestone 1"
     },
     "host": "localhost:3000",
-    "basePatch": "/api/",
+    "basePath": "/api",
     "schemes": [
         "http"
     ],
@@ -17,7 +17,7 @@
         "aplication/json"
     ],
     "paths": {
-        "/api/pedido": {
+        "/pedido": {
             "post": {
                 "summary": "Criar um pedido na plataforma",
                 "tags": [
@@ -41,7 +41,7 @@
                 ]
             }
         },
-        "/api/pedido/:pedidoId": {
+        "/pedido/:pedidoId": {
             "get": {
                 "summary": "Retorna um pedido com um determinado id",
                 "tags": [
@@ -56,43 +56,72 @@
                 ]
             }
         },
-        "/api/utilizador": {
+        "/utilizador/": {
             "post": {
-                "summary": "Guarda um utilizador com as informações passadas",
+                "summary": "Criar novo utlizador",
                 "tags": [
                     "Utilizador"
                 ],
                 "parameters": [
                     {
-                        "name": "Utilizador",
+                        "name": "utilizador",
                         "in": "body",
                         "description": "Utilizador com as propriedades dadas",
                         "schema": {
-                            "$ref": "#/models/utilizador.js#"
+                            "$ref": "#/definitions/utilizador"
                         }
                     }
-                ]
+                ],
+                "produces": [
+                    "aplication/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Novo utilizador criado.",
+                        "schema": {
+                            "$ref": "#/definitions/utilizador"
+                        }
+                    }
+                }
             },
             "get": {
                 "summary": "Retorna todos os utilizadores existentes",
                 "tags": [
                     "Utilizador"
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Utilizador encontrado",
+                        "schema": {
+                            "$ref": "#/definitions/utilizador"
+                        }
+                    }
+                }
             }
         },
-        "/api/utilizador/:utilizadorId": {
+        "/utilizador/{utilizadorId}": {
+            "parameters": [
+                {
+                    "name": "utilizadorId",
+                    "in": "path",
+                    "description": "id do utilizador a encontrar",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
             "get": {
-                "summary": "Retorna todos o utilizador com o id dado",
+                "summary": "Retorna o utilizador com o id dado",
                 "tags": [
                     "Utilizador"
                 ],
-                "parameters": [
-                    {
-                        "name": "Utilizador",
-                        "in": "body",
-                        "description": "Utilizador com as propriedades dadas"
+                "responses": {
+                    "200": {
+                        "description": "Utilizador retornado",
+                        "schema": {
+                            "$ref": "#/definitions/utilizador"
+                        }
                     }
-                ]
+                }
             },
             "put": {
                 "summary": "Atualiza o utilizador com o id dado",
@@ -103,23 +132,34 @@
                     {
                         "name": "Utilizador",
                         "in": "body",
-                        "description": "Utilizador com as novas propriedades"
+                        "description": "Utilizador com as novas propriedades",
+                        "schema": {
+                            "$ref": "#/definitions/utilizador"
+                        }
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Utilizador atualizado",
+                        "schema": {
+                            "$ref": "#/definitions/utilizador"
+                        }
+                    }
+                }
             }
         },
-        "/api/tecnico": {
+        "/tecnico": {
             "get": {
                 "summary": "Retorna todos os técnicos existentes",
                 "tags": [
                     "Técnico"
                 ],
-                "produces":[
+                "produces": [
                     "application/json"
-                 ]
+                ]
             }
         },
-        "/api/tecnico/:userID": {
+        "/tecnico/:userID": {
             "post": {
                 "summary": "Define um utilizador como técnico",
                 "tags": [
@@ -133,7 +173,8 @@
                     }
                 ]
             }
-        },"/api/tecnico/:tecnicoID": {
+        },
+        "/tecnico/:tecnicoID": {
             "get": {
                 "summary": "Retorna um técnio dado um determinado ID",
                 "tags": [
@@ -159,6 +200,30 @@
                         "description": "ID do Técnico"
                     }
                 ]
+            }
+        }
+    },
+    "definitions": {
+        "utilizador": {
+            "required": [],
+            "properties": {
+                "nmrCC": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "primeiroNome": {
+                    "type": "string"
+                },
+                "ultimoNome": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "string"
+                }
             }
         }
     }
