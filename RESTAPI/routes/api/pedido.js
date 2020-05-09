@@ -8,6 +8,7 @@ router.post('/', pedidoController.criarPedido);
 router.put('/:pedidoId', pedidoController.updatePedido);
 
 
+
 //filtrar parâmetros de um pedido pelo seu id
 router.get('/estadoTeste/:pedidoId', pedidoController.getOnePedidoByEstadoTeste)
 router.get('/resultado/:pedidoId', pedidoController.getOnePedidoByResultado)
@@ -17,20 +18,11 @@ router.get('/informacao/:pedidoId', pedidoController.getOnePedidoByInformacao)
 
 //filtrar a lista dos pedidos por parâmetro
 router.get('/resultados/:resultado', pedidoController.Resultados)
-
-router.get('/estados/:estado', pedidoController.Estados)
-
-router.get('/estadoUtilizador/:estadoUtilizador', pedidoController.allEstadoUserIngetadoPedido)
-
-//router.get('/informacaoPedido/:saude24', pedidoController.allInformacaoSaude24Pedido)
-//router.get('/informacaoPedido/:grupo_de_risco', pedidoController.allInformacaoGrupoDeRiscoPedido)
-//router.get('/informacaoPedido/:locais_de_risco', pedidoController.allInformacaoLocaisDeRiscoPedido)
-//router.get('/abc/:locais', pedidoController.allInformacaoLocaisRiscoPedido)
+router.get('/estadosTeste/:estadoTeste', pedidoController.EstadosTeste)
+router.get('/estadosUtilizador/:estadoUtilizador', pedidoController.EstadosUser)
+router.get('/informacaoPedido/:informacao', pedidoController.informacao)
 
 
-
-
-//router.param('pedidoId', pedidoController.getByIdProduct)
 
 
 

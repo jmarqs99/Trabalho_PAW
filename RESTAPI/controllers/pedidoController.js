@@ -14,6 +14,18 @@ pedidoController.criarPedido = function (req, res, next) {
         }
     });
 };
+pedidoController.updatePedido = function (req, res, next) {
+
+    Pedido.findByIdAndUpdate(req.params.pedidoId, req.body, { new: true },
+        function (err, pedido) {
+            if (err) {
+                next(err);
+            } else {
+                res.json(pedido);
+            }
+        });
+}
+
 
 pedidoController.getAllPedidos = function (req, res, next) {
     Pedido.find(function (err, pedidos) {
@@ -21,23 +33,12 @@ pedidoController.getAllPedidos = function (req, res, next) {
             next(err)
         } else {
 
-
-
             res.json(pedidos)
 
         }
     })
 }
 
-pedidoController.numeroInfetados = function (req, res, next) {
-    Pedido.find(function (err, pedidos) {
-        if (err) {
-            next(err)
-        } else {
-            res.json(pedidos)
-        }
-    })
-}
 
 
 pedidoController.getOnePedido = function (req, res, next) {
@@ -65,8 +66,8 @@ pedidoController.Resultados = function (req, res, next) {
 }
 
 
-pedidoController.Estados = function (req, res, next) {
-    Pedido.find({ estadoTeste: req.params.estado }, function (err, pedido) {
+pedidoController.EstadosTeste = function (req, res, next) {
+    Pedido.find({ estadoTeste: req.params.estadoTeste }, function (err, pedido) {
         if (err) {
             next(err)
         }
@@ -76,131 +77,29 @@ pedidoController.Estados = function (req, res, next) {
     })
 }
 
-/**
-pedidoController.allInformacaoSaude24Pedido = function(req, res, next) {
-
-
-
-    Pedido.find({informacao:req.params.saude24}, function(err, pedido){
-        if(err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-            
-        }
-    })
-
-}
- */
-
-/**
-pedidoController.allInformacaoGrupoDeRiscoPedido = function(req, res, next) {
-
-
-
-   Pedido.find({informacao:req.params.grupo_de_risco}, function(err, pedido){
-       if(err) {
-           next(err)
-       }
-       else {
-           res.json(pedido)
-           
-       }
-   })
-
-}
-*/
-
-/**
-pedidoController.allInformacaoLocaisDeRiscoPedido = function(req, res, next) {
-
-
-
-   Pedido.find({informacao:req.params.locais_de_risco}, function(err, pedido){
-       if(err) {
-           next(err)
-       }
-       else {
-           res.json(pedido)
-           
-       }
-   })
-
-}
-*/
-
-/**
-pedidoController.allInformacaoLocaisRiscoPedido = function(req, res, next) {
-
-
-   Pedido.find({informacao:req.params.locais}, function(err, pedido){
-       if(err) {
-           next(err)
-       }
-       else {
-           var indices = {}
-           var elemento = "locais"
-           var procurar = pedido.indexOf(elemento)
-           
-           while (procurar != -1) {
-               indices.push(procurar);
-               procurar = pedido.indexOf(elemento, procurar + 1);
-             }
-             res.json(indices)
-           
-       }
-   })
-
-}
-*/
-
-
-
-pedidoController.allEstadoUserIngetadoPedido = function (req, res, next) {
-
-
-    Pedido.find({ estadoUtilizador: req.params.infetado }, function (err, pedido) {
+pedidoController.EstadosUser = function (req, res, next) {
+    Pedido.find({ estadoUtilizador: req.params.estadoUtilizador }, function (err, pedido) {
         if (err) {
             next(err)
         }
         else {
             res.json(pedido)
-
         }
     })
-
 }
 
-pedidoController.allEstadoUserSuspeitoPedido = function (req, res, next) {
-
-
-    Pedido.find({ estadoUtilizador: req.params.suspeito }, function (err, pedido) {
+pedidoController.informacao = function (req, res, next) {
+    Pedido.find({ informacao: req.params.informacao }, function (err, pedido) {
         if (err) {
             next(err)
         }
         else {
             res.json(pedido)
-
         }
     })
-
 }
 
-pedidoController.allEstadoUserSaudavelPedido = function (req, res, next) {
 
-
-    Pedido.find({ estadoUtilizador: req.params.saudavel }, function (err, pedido) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-
-        }
-    })
-
-}
 
 pedidoController.getOnePedidoByEstadoTeste = async function (req, res, next) {
 
@@ -279,18 +178,18 @@ pedidoController.getOnePedidoByInformacao = async function (req, res, next) {
     });
 };
 
-pedidoController.updatePedido = function (req, res, next) {
-
-    Pedido.findByIdAndUpdate(req.params.pedidoId, req.body, { new: true },
-        function (err, pedido) {
-            if (err) {
-                next(err);
-            } else {
-                res.json(pedido);
-            }
-        });
+/**
+pedidoController.numeroInfetados = function (req, res, next) {
+    Pedido.find(function (err, pedidos) {
+        if (err) {
+            next(err)
+        } else {
+            res.json(pedidos)
+        }
+    })
 }
 
+ */
 
 
 

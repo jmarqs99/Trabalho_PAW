@@ -83,6 +83,7 @@
                         }
                     }
                 }
+                
             },
             "put": {
                 "summary": "Atualiza o pedido com o id dado",
@@ -128,7 +129,7 @@
                     "200": {
                         "description": "Pedido retornado",
                         "schema": {
-                            "$ref": "#/definitions/pedido/estadoTeste"
+                            "$ref": "#/definitions/pedido"
                         }
                     }
                 }
@@ -153,7 +154,7 @@
                     "200": {
                         "description": "Pedido retornado",
                         "schema": {
-                            "$ref": "#/definitions/pedido/estadoTeste"
+                            "$ref": "#/definitions/pedido"
                         }
                     }
                 }
@@ -178,7 +179,7 @@
                     "200": {
                         "description": "Pedido retornado",
                         "schema": {
-                            "$ref": "#/definitions/pedido/estadoTeste"
+                            "$ref": "#/definitions/pedido"
                         }
                     }
                 }
@@ -203,187 +204,113 @@
                     "200": {
                         "description": "Pedido retornado",
                         "schema": {
-                            "$ref": "#/definitions/pedido/estadoTeste"
+                            "$ref": "#/definitions/pedido"
                         }
                     }
                 }
             }
         },
-        "/pedido/resultadoTeste/{positivo}": {
-            "get": {
-                "summary": "Retorna todos os pedidos cujo resultado do teste foi positivo",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "positivo",
-                        "in": "path",
-                        "description": "encontra os pedidos positivos",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/resultadoTeste"
-                        }
+      "pedido/resultados/{resultado}": {
+        "get": {
+            "summary": "Retorna os pedidos com o resultado dado como parâmetro",
+            "tags": [
+                "Pedido"
+            ],
+            "parameters": [
+                {
+                    "name": "resultado",
+                    "in": "path",
+                    "description": "resultado dos pedidos a encontrar",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Pedido retornado",
+                    "schema": {
+                        "$ref": "#/definitions/pedido"
                     }
                 }
             }
-        },
-        "/pedido/resultadoTeste/{negativo}": {
-            "get": {
-                "summary": "Retorna todos os pedidos cujo resultado do teste foi negativo",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "negativo",
-                        "in": "path",
-                        "description": "encontra os pedidos negativos",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/resultadoTeste"
-                        }
+        }
+      },
+      "pedido/estadosTeste/{estadoTeste}": {
+        "get": {
+            "summary": "Retorna os pedidos com o estado do teste dado como parâmetro",
+            "tags": [
+                "Pedido"
+            ],
+            "parameters": [
+                {
+                    "name": "estadoTeste",
+                    "in": "path",
+                    "description": "estado do teste dos pedidos a encontrar",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Pedido retornado",
+                    "schema": {
+                        "$ref": "#/definitions/pedido"
                     }
                 }
             }
-        },
-        "/pedido/estado/{finalizado}": {
-            "get": {
-                "summary": "Retorna todos os pedidos finalizados",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "finalizado",
-                        "in": "path",
-                        "description": "encontra os pedidos finalizados",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/estado"
-                        }
+        }
+      },
+      "pedido/estadosUtilizador/{estadoUtilizador}": {
+        "get": {
+            "summary": "Retorna os pedidos com o estado do utilizador dado como parâmetro",
+            "tags": [
+                "Pedido"
+            ],
+            "parameters": [
+                {
+                    "name": "estadoUtilizador",
+                    "in": "path",
+                    "description": "estado do utilizador dos pedidos a encontrar",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Pedido retornado",
+                    "schema": {
+                        "$ref": "#/definitions/pedido"
                     }
                 }
             }
-        },
-        "/pedido/estado/{pendente}": {
-            "get": {
-                "summary": "Retorna todos os pedidos pendentes de avaliação",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pendente",
-                        "in": "path",
-                        "description": "encontra os pedidos pendentes",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/estado"
-                        }
+        }
+      },
+      "pedido/informacaoPedido/{informacao}": {
+        "get": {
+            "summary": "Retorna os pedidos com a informação dado como parâmetro",
+            "tags": [
+                "Pedido"
+            ],
+            "parameters": [
+                {
+                    "name": "informacao",
+                    "in": "path",
+                    "description": "informação dos pedidos a encontrar",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Pedido retornado",
+                    "schema": {
+                        "$ref": "#/definitions/pedido"
                     }
                 }
             }
-        },
-        "/pedido/estadoUtilizador/{infetado}": {
-            "get": {
-                "summary": "Retorna todos os pedidos cujo o estado do utilizador é infetado",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "infetado",
-                        "in": "path",
-                        "description": "encontra os pedidos dos utilizadores infetados ",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/estadoUtilizador"
-                        }
-                    }
-                }
-            }
-        },
-        "/pedido/estadoUtilizador/{saudavel}": {
-            "get": {
-                "summary": "Retorna todos os pedidos cujo o estado do utilizador é saudável",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "infetado",
-                        "in": "path",
-                        "description": "encontra os pedidos dos utilizadores saudáveis ",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/estadoUtilizador"
-                        }
-                    }
-                }
-            }
-        },
-        "/pedido/estadoUtilizador/{suspeito}": {
-            "get": {
-                "summary": "Retorna todos os pedidos cujo o estado do utilizador é suspeito",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "infetado",
-                        "in": "path",
-                        "description": "encontra os pedidos dos utilizadores suspeitos de estarem infetados ",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido/estadoUtilizador"
-                        }
-                    }
-                }
-            }
-        },
+        }
+      },
+        
         "/utilizador/": {
             "post": {
                 "summary": "Criar novo utlizador",
