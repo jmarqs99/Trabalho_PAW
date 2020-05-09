@@ -18,11 +18,10 @@ router.get('/informacao/:pedidoId', pedidoController.getOnePedidoByInformacao)
 //filtrar a lista dos pedidos por parâmetro
 router.get('/resultados/:resultado', pedidoController.Resultados)
 
-router.get('/estado/:finalizado', pedidoController.allEstadoTesteFinalizadoPedido)
-router.get('/estado/:pendente', pedidoController.allEstadoTestePendentePedido)
-router.get('/estadoUtilizador/:infetado', pedidoController.allEstadoUserIngetadoPedido)
-router.get('/estadoUtilizador/:saudavel', pedidoController.allEstadoUserSaudavelPedido)
-router.get('/estadoUtilizador/:suspeito', pedidoController.allEstadoUserSuspeitoPedido)
+router.get('/estados/:estado', pedidoController.Estados)
+
+router.get('/estadoUtilizador/:estadoUtilizador', pedidoController.allEstadoUserIngetadoPedido)
+
 //router.get('/informacaoPedido/:saude24', pedidoController.allInformacaoSaude24Pedido)
 //router.get('/informacaoPedido/:grupo_de_risco', pedidoController.allInformacaoGrupoDeRiscoPedido)
 //router.get('/informacaoPedido/:locais_de_risco', pedidoController.allInformacaoLocaisDeRiscoPedido)
