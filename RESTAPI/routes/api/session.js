@@ -2,6 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const Utilizador = require("../../models/utilizador");
 const Tecnico = require("../../models/tecnico");
+const Admin = require("../../models/admin");
 const authorize = require('../../middlewares/authorize')
 const bcrypt = require('bcrypt');
 
@@ -25,19 +26,39 @@ sessionRouter.post('/login', (req, res, next) => {
 								} else {
 									if (tecnico) {
 										cookie.role = "TECNICO";
+										const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
+										res.cookie(
+											'session',
+											jwtToken,
+											{
+												expires: new Date(Date.now() + SESSION_EXP),
+												httpOnly: true
+											}
+										)
+										res.json({status:'logged In'})
 									} else {
-										cookie.role = "UTILIZADOR"
+										Admin.findOne({utilizadorId:utilizador._id},function (err, admin) {
+											if(err){
+												next(err);
+											} else {
+												if (admin) {
+													cookie.role = "ADMIN";
+												} else {
+													cookie.role = "UTILIZADOR"
+												}
+												const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
+												res.cookie(
+													'session',
+													jwtToken,
+													{
+														expires: new Date(Date.now() + SESSION_EXP),
+														httpOnly: true
+													}
+												)
+												res.json({status:'logged In'})
+											}
+										})
 									}
-									const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
-									res.cookie(
-										'session',
-										jwtToken,
-										{
-											expires: new Date(Date.now() + SESSION_EXP),
-											httpOnly: true
-										}
-									)
-									res.json({status:'logged In'})
 								}
 							})
 						} else {

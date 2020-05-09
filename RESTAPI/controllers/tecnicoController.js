@@ -40,7 +40,8 @@ tecnicoController.removerTecnico = function (req,res,next) {
 };
 
 tecnicoController.verTecnico = async function (req,res,next) {
-    Tecnico.findOne({_id:req.params.tecnicoID},function (err,tecnico)  {
+    console.log(req.params.tecnicoID)
+    Tecnico.findOne({ _id : req.params.tecnicoID},function (err,tecnico)  {
         if(err) {
             next(err);
         } else {
@@ -61,7 +62,6 @@ tecnicoController.verTecnico = async function (req,res,next) {
 };
 
 tecnicoController.verTecnicos = function (req,res,next) {
-    console.log(process.env.JWT_SECRET);
     Tecnico.find(function (err,tecnicos)  {
         if(err) {
             next(err);

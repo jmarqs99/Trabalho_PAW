@@ -11,6 +11,7 @@ const apiUtilizadorRouter = require('./routes/api/utilizador');
 const apiTecnicoRouter = require('./routes/api/tecnico');
 const apiPedidoRouter = require('./routes/api/pedido');
 const sessionRouter = require('./routes/api/session');
+const adminRouter = require('./routes/api/admin');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/utilizador', apiUtilizadorRouter);
 app.use('/api/tecnico', apiTecnicoRouter);
 app.use('/api/pedido', apiPedidoRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api', sessionRouter);
 app.use('/api-docs',swaggerUi.serve , swaggerUi.setup(swaggerDocumment));
 

@@ -408,52 +408,172 @@
                 "tags": [
                     "Técnico"
                 ],
-                "produces": [
-                    "application/json"
-                ]
+                "responses": {
+                    "200": {
+                        "description": "Técnico encontrado",
+                        "schema": {
+                            "$ref": "#/definitions/tecnico"
+                        }
+                    }
+                }
             }
         },
-        "/tecnico/:userID": {
+        "/tecnico/{userID}": {
+            "parameters": [
+                {
+                    "name": "userID",
+                    "in": "path",
+                    "description": "ID do Utilizador",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
             "post": {
-                "summary": "Define um utilizador como técnico",
+                "summary": "Criar novo técnico",
                 "tags": [
                     "Técnico"
                 ],
-                "parameters": [
-                    {
-                        "name": "userID",
-                        "in": "Query Params",
-                        "description": "ID do Utilizador"
+                "produces": [
+                    "aplication/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Novo técnico criado.",
+                        "schema": {
+                            "$ref": "#/definitions/tecnico"
+                        }
                     }
-                ]
+                }
             }
         },
-        "/tecnico/:tecnicoID": {
+        "/tecnico/{tecnicoID}": {
+            "parameters": [
+                {
+                    "name": "tecnicoID",
+                    "in": "path",
+                    "description": "ID do Técnico",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
             "get": {
                 "summary": "Retorna um técnio dado um determinado ID",
                 "tags": [
                     "Técnico"
                 ],
-                "parameters": [
-                    {
-                        "name": "tecnicoID",
-                        "in": "Query Params",
-                        "description": "ID do Técnico"
+                "responses": {
+                    "200": {
+                        "description": "Técnico retornado"
                     }
-                ]
+                }
             },
             "delete": {
                 "summary": "Remove um utilizador da posição de técnico",
                 "tags": [
                     "Técnico"
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Técnico Removido"
+                    }
+                }
+            }
+        },
+        "/admin": {
+            "get": {
+                "summary": "Retorna todos os admins existentes",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admins encontrados"
+                    }
+                }
+            }
+        },
+        "/admin/{userID}": {
+            "parameters": [
+                {
+                    "name": "userID",
+                    "in": "path",
+                    "description": "ID do Utilizador",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "post": {
+                "summary": "Criar novo Admin",
+                "tags": [
+                    "Admin"
+                ],
+                "produces": [
+                    "aplication/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Novo Admin criado."
+                    }
+                }
+            }
+        },
+        "/admin/{adminID}": {
+            "parameters": [
+                {
+                    "name": "adminID",
+                    "in": "path",
+                    "description": "ID do Admin",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Retorna um admin dado um determinado ID",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin retornado"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove um utilizador da posição de Admin",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin Removido"
+                    }
+                }
+            }
+        },
+        "/login":{
+            "post": {
+                "summary": "Fazer login na API",
+                "tags": [
+                    "Sessão"
+                ],
                 "parameters": [
                     {
-                        "name": "tecnicoID",
-                        "in": "Query Params",
-                        "description": "ID do Técnico"
+                        "name": "Dados de Login",
+                        "in": "body",
+                        "description": "Informações do utilizador",
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
                     }
-                ]
+                ],
+                "produces": [
+                    "aplication/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Log in com sucesso"
+                    }
+                }
             }
         }
     },
@@ -494,6 +614,28 @@
                 },
                 "resultadoTeste": {
                     "type":"string"
+                }
+            }
+        },
+        "tecnico": {
+            "required": [],
+            "properties": {
+                "utilizadorId": {
+                    "type": "string",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "login":{
+            "required": [],
+            "properties": {
+                "nmrCC": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string",
+                    "uniqueItems": true
                 }
             }
         }
