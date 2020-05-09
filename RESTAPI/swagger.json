@@ -60,7 +60,7 @@
                 }
             }
         },
-        "/pedido/:pedidoId": {
+        "/pedido/{pedidoId}": {
             "get": {
                 "summary": "Retorna um pedido com um determinado id",
                 "tags": [
@@ -109,7 +109,7 @@
                 }
             }
         },
-        "/pedido/estadoTeste/:pedidoId": {
+        "/pedido/estadoTeste/{pedidoId}": {
             "get": {
                 "summary": "Retorna o estado do teste de um pedido com um determinado id",
                 "tags": [
@@ -134,7 +134,7 @@
                 }
             }
         },
-        "/pedido/resultado/:pedidoId": {
+        "/pedido/resultado/{pedidoId}": {
             "get": {
                 "summary": "Retorna o resultado do teste de um pedido com um determinado id",
                 "tags": [
@@ -159,7 +159,7 @@
                 }
             }
         },
-        "/pedido/estadoUser/:pedidoId": {
+        "/pedido/estadoUser/{pedidoId}": {
             "get": {
                 "summary": "Retorna o estado do utilizador de um pedido com um determinado id",
                 "tags": [
@@ -184,7 +184,7 @@
                 }
             }
         },
-        "/pedido/informacao/:pedidoId": {
+        "/pedido/informacao/{pedidoId}": {
             "get": {
                 "summary": "Retorna a informação do utilizador de um pedido com um determinado id",
                 "tags": [
@@ -209,7 +209,7 @@
                 }
             }
         },
-        "/pedido/resultadoTeste/:positivo": {
+        "/pedido/resultadoTeste/{positivo}": {
             "get": {
                 "summary": "Retorna todos os pedidos cujo resultado do teste foi positivo",
                 "tags": [
@@ -234,7 +234,7 @@
                 }
             }
         },
-        "/pedido/resultadoTeste/:negativo": {
+        "/pedido/resultadoTeste/{negativo}": {
             "get": {
                 "summary": "Retorna todos os pedidos cujo resultado do teste foi negativo",
                 "tags": [
@@ -259,7 +259,7 @@
                 }
             }
         },
-        "/pedido/estado/:finalizado": {
+        "/pedido/estado/{finalizado}": {
             "get": {
                 "summary": "Retorna todos os pedidos finalizados",
                 "tags": [
@@ -284,7 +284,7 @@
                 }
             }
         },
-        "/pedido/estado/:pendente": {
+        "/pedido/estado/{pendente}": {
             "get": {
                 "summary": "Retorna todos os pedidos pendentes de avaliação",
                 "tags": [
@@ -309,7 +309,7 @@
                 }
             }
         },
-        "/pedido/estadoUtilizador/:infetado": {
+        "/pedido/estadoUtilizador/{infetado}": {
             "get": {
                 "summary": "Retorna todos os pedidos cujo o estado do utilizador é infetado",
                 "tags": [
@@ -334,7 +334,7 @@
                 }
             }
         },
-        "/pedido/estadoUtilizador/:saudavel": {
+        "/pedido/estadoUtilizador/{saudavel}": {
             "get": {
                 "summary": "Retorna todos os pedidos cujo o estado do utilizador é saudável",
                 "tags": [
@@ -359,7 +359,7 @@
                 }
             }
         },
-        "/pedido/estadoUtilizador/:suspeito": {
+        "/pedido/estadoUtilizador/{suspeito}": {
             "get": {
                 "summary": "Retorna todos os pedidos cujo o estado do utilizador é suspeito",
                 "tags": [
@@ -551,6 +551,23 @@
                 },
                 "estado": {
                     "type": "string"
+                }
+            }
+        },
+        "pedido": {
+            "required": [],
+            "properties": {
+                "informacao": {
+                    "type": "string"
+                },
+                "estadoUtilizador": {
+                    "type": "string"
+                },
+                "estadoTeste": {
+                    "type":"string"
+                },
+                "resultadoTeste": {
+                    "type":"string"
                 }
             }
         }
