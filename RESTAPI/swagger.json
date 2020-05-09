@@ -210,7 +210,7 @@
                 }
             }
         },
-      "pedido/resultados/{resultado}": {
+      "/pedido/resultados/{resultado}": {
         "get": {
             "summary": "Retorna os pedidos com o resultado dado como parâmetro",
             "tags": [
@@ -235,7 +235,7 @@
             }
         }
       },
-      "pedido/estadosTeste/{estadoTeste}": {
+      "/pedido/estadosTeste/{estadoTeste}": {
         "get": {
             "summary": "Retorna os pedidos com o estado do teste dado como parâmetro",
             "tags": [
@@ -260,7 +260,7 @@
             }
         }
       },
-      "pedido/estadosUtilizador/{estadoUtilizador}": {
+      "/pedido/estadosUtilizador/{estadoUtilizador}": {
         "get": {
             "summary": "Retorna os pedidos com o estado do utilizador dado como parâmetro",
             "tags": [
@@ -285,7 +285,7 @@
             }
         }
       },
-      "pedido/informacaoPedido/{informacao}": {
+      "/pedido/informacaoPedido/{informacao}": {
         "get": {
             "summary": "Retorna os pedidos com a informação dado como parâmetro",
             "tags": [
@@ -310,7 +310,6 @@
             }
         }
       },
-        
         "/utilizador/": {
             "post": {
                 "summary": "Criar novo utlizador",
