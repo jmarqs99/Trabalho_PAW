@@ -111,7 +111,7 @@ pedidoController.allEstadoTestePendentePedido = function(req, res, next) {
         })
 
 }
-
+/**
 pedidoController.allInformacaoSaude24Pedido = function(req, res, next) {
 
 
@@ -127,7 +127,9 @@ pedidoController.allInformacaoSaude24Pedido = function(req, res, next) {
     })
 
 }
+ */
 
+ /**
 pedidoController.allInformacaoGrupoDeRiscoPedido = function(req, res, next) {
 
 
@@ -143,7 +145,9 @@ pedidoController.allInformacaoGrupoDeRiscoPedido = function(req, res, next) {
     })
 
 }
+ */
 
+ /**
 pedidoController.allInformacaoLocaisDeRiscoPedido = function(req, res, next) {
 
 
@@ -159,7 +163,9 @@ pedidoController.allInformacaoLocaisDeRiscoPedido = function(req, res, next) {
     })
 
 }
+ */
 
+ /**
 pedidoController.allInformacaoLocaisRiscoPedido = function(req, res, next) {
 
 
@@ -182,6 +188,7 @@ pedidoController.allInformacaoLocaisRiscoPedido = function(req, res, next) {
     })
 
 }
+ */
 
 
 
