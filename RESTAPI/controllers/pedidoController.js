@@ -53,34 +53,17 @@ pedidoController.getOnePedido = function(req, res, next) {
     })
     
 }
-pedidoController.allResultadoPositivoPedido = function(req, res, next) {
-
-
-        Pedido.find({resultadoTeste:req.params.positivo}, function(err, pedido){
+pedidoController.Resultados = function(req, res, next) {
+        Pedido.find({resultadoTeste: req.params.resultado}, function(err, pedido){
             if(err) {
                 next(err)
             }
             else {
                 res.json(pedido)
-                
             }
         })
-
 }
-pedidoController.allResultadoNegativoPedido = function(req, res, next) {
 
-
-        Pedido.find({resultadoTeste:req.params.negativo}, function(err, pedido){
-            if(err) {
-                next(err)
-            }
-            else {
-                res.json(pedido)
-                
-            }
-        })
-
-}
 
 pedidoController.allEstadoTesteFinalizadoPedido = function(req, res, next) {
 

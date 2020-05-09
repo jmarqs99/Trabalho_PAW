@@ -16,8 +16,8 @@ router.get('/informacao/:pedidoId', pedidoController.getOnePedidoByInformacao)
 
 
 //filtrar a lista dos pedidos por parâmetro
-router.get('/resultadoTeste/:positivo', pedidoController.allResultadoPositivoPedido)
-router.get('/resultadoTeste/:negativo', pedidoController.allResultadoNegativoPedido)
+router.get('/resultados/:resultado', pedidoController.Resultados)
+
 router.get('/estado/:finalizado', pedidoController.allEstadoTesteFinalizadoPedido)
 router.get('/estado/:pendente', pedidoController.allEstadoTestePendentePedido)
 router.get('/estadoUtilizador/:infetado', pedidoController.allEstadoUserIngetadoPedido)
