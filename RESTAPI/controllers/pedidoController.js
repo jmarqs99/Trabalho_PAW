@@ -55,7 +55,6 @@ pedidoController.getOnePedido = function(req, res, next) {
 }
 pedidoController.allResultadoPositivoPedido = function(req, res, next) {
 
-    //Pedido.findOne({_resultadoTeste:req.params.positivo}, function(err, pedido){
 
         Pedido.find({resultadoTeste:req.params.positivo}, function(err, pedido){
             if(err) {
@@ -85,8 +84,6 @@ pedidoController.allResultadoNegativoPedido = function(req, res, next) {
 
 pedidoController.allEstadoTesteFinalizadoPedido = function(req, res, next) {
 
-    //Pedido.findOne({_resultadoTeste:req.params.positivo}, function(err, pedido){
-
         Pedido.find({estadoTeste:req.params.finalizado}, function(err, pedido){
             if(err) {
                 next(err)
@@ -101,7 +98,7 @@ pedidoController.allEstadoTesteFinalizadoPedido = function(req, res, next) {
 
 pedidoController.allEstadoTestePendentePedido = function(req, res, next) {
 
-    //Pedido.findOne({_resultadoTeste:req.params.positivo}, function(err, pedido){
+
 
         Pedido.find({estadoTeste:req.params.pendente}, function(err, pedido){
             if(err) {
@@ -115,11 +112,83 @@ pedidoController.allEstadoTestePendentePedido = function(req, res, next) {
 
 }
 
-pedidoController.allEstadoUserDoentePedido = function(req, res, next) {
+pedidoController.allInformacaoSaude24Pedido = function(req, res, next) {
 
-    //Pedido.findOne({_resultadoTeste:req.params.positivo}, function(err, pedido){
 
-        Pedido.find({estadoTeste:req.params.doente}, function(err, pedido){
+
+    Pedido.find({informacao:req.params.saude24}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            res.json(pedido)
+            
+        }
+    })
+
+}
+
+pedidoController.allInformacaoGrupoDeRiscoPedido = function(req, res, next) {
+
+
+
+    Pedido.find({informacao:req.params.grupo_de_risco}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            res.json(pedido)
+            
+        }
+    })
+
+}
+
+pedidoController.allInformacaoLocaisDeRiscoPedido = function(req, res, next) {
+
+
+
+    Pedido.find({informacao:req.params.locais_de_risco}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            res.json(pedido)
+            
+        }
+    })
+
+}
+
+pedidoController.allInformacaoLocaisRiscoPedido = function(req, res, next) {
+
+
+    Pedido.find({informacao:req.params.locais}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            var indices = {}
+            var elemento = "locais"
+            var procurar = pedido.indexOf(elemento)
+            
+            while (procurar != -1) {
+                indices.push(procurar);
+                procurar = pedido.indexOf(elemento, procurar + 1);
+              }
+              res.json(indices)
+            
+        }
+    })
+
+}
+
+
+
+pedidoController.allEstadoUserIngetadoPedido = function(req, res, next) {
+
+
+        Pedido.find({estadoUtilizador:req.params.infetado}, function(err, pedido){
             if(err) {
                 next(err)
             }
@@ -130,11 +199,26 @@ pedidoController.allEstadoUserDoentePedido = function(req, res, next) {
         })
 
 }
+
+pedidoController.allEstadoUserSuspeitoPedido = function(req, res, next) {
+
+
+    Pedido.find({estadoUtilizador:req.params.suspeito}, function(err, pedido){
+        if(err) {
+            next(err)
+        }
+        else {
+            res.json(pedido)
+            
+        }
+    })
+
+}
+
 pedidoController.allEstadoUserSaudavelPedido = function(req, res, next) {
 
-    //Pedido.findOne({_resultadoTeste:req.params.positivo}, function(err, pedido){
 
-        Pedido.find({estadoTeste:req.params.saudavel}, function(err, pedido){
+        Pedido.find({estadoUtilizador:req.params.saudavel}, function(err, pedido){
             if(err) {
                 next(err)
             }
