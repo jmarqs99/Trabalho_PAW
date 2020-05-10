@@ -29,16 +29,16 @@ pedidoController.criarPedido = function (req, res, next) {
                     if (err) {
                         next(err);
                     } else {
-                        res.json({ status: "Criado" });
+                        res.json(newPedido);
                     }
                 })
             }
             else {
-                res.json({invalidArguments: 'true'});
+                res.status(201).json({ invalidArguments: 'true' });
             }
         }
         else {
-            res.json({invalidArguments: 'true'});
+            res.status(202).json({ invalidArguments: 'true' });
         }
 
     }
