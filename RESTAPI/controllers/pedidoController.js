@@ -4,6 +4,8 @@ const Pedido = require("../models/pedido");
 const pedidoController = {};
 
 pedidoController.criarPedido = function (req, res, next) {
+    
+    /** 
     const pedido = new Pedido(req.body);
 
     pedido.save(function (err) {
@@ -13,6 +15,34 @@ pedidoController.criarPedido = function (req, res, next) {
             res.json(pedido);
         }
     });
+    */
+   Pedido.findOne({ _id: req.body.pedidoId }, function (err, pedido) {
+    if (err) {
+        next(err);
+    } else {
+    
+        if(req.body.informacao && req.body.estadoTeste && req.body.estadoUtilizador && req.body.resultadoTeste) {
+            if(pedido == null) {
+                const newPedido = new Pedido(req.body)
+
+                newPedido.save(function(err) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        res.json({ status: "Criado" });
+                    }
+                })
+            }
+            else {
+                res.json({invalidArguments: 'true'});
+            }
+        }
+        else {
+            res.json({invalidArguments: 'true'});
+        }
+
+    }
+})  
 };
 pedidoController.updatePedido = function (req, res, next) {
 
