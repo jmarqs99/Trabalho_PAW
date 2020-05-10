@@ -208,18 +208,18 @@ pedidoController.getOnePedidoByInformacao = async function (req, res, next) {
     });
 };
 
-/**
+
 pedidoController.numeroInfetados = function (req, res, next) {
-    Pedido.find(function (err, pedidos) {
+    Pedido.find({ estadoUtilizador: req.params.infetado }, function (err, pedido) {
         if (err) {
             next(err)
         } else {
-            res.json(pedidos)
+            res.json(pedido.length)
         }
     })
 }
 
- */
+ 
 
 
 

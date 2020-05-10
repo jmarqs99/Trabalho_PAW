@@ -7,7 +7,7 @@ router.get('/:pedidoId', pedidoController.getOnePedido);
 router.post('/', pedidoController.criarPedido);
 router.put('/:pedidoId', pedidoController.updatePedido);
 
-
+router.get('/infetados/:infetado', pedidoController.numeroInfetados)
 
 //filtrar parâmetros de um pedido pelo seu id
 router.get('/estadoTeste/:pedidoId', pedidoController.getOnePedidoByEstadoTeste)
