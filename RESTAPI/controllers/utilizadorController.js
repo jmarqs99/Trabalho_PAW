@@ -5,35 +5,39 @@ const bcrypt = require('bcrypt');
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
-
     Utilizador.findOne({ nmrCC: req.body.nmrCC }, function (err, utilizador) {
-        if (err) {
-            next(err);
+      if (err) {
+        next(err);
+      } else {
+        if (
+          req.body.nmrCC &&
+          req.body.password &&
+          req.body.primeiroNome &&
+          req.body.ultimoNome
+        ) {
+          if (utilizador === null) {
+            bcrypt.hash(req.body.password, 10, function (err, hash) {
+              req.body.password = hash;
+              const newUtilizador = new Utilizador(req.body);
+              newUtilizador.save(function (err) {
+                if (err) {
+                  next(err);
+                } else {
+                  res.json(newUtilizador);
+                }
+              });
+            });
+          } else {
+            res.status(201).json({ invalidArguments: 'true' });
+          }
         } else {
-            if (req.body.nmrCC && req.body.password && req.body.primeiroNome && req.body.ultimoNome) {
-                if (utilizador == null) {
-                    bcrypt.hash(req.body.password, 10, function (err, hash) {
-                        req.body.password = hash;
-                        const newUtilizador = new Utilizador(req.body);
-                        newUtilizador.save(function (err) {
-                            if (err) {
-                                next(err);
-                            } else {
-                                res.json({ status: "Criado" });
-                            }
-                        });
-                    });
-                }
-                else {
-                    res.json({invalidArguments: 'true'});
-                }
-            }else{
-                res.json({invalidArguments: 'true'});
-            }
+          res.status(202).json({ invalidArguments: 'true' });
         }
+      }
     });
+  };
 
-};
+
 
 
 utilizadorController.updateUtilizador = function (req, res, next) {
@@ -47,12 +51,12 @@ utilizadorController.updateUtilizador = function (req, res, next) {
         });
 };
 
-utilizadorController.updateUtilizadorInterno = function (id,update) {
+utilizadorController.updateUtilizadorInterno = function (id, update) {
     Utilizador.findByIdAndUpdate(id, update, { new: true },
         function (err, utilizador) {
             if (err) {
                 next(err);
-            } 
+            }
         });
 };
 

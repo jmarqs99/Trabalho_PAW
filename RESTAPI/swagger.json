@@ -1,643 +1,310 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.0.0",
-        "title": "Trabalho PAW",
-        "description": "REST API para a milestone 1"
+      "version": "1.0.0",
+      "title": "Trabalho PAW",
+      "description": "REST API para a milestone 1"
     },
     "host": "localhost:3000",
     "basePath": "/api",
-    "schemes": [
-        "http"
-    ],
-    "consumes": [
-        "aplication/json"
-    ],
-    "produces": [
-        "aplication/json"
-    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "paths": {
-        "/pedido/": {
-            "post": {
-                "summary": "Criar um pedido na plataforma",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedido",
-                        "in": "body",
-                        "description": "Registar um pedido de diagnóstico por parte do utilizador ao centro de análises",
-                        "shema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                ],
-                "produces": [
-                    "aplication/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Um novo pedido foi criado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Retorna todos os pedidos existentes",
-                "tags": [
-                    "Pedido"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido encontrado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
+      "/utilizador/": {
+        "post": {
+          "summary": "Criar novo utlizador",
+          "tags": ["Utilizador"],
+          "parameters": [
+            {
+              "name": "utilizador",
+              "in": "body",
+              "description": "Utilizador com as propriedades dadas",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
             }
-        },
-        "/pedido/{pedidoId}": {
-            "get": {
-                "summary": "Retorna um pedido com um determinado id",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedidoId",
-                        "in": "path",
-                        "description": "id do pedido a encontrar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-                
-            },
-            "put": {
-                "summary": "Atualiza o pedido com o id dado",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "Pedido",
-                        "in": "body",
-                        "description": "Pedido com as novas propriedades",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido atualizado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Novo utilizador criado.",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
             }
+          }
         },
-        "/pedido/estadoTeste/{pedidoId}": {
-            "get": {
-                "summary": "Retorna o estado do teste de um pedido com um determinado id",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedidoId",
-                        "in": "path",
-                        "description": "id do pedido a encontrar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-            }
-        },
-        "/pedido/resultado/{pedidoId}": {
-            "get": {
-                "summary": "Retorna o resultado do teste de um pedido com um determinado id",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedidoId",
-                        "in": "path",
-                        "description": "id do pedido a encontrar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-            }
-        },
-        "/pedido/estadoUser/{pedidoId}": {
-            "get": {
-                "summary": "Retorna o estado do utilizador de um pedido com um determinado id",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedidoId",
-                        "in": "path",
-                        "description": "id do pedido a encontrar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-            }
-        },
-        "/pedido/informacao/{pedidoId}": {
-            "get": {
-                "summary": "Retorna a informação do utilizador de um pedido com um determinado id",
-                "tags": [
-                    "Pedido"
-                ],
-                "parameters": [
-                    {
-                        "name": "pedidoId",
-                        "in": "path",
-                        "description": "id do pedido a encontrar",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Pedido retornado",
-                        "schema": {
-                            "$ref": "#/definitions/pedido"
-                        }
-                    }
-                }
-            }
-        },
-      "/pedido/resultados/{resultado}": {
         "get": {
-            "summary": "Retorna os pedidos com o resultado dado como parâmetro",
-            "tags": [
-                "Pedido"
-            ],
-            "parameters": [
-                {
-                    "name": "resultado",
-                    "in": "path",
-                    "description": "resultado dos pedidos a encontrar",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Pedido retornado",
-                    "schema": {
-                        "$ref": "#/definitions/pedido"
-                    }
-                }
+          "summary": "Retorna todos os utilizadores existentes",
+          "tags": ["Utilizador"],
+          "responses": {
+            "200": {
+              "description": "Utilizador encontrado",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
             }
+          }
         }
       },
-      "/pedido/estadosTeste/{estadoTeste}": {
+      "/utilizador/{utilizadorId}": {
+        "parameters": [
+          {
+            "name": "utilizadorId",
+            "in": "path",
+            "description": "id do utilizador a encontrar",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "get": {
-            "summary": "Retorna os pedidos com o estado do teste dado como parâmetro",
-            "tags": [
-                "Pedido"
-            ],
-            "parameters": [
-                {
-                    "name": "estadoTeste",
-                    "in": "path",
-                    "description": "estado do teste dos pedidos a encontrar",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Pedido retornado",
-                    "schema": {
-                        "$ref": "#/definitions/pedido"
-                    }
-                }
+          "summary": "Retorna o utilizador com o id dado",
+          "tags": ["Utilizador"],
+          "responses": {
+            "200": {
+              "description": "Utilizador retornado",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
             }
+          }
+        },
+        "put": {
+          "summary": "Atualiza o utilizador com o id dado",
+          "tags": ["Utilizador"],
+          "parameters": [
+            {
+              "name": "Utilizador",
+              "in": "body",
+              "description": "Utilizador com as novas propriedades",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Utilizador atualizado",
+              "schema": {
+                "$ref": "#/definitions/utilizador"
+              }
+            }
+          }
         }
       },
-      "/pedido/estadosUtilizador/{estadoUtilizador}": {
+      "/tecnico": {
         "get": {
-            "summary": "Retorna os pedidos com o estado do utilizador dado como parâmetro",
-            "tags": [
-                "Pedido"
-            ],
-            "parameters": [
-                {
-                    "name": "estadoUtilizador",
-                    "in": "path",
-                    "description": "estado do utilizador dos pedidos a encontrar",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Pedido retornado",
-                    "schema": {
-                        "$ref": "#/definitions/pedido"
-                    }
-                }
+          "summary": "Retorna todos os técnicos existentes",
+          "tags": ["Técnico"],
+          "responses": {
+            "200": {
+              "description": "Técnico encontrado",
+              "schema": {
+                "$ref": "#/definitions/tecnico"
+              }
             }
+          }
         }
       },
-      "/pedido/informacaoPedido/{informacao}": {
-        "get": {
-            "summary": "Retorna os pedidos com a informação dado como parâmetro",
-            "tags": [
-                "Pedido"
-            ],
-            "parameters": [
-                {
-                    "name": "informacao",
-                    "in": "path",
-                    "description": "informação dos pedidos a encontrar",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Pedido retornado",
-                    "schema": {
-                        "$ref": "#/definitions/pedido"
-                    }
-                }
+      "/tecnico/{userID}": {
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do Utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "post": {
+          "summary": "Criar novo técnico",
+          "tags": ["Técnico"],
+          "produces": ["aplication/json"],
+          "responses": {
+            "200": {
+              "description": "Novo técnico criado.",
+              "schema": {
+                "$ref": "#/definitions/tecnico"
+              }
             }
+          }
         }
       },
-        "/utilizador/": {
-            "post": {
-                "summary": "Criar novo utlizador",
-                "tags": [
-                    "Utilizador"
-                ],
-                "parameters": [
-                    {
-                        "name": "utilizador",
-                        "in": "body",
-                        "description": "Utilizador com as propriedades dadas",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                ],
-                "produces": [
-                    "aplication/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Novo utilizador criado.",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Retorna todos os utilizadores existentes",
-                "tags": [
-                    "Utilizador"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Utilizador encontrado",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                }
+      "/tecnico/{tecnicoID}": {
+        "parameters": [
+          {
+            "name": "tecnicoID",
+            "in": "path",
+            "description": "ID do Técnico",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "get": {
+          "summary": "Retorna um técnio dado um determinado ID",
+          "tags": ["Técnico"],
+          "responses": {
+            "200": {
+              "description": "Técnico retornado"
             }
+          }
         },
-        "/utilizador/{utilizadorId}": {
-            "parameters": [
-                {
-                    "name": "utilizadorId",
-                    "in": "path",
-                    "description": "id do utilizador a encontrar",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "get": {
-                "summary": "Retorna o utilizador com o id dado",
-                "tags": [
-                    "Utilizador"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Utilizador retornado",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "summary": "Atualiza o utilizador com o id dado",
-                "tags": [
-                    "Utilizador"
-                ],
-                "parameters": [
-                    {
-                        "name": "Utilizador",
-                        "in": "body",
-                        "description": "Utilizador com as novas propriedades",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Utilizador atualizado",
-                        "schema": {
-                            "$ref": "#/definitions/utilizador"
-                        }
-                    }
-                }
+        "delete": {
+          "summary": "Remove um utilizador da posição de técnico",
+          "tags": ["Técnico"],
+          "responses": {
+            "200": {
+              "description": "Técnico Removido"
             }
-        },
-        "/tecnico": {
-            "get": {
-                "summary": "Retorna todos os técnicos existentes",
-                "tags": [
-                    "Técnico"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Técnico encontrado",
-                        "schema": {
-                            "$ref": "#/definitions/tecnico"
-                        }
-                    }
-                }
-            }
-        },
-        "/tecnico/{userID}": {
-            "parameters": [
-                {
-                    "name": "userID",
-                    "in": "path",
-                    "description": "ID do Utilizador",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "post": {
-                "summary": "Criar novo técnico",
-                "tags": [
-                    "Técnico"
-                ],
-                "produces": [
-                    "aplication/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Novo técnico criado.",
-                        "schema": {
-                            "$ref": "#/definitions/tecnico"
-                        }
-                    }
-                }
-            }
-        },
-        "/tecnico/{tecnicoID}": {
-            "parameters": [
-                {
-                    "name": "tecnicoID",
-                    "in": "path",
-                    "description": "ID do Técnico",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "get": {
-                "summary": "Retorna um técnio dado um determinado ID",
-                "tags": [
-                    "Técnico"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Técnico retornado"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Remove um utilizador da posição de técnico",
-                "tags": [
-                    "Técnico"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Técnico Removido"
-                    }
-                }
-            }
-        },
-        "/admin": {
-            "get": {
-                "summary": "Retorna todos os admins existentes",
-                "tags": [
-                    "Admin"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Admins encontrados"
-                    }
-                }
-            }
-        },
-        "/admin/{userID}": {
-            "parameters": [
-                {
-                    "name": "userID",
-                    "in": "path",
-                    "description": "ID do Utilizador",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "post": {
-                "summary": "Criar novo Admin",
-                "tags": [
-                    "Admin"
-                ],
-                "produces": [
-                    "aplication/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Novo Admin criado."
-                    }
-                }
-            }
-        },
-        "/admin/{adminID}": {
-            "parameters": [
-                {
-                    "name": "adminID",
-                    "in": "path",
-                    "description": "ID do Admin",
-                    "required": true,
-                    "type": "string"
-                }
-            ],
-            "get": {
-                "summary": "Retorna um admin dado um determinado ID",
-                "tags": [
-                    "Admin"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Admin retornado"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Remove um utilizador da posição de Admin",
-                "tags": [
-                    "Admin"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Admin Removido"
-                    }
-                }
-            }
-        },
-        "/login":{
-            "post": {
-                "summary": "Fazer login na API",
-                "tags": [
-                    "Sessão"
-                ],
-                "parameters": [
-                    {
-                        "name": "Dados de Login",
-                        "in": "body",
-                        "description": "Informações do utilizador",
-                        "schema": {
-                            "$ref": "#/definitions/login"
-                        }
-                    }
-                ],
-                "produces": [
-                    "aplication/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Log in com sucesso"
-                    }
-                }
-            }
+          }
         }
+      },
+      "/admin": {
+        "get": {
+          "summary": "Retorna todos os admins existentes",
+          "tags": ["Admin"],
+          "responses": {
+            "200": {
+              "description": "Admins encontrados"
+            }
+          }
+        }
+      },
+      "/admin/{userID}": {
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do Utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "post": {
+          "summary": "Criar novo Admin",
+          "tags": ["Admin"],
+          "produces": ["aplication/json"],
+          "responses": {
+            "200": {
+              "description": "Novo Admin criado."
+            }
+          }
+        }
+      },
+      "/admin/{adminID}": {
+        "parameters": [
+          {
+            "name": "adminID",
+            "in": "path",
+            "description": "ID do Admin",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "get": {
+          "summary": "Retorna um admin dado um determinado ID",
+          "tags": ["Admin"],
+          "responses": {
+            "200": {
+              "description": "Admin retornado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Remove um utilizador da posição de Admin",
+          "tags": ["Admin"],
+          "responses": {
+            "200": {
+              "description": "Admin Removido"
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+          "summary": "Fazer login na API",
+          "tags": ["Sessão"],
+          "parameters": [
+            {
+              "name": "Dados de Login",
+              "in": "body",
+              "description": "Informações do utilizador",
+              "schema": {
+                "$ref": "#/definitions/login"
+              }
+            }
+          ],
+          "produces": ["aplication/json"],
+          "responses": {
+            "200": {
+              "description": "Log in com sucesso"
+            }
+          }
+        }
+      }
     },
     "definitions": {
-        "utilizador": {
-            "required": [],
-            "properties": {
-                "nmrCC": {
-                    "type": "string",
-                    "uniqueItems": true
-                },
-                "password": {
-                    "type": "string",
-                    "uniqueItems": true
-                },
-                "primeiroNome": {
-                    "type": "string"
-                },
-                "ultimoNome": {
-                    "type": "string"
-                },
-                "estado": {
-                    "type": "string"
-                }
-            }
-        },
-        "pedido": {
-            "required": [],
-            "properties": {
-                "informacao": {
-                    "type": "string"
-                },
-                "estadoUtilizador": {
-                    "type": "string"
-                },
-                "estadoTeste": {
-                    "type":"string"
-                },
-                "resultadoTeste": {
-                    "type":"string"
-                }
-            }
-        },
-        "tecnico": {
-            "required": [],
-            "properties": {
-                "utilizadorId": {
-                    "type": "string",
-                    "uniqueItems": true
-                }
-            }
-        },
-        "login":{
-            "required": [],
-            "properties": {
-                "nmrCC": {
-                    "type": "string",
-                    "uniqueItems": true
-                },
-                "password": {
-                    "type": "string",
-                    "uniqueItems": true
-                }
-            }
+      "utilizador": {
+        "required": [],
+        "properties": {
+          "nmrCC": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "primeiroNome": {
+            "type": "string"
+          },
+          "ultimoNome": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          }
         }
+      },
+      "pedido": {
+        "required": [],
+        "properties": {
+          "informacao": {
+            "type": "string"
+          },
+          "estadoUtilizador": {
+            "type": "string"
+          },
+          "estadoTeste": {
+            "type": "string"
+          },
+          "resultadoTeste": {
+            "type": "string"
+          }
+        }
+      },
+      "tecnico": {
+        "required": [],
+        "properties": {
+          "utilizadorId": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      },
+      "login": {
+        "required": [],
+        "properties": {
+          "nmrCC": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      }
     }
-}
+  }
