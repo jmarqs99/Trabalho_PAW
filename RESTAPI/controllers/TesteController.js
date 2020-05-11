@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const AgendarTeste = require("../models/AgendarTeste");
+const AgendarTeste = require("../models/Teste");
 const pedidoController = require("./pedidoController");
 const Pedido = require("../models/pedido");
 
 const agendarTesteController = {};
 
-agendarTesteController.agendarteste = function(req, res, next) {
+agendarTesteController.criarTeste = function(req, res, next) {
    
     /**
     pedidoController.verPedidoInterno(req.params.pedidoID, function(pedido) {
@@ -67,7 +67,7 @@ agendarTesteController.verAgendamentos = function(req, res, next) {
     })
 }
  */
-agendarTesteController.veragendamentos = function(req, res, next) {
+agendarTesteController.verTestes = function(req, res, next) {
     AgendarTeste.find(function (err, agendamentos) {
         if (err) {
             next(err)
@@ -79,7 +79,7 @@ agendarTesteController.veragendamentos = function(req, res, next) {
     })
 }
 
-agendarTesteController.verAgendamento = function(req, res, next) {
+agendarTesteController.verTeste = function(req, res, next) {
     AgendarTeste.findOne({ _id: req.params.agendamentoId }, function (err, agendarTeste) {
         if (err) {
             next(err)
@@ -91,7 +91,7 @@ agendarTesteController.verAgendamento = function(req, res, next) {
     })
 }
 
-agendarTesteController.updateAgendamento = function(req, res, next) {
+agendarTesteController.updateTeste = function(req, res, next) {
     AgendarTeste.findByIdAndUpdate(req.params.agendamentoId, req.body, { new: true },
         function (err, agendarTeste) {
             if (err) {
@@ -102,7 +102,7 @@ agendarTesteController.updateAgendamento = function(req, res, next) {
         });
 }
 
-agendarTesteController.deleteAgendamento = function(req, res, next) {
+agendarTesteController.deleteTeste = function(req, res, next) {
     AgendarTeste.findOne({ _id: req.params.agendamentoId }, function (err, agendarTeste) {
         if(err) {
             next(err);
@@ -119,7 +119,7 @@ agendarTesteController.deleteAgendamento = function(req, res, next) {
     })
 }
 
-agendarTesteController.totalAgendamentosPorDia = function(req, res, next) {
+agendarTesteController.totalTestesPorDia = function(req, res, next) {
     AgendarTeste.find({ Data: req.params.testes }, function (err, agendarTeste) {
         if (err) {
             next(err)
@@ -130,7 +130,7 @@ agendarTesteController.totalAgendamentosPorDia = function(req, res, next) {
 
 }
 
-agendarTesteController.totalAgendamentosPorPessoa = function(req, res, next) {
+agendarTesteController.totalTestesPorPessoa = function(req, res, next) {
     AgendarTeste.find({ pedidoId: req.params.user }, function (err, agendarTeste) {
         if (err) {
             next(err)

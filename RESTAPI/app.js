@@ -12,7 +12,7 @@ const apiTecnicoRouter = require('./routes/api/tecnico');
 const apiPedidoRouter = require('./routes/api/pedido');
 const sessionRouter = require('./routes/api/session');
 const adminRouter = require('./routes/api/admin');
-const agendarTesteRouter = require('./routes/api/agendarTeste')
+const TesteRouter = require('./routes/api/Teste')
 
 const app = express();
 
@@ -42,7 +42,7 @@ app.use('/api/pedido', apiPedidoRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api', sessionRouter);
 app.use('/api-docs',swaggerUi.serve , swaggerUi.setup(swaggerDocumment));
-app.use('/api/teste', agendarTesteRouter)
+app.use('/api/testes', TesteRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
