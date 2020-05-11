@@ -6,6 +6,7 @@ router.get('/', pedidoController.getAllPedidos);
 router.get('/:pedidoId', pedidoController.getOnePedido);
 router.post('/', pedidoController.criarPedido);
 router.put('/:pedidoId', pedidoController.updatePedido);
+router.delete('/:pedidoId', pedidoController.deletePedido)
 
 router.get('/infetados/:infetado', pedidoController.numeroInfetados)
 

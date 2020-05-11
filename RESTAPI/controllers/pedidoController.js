@@ -219,8 +219,53 @@ pedidoController.numeroInfetados = function (req, res, next) {
     })
 }
 
+pedidoController.deletePedido = function(req, res, next) {
+    Pedido.findOne({ _id: req.params.pedidoId }, function (err, pedido) {
+        if(err) {
+            next(err);
+        } else {
+            Pedido.deleteOne({_id:req.params.pedidoId},function (err)  {
+                if(err) {
+                    next(err);
+                } else {
+                    
+                    res.json({status:"Done"});
+                }
+            });
+        }
+    })
+}
+
+
+
+
+pedidoController.verPedidoInterno = function (id, teste) {
+    Utilizador.findOne({ _id: id }, function (err, pedido) {
+        if (err) {
+            teste(null);
+        } else {
+            teste(pedido)
+        }
+    });
+};
  
 
+
+
+
+
+
+/**
+utilizadorController.verUtilizadorInterno = function (id, user) {
+    Utilizador.findOne({ _id: id }, function (err, utilizador) {
+        if (err) {
+            user(null);
+        } else {
+            user(utilizador);
+        }
+    });
+};
+ */
 
 
 module.exports = pedidoController;
