@@ -329,6 +329,148 @@
         }
     }
   },
+  "/testes": {
+    "post": {
+      "summary": "Criar um novo teste",
+      "tags": ["Teste"],
+      "parameters": [
+        {
+          "name": "teste",
+          "in": "body",
+          "description": "testes despiste e imunização à Covid-19",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "Novo teste criado.",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    },
+    "get": {
+      "summary": "Retorna todos os testes existentes",
+          "tags": ["Teste"],
+          "responses": {
+            "200": {
+              "description": "teste encontrado",
+              "schema": {
+                "$ref": "#/definitions/testes"
+              }
+            }
+          }
+    }
+  },
+  "/testes/{testeId}": {
+    "parameters": [
+      {
+        "name": "id do teste",
+        "in": "path",
+        "description": "id do teste a encontrar",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "get": {
+      "summary": "Retorna o teste com o id dado",
+      "tags": ["Teste"],
+      "responses": {
+        "200": {
+          "description": "Utilizador retornado",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    },
+    "put": {
+      "summary": "Atualiza o teste com o id dado",
+      "tags": ["Teste"],
+      "parameters": [
+        {
+          "name": "teste",
+          "in": "body",
+          "description": "teste com as novas propriedades",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "teste atualizado",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    },
+    "delete":{
+      "summary": "Apagar um teste com o seu id",
+      "tags":[
+        "Teste"
+      ],
+      "responses":{
+        "200":{
+          "description": "o teste foi apagado",
+          "schema":{
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    }
+  },
+  "/testes/numeroTestesDia/{testes}": {
+    "parameters": [
+      {
+        "name": "testes",
+        "in": "path",
+        "description": "dia do teste",
+        "required": true,
+        "type": "Date"
+      }
+    ],
+    "get": {
+      "summary": "Retorna número de testes realizados num determinado dia",
+      "tags": ["Teste"],
+      "responses": {
+        "200": {
+          "description": "total de testes retornados",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    }
+  },
+  "/testes/numeroTestesPessoa/{user}": {
+    "parameters": [
+      {
+        "name": "user",
+        "in": "path",
+        "description": "id do user",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "get": {
+      "summary": "Retorna número de testes realizados por pessoa",
+      "tags": ["Teste"],
+      "responses": {
+        "200": {
+          "description": "total de testes retornados",
+          "schema": {
+            "$ref": "#/definitions/testes"
+          }
+        }
+      }
+    }
+  },
       "/utilizador/": {
         "post": {
           "summary": "Criar novo utlizador",
@@ -581,6 +723,22 @@
             "type": "string"
           },
           "estado": {
+            "type": "string"
+          }
+        }
+      },
+      "testes": {
+        "required": [],
+        "properties": {
+          "pedidoId": {
+            "type": "string"
+           
+          },
+          "Data": {
+            "type": "Date"
+            
+          },
+          "resultadoTeste": {
             "type": "string"
           }
         }
