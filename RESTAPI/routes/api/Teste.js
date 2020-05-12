@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const agendarTesteController = require("../../controllers/TesteController");
+const TesteController = require("../../controllers/TesteController");
 
 //router.post('/:pedidoID', agendarTesteController.agendarOTeste)
-router.post('/', agendarTesteController.criarTeste)
-router.get('/', agendarTesteController.verTestes)
-router.get('/:agendamentoId', agendarTesteController.verTeste)
-router.put('/:agendamentoId', agendarTesteController.updateTeste)
-router.delete('/:agendamentoId', agendarTesteController.deleteTeste)
+router.post('/', TesteController.criarTeste)
+router.get('/', TesteController.verTestes)
+router.get('/:testeId', TesteController.verTeste)
+router.put('/:testeId', TesteController.updateTeste)
+router.delete('/:testeId', TesteController.deleteTeste)
 
 
-router.get('/numeroTestes/:testes', agendarTesteController.totalTestesPorDia)
-router.get('/numeroTestesPessoa/:user', agendarTesteController.totalTestesPorPessoa)
+router.get('/numeroTestesDia/:testes', TesteController.totalTestesPorDia)
+router.get('/numeroTestesPessoa/:user', TesteController.totalTestesPorPessoa)
 
 module.exports = router;

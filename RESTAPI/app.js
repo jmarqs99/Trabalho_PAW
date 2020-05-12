@@ -16,6 +16,10 @@ const TesteRouter = require('./routes/api/Teste')
 
 const app = express();
 
+//
+const fileupload = require('express-fileupload')
+app.use(fileupload())
+//app.apiPedidoRouter.use(fileupload())
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocumment = require('./swagger.json');
 

@@ -8,6 +8,8 @@ router.post('/', pedidoController.criarPedido);
 router.put('/:pedidoId', pedidoController.updatePedido);
 router.delete('/:pedidoId', pedidoController.deletePedido)
 
+router.post('/up/', pedidoController.upload)
+
 router.get('/infetados/:infetado', pedidoController.numeroInfetados)
 
 //filtrar parâmetros de um pedido pelo seu id
@@ -22,6 +24,7 @@ router.get('/resultados/:resultado', pedidoController.Resultados)
 router.get('/estadosTeste/:estadoTeste', pedidoController.EstadosTeste)
 router.get('/estadosUtilizador/:estadoUtilizador', pedidoController.EstadosUser)
 router.get('/informacaoPedido/:informacao', pedidoController.informacao)
+
 
 
 

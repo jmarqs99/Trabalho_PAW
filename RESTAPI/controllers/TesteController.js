@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const AgendarTeste = require("../models/Teste");
+const Teste = require("../models/Teste");
 const pedidoController = require("./pedidoController");
 const Pedido = require("../models/pedido");
 
-const agendarTesteController = {};
+const TesteController = {};
 
-agendarTesteController.criarTeste = function(req, res, next) {
+TesteController.criarTeste = function(req, res, next) {
    
     /**
     pedidoController.verPedidoInterno(req.params.pedidoID, function(pedido) {
@@ -27,14 +27,14 @@ agendarTesteController.criarTeste = function(req, res, next) {
        */
      
     
-    const agendarTeste = new AgendarTeste(req.body);
+    const teste = new Teste(req.body);
 
-    agendarTeste.save(function(err) {
+    teste.save(function(err) {
         if(err) {
             next(err)
         } 
         else {
-            res.json(agendarTeste)
+            res.json(teste)
         }
     })
        
@@ -67,47 +67,47 @@ agendarTesteController.verAgendamentos = function(req, res, next) {
     })
 }
  */
-agendarTesteController.verTestes = function(req, res, next) {
-    AgendarTeste.find(function (err, agendamentos) {
+TesteController.verTestes = function(req, res, next) {
+    Teste.find(function (err, testes) {
         if (err) {
             next(err)
         } else {
 
-            res.json(agendamentos)
+            res.json(testes)
 
         }
     })
 }
 
-agendarTesteController.verTeste = function(req, res, next) {
-    AgendarTeste.findOne({ _id: req.params.agendamentoId }, function (err, agendarTeste) {
+TesteController.verTeste = function(req, res, next) {
+    Teste.findOne({ _id: req.params.testeId }, function (err, teste) {
         if (err) {
             next(err)
         }
         else {
-            res.json(agendarTeste)
+            res.json(teste)
 
         }
     })
 }
 
-agendarTesteController.updateTeste = function(req, res, next) {
-    AgendarTeste.findByIdAndUpdate(req.params.agendamentoId, req.body, { new: true },
-        function (err, agendarTeste) {
+TesteController.updateTeste = function(req, res, next) {
+    Teste.findByIdAndUpdate(req.params.testeId, req.body, { new: true },
+        function (err, teste) {
             if (err) {
                 next(err);
             } else {
-                res.json(agendarTeste);
+                res.json(teste);
             }
         });
 }
 
-agendarTesteController.deleteTeste = function(req, res, next) {
-    AgendarTeste.findOne({ _id: req.params.agendamentoId }, function (err, agendarTeste) {
+TesteController.deleteTeste = function(req, res, next) {
+    Teste.findOne({ _id: req.params.testeId }, function (err, teste) {
         if(err) {
             next(err);
         } else {
-            AgendarTeste.deleteOne({_id:req.params.agendamentoId},function (err)  {
+            teste.deleteOne({_id:req.params.testeId},function (err)  {
                 if(err) {
                     next(err);
                 } else {
@@ -119,25 +119,25 @@ agendarTesteController.deleteTeste = function(req, res, next) {
     })
 }
 
-agendarTesteController.totalTestesPorDia = function(req, res, next) {
-    AgendarTeste.find({ Data: req.params.testes }, function (err, agendarTeste) {
+TesteController.totalTestesPorDia = function(req, res, next) {
+    Teste.find({ Data: req.params.testes }, function (err, teste) {
         if (err) {
             next(err)
         } else {
-            res.json(agendarTeste.length)
+            res.json(teste.length)
         }
     })
 
 }
 
-agendarTesteController.totalTestesPorPessoa = function(req, res, next) {
-    AgendarTeste.find({ pedidoId: req.params.user }, function (err, agendarTeste) {
-        if (err) {
+TesteController.totalTestesPorPessoa = function(req, res, next) {
+    Teste.find({ pedidoId: req.params.user }, function (err, teste) {
+        if (err) {teste
             next(err)
         } else {
-            res.json(agendarTeste.length)
+            res.json(teste.length)
         }
     })
 }
 
-module.exports = agendarTesteController;
+module.exports = TesteController;

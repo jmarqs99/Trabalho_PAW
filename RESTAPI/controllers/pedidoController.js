@@ -1,7 +1,26 @@
 const mongoose = require("mongoose");
 const Pedido = require("../models/pedido");
 
+//const fileupload = require('express-fileupload')
+//mongoose.use(fileupload())
+
+//const multer = require('multer')
+//const upload = multer({dest: '/uploads'})
+
 const pedidoController = {};
+
+//Pedido.use(fileupload())
+//pedidoController.use(fileupload())
+/**
+pedidoController.upload = function(req, res, next) {
+    //const file = req.files.pdf
+    console.log(req.files)
+    res.send({
+        success: true,
+        message: "file uploaded"
+    })
+}
+ */
 
 pedidoController.criarPedido = function (req, res, next) {
     
@@ -44,6 +63,8 @@ pedidoController.criarPedido = function (req, res, next) {
     }
 })  
 };
+
+
 pedidoController.updatePedido = function (req, res, next) {
 
     Pedido.findByIdAndUpdate(req.params.pedidoId, req.body, { new: true },
@@ -56,6 +77,46 @@ pedidoController.updatePedido = function (req, res, next) {
         });
 }
 
+pedidoController.upload = function (req, res, next) {
+    /**
+    Pedido.findByIdAndUpdate(req.params.pedidoId, req.body, { new: true },
+        function (err, pedido) {
+            if (err) {
+                next(err);
+            } else {
+                const file = req.files.photo
+                file.mv('/uploads' + file.name, function(err, result) {
+                    if(err) {
+                        next(err)
+                    }
+                    res.send({
+                        success: true,
+                        message: "file uploaded"
+                    })
+                })
+                
+            }
+        });
+         */
+        
+                console.log(req.files)
+                 const file = req.files.photo
+                 file.mv('/uploads/' + file.name, function(err, result) {
+                     if(err) {
+                         next(err)
+                     }
+                     else {
+                     res.send({
+                        success: true,
+                        message: "file uploaded"
+                    })
+                }
+                 })
+                 
+
+                  
+                 
+}
 
 pedidoController.getAllPedidos = function (req, res, next) {
     Pedido.find(function (err, pedidos) {
@@ -255,17 +316,6 @@ pedidoController.verPedidoInterno = function (id, teste) {
 
 
 
-/**
-utilizadorController.verUtilizadorInterno = function (id, user) {
-    Utilizador.findOne({ _id: id }, function (err, utilizador) {
-        if (err) {
-            user(null);
-        } else {
-            user(utilizador);
-        }
-    });
-};
- */
 
 
 module.exports = pedidoController;
