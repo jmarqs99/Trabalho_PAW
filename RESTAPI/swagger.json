@@ -334,6 +334,7 @@
         }
       }
     },
+    
     "/testes": {
       "post": {
         "summary": "Criar um novo teste",
@@ -440,7 +441,7 @@
         }
       }
     },
-    "/testes/numeroTestesDia/{testes}": {
+    "/testes/numeroTestesDia/{dia}/{mes}/{ano}": {
       "parameters": [
         {
           "name": "testes",
@@ -832,8 +833,20 @@
             "type": "string",
             "uniqueItems": true
           },
-          "Data": {
-            "type": "Date"
+          "ano": {
+            "type": "number"
+          },
+          "mes": {
+            "type": "number"
+          },
+          "dia": {
+            "type": "number"
+          },
+          "hora": {
+            "type": "number"
+          },
+          "minuto": {
+            "type": "number"
           },
           "resultadoTeste": {
             "type": "string"
