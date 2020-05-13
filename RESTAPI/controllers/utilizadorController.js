@@ -23,15 +23,15 @@ utilizadorController.createUtilizador = function (req, res, next) {
                 if (err) {
                   next(err);
                 } else {
-                  res.json(newUtilizador);
+                  res.status(201).json({userCreated : 'true'});
                 }
               });
             });
           } else {
-            res.status(201).json({ invalidArguments: 'true' });
+            res.status(400).json({ invalidArguments: 'true' });
           }
         } else {
-          res.status(202).json({ invalidArguments: 'true' });
+          res.status(400).json({ invalidArguments: 'true' });
         }
       }
     });
