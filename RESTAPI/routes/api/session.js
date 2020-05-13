@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 const sessionRouter = express.Router()
 
-const SESSION_EXP = 86400000; //Um dia
+const SESSION_EXP = 86400000; //1 dia
 
 sessionRouter.post('/login', (req, res, next) => {
 	if (req.body.nmrCC && req.body.password) {
