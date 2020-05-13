@@ -424,27 +424,18 @@
             }
           }
         }
-      }
-    }
-  },
-  "/testes/numeroTestesDia/{dia}/{mes}/{ano}": {
-    "parameters": [
-      {
-        "name": "testes",
-        "in": "path",
-        "description": "dia, mes e ano do teste",
-        "required": true,
-        "type": "Date"
-      }
-    ],
-    "get": {
-      "summary": "Retorna número de testes realizados num determinado dia",
-      "tags": ["Teste"],
-      "responses": {
-        "200": {
-          "description": "total de testes retornados",
-          "schema": {
-            "$ref": "#/definitions/testes"
+      },
+      "delete": {
+        "summary": "Apagar um teste com o seu id",
+        "tags": [
+          "Teste"
+        ],
+        "responses": {
+          "200": {
+            "description": "o teste foi apagado",
+            "schema": {
+              "$ref": "#/definitions/testes"
+            }
           }
         }
       }
@@ -838,23 +829,11 @@
         "required": [],
         "properties": {
           "pedidoId": {
-            "type": "string"
-           
+            "type": "string",
+            "uniqueItems": true
           },
-          "ano": {
-            "type": "number"
-          },
-          "mes": {
-            "type": "number"
-          },
-          "dia": {
-            "type": "number"
-          },
-          "hora": {
-            "type": "number"
-          },
-          "minuto": {
-            "type": "number"
+          "Data": {
+            "type": "Date"
           },
           "resultadoTeste": {
             "type": "string"
@@ -864,9 +843,6 @@
       "pedido": {
         "required": [],
         "properties": {
-          "utilizadorId": {
-            "type":"string"
-          },
           "informacao": {
             "type": "string"
           },

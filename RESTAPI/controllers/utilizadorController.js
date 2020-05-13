@@ -5,90 +5,86 @@ const bcrypt = require('bcrypt');
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
-    Utilizador.findOne({ nmrCC: req.body.nmrCC }, function (err, utilizador) {
-      if (err) {
-        next(err);
-      } else {
-        if (
-          req.body.nmrCC &&
-          req.body.password &&
-          req.body.primeiroNome &&
-          req.body.ultimoNome
-        ) {
-          if (utilizador === null) {
-            bcrypt.hash(req.body.password, 10, function (err, hash) {
-              req.body.password = hash;
-              const newUtilizador = new Utilizador(req.body);
-              newUtilizador.save(function (err) {
-                if (err) {
-                  next(err);
-                } else {
-                  res.status(201).json({userCreated : 'true'});
-                }
-              });
+  Utilizador.findOne({ nmrCC: req.body.nmrCC }, function (err, utilizador) {
+    if (err) {
+      next(err);
+    } else {
+      if (
+        req.body.nmrCC &&
+        req.body.password &&
+        req.body.primeiroNome &&
+        req.body.ultimoNome
+      ) {
+        if (utilizador === null) {
+          bcrypt.hash(req.body.password, 10, function (err, hash) {
+            req.body.password = hash;
+            const newUtilizador = new Utilizador(req.body);
+            newUtilizador.save(function (err) {
+              if (err) {
+                next(err);
+              } else {
+                res.status(201).json({ userCreated: 'true' });
+              }
             });
-          } else {
-            res.status(400).json({ invalidArguments: 'true' });
-          }
+          });
         } else {
           res.status(400).json({ invalidArguments: 'true' });
         }
+      } else {
+        res.status(400).json({ invalidArguments: 'true' });
       }
-    });
-  };
-
-
-
+    }
+  });
+};
 
 utilizadorController.updateUtilizador = function (req, res, next) {
-    Utilizador.findByIdAndUpdate(req.params.utilizadorId, req.body, { new: true },
-        function (err, utilizador) {
-            if (err) {
-                next(err);
-            } else {
-                res.json(utilizador);
-            }
-        });
+  Utilizador.findByIdAndUpdate(req.params.utilizadorId, req.body, { new: true },
+    function (err, utilizador) {
+      if (err) {
+        next(err);
+      } else {
+        res.status(200).json(utilizador);
+      }
+    });
 };
 
 utilizadorController.updateUtilizadorInterno = function (id, update) {
-    Utilizador.findByIdAndUpdate(id, update, { new: true },
-        function (err, utilizador) {
-            if (err) {
-                next(err);
-            }
-        });
+  Utilizador.findByIdAndUpdate(id, update, { new: true },
+    function (err, utilizador) {
+      if (err) {
+        next(err);
+      }
+    });
 };
 
 utilizadorController.verUtilizador = function (req, res, next) {
-    Utilizador.findOne({ _id: req.params.utilizadorId }, function (err, utilizador) {
-        if (err) {
-            next(err);
-        } else {
-            res.json(utilizador);
-        }
-    });
+  Utilizador.findOne({ _id: req.params.utilizadorId }, function (err, utilizador) {
+    if (err) {
+      next(err);
+    } else {
+      res.status(200).json(utilizador);
+    }
+  });
 };
 
 utilizadorController.verUtilizadorInterno = function (id, user) {
-    Utilizador.findOne({ _id: id }, function (err, utilizador) {
-        if (err) {
-            user(null);
-        } else {
-            user(utilizador);
-        }
-    });
+  Utilizador.findOne({ _id: id }, function (err, utilizador) {
+    if (err) {
+      user(null);
+    } else {
+      user(utilizador);
+    }
+  });
 };
 
 utilizadorController.verTodosUtilizadores = function (req, res, next) {
-    Utilizador.find(function (err, utilizadores) {
-        if (err) {
-            next(err);
-        } else {
-            res.json(utilizadores);
-        }
-    });
+  Utilizador.find(function (err, utilizadores) {
+    if (err) {
+      next(err);
+    } else {
+      res.status(200).json(utilizadores);
+    }
+  });
 }
-
 
 module.exports = utilizadorController;
