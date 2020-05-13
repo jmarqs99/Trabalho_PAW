@@ -9,7 +9,7 @@ const autorizacoes = {
 
 const authorize = (opts) => {
 
-	opts = autorizacoes(opts) || []
+	opts = autorizacoes[opts] || []
 
 	return (req, res, next) => {
 		if (!req.user) {
