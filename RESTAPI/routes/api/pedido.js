@@ -1,29 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const pedidoController = require("../../controllers/pedidoController");
+const authorize = require('../../middlewares/authorize')
 
-router.get('/', pedidoController.getAllPedidos);
-router.get('/:pedidoId', pedidoController.getOnePedido);
-router.post('/', pedidoController.criarPedido);
-router.put('/:pedidoId', pedidoController.updatePedido);
-router.delete('/:pedidoId', pedidoController.deletePedido)
+router.get('/',authorize(["TECNICO"]), pedidoController.getAllPedidos);
+router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
+router.post('/',authorize(["UTILIZADOR"]), pedidoController.criarPedido);
+router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
+router.delete('/:pedidoId',authorize(["TECNICO"]), pedidoController.deletePedido)
 
-router.post('/up/', pedidoController.upload)
+router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
 
-router.get('/infetados/:infetado', pedidoController.numeroInfetados)
+router.post('/up/',authorize(["TECNICO"]), pedidoController.upload)
+
+router.get('/infetados/:infetado',authorize(["TECNICO"]), pedidoController.numeroInfetados)
 
 //filtrar parâmetros de um pedido pelo seu id
-router.get('/estadoTeste/:pedidoId', pedidoController.getOnePedidoByEstadoTeste)
-router.get('/resultado/:pedidoId', pedidoController.getOnePedidoByResultado)
-router.get('/estadoUser/:pedidoId', pedidoController.getOnePedidoByEstadoUtilizador)
-router.get('/informacao/:pedidoId', pedidoController.getOnePedidoByInformacao)
+router.get('/estadoTeste/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByEstadoTeste)
+router.get('/resultado/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByResultado)
+router.get('/estadoUser/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByEstadoUtilizador)
+router.get('/informacao/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByInformacao)
 
 
 //filtrar a lista dos pedidos por parâmetro
-router.get('/resultados/:resultado', pedidoController.Resultados)
-router.get('/estadosTeste/:estadoTeste', pedidoController.EstadosTeste)
-router.get('/estadosUtilizador/:estadoUtilizador', pedidoController.EstadosUser)
-router.get('/informacaoPedido/:informacao', pedidoController.informacao)
+router.get('/resultados/:resultado',authorize(["TECNICO"]), pedidoController.Resultados)
+router.get('/estadosTeste/:estadoTeste',authorize(["TECNICO"]), pedidoController.EstadosTeste)
+router.get('/estadosUtilizador/:estadoUtilizador',authorize(["TECNICO"]), pedidoController.EstadosUser)
+router.get('/informacaoPedido/:informacao',authorize(["TECNICO"]), pedidoController.informacao)
 
 
 

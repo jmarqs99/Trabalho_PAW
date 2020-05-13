@@ -8,6 +8,7 @@ module.exports = mongoose.model('Teste', new mongoose.Schema({
     dia: Number,
     hora: Number,
     minuto: Number,
-    resultadoTeste: String
+    resultadoTeste: String,
+    changed: {type:Boolean, default:false}
 })
 );

@@ -5,8 +5,8 @@ const Pedido = require("../models/pedido");
 
 const TesteController = {};
 
-TesteController.criarTeste = function(req, res, next) {
-   
+TesteController.criarTeste = function (req, res, next) {
+
     /**
     pedidoController.verPedidoInterno(req.params.pedidoID, function(pedido) {
         //Pedido.findOne({ _id: req.body.pedidoID }, function (err, pedido) {
@@ -25,49 +25,23 @@ TesteController.criarTeste = function(req, res, next) {
         }
     })
        */
-     
-    
+
+
     const teste = new Teste(req.body);
 
-    teste.save(function(err) {
-        if(err) {
+    teste.save(function (err) {
+        if (err) {
             next(err)
-        } 
+        }
         else {
             res.json(teste)
         }
     })
-       
+
 
 }
 
-/**
-agendarTesteController.verAgendamentos = function(req, res, next) {
-    AgendarTeste.find(function(err, agendarTestes){
-        if(err) {
-            next(err)
-        } else {
-            const result = agendarTestes;
-
-            new Promise((resolve, reject) => {
-                result.forEach(function(item,index){
-                    result[index] = result[index].toObject();
-                    pedidoController.verPedidoInterno(item.pedidoId,function(pedido){
-                        console.log(pedido);
-                        result[index].estadoTeste = pedido.estadoTeste;
-                        result[index].resultadoTeste = pedido.resultadoTeste;
-                        result[index].estadoUtilizador = utilizador.estadoUtilizador;
-                        if (index === result.length -1) resolve();
-                    })
-                })
-            }).then(() => {
-                res.json(result)
-            });
-        }
-    })
-}
- */
-TesteController.verTestes = function(req, res, next) {
+TesteController.verTestes = function (req, res, next) {
     Teste.find(function (err, testes) {
         if (err) {
             next(err)
@@ -79,7 +53,7 @@ TesteController.verTestes = function(req, res, next) {
     })
 }
 
-TesteController.verTeste = function(req, res, next) {
+TesteController.verTeste = function (req, res, next) {
     Teste.findOne({ _id: req.params.testeId }, function (err, teste) {
         if (err) {
             next(err)
@@ -91,7 +65,7 @@ TesteController.verTeste = function(req, res, next) {
     })
 }
 
-TesteController.updateTeste = function(req, res, next) {
+TesteController.updateTeste = function (req, res, next) {
     Teste.findByIdAndUpdate(req.params.testeId, req.body, { new: true },
         function (err, teste) {
             if (err) {
@@ -102,25 +76,25 @@ TesteController.updateTeste = function(req, res, next) {
         });
 }
 
-TesteController.deleteTeste = function(req, res, next) {
+TesteController.deleteTeste = function (req, res, next) {
     Teste.findOne({ _id: req.params.testeId }, function (err, teste) {
-        if(err) {
+        if (err) {
             next(err);
         } else {
-            teste.deleteOne({_id:req.params.testeId},function (err)  {
-                if(err) {
+            teste.deleteOne({ _id: req.params.testeId }, function (err) {
+                if (err) {
                     next(err);
                 } else {
-                    
-                    res.json({status:"Done"});
+
+                    res.json({ status: "Done" });
                 }
             });
         }
     })
 }
 
-TesteController.totalTestesPorDia = function(req, res, next) {
-    Teste.find({ dia: req.params.dia }, {mes: req.params.mes}, {ano: req.params.ano}, function (err, teste) {
+TesteController.totalTestesPorDia = function (req, res, next) {
+    Teste.find({ dia: req.params.dia }, { mes: req.params.mes }, { ano: req.params.ano }, function (err, teste) {
         if (err) {
             next(err)
         } else {
@@ -130,9 +104,10 @@ TesteController.totalTestesPorDia = function(req, res, next) {
 
 }
 
-TesteController.totalTestesPorPessoa = function(req, res, next) {
+TesteController.totalTestesPorPessoa = function (req, res, next) {
     Teste.find({ pedidoId: req.params.user }, function (err, teste) {
-        if (err) {teste
+        if (err) {
+            teste
             next(err)
         } else {
             res.json(teste.length)

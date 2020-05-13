@@ -424,6 +424,7 @@
             }
           }
         }
+<<<<<<< Updated upstream
       },
       "delete": {
         "summary": "Apagar um teste com o seu id",
@@ -436,6 +437,29 @@
             "schema": {
               "$ref": "#/definitions/testes"
             }
+=======
+      }
+    }
+  },
+  "/testes/numeroTestesDia/{dia}/{mes}/{ano}": {
+    "parameters": [
+      {
+        "name": "testes",
+        "in": "path",
+        "description": "dia, mes e ano do teste",
+        "required": true,
+        "type": "Date"
+      }
+    ],
+    "get": {
+      "summary": "Retorna número de testes realizados num determinado dia",
+      "tags": ["Teste"],
+      "responses": {
+        "200": {
+          "description": "total de testes retornados",
+          "schema": {
+            "$ref": "#/definitions/testes"
+>>>>>>> Stashed changes
           }
         }
       }
@@ -829,11 +853,31 @@
         "required": [],
         "properties": {
           "pedidoId": {
+<<<<<<< Updated upstream
             "type": "string",
             "uniqueItems": true
           },
           "Data": {
             "type": "Date"
+=======
+            "type": "string"
+           
+          },
+          "ano": {
+            "type": "number"
+          },
+          "mes": {
+            "type": "number"
+          },
+          "dia": {
+            "type": "number"
+          },
+          "hora": {
+            "type": "number"
+          },
+          "minuto": {
+            "type": "number"
+>>>>>>> Stashed changes
           },
           "resultadoTeste": {
             "type": "string"
@@ -843,6 +887,9 @@
       "pedido": {
         "required": [],
         "properties": {
+          "utilizadorId": {
+            "type":"string"
+          },
           "informacao": {
             "type": "string"
           },
