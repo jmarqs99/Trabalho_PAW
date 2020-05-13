@@ -120,7 +120,7 @@ TesteController.deleteTeste = function(req, res, next) {
 }
 
 TesteController.totalTestesPorDia = function(req, res, next) {
-    Teste.find({ Data: req.params.testes }, function (err, teste) {
+    Teste.find({ dia: req.params.dia }, {mes: req.params.mes}, {ano: req.params.ano}, function (err, teste) {
         if (err) {
             next(err)
         } else {

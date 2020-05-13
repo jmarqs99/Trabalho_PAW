@@ -10,7 +10,7 @@ router.put('/:testeId', TesteController.updateTeste)
 router.delete('/:testeId', TesteController.deleteTeste)
 
 
-router.get('/numeroTestesDia/:testes', TesteController.totalTestesPorDia)
+router.get('/numeroTestesDia/:dia/:mes/:ano', TesteController.totalTestesPorDia)
 router.get('/numeroTestesPessoa/:user', TesteController.totalTestesPorPessoa)
 
 module.exports = router;
