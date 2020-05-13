@@ -100,8 +100,8 @@ pedidoController.upload = function (req, res, next) {
          */
         
                 console.log(req.files)
-                 const file = req.files.photo
-                 file.mv('/uploads/' + file.name, function(err, result) {
+                 const file = req.files.pdf
+                 file.mv('uploads/' + file.name, function(err, result) {
                      if(err) {
                          next(err)
                      }
