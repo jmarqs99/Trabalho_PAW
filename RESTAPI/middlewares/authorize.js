@@ -1,6 +1,12 @@
 const Utilizador = require("../models/utilizador");
 const utilizadorController = require("../controllers/utilizadorController");
 
+const autorizacoes = {
+    ["UTILIZADOR"] : ["UTILIZADOR","TECNICO","ADMIN"],
+    ["TECNICO"] : ["TECNICO","ADMIN"],
+    ["ADMIN"] : ["ADMIN"]
+}
+
 const authorize = (opts) => {
 
 	opts = opts || []
@@ -18,7 +24,7 @@ const authorize = (opts) => {
                         res.json({ status: 'Need to RE-Login due to changes!' })
                         utilizadorController.updateUtilizadorInterno(utilizador._id,{changed:false})
                     } else {
-                        const hasAuthorization = opts.includes(req.user.role)
+                        const hasAuthorization = opts.includes(autorizacoes[req.user.role])
             
                         if (hasAuthorization) {
                             next()

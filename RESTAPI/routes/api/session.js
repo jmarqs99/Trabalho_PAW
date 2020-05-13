@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 const sessionRouter = express.Router()
 
-const SESSION_EXP = 86400000;
+const SESSION_EXP = 86400000; //Um dia
 
 sessionRouter.post('/login', (req, res, next) => {
 	if (req.body.nmrCC && req.body.password) {
@@ -77,8 +77,42 @@ sessionRouter.post('/login', (req, res, next) => {
 })
 
 sessionRouter.get('/me', (req, res, next) => {
-	res.json(req.user)
+	const result = req.user;
+	delete result.password;
+	Utilizador.findOne({ nmrCC: result.nmrCC }, function (err, utilizador) {
+		if (err) {
+			next(err);
+		} else {
+			result.primeiroNome = utilizador.primeiroNome;
+			result.ultimoNome = utilizador.ultimoNome;
+			result.estado = utilizador.estado;
+			res.json(result)
+		}
+	});
 })
+
+sessionRouter.put('/changePassword', (req, res, next) => {
+	if (req.body.currentPassword && req.body.newPassword){
+		if (req.body.currentPassword == req.user.password){
+			bcrypt.hash(req.body.newPassword, 10, function (err, hash) {
+				req.body.newPassword = hash;
+				Utilizador.findOneAndUpdate({nmrCC: req.user.nmrCC}, {password: req.body.newPassword},function (err, utilizador) {
+					if (err) {
+						next(err);
+					} else {
+						res.status(200).json({done: 'true'});
+					}
+				});
+			  });
+		} else {
+			res.status(400).json({invalidPassword: 'true'});
+		}
+	} else {
+		res.status(400).json({invalidArguments: 'true'});
+	}
+})
+
+
 
 sessionRouter.post('/logout', (req, res, next) => {
 	res.clearCookie('session')
