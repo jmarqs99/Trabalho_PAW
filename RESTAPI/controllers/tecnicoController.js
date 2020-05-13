@@ -13,11 +13,11 @@ tecnicoController.criarTecnico = function (req,res,next) {
                     next(err);
                 } else {
                     utilizadorController.updateUtilizadorInterno(req.params.userId,{changed:true})
-                    res.json(tecnico);
+                    res.status(201).json(tecnico);
                 }
             });
         } else {
-            res.json({userDontExist:true});
+            res.status(400).json({userDontExist:true});
         }
     });   
 };
@@ -32,7 +32,7 @@ tecnicoController.removerTecnico = function (req,res,next) {
                     next(err);
                 } else {
                     utilizadorController.updateUtilizadorInterno(tecnico.utilizadorId,{changed:true})
-                    res.json({status:"Done"});
+                    res.status(200).json({status:"Done"});
                 }
             });
         }
@@ -51,11 +51,11 @@ tecnicoController.verTecnico = async function (req,res,next) {
                     result.primeiroNome = utilizador.primeiroNome;
                     result.ultimoNome = utilizador.ultimoNome;
                     result.estado = utilizador.estado;
-                    res.json(result);
+                    res.status(200).json(result);
                 })
                 
             } else {
-                res.json({tecnicoDontExist:true});
+                res.status(400).json({tecnicoDontExist:true});
             }
         }
      });
@@ -80,7 +80,7 @@ tecnicoController.verTecnicos = function (req,res,next) {
                     })
                 })
             }).then(() => {
-                res.json(result)
+                res.status(200).json(result)
             });
 
         }

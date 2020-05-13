@@ -55,23 +55,23 @@ sessionRouter.post('/login', (req, res, next) => {
 														httpOnly: true
 													}
 												)
-												res.json({status:'logged In'})
+												res.status(200).json({status:'logged In'})
 											}
 										})
 									}
 								}
 							})
 						} else {
-							res.json({status:"Wrong Password"})
+							res.status(400).json({status:"Wrong Password"})
 						}
 					});
 				} else {
-					res.json({noUserFound: 'true'});
+					res.status(400).json({noUserFound: 'true'});
 				}
 			}
 		});	
 	} else {
-		res.json({invalidArguments: 'true'});
+		res.status(400).json({invalidArguments: 'true'});
 	}
 
 })
@@ -86,7 +86,7 @@ sessionRouter.get('/me', (req, res, next) => {
 			result.primeiroNome = utilizador.primeiroNome;
 			result.ultimoNome = utilizador.ultimoNome;
 			result.estado = utilizador.estado;
-			res.json(result)
+			res.status(200).json(result)
 		}
 	});
 })

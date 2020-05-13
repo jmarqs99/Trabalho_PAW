@@ -424,20 +424,6 @@
             }
           }
         }
-<<<<<<< Updated upstream
-      },
-      "delete": {
-        "summary": "Apagar um teste com o seu id",
-        "tags": [
-          "Teste"
-        ],
-        "responses": {
-          "200": {
-            "description": "o teste foi apagado",
-            "schema": {
-              "$ref": "#/definitions/testes"
-            }
-=======
       }
     }
   },
@@ -459,7 +445,6 @@
           "description": "total de testes retornados",
           "schema": {
             "$ref": "#/definitions/testes"
->>>>>>> Stashed changes
           }
         }
       }
@@ -853,13 +838,6 @@
         "required": [],
         "properties": {
           "pedidoId": {
-<<<<<<< Updated upstream
-            "type": "string",
-            "uniqueItems": true
-          },
-          "Data": {
-            "type": "Date"
-=======
             "type": "string"
            
           },
@@ -877,7 +855,6 @@
           },
           "minuto": {
             "type": "number"
->>>>>>> Stashed changes
           },
           "resultadoTeste": {
             "type": "string"

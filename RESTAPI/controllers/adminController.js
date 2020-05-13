@@ -13,11 +13,11 @@ adminController.criarAdmin = function (req,res,next) {
                     next(err);
                 } else {
                     utilizadorController.updateUtilizadorInterno(req.params.userId,{changed:true})
-                    res.json(admin);
+                    res.status(201).json(admin);
                 }
             });
         } else {
-            res.json({userDontExist:true});
+            res.status(400).json({userDontExist:true});
         }
     });   
 };
@@ -32,7 +32,7 @@ adminController.removerAdmin = function (req,res,next) {
                     next(err);
                 } else {
                     utilizadorController.updateUtilizadorInterno(admin.utilizadorId,{changed:true})
-                    res.json({status:"Done"});
+                    res.status(200).json({status:"Done"});
                 }
             });
         }
@@ -50,11 +50,11 @@ adminController.verAdmin = async function (req,res,next) {
                     result.primeiroNome = utilizador.primeiroNome;
                     result.ultimoNome = utilizador.ultimoNome;
                     result.estado = utilizador.estado;
-                    res.json(result);
+                    res.status(200).json(result);
                 })
                 
             } else {
-                res.json({adminDontExist:true});
+                res.status(400).json({adminDontExist:true});
             }
         }
      });
@@ -79,10 +79,10 @@ adminController.verAdmins = function (req,res,next) {
                         })
                     })
                 }).then(() => {
-                    res.json(result)
+                    res.status(200).json(result)
                 });
             } else {
-                res.json(admins);
+                res.status(200).json(admins);
             }
 
 
