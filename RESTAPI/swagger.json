@@ -580,7 +580,7 @@
         "post": {
           "summary": "Criar novo técnico",
           "tags": ["Técnico"],
-          "produces": ["aplication/json"],
+          "produces": ["application/json"],
           "responses": {
             "200": {
               "description": "Novo técnico criado.",
@@ -644,7 +644,7 @@
         "post": {
           "summary": "Criar novo Admin",
           "tags": ["Admin"],
-          "produces": ["aplication/json"],
+          "produces": ["application/json"],
           "responses": {
             "200": {
               "description": "Novo Admin criado."
@@ -695,7 +695,7 @@
               }
             }
           ],
-          "produces": ["aplication/json"],
+          "produces": ["application/json"],
           "responses": {
             "200": {
               "description": "Log in com sucesso"
@@ -713,8 +713,7 @@
             "uniqueItems": true
           },
           "password": {
-            "type": "string",
-            "uniqueItems": true
+            "type": "string"
           },
           "primeiroNome": {
             "type": "string"
@@ -731,7 +730,8 @@
         "required": [],
         "properties": {
           "pedidoId": {
-            "type": "string"
+            "type": "string",
+            "uniqueItems": true
            
           },
           "Data": {
@@ -777,8 +777,7 @@
             "uniqueItems": true
           },
           "password": {
-            "type": "string",
-            "uniqueItems": true
+            "type": "string"
           }
         }
       }
