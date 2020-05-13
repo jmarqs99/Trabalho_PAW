@@ -9,7 +9,7 @@ const autorizacoes = {
 
 const authorize = (opts) => {
 
-	opts = opts || []
+	opts = autorizacoes(opts) || []
 
 	return (req, res, next) => {
 		if (!req.user) {
@@ -24,7 +24,7 @@ const authorize = (opts) => {
                         res.json({ status: 'Need to RE-Login due to changes!' })
                         utilizadorController.updateUtilizadorInterno(utilizador._id,{changed:false})
                     } else {
-                        const hasAuthorization = opts.includes(autorizacoes[req.user.role])
+                        const hasAuthorization = opts.includes(req.user.role)
             
                         if (hasAuthorization) {
                             next()
