@@ -7,8 +7,7 @@ module.exports = mongoose.model('Pedido', new mongoose.Schema({
     estadoUtilizador: String,
     estadoTeste: String,
     resultadoTeste: String,
-    type: String,
-    data: Buffer,
+    havePDF: {type:Boolean, default:false}
    
 })
 );

@@ -67,13 +67,13 @@ pedidoController.updatePedido = function (req, res, next) {
 }
 pedidoController.updateUpload = function (req, res, next) {
     const file = req.files.pdf
-    Pedido.findByIdAndUpdate(req.params.pedidoId, {data:file.data}, { new: true },
+    Pedido.findByIdAndUpdate(req.params.pedidoId,{havePDF: true}, { new: true },
         function (err, pedido) {
             if (err) {
                 next(err);
             } else {
                 console.log(req.files)
-                file.mv('uploads/' + file.name, function (err, result) {
+                file.mv('uploads/' + req.params.pedidoId, function (err, result) {
                     if (err) {
                         next(err)
                     }

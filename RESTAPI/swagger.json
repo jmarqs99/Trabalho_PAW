@@ -334,6 +334,34 @@
         }
       }
     },
+    "/pedido/pedidoUpload/{pedidoId}": {
+      
+      "put": {
+        "summary": "Anexar um ficheiro pdf com os resultados clínicos",
+        "tags": [
+          "Pedido"
+        ],
+        "parameters": [
+          {
+            "name": "Pedido",
+            "in": "body",
+            "description": "Resultados cínicos anexados à ficha do pedido",
+            "schema": {
+              "$ref": "#/definitions/pedido"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ficheiro anexado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/pedido"
+            }
+          }
+        }
+      }
+    
+    },
     
     "/testes": {
       "post": {
@@ -867,6 +895,9 @@
           },
           "resultadoTeste": {
             "type": "string"
+          },
+          "havePDF": {
+            "type" : "Boolean", "default" : "false"
           }
         }
       },
