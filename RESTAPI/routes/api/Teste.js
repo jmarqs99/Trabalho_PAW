@@ -8,7 +8,7 @@ router.post('/',authorize(["TECNICO"]), TesteController.criarTeste)
 router.get('/',authorize(["TECNICO"]), TesteController.verTestes)
 router.get('/:testeId',authorize(["TECNICO"]), TesteController.verTeste)
 router.put('/:testeId',authorize(["TECNICO"]), TesteController.updateTeste)
-router.delete('/:testeId',authorize(["TECNICO"]), TesteController.deleteTeste)
+router.delete('/:testeId',authorize(["ADMIN"]), TesteController.deleteTeste)
 
 router.get('/numeroTestesDia/:dia/:mes/:ano',authorize(["TECNICO"]), TesteController.totalTestesPorDia)
 router.get('/numeroTestesPessoa/:user',authorize(["TECNICO"]), TesteController.totalTestesPorPessoa)

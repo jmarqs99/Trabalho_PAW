@@ -7,7 +7,7 @@ router.get('/',authorize(["TECNICO"]), pedidoController.getAllPedidos);
 router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
 router.post('/',authorize(["UTILIZADOR"]), pedidoController.criarPedido);
 router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
-router.delete('/:pedidoId',authorize(["TECNICO"]), pedidoController.deletePedido)
+router.delete('/:pedidoId',authorize(["ADMIN"]), pedidoController.deletePedido)
 
 router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
 
@@ -27,6 +27,7 @@ router.get('/resultados/:resultado',authorize(["TECNICO"]), pedidoController.Res
 router.get('/estadosTeste/:estadoTeste',authorize(["TECNICO"]), pedidoController.EstadosTeste)
 router.get('/estadosUtilizador/:estadoUtilizador',authorize(["TECNICO"]), pedidoController.EstadosUser)
 router.get('/informacaoPedido/:informacao',authorize(["TECNICO"]), pedidoController.informacao)
+router.get('/cc/:nmrCC', authorize(["TECNICO"]), pedidoController.cc)
 
 
 

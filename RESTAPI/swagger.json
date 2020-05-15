@@ -362,6 +362,31 @@
       }
     
     },
+    "/pedido/cc/{nmrCC}": {
+      "get": {
+        "summary": "Retorna o pedido com o numero de cartao de cidadao dado como parâmetro",
+        "tags": [
+          "Pedido"
+        ],
+        "parameters": [
+          {
+            "name": "nmrCC",
+            "in": "path",
+            "description": "numero de cartao de cidadao do utilizador dado como parâmetro",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pedido retornado",
+            "schema": {
+              "$ref": "#/definitions/pedido"
+            }
+          }
+        }
+      }
+    },
     
     "/testes": {
       "post": {
@@ -891,10 +916,12 @@
             "type": "string"
           },
           "estadoTeste": {
-            "type": "string"
+            "type": "string",
+            "default": "Por agendar"
           },
           "resultadoTeste": {
-            "type": "string"
+            "type": "string",
+            "default": "indefinido"
           },
           "havePDF": {
             "type" : "Boolean", "default" : "false"

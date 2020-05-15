@@ -29,7 +29,7 @@ pedidoController.criarPedido = function (req, res, next) {
             next(err);
         } else {
 
-            if (req.body.informacao && req.body.estadoTeste && req.body.estadoUtilizador && req.body.resultadoTeste) {
+            if (req.body.nmrCC && req.body.informacao && req.body.estadoUtilizador) {
                 if (pedido == null) {
                     const newPedido = new Pedido(req.body)
 
@@ -177,6 +177,16 @@ pedidoController.informacao = function (req, res, next) {
             next(err)
         }
         else {
+            res.json(pedido)
+        }
+    })
+}
+
+pedidoController.cc = function(req, res, next) {
+    Pedido.find({nmrCC: req.params.nmrCC}, function(err, pedido){
+        if(err) {
+            next(err)
+        } else {
             res.json(pedido)
         }
     })
