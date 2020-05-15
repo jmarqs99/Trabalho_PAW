@@ -1,26 +1,10 @@
 const mongoose = require("mongoose");
 const Pedido = require("../models/pedido");
 
-//const fileupload = require('express-fileupload')
-//mongoose.use(fileupload())
-
-//const multer = require('multer')
-//const upload = multer({dest: '/uploads'})
 
 const pedidoController = {};
 
-//Pedido.use(fileupload())
-//pedidoController.use(fileupload())
-/**
-pedidoController.upload = function(req, res, next) {
-    //const file = req.files.pdf
-    console.log(req.files)
-    res.send({
-        success: true,
-        message: "file uploaded"
-    })
-}
- */
+
 
 pedidoController.criarPedido = function (req, res, next) {
 
@@ -88,27 +72,6 @@ pedidoController.updateUpload = function (req, res, next) {
         });
 }
 
-pedidoController.upload = function (req, res, next) {
-
-
-    console.log(req.files)
-    const file = req.files.pdf
-    file.mv('uploads/' + file.name, function (err, result) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.send({
-                success: true,
-                message: "file uploaded"
-            })
-        }
-    })
-
-
-
-
-}
 
 pedidoController.getAllPedidos = function (req, res, next) {
     Pedido.find(function (err, pedidos) {
@@ -299,18 +262,6 @@ pedidoController.deletePedido = function (req, res, next) {
     })
 }
 
-
-
-
-pedidoController.verPedidoInterno = function (id, teste) {
-    Utilizador.findOne({ _id: id }, function (err, pedido) {
-        if (err) {
-            teste(null);
-        } else {
-            teste(pedido)
-        }
-    });
-};
 
 
 

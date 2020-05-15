@@ -61,20 +61,23 @@
       }
     },
     "/pedido/{pedidoId}": {
+
+      "parameters": [
+        {
+          "name": "pedidoId",
+          "in": "path",
+          "description": "id do pedido a encontrar",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      
       "get": {
         "summary": "Retorna um pedido com um determinado id",
         "tags": [
           "Pedido"
         ],
-        "parameters": [
-          {
-            "name": "pedidoId",
-            "in": "path",
-            "description": "id do pedido a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        
         "responses": {
           "200": {
             "description": "Pedido retornado",
@@ -434,7 +437,7 @@
     "/testes/{testeId}": {
       "parameters": [
         {
-          "name": "id do teste",
+          "name": "testeId",
           "in": "path",
           "description": "id do teste a encontrar",
           "required": true,
@@ -519,12 +522,12 @@
         }
       }
     },
-    "/testes/numeroTestesPessoa/{user}": {
+    "/testes/numeroTestesPessoa/{nmrCC}": {
       "parameters": [
         {
-          "name": "user",
+          "name": "nmrCC",
           "in": "path",
-          "description": "id do user",
+          "description": "número de cartão de cidadão do user",
           "required": true,
           "type": "string"
         }
@@ -882,9 +885,11 @@
       "testes": {
         "required": [],
         "properties": {
+          "nmrCC":{
+            "type":"string"
+          },
           "pedidoId": {
-            "type": "string",
-            "uniqueItems": true
+            "type": "string"
           },
           "ano": {
             "type": "number"
@@ -902,13 +907,23 @@
             "type": "number"
           },
           "resultadoTeste": {
-            "type": "string"
+            "type": "string",
+            "default":"indefinido"
+          },
+          "estadoTeste":{
+            "type":"string",
+            "default":"agendado"
           }
         }
       },
       "pedido": {
         "required": [],
         "properties": {
+
+          "nmrCC": {
+            "type":"string"
+          },
+
           "informacao": {
             "type": "string"
           },

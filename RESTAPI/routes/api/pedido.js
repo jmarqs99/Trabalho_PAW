@@ -3,15 +3,17 @@ const router = express.Router();
 const pedidoController = require("../../controllers/pedidoController");
 const authorize = require('../../middlewares/authorize')
 
-router.get('/',authorize(["TECNICO"]), pedidoController.getAllPedidos);
-router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
+
 router.post('/',authorize(["UTILIZADOR"]), pedidoController.criarPedido);
-router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
+router.get('/',authorize(["TECNICO"]), pedidoController.getAllPedidos);
 router.delete('/:pedidoId',authorize(["ADMIN"]), pedidoController.deletePedido)
+router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
+router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
+
 
 router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
 
-router.post('/up/',authorize(["TECNICO"]), pedidoController.upload)
+
 
 router.get('/infetados/:infetado',authorize(["TECNICO"]), pedidoController.numeroInfetados)
 
