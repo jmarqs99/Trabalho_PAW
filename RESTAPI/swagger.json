@@ -13,6 +13,9 @@
   "consumes": [
     "application/json"
   ],
+  "consumes2":[
+    "multipart/form-data"
+  ],
   "produces": [
     "application/json"
   ],
@@ -345,9 +348,18 @@
           "Pedido"
         ],
         "parameters": [
+
           {
-            "name": "Pedido",
-            "in": "body",
+            "in":"formData",
+            "name":"pdf",
+            "type":"file",
+            "require": true
+
+          },
+
+          {
+            "name": "pedidoId",
+            "in": "path",
             "description": "Resultados cínicos anexados à ficha do pedido",
             "schema": {
               "$ref": "#/definitions/pedido"
