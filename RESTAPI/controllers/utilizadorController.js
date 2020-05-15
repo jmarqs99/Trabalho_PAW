@@ -5,16 +5,16 @@ const bcrypt = require('bcrypt');
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
-  Utilizador.findOne({ nmrCC: req.body.nmrCC }, function (err, utilizador) {
-    if (err) {
-      next(err);
-    } else {
-      if (
-        req.body.nmrCC &&
-        req.body.password &&
-        req.body.primeiroNome &&
-        req.body.ultimoNome
-      ) {
+  if (
+    req.body.nmrCC &&
+    req.body.password &&
+    req.body.primeiroNome &&
+    req.body.ultimoNome
+  ) {
+    Utilizador.findOne({ nmrCC: req.body.nmrCC }, function (err, utilizador) {
+      if (err) {
+        next(err);
+      } else {
         if (utilizador === null) {
           bcrypt.hash(req.body.password, 10, function (err, hash) {
             req.body.password = hash;
@@ -28,13 +28,13 @@ utilizadorController.createUtilizador = function (req, res, next) {
             });
           });
         } else {
-          res.status(400).json({ invalidArguments: 'true' });
+          res.status(400).json({ userAlreadyExits: 'true' });
         }
-      } else {
-        res.status(400).json({ invalidArguments: 'true' });
       }
-    }
-  });
+    });
+  } else {
+    res.status(400).json({ invalidArguments: 'true' });
+  }
 };
 
 utilizadorController.updateUtilizador = function (req, res, next) {

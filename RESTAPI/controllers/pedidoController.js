@@ -7,13 +7,12 @@ const pedidoController = {};
 
 
 pedidoController.criarPedido = function (req, res, next) {
+    if (req.body.nmrCC && req.body.informacao && req.body.estadoUtilizador) {
+        Pedido.findOne({ _id: req.body.pedidoId }, function (err, pedido) {
+            if (err) {
+                next(err);
+            } else {
 
-    Pedido.findOne({ _id: req.body.pedidoId }, function (err, pedido) {
-        if (err) {
-            next(err);
-        } else {
-
-            if (req.body.nmrCC && req.body.informacao && req.body.estadoUtilizador) {
                 if (pedido == null) {
                     const newPedido = new Pedido(req.body)
 
@@ -28,13 +27,13 @@ pedidoController.criarPedido = function (req, res, next) {
                 else {
                     res.status(400).json({ invalidArguments: 'true' });
                 }
-            }
-            else {
-                res.status(400).json({ invalidArguments: 'true' });
-            }
 
-        }
-    })
+            }
+        });
+    }
+    else {
+        res.status(400).json({ invalidArguments: 'true' });
+    }
 };
 
 
@@ -51,18 +50,18 @@ pedidoController.updatePedido = function (req, res, next) {
 }
 pedidoController.updateUpload = function (req, res, next) {
     const file = req.files.pdf
-    Pedido.findByIdAndUpdate(req.params.pedidoId,{havePDF: true}, { new: true },
+    if (file){
+    Pedido.findByIdAndUpdate(req.params.pedidoId, { havePDF: true }, { new: true },
         function (err, pedido) {
             if (err) {
                 next(err);
             } else {
-                console.log(req.files)
                 file.mv('uploads/' + req.params.pedidoId, function (err, result) {
                     if (err) {
                         next(err)
                     }
                     else {
-                        res.send({
+                        res.status(200).send({
                             success: true,
                             message: "file uploaded"
                         })
@@ -70,6 +69,11 @@ pedidoController.updateUpload = function (req, res, next) {
                 })
             }
         });
+    } else {
+        res.status(400).send({
+            invalidFile: true
+        })
+    }
 }
 
 
@@ -145,9 +149,9 @@ pedidoController.informacao = function (req, res, next) {
     })
 }
 
-pedidoController.cc = function(req, res, next) {
-    Pedido.find({nmrCC: req.params.nmrCC}, function(err, pedido){
-        if(err) {
+pedidoController.cc = function (req, res, next) {
+    Pedido.find({ nmrCC: req.params.nmrCC }, function (err, pedido) {
+        if (err) {
             next(err)
         } else {
             res.json(pedido)

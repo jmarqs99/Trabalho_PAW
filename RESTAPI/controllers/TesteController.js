@@ -6,13 +6,13 @@ const TesteController = {};
 
 TesteController.criarTeste = function (req, res, next) {
 
+    if (req.body.pedidoId && req.body.nmrCC && req.body.ano && req.body.mes && req.body.dia && req.body.hora && req.body.minuto) {
+        Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
+            if (err) {
+                next(err);
+            } else {
 
-    Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
-        if (err) {
-            next(err);
-        } else {
 
-            if (req.body.pedidoId && req.body.nmrCC && req.body.ano && req.body.mes && req.body.dia && req.body.hora && req.body.minuto) {
                 if (teste == null) {
                     const newTeste = new Teste(req.body)
 
@@ -27,13 +27,14 @@ TesteController.criarTeste = function (req, res, next) {
                 else {
                     res.status(400).json({ invalidArguments: 'true' });
                 }
-            }
-            else {
-                res.status(400).json({ invalidArguments: 'true' });
-            }
 
-        }
-    })
+
+            }
+        })
+    }
+    else {
+        res.status(400).json({ invalidArguments: 'true' });
+    }
 
 
 }

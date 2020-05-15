@@ -871,120 +871,120 @@
           "description": "Log out com sucesso"
         }
       }
+    }
+  },
+  "definitions": {
+    "utilizador": {
+      "required": [],
+      "properties": {
+        "nmrCC": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "primeiroNome": {
+          "type": "string"
+        },
+        "ultimoNome": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string"
+        }
+      }
     },
-    "definitions": {
-      "utilizador": {
-        "required": [],
-        "properties": {
-          "nmrCC": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "password": {
-            "type": "string"
-          },
-          "primeiroNome": {
-            "type": "string"
-          },
-          "ultimoNome": {
-            "type": "string"
-          },
-          "estado": {
-            "type": "string"
-          }
+    "testes": {
+      "required": [],
+      "properties": {
+        "nmrCC":{
+          "type":"string"
+        },
+        "pedidoId": {
+          "type": "string"
+        },
+        "ano": {
+          "type": "number"
+        },
+        "mes": {
+          "type": "number"
+        },
+        "dia": {
+          "type": "number"
+        },
+        "hora": {
+          "type": "number"
+        },
+        "minuto": {
+          "type": "number"
+        },
+        "resultadoTeste": {
+          "type": "string",
+          "default":"indefinido"
+        },
+        "estadoTeste":{
+          "type":"string",
+          "default":"agendado"
         }
-      },
-      "testes": {
-        "required": [],
-        "properties": {
-          "nmrCC":{
-            "type":"string"
-          },
-          "pedidoId": {
-            "type": "string"
-          },
-          "ano": {
-            "type": "number"
-          },
-          "mes": {
-            "type": "number"
-          },
-          "dia": {
-            "type": "number"
-          },
-          "hora": {
-            "type": "number"
-          },
-          "minuto": {
-            "type": "number"
-          },
-          "resultadoTeste": {
-            "type": "string",
-            "default":"indefinido"
-          },
-          "estadoTeste":{
-            "type":"string",
-            "default":"agendado"
-          }
-        }
-      },
-      "pedido": {
-        "required": [],
-        "properties": {
+      }
+    },
+    "pedido": {
+      "required": [],
+      "properties": {
 
-          "nmrCC": {
-            "type":"string"
-          },
+        "nmrCC": {
+          "type":"string"
+        },
 
-          "informacao": {
-            "type": "string"
-          },
-          "estadoUtilizador": {
-            "type": "string"
-          },
-          "estadoTeste": {
-            "type": "string",
-            "default": "Por agendar"
-          },
-          "resultadoTeste": {
-            "type": "string",
-            "default": "indefinido"
-          },
-          "havePDF": {
-            "type" : "Boolean", "default" : "false"
-          }
+        "informacao": {
+          "type": "string"
+        },
+        "estadoUtilizador": {
+          "type": "string"
+        },
+        "estadoTeste": {
+          "type": "string",
+          "default": "Por agendar"
+        },
+        "resultadoTeste": {
+          "type": "string",
+          "default": "indefinido"
+        },
+        "havePDF": {
+          "type" : "Boolean", "default" : "false"
         }
-      },
-      "tecnico": {
-        "required": [],
-        "properties": {
-          "utilizadorId": {
-            "type": "string",
-            "uniqueItems": true
-          }
+      }
+    },
+    "login": {
+      "required": [],
+      "properties": {
+        "nmrCC": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
         }
-      },
-      "login": {
-        "required": [],
-        "properties": {
-          "nmrCC": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "password": {
-            "type": "string"
-          }
+      }
+    },
+    "tecnico": {
+      "required": [],
+      "properties": {
+        "utilizadorId": {
+          "type": "string",
+          "uniqueItems": true
         }
-      },
-      "password": {
-        "required": [],
-        "properties": {
-          "currentPassword": {
-            "type": "string"
-          },
-          "newPassword": {
-            "type": "string"
-          }
+      }
+    },
+    "password": {
+      "required": [],
+      "properties": {
+        "currentPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
         }
       }
     }
