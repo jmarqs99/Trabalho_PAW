@@ -6,7 +6,7 @@ const TesteController = {};
 
 TesteController.criarTeste = function (req, res, next) {
 
-    if (req.body.pedidoId && req.body.nmrCC && req.body.ano && req.body.mes && req.body.dia && req.body.hora && req.body.minuto) {
+    if (req.body.pedidoId && req.body.nmrCC && req.body.ano && req.body.mes && req.body.dia) {
         Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
             if (err) {
                 next(err);
