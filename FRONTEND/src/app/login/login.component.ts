@@ -9,11 +9,23 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   @Input() nmrCC: string;
   @Input() password: string;
+  @Input() primeiroNome: string;
+  @Input() ultimoNome: string;
+
   isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
   ngOnInit(): void {
   }
   login(): void {
+    this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {
+      if (user) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.router.navigate(['']);
+      }
+    })
+  }
+  register(): void {
     this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {
       if (user) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
