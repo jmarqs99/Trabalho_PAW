@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationServiceService } from './authentication-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements OnInit{
-  user : any ;
+export class AppComponent {
+  user: any;
 
-  constructor(private router: Router, private authServive: AuthenticationServiceService) { }
-
-  ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem("currentUser"))
+  constructor(private router: Router, private authServive: AuthenticationServiceService, route: ActivatedRoute) {
+    router.events.subscribe((val) => {
+      // see also 
+      this.user = JSON.parse(localStorage.getItem("currentUser"))
+    });
   }
+
+
   logout(): void {
     this.authServive.logout().subscribe(() => {
-      this.router.navigate(['']);
+      this.user = null;
+      this.router.navigate(['login']);
     }
     );
 
