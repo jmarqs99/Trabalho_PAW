@@ -1,1 +1,6 @@
+<header *ngIf="user">
+    <a routerLink="/">Homepage</a><br>
+    <label>{{user.nome}}</label><br>
+    <button (click)="logout()">Logout</button>
+</header>
 <router-outlet></router-outlet>

@@ -17,9 +17,10 @@ export class AuthenticationServiceService {
       nmrCC, password
     }), httpOptions);
   }
-  logout() {
+  logout() : Observable<any> {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    return this.http.post<any>('http://localhost:3000/api/logout', {});
   }
   register(nmrCC: string, password: string,primeiroNome: string, ultimoNome: string, estado: string): Observable<any> {
     return this.http.post<any>('http://localhost:3000/api/utilizador', {
