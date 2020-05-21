@@ -26,7 +26,9 @@ sessionRouter.post('/login', (req, res, next) => {
 								} else {
 									if (tecnico) {
 										cookie.role = "TECNICO";
-										const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
+										const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET,{
+											expiresIn: 86400 // expires in 24 hours
+											});
 										res.cookie(
 											'session',
 											jwtToken,
@@ -35,7 +37,7 @@ sessionRouter.post('/login', (req, res, next) => {
 												httpOnly: true
 											}
 										)
-										res.json({status:'logged In'})
+										res.status(200).json({nome: utilizador.primeiroNome,role: "TECNICO",token:jwtToken})
 									} else {
 										Admin.findOne({utilizadorId:utilizador._id},function (err, admin) {
 											if(err){
@@ -46,7 +48,9 @@ sessionRouter.post('/login', (req, res, next) => {
 												} else {
 													cookie.role = "UTILIZADOR"
 												}
-												const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET);
+												const jwtToken = jwt.sign(cookie, process.env.JWT_SECRET,{
+													expiresIn: 86400 // expires in 24 hours
+													});
 												res.cookie(
 													'session',
 													jwtToken,
@@ -55,7 +59,7 @@ sessionRouter.post('/login', (req, res, next) => {
 														httpOnly: true
 													}
 												)
-												res.status(200).json({status:'logged In'})
+												res.status(200).json({nome: utilizador.primeiroNome,role: cookie.role,token:jwtToken})
 											}
 										})
 									}
