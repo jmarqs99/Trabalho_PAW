@@ -8,13 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
+  user:any
   constructor(private router: Router, private restService: RestService) { }
 
   ngOnInit(): void {
-    this.restService.test().subscribe((user: any) => {
-      console.log(user)
-    })
+    this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
 }
