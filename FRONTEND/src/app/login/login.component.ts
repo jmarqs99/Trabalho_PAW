@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   @Input() nmrCC: string;
   @Input() password: string;
+  isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
   ngOnInit(): void {
   }

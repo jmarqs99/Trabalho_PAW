@@ -1,5 +1,16 @@
-<form (submit)="login()">
-    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" placeholder="enter a username" />
-    <input [(ngModel)]="password" name="password" placeholder="Password..." type="password" />
-    <button type="submit">Login</button>
+<form *ngIf="isRegistering == false" (submit)="login()">
+    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" placeholder="Username..." /><br>
+    <input [(ngModel)]="password" name="password" placeholder="Password..." type="password" /><br>
+    <button type="submit">Login</button><br>
+</form>
+
+<button *ngIf="isRegistering == false" type="button" (click)="isRegistering = true">Registar</button>
+<button *ngIf="isRegistering" type="button" (click)="isRegistering = false">Voltar</button>
+
+<form *ngIf="isRegistering">
+    <input name="primeiroNome" type="text" placeholder="Ultimo Nome..."/><br>
+    <input name="ultimoNome" type="text" placeholder="Primeiro Nome..."/><br>
+    <input name="nmrCC" type="text" placeholder="Username..." /><br>
+    <input name="password" placeholder="Password..." type="password" /><br>
+    <button type="submit">Registar</button><br>
 </form>
