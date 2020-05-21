@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const utilizadorController = {};
 
 utilizadorController.createUtilizador = function (req, res, next) {
+  console.log(req.body);
   if (
     req.body.nmrCC &&
     req.body.password &&

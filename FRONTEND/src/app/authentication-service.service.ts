@@ -22,13 +22,12 @@ export class AuthenticationServiceService {
     localStorage.removeItem('currentUser');
     return this.http.post<any>('http://localhost:3000/api/logout', {});
   }
-  register(nmrCC: string, password: string,primeiroNome: string, ultimoNome: string, estado: string): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/api/utilizador', {
+  register(nmrCC: string, password: string,primeiroNome: string, ultimoNome: string): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/api/utilizador', JSON.stringify({
       nmrCC,
       password,
       primeiroNome,
-      ultimoNome,
-      estado
-    })
+      ultimoNome
+    }),httpOptions)
   }
 }

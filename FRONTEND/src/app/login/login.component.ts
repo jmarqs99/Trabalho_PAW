@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   @Input() password: string;
   @Input() primeiroNome: string;
   @Input() ultimoNome: string;
+ 
 
   isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
@@ -26,12 +27,9 @@ export class LoginComponent implements OnInit {
     })
   }
   register(): void {
-    this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {
-      if (user) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigate(['']);
-      }
+    this.authServive.register(this.nmrCC,this.password,this.primeiroNome, this.ultimoNome).subscribe((user: any) => {
+    this.router.navigate(['/login']);
+    this.isRegistering = false;
     })
   }
 }
