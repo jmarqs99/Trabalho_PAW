@@ -15,4 +15,12 @@ export class HomepageComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
+  havePremission(roleRequired : string) : boolean {
+    if (roleRequired == this.user.role){
+      return true
+    } else if (roleRequired == "TECNICO" && this.user.role == "ADMIN"){
+      return true
+    }
+    return false
+  }
 }

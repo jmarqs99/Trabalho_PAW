@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
   ngOnInit(): void {
+    if (localStorage.getItem('currentUser')){
+      this.router.navigate(['']);
+    }
   }
   login(): void {
     this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {

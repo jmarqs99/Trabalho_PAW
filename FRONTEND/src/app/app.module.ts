@@ -29,6 +29,31 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'pedidos',
+    component: PedidosComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'testes',
+    component: TestesComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'utilizadores',
+    component: UtilizadoresComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'tecnicos',
+    component: TecnicosComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'admins',
+    component: AdminsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

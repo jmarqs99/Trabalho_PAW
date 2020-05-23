@@ -8,19 +8,19 @@
 <body>
 
     <h3>Bem vindo {{user.nome}}</h3>
-    <h4>User loggado com a role {{user.role}}</h4>
+    <h4>User loggado com a role {{user.role.toLowerCase()}}</h4>
 
     <br>
+    
+    <a routerLink="/pedidos"><button type="button">Pedidos</button></a>
 
-    <button type="button">Pedidos</button>
+    <a routerLink="/testes"><button *ngIf="havePremission('TECNICO')" type="button">Testes</button></a>
 
-    <button type="button">Testes</button>
+    <a routerLink="/utilizadores"><button *ngIf="havePremission('ADMIN')" type="button">Utilizadores</button></a>
 
-    <button type="button">Utilizadores</button>
+    <a routerLink="/tecnicos"><button *ngIf="havePremission('ADMIN')" type="button">Técnicos</button></a>
 
-    <button type="button">Técnicos</button>
-
-    <button type="button">Admins</button>
+    <a routerLink="/admins"><button *ngIf="havePremission('ADMIN')" type="button">Admins</button></a>
     
 </body>
 
