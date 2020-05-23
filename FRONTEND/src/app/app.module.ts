@@ -9,6 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AuthGuardService } from './auth-guard-service.service';
 import { JwtInterceptorService } from './jwt-interceptor-service.service';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { TestesComponent } from './testes/testes.component';
+import { UtilizadoresComponent } from './utilizadores/utilizadores.component';
+import { TecnicosComponent } from './tecnicos/tecnicos.component';
+import { AdminsComponent } from './admins/admins.component';
 
 
 
@@ -35,7 +40,12 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomepageComponent
+    HomepageComponent,
+    PedidosComponent,
+    TestesComponent,
+    UtilizadoresComponent,
+    TecnicosComponent,
+    AdminsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
