@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RestService } from '../rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos',
@@ -7,9 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PedidosComponent implements OnInit {
 
-  constructor() { }
+  pedidos:any = [];
+
+  constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.getPedidos()
+  }
+
+  getPedidos() {
+    this.pedidos = [];
+    this.rest.getPedidos().subscribe((data: {}) => {
+      console.log(data);
+      this.pedidos = data;
+    });
+  }
+  add() {
+
+  }
+  delete(id) {
+    this.rest.deletePedido(id)
+      .subscribe(res => {
+        this.getPedidos();
+      }, (err) => {
+        console.log(err);
+      }
+      );
+  }
+  update(id) {
+    this.rest.updatePedido(id)
+    .subscribe(res => {
+      this.getPedidos();
+    }, (err) => {
+      console.log(err);
+    }
+    );
   }
 
 }
