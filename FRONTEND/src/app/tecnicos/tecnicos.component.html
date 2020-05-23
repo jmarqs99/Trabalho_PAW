@@ -1,1 +1,13 @@
-<p>tecnicos works!</p>
+<h1>Técnicos</h1>
+<button (click)="addingTecnico = true">Adicionar Técnico</button>
+<ul class="products">
+    <li *ngFor="let t of tecnicos; let i=index;">
+        <span>{{t._id}}</span> {{t.name}}
+        <button (click)="demote(t._id)">Remover Técnico</button>
+    </li>
+</ul>
+
+<form *ngIf="addingTecnico" (submit)="addTecnico()">
+    <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador"/><br>
+    <button type="submit">Registar</button><br>
+</form>
