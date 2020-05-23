@@ -1,2 +1,8 @@
 <h2>Lista de utilizadores</h2>
-<ul></ul>
+<ul class="utilizadores">
+    <li *ngFor="let u of utilizadores; let i=index">
+    (click)="verUser()">{{u.primeiroNome + " " + u.ultimoNome}}
+
+    </li><br>
+
+</ul>

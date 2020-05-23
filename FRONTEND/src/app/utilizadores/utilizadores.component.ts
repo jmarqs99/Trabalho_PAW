@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UtilizadoresComponent implements OnInit {
 
   utilizadores:any=[]; 
+  utilizador:any;
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) {}
 
@@ -25,6 +26,16 @@ export class UtilizadoresComponent implements OnInit {
     });
   }
 
+  getUtilizador(_id:String){
+    this.utilizador=null;
+    this.rest.getUtilizador(_id).subscribe((data:{})=>{
+      this.utilizador=data;
+    })
+  }
+
+  verUser(){
+    console.log("aaaaaa");
+  }
   
 
 }
