@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from '../Models/Pedido';
@@ -10,8 +10,12 @@ import { Pedido } from '../Models/Pedido';
 })
 export class PedidosComponent implements OnInit {
 
-  pedidos:any = [];
-  pedido:Pedido;
+
+
+
+  pedidos:any;
+  @Input() pedido:Pedido = new Pedido();
+
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
@@ -21,14 +25,22 @@ export class PedidosComponent implements OnInit {
 
   getPedidos() {
     this.pedidos = [];
-    this.rest.getPedidos().subscribe((data: {}) => {
+    this.rest.getPedidos().subscribe((data: Pedido[]) => {
       console.log(data);
       this.pedidos = data;
     });
   }
-  add() {
 
+  addPedido() {
+    console.log(this.pedido)
+    this.rest.addPedido(this.pedido).subscribe((result : Pedido) => {
+     this.getPedidos()
+      }, (err) => {
+      console.log(err);
+      })
+    
   }
+
   delete(id) {
     this.rest.deletePedido(id)
       .subscribe(res => {

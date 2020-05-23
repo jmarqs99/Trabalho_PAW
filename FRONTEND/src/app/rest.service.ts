@@ -36,8 +36,8 @@ export class RestService {
     return this.http.post<any>(endpoint +"utilizador/"+ id,JSON.stringify(utilizador),httpOptions);
   }
 
-  getPedidos() : Observable<any>{
-    return this.http.get<any>(endpoint + "pedido")
+  getPedidos() : Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(endpoint + "pedido")
   }
 
  
@@ -51,6 +51,9 @@ export class RestService {
   
   deletePedido(id:String):Observable<any> {
     return this.http.delete<any>(endpoint + "pedido/" + id);
+  }
+  addPedido(pedido:Pedido):Observable<any>{
+    return this.http.post<any>(endpoint +"pedido/",JSON.stringify(pedido), httpOptions);
   }
   
   getTecnicos():Observable<any> {

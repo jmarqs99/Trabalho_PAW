@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
 
-    </head>
+<head>
 
-    <body>
-        <h2>Lista de Pedidos</h2>
-        
-           
+</head>
 
-    </body>
+<body>
+    <h1>Gestão de Pedidos</h1>
+    <div>
+        <br>
+        <br>
+
+        <h2>Pedido Add</h2>
+      
+            <label>nmrCC:
+                <input [(ngModel)]="pedido.nmrCC" placeholder="nmrCC" />
+            </label><br>
+            <label>informacao:
+                <input [(ngModel)]="pedido.informacao" placeholder="informacao" />
+            </label><br>
+            <label>estadoUtilizador:
+                <input [(ngModel)]="pedido.estadoUtilizador" placeholder="estadoUtilizador" />
+            </label><br>
+       
+        <button (click)="addPedido()">Save</button>
+    
+
+
+    </div>
+    <h4>Lista de Pedidos</h4>
+
+
+
+
+    <ul class="pedidos">
+        <li *ngFor="let p of pedidos; let i=index;">
+            <span class="badge">ID do pedido: </span> {{p.nmrCC}}
+
+            <button class="delete" title="delete pedido" (click)="delete(p._id)">apagar</button>
+            <button class="update" title="ataulizar pedido" (click)="update(p._id)">atualizar</button>
+            <button class="pedido" title="dados do pedido" (click)="(p._id)">dados do pedido</button>
+        </li>
+    </ul>
+
+
+    <a routerLink="/home"><button type="button">Voltar</button></a>
+
+
+
+</body>
+
 </html>
