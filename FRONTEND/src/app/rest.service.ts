@@ -12,6 +12,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RestService {
+  
   constructor(private http: HttpClient) { }
   private extractData(res: Response) {
     let body = res;
@@ -20,7 +21,20 @@ export class RestService {
  /* getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(endpoint + 'products');
   }*/
-  test(): Observable<any> {
-    return this.http.get<any>(endpoint + 'me');
+
+  getUtilizadores() : Observable<any> {
+    return this.http.get<any>(endpoint + "utilizador")
   }
+
+  getUtilizador(id:String):Observable<any>{
+    return this.http.get<any>(endpoint +"utilizador/" + id);
+  }
+
+  updateUtilizador(id:String,utilizador:Utilizador):Observable<any>{
+    return this.http.post<any>(endpoint +"utilizador/"+ id,JSON.stringify(utilizador),httpOptions);
+  }
+
+
+
+
 }
