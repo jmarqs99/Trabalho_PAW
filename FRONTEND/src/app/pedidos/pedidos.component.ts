@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Pedido } from '../Models/Pedido';
 
 @Component({
   selector: 'app-pedidos',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PedidosComponent implements OnInit {
 
   pedidos:any = [];
+  pedido:Pedido;
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
@@ -37,7 +39,7 @@ export class PedidosComponent implements OnInit {
       );
   }
   update(id) {
-    this.rest.updatePedido(id)
+    this.rest.updatePedido(id,this.pedido)
     .subscribe(res => {
       this.getPedidos();
     }, (err) => {
