@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tecnicos',
@@ -10,15 +11,16 @@ export class TecnicosComponent implements OnInit {
   tecnicos : any;
   addingTecnico: boolean;
   userId: string;
+  currentTecnico : any;
+  viewingTecnico: boolean;
 
-  constructor(public rest:RestService) { }
+  constructor(private router: Router,public rest:RestService) { }
 
   ngOnInit(): void {
     this.getTecnicos();
   }
 
   getTecnicos(){
-    console.log("Here")
     this.tecnicos = [];
     this.rest.getTecnicos().subscribe((data:{})=>{
       this.tecnicos = data;
@@ -41,9 +43,19 @@ export class TecnicosComponent implements OnInit {
       return;
     }
     this.rest.addTecnico(this.userId).subscribe((data:{})=>{
+      this.getTecnicos();
       this.addingTecnico = false;
       this.userId = null;
-      this.getTecnicos();
     });
+  }
+  tecnicoInfo(tecnicoId :string){
+    if (this.viewingTecnico) {
+      this.viewingTecnico = false;
+    } else {
+      this.rest.getTecnico(tecnicoId).subscribe((data:{})=>{
+        this.currentTecnico = data;
+        this.viewingTecnico = true;
+      });
+    }
   }
 }

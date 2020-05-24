@@ -12,7 +12,6 @@ export class AppComponent {
 
   constructor(private router: Router, private authServive: AuthenticationServiceService, route: ActivatedRoute) {
     router.events.subscribe((val) => {
-      // see also 
       this.user = JSON.parse(localStorage.getItem("currentUser"))
     });
   }

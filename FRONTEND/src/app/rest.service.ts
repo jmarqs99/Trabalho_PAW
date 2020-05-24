@@ -59,6 +59,9 @@ export class RestService {
   getTecnicos():Observable<any> {
     return this.http.get<any>(endpoint + "tecnico");
   }
+  getTecnico(id:string):Observable<any> {
+    return this.http.get<any>(endpoint + "tecnico/" + id);
+  }
   removeTecnico(id:string):Observable<any> {
     return this.http.delete<any>(endpoint + "tecnico/"+id);
   }

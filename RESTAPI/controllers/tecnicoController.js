@@ -40,7 +40,6 @@ tecnicoController.removerTecnico = function (req,res,next) {
 };
 
 tecnicoController.verTecnico = async function (req,res,next) {
-    console.log(req.params.tecnicoID)
     Tecnico.findOne({ _id : req.params.tecnicoID},function (err,tecnico)  {
         if(err) {
             next(err);
@@ -67,21 +66,24 @@ tecnicoController.verTecnicos = function (req,res,next) {
             next(err);
         } else {
             const result = tecnicos;
-
-            new Promise((resolve, reject) => {
-                result.forEach(function(item,index){
-                    result[index] = result[index].toObject();
-                    utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
-                        console.log(utilizador);
-                        result[index].primeiroNome = utilizador.primeiroNome;
-                        result[index].ultimoNome = utilizador.ultimoNome;
-                        result[index].estado = utilizador.estado;
-                        if (index === result.length -1) resolve();
+            if (result.length >= 1){
+                new Promise((resolve, reject) => {
+                    result.forEach(function(item,index){
+                        result[index] = result[index].toObject();
+                        utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
+                            result[index].primeiroNome = utilizador.primeiroNome;
+                            result[index].ultimoNome = utilizador.ultimoNome;
+                            result[index].estado = utilizador.estado;
+                            console.log(index ,result.length)
+                            if (index === result.length -1) resolve();
+                        })
                     })
-                })
-            }).then(() => {
-                res.status(200).json(result)
-            });
+                }).then(() => {
+                    res.status(200).json(result)
+                });
+            } else {
+                res.status(200).json(result);
+            }
 
         }
      });
