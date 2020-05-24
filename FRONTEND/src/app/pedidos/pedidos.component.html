@@ -12,39 +12,46 @@
         <br>
 
         <h2>Pedido Add</h2>
-      
-            <label>nmrCC:
-                <input [(ngModel)]="pedido.nmrCC" placeholder="nmrCC" />
-            </label><br>
-            <label>informacao:
-                <input [(ngModel)]="pedido.informacao" placeholder="informacao" />
-            </label><br>
-            <label>estadoUtilizador:
-                <input [(ngModel)]="pedido.estadoUtilizador" placeholder="estadoUtilizador" />
-            </label><br>
-       
-        <button (click)="addPedido()">Save</button>
+
+        <label>nmrCC:
+            <input [(ngModel)]="pedido.nmrCC" placeholder="nmrCC" />
+        </label><br>
+        <label>informacao:
+            <input [(ngModel)]="pedido.informacao" placeholder="informacao" />
+        </label><br>
+        <label>estadoUtilizador:
+            <input [(ngModel)]="pedido.estadoUtilizador" placeholder="estadoUtilizador" />
+        </label><br>
+   
+    <button (click)="addPedido()">Save</button>
+
+    </div>
+    
+    <ul class="pedidos">
+        <li *ngFor="let p of pedidos; let i=index;">
+            <span (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">ID do pedido: {{p._id}}&nbsp; &nbsp;</span>
+            
+            <button (click)="delete(p._id)">Remover pedido</button>
+        </li>
+        
+    <div *ngIf="viewingPedido">
+        <p>ID do Pedido: {{currentPedido._id}}</p>
+        <p>nmrCC do usuário do pedido: {{currentPedido.nmrCC}}</p>
+        <p>Informação do pedido: {{currentPedido.informacao}}</p>
+        <p>Estado do utilizador deste pedido: {{currentPedido.estadoUtilizador}}</p>
+        <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
+        <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
+        <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
+    </div>
+    </ul>
+
     
 
 
-    </div>
-    <h4>Lista de Pedidos</h4>
+    
 
 
-
-
-    <ul class="pedidos">
-        <li *ngFor="let p of pedidos; let i=index;">
-            <span class="badge">ID do pedido: </span> {{p.nmrCC}}
-
-            <button class="delete" title="delete pedido" (click)="delete(p._id)">apagar</button>
-            <button class="update" title="ataulizar pedido" (click)="update(p._id)">atualizar</button>
-            <button class="pedido" title="dados do pedido" (click)="(p._id)">dados do pedido</button>
-        </li>
-    </ul>
-
-
-    <a routerLink="/home"><button type="button">Voltar</button></a>
+    
 
 
 
