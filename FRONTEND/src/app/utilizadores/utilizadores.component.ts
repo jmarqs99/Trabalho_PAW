@@ -13,6 +13,7 @@ export class UtilizadoresComponent implements OnInit {
   utilizador:any;
   currentUtilizador : any;
   viewingUtilizador: boolean;
+  atualizar: boolean;
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) {}
 
@@ -44,6 +45,10 @@ export class UtilizadoresComponent implements OnInit {
         this.viewingUtilizador = true;
       });
     }
+  }
+
+  updateUtilizador(){
+    this.rest.updateUtilizador(this.route.snapshot.params['id'],this.utilizador)
   }
   
 

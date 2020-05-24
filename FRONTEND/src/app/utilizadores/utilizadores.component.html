@@ -1,15 +1,26 @@
 <h2>Lista de utilizadores</h2>
 <ul class="utilizadores">
     <li *ngFor="let u of utilizadores; let i=index">
-    <span (click)="utilizadorInfo(u._id)" title="Clica para veres/esconderes informações deste user!">{{u.primeiroNome}} {{u.ultimoNome}}</span>
+        <span (click)="utilizadorInfo(u._id)"
+            title="Clica para veres/esconderes informações deste user!">{{u.primeiroNome}} {{u.ultimoNome}}</span>
     </li><br>
 
     <div *ngIf="viewingUtilizador">
-        <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}}  {{currentUtilizador.ultimoNome}}</p>
+        <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
         <p>ID do Utilizador: {{currentUtilizador._id}}</p>
-        <p>Estado do utilizador : {{currentUtilizador.estado}}</p>
+        <p>Estado do utilizador : {{currentUtilizador.estado}} <button type="button" (click)="atualizar = true">
+                ATUALIZAR</button> </p>
     </div>
 
+    <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
+
+    <form *ngIf="atualizar" (submit)="updateUtilizador()">
+        <select name="estado">
+            <option value="infetado">Infetado</option>
+            <option value="suspeito">Suspeito</option>
+            <option value="saudavel">Saudável</option>
+            </select>
+        <button type="submit">Atualizar</button><br>
+    </form>
+
 </ul>
-
-
