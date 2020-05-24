@@ -11,6 +11,8 @@ export class UtilizadoresComponent implements OnInit {
 
   utilizadores:any=[]; 
   utilizador:any;
+  currentUtilizador : any;
+  viewingUtilizador: boolean;
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) {}
 
@@ -33,8 +35,15 @@ export class UtilizadoresComponent implements OnInit {
     })
   }
 
-  verUser(){
-    console.log("aaaaaa");
+  utilizadorInfo(Id :string){
+    if (this.viewingUtilizador) {
+      this.viewingUtilizador = false;
+    } else {
+      this.rest.getUtilizador(Id).subscribe((data:{})=>{
+        this.currentUtilizador = data;
+        this.viewingUtilizador = true;
+      });
+    }
   }
   
 
