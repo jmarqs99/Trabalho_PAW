@@ -1,6 +1,6 @@
 <h1>Técnicos</h1>
 <button (click)="addingTecnico = true">Adicionar Técnico</button>
-<ul class="products">
+<ul>
     <li *ngFor="let t of tecnicos; let i=index;">
         <span (click)="tecnicoInfo(t._id)" title="Clica para veres/esconderes informações deste user!">{{t.primeiroNome}} {{t.ultimoNome}}</span>
         <button (click)="demote(t._id)">Remover Técnico</button>

@@ -69,4 +69,17 @@ export class RestService {
     return this.http.post<any>(endpoint + "tecnico/"+id, {},{});
   }
 
+  getAdmins():Observable<any> {
+    return this.http.get<any>(endpoint + "admin");
+  }
+  getAdmin(id:string):Observable<any> {
+    return this.http.get<any>(endpoint + "admin/" + id);
+  }
+  removeAdmin(id:string):Observable<any> {
+    return this.http.delete<any>(endpoint + "admin/"+id);
+  }
+  addAdmin(id:string):Observable<any> {
+    return this.http.post<any>(endpoint + "admin/"+id, {},{});
+  }
+
 }

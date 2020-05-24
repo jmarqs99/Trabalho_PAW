@@ -67,20 +67,23 @@ adminController.verAdmins = function (req,res,next) {
         } else {
             if (admins.length > 0){
                 const result = admins;
-                new Promise((resolve, reject) => {
-                    result.forEach(function(item,index){
-                        result[index] = result[index].toObject();
-                        utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
-                            console.log(utilizador);
-                            result[index].primeiroNome = utilizador.primeiroNome;
-                            result[index].ultimoNome = utilizador.ultimoNome;
-                            result[index].estado = utilizador.estado;
-                            if (index === result.length -1) resolve();
+                if(result.length >= 1) {
+                    new Promise((resolve, reject) => {
+                        result.forEach(function(item,index){
+                            result[index] = result[index].toObject();
+                            utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
+                                result[index].primeiroNome = utilizador.primeiroNome;
+                                result[index].ultimoNome = utilizador.ultimoNome;
+                                result[index].estado = utilizador.estado;
+                                if (index === result.length -1) resolve();
+                            })
                         })
-                    })
-                }).then(() => {
+                    }).then(() => {
+                        res.status(200).json(result)
+                    });
+                } else {
                     res.status(200).json(result)
-                });
+                }
             } else {
                 res.status(200).json(admins);
             }
