@@ -52,9 +52,20 @@ export class AdminsComponent implements OnInit {
     if (this.viewingAdmin) {
       this.viewingAdmin = false;
     } else {
-      this.rest.getAdmin(tecnicoId).subscribe((data:{})=>{
-        this.currentAdmin = data;
-        this.viewingAdmin = true;
+      var adminResult:any = null;
+      new Promise((resolve, reject) => {
+      this.admins.forEach(function(admin,index){
+        if (admin._id == tecnicoId){
+          adminResult = admin;
+          this.currentAdmin = admin;
+          this.viewingAdmin = true
+          resolve();
+        }
+        if (index === this.admins.length -1) resolve();
+      });
+      }).then(() => {
+        this.currentAdmin = adminResult;
+        this.viewingAdmin = true
       });
     }
   }

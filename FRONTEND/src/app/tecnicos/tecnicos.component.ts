@@ -52,9 +52,18 @@ export class TecnicosComponent implements OnInit {
     if (this.viewingTecnico) {
       this.viewingTecnico = false;
     } else {
-      this.rest.getTecnico(tecnicoId).subscribe((data:{})=>{
-        this.currentTecnico = data;
-        this.viewingTecnico = true;
+      var tecnicoResult:any = null;
+      new Promise((resolve, reject) => {
+      this.tecnicos.forEach(function(tecnico,index){
+        if (tecnico._id == tecnicoId){
+          tecnicoResult = tecnico;
+          resolve();
+        }
+        if (index === this.tecnicos.length -1) resolve();
+      });
+      }).then(() => {
+        this.currentTecnico = tecnicoResult;
+        this.viewingTecnico = true
       });
     }
   }
