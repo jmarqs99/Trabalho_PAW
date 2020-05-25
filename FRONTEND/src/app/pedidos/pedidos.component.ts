@@ -103,5 +103,11 @@ export class PedidosComponent implements OnInit {
       });
     }
   }
+  nrinfetados(pedidoId: String) {
+    this.pedido=null;
+    this.rest.getPedido(pedidoId).subscribe((data:Pedido)=>{
+      this.pedido=data;
+    })
+  }
 
 }

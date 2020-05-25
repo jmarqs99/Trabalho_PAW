@@ -56,6 +56,10 @@ export class RestService {
     return this.http.post<any>(endpoint +"pedido/",JSON.stringify(pedido), httpOptions);
   }
   
+  numeroInfetados(id:String):Observable<any> {
+    return this.http.get<any>(endpoint + "pedido/numeroInfetados/" + id);
+  }
+  
   getTecnicos():Observable<any> {
     return this.http.get<any>(endpoint + "tecnico");
   }
