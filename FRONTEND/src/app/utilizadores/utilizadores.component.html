@@ -2,7 +2,7 @@
 <ul class="utilizadores">
     <li *ngFor="let u of utilizadores; let i=index">
         <span (click)="utilizadorInfo(u._id)"
-            title="Clica para veres/esconderes informações deste user!">{{u.primeiroNome}} {{u.ultimoNome}}</span>
+            title="Clica para veres/esconderes informaÃ§Ãµes deste user!">{{u.primeiroNome}} {{u.ultimoNome}}</span>
     </li><br>
 
     <div *ngIf="viewingUtilizador">
@@ -18,7 +18,11 @@
         <select input [(ngModel)]= novoEstado name="estado">
             <option value="Infetado">Infetado</option>
             <option value="Suspeito">Suspeito</option>
+<<<<<<< Updated upstream
             <option value="Saudável">Saudável</option>
+=======
+            <option value="SaudÃ¡vel">SaudÃ¡vel</option>
+>>>>>>> Stashed changes
         </select>
         <button type="submit">Atualizar</button><br>
     </form>
