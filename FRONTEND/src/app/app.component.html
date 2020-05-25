@@ -1,6 +1,12 @@
 <header *ngIf="user">
     <a routerLink="/">Homepage</a><br>
-    <label>{{user.nome}}</label><br>
+    
+    <div class="dropdown">
+        <label>{{user.nome}}</label><br>
+        <div class="dropdown-content">
+        <p routerLink="/changePassword">Editar Password</p>
+        </div>
+    </div>
     <button (click)="logout()">Logout</button>
 </header>
 <router-outlet></router-outlet>

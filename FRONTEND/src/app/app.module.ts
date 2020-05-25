@@ -14,6 +14,7 @@ import { TestesComponent } from './testes/testes.component';
 import { UtilizadoresComponent } from './utilizadores/utilizadores.component';
 import { TecnicosComponent } from './tecnicos/tecnicos.component';
 import { AdminsComponent } from './admins/admins.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -54,6 +55,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'changePassword',
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -70,7 +76,8 @@ const appRoutes: Routes = [
     TestesComponent,
     UtilizadoresComponent,
     TecnicosComponent,
-    AdminsComponent
+    AdminsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
