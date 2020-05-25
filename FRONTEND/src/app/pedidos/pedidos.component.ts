@@ -3,6 +3,7 @@ import { RestService } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from '../Models/Pedido';
 
+
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -13,7 +14,9 @@ export class PedidosComponent implements OnInit {
   addingPedido: boolean;
   currentPedido : any;
   viewingPedido: boolean;
+  atualizarPedido : boolean;
   pedidos:any=[];
+  uinformação:boolean;
 
 
   @Input() pedido:Pedido = new Pedido();
@@ -62,10 +65,29 @@ export class PedidosComponent implements OnInit {
       );
     }
   }
+  /**
+  update() {
+    if (this.atualizarPedido) {
+      this.atualizarPedido = false;
+    }
+    else {
+    this.rest.updatePedido(this.route.snapshot.params["pedidoId"],this.pedido)
+    .subscribe(res => {
+      this.atualizarPedido = true;
+      this.getPedidos();
+    }, (err) => {
+      console.log(err);
+    }
+    );
+  }
+  }
+   */
   update(pedidoId: String) {
     this.rest.updatePedido(pedidoId,this.pedido)
     .subscribe(res => {
+      this.atualizarPedido = true;
       this.getPedidos();
+      this.atualizarPedido = false;
     }, (err) => {
       console.log(err);
     }

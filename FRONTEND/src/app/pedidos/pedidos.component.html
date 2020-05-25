@@ -20,7 +20,11 @@
             <input [(ngModel)]="pedido.informacao" placeholder="informacao" />
         </label><br>
         <label>estadoUtilizador:
-            <input [(ngModel)]="pedido.estadoUtilizador" placeholder="estadoUtilizador" />
+            <select input [(ngModel)]="pedido.estadoUtilizador">
+                <option value="infetado">Infetado</option>
+                <option value="suspeito">Suspeito</option>
+                <option value="saudavel">Saudável</option>
+                </select>
         </label><br>
    
     <button (click)="addPedido()">Save</button>
@@ -42,7 +46,44 @@
         <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
         <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
         <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
+        <button (click)="atualizarPedido = true">Atualizar este pedido</button>
     </div>
+
+    <form *ngIf="atualizarPedido" (submit)="update(currentPedido._id)">
+        <h5>Atualizar pedido {{currentPedido._id}}</h5>
+        <label>informacao:
+            <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
+        </label><br>
+        <label>estadoUtilizador:
+            <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
+                <option value="infetado">Infetado</option>
+                <option value="suspeito">Suspeito</option>
+                <option value="saudavel">Saudável</option>
+                </select>
+        </label><br>
+
+        <label>estadoTeste: 
+            <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
+                <option value="por agendar">por agendar</option>
+                <option value="agendado">agendado</option>
+                <option value="finalizado">finalizado</option>
+            </select>
+        </label>
+<br>
+        <label>resultadoTeste:
+            <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
+                <option value="indefinido">indefinido</option>
+                <option value="positivo">positivo</option>
+                <option value="negativo">negativo</option>
+            </select>
+
+        </label>
+        <br>
+        <button type="submit">Save</button><br>
+
+
+    </form>
+    
     </ul>
 
     
