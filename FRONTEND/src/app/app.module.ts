@@ -15,6 +15,7 @@ import { UtilizadoresComponent } from './utilizadores/utilizadores.component';
 import { TecnicosComponent } from './tecnicos/tecnicos.component';
 import { AdminsComponent } from './admins/admins.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi:true}],
   bootstrap: [AppComponent]

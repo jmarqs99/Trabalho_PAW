@@ -1,12 +1,13 @@
 <header *ngIf="user">
-    <a routerLink="/">Homepage</a><br>
-    
-    <div class="dropdown">
-        <label>{{user.nome}}</label><br>
-        <div class="dropdown-content">
-        <p routerLink="/changePassword">Editar Password</p>
+    <button class="btn btn btn-success" routerLink="/">Homepage</button>
+    <div id="accInfo">
+        <div ngbDropdown class="d-inline-block">
+            <button  class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{user.nome}}</button >
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button routerLink="/changePassword" ngbDropdownItem>Editar Password</button>
+            </div>
         </div>
+        <button (click)="logout()" class="btn btn btn-danger">Logout</button>
     </div>
-    <button (click)="logout()">Logout</button>
 </header>
 <router-outlet></router-outlet>
