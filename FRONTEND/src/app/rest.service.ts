@@ -33,7 +33,7 @@ export class RestService {
   }
 
   updateUtilizador(id:String,dados:JSON):Observable<any>{
-    return this.http.post<any>(endpoint +"utilizador/"+ id,httpOptions);
+    return this.http.put<any>(endpoint +"utilizador/"+ id,httpOptions);
   }
 
   getPedidos() : Observable<Pedido[]>{

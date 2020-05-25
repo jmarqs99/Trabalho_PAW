@@ -15,6 +15,7 @@ export class UtilizadoresComponent implements OnInit {
   viewingUtilizador: boolean;
   atualizar: boolean;
 
+
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
@@ -47,8 +48,8 @@ export class UtilizadoresComponent implements OnInit {
     }
   }
 
-  updateUtilizador(){
-    this.rest.updateUtilizador(this.route.snapshot.params['id'],this.utilizador)
+  updateUtilizador(Id :string, dados:JSON){
+    this.rest.updateUtilizador(this.route.snapshot.params['id'],dados)
   }
   
 
