@@ -14,11 +14,11 @@
 
     <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
 
-    <form *ngIf="atualizar" (submit)="updateUtilizador(currentUtilizador._id,currentUtilizador.estado)">
-        <select name="estado">
-            <option value="infetado">Infetado</option>
-            <option value="suspeito">Suspeito</option>
-            <option value="saudavel">Saudável</option>
+    <form *ngIf="atualizar" (submit)="update()">
+        <select input [(ngModel)]= novoEstado name="estado">
+            <option value="Infetado">Infetado</option>
+            <option value="Suspeito">Suspeito</option>
+            <option value="Saudável">Saudável</option>
         </select>
         <button type="submit">Atualizar</button><br>
     </form>

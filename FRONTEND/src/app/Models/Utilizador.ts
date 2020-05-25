@@ -1,4 +1,4 @@
-export class Utilizador{
+export class Utilizador {
     _id:String;
     nrCC:String;
     primeiroNome:String;

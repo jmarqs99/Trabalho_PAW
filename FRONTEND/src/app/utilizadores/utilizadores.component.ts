@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Utilizador} from '../Models/Utilizador';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-utilizadores',
@@ -14,6 +16,8 @@ export class UtilizadoresComponent implements OnInit {
   currentUtilizador : any;
   viewingUtilizador: boolean;
   atualizar: boolean;
+  atualizarUtilizador:boolean;
+  novoEstado: String;
 
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) {}
@@ -47,10 +51,21 @@ export class UtilizadoresComponent implements OnInit {
       });
     }
   }
-
-  updateUtilizador(Id :string, dados:JSON){
-    this.rest.updateUtilizador(this.route.snapshot.params['id'],dados)
+  update() {
+    this.rest.updateUtilizador(this.currentUtilizador._id,this.novoEstado)
+    .subscribe(res => {
+      this.atualizar = false;
+      this.getUtilizadores();
+      this.viewingUtilizador = false;
+      this.utilizadorInfo(this.currentUtilizador._id);
+    }, (err) => {
+      console.log(err);
+    }
+    );
   }
+ /*  updateUtilizador(Id :string, dados:JSON){
+    this.rest.updateUtilizador(this.route.snapshot.params['id'],dados)
+  } */
   
 
 }
