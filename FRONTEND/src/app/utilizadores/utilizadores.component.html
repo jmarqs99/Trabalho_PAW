@@ -1,26 +1,41 @@
 <h2>Lista de utilizadores</h2>
-<ul class="utilizadores">
-    <li *ngFor="let u of utilizadores; let i=index">
-        <span (click)="utilizadorInfo(u._id)"
-            title="Clica para veres/esconderes informações deste user!">{{u.primeiroNome}} {{u.ultimoNome}}</span>
-    </li><br>
 
-    <div *ngIf="viewingUtilizador">
-        <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
-        <p>ID do Utilizador: {{currentUtilizador._id}}</p>
-        <p>Estado do utilizador : {{currentUtilizador.estado}} <button type="button" (click)="atualizar = true">
-                ATUALIZAR</button> </p>
+<div class="conteiner">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Número de CC</th>
+                <th scope="col">Primeiro Nome</th>
+                <th scope="col">Último Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of utilizadores; let i=index">
+                <td (click)="utilizadorInfo(u._id)" title="Clica para veres/esconderes informações deste user!">
+                    {{ u.nmrCC}} </td>
+                <td>{{ u.primeiroNome}}</td>
+                <td>{{ u.ultimoNome }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <div *ngIf="viewingUtilizador">
+            <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
+            <p>ID do Utilizador: {{currentUtilizador._id}}</p>
+            <p>Estado do utilizador : {{currentUtilizador.estado}} <button type="button" (click)="atualizar = true">
+                    ATUALIZAR</button> </p>
+        </div>
+        <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
+
+        <form *ngIf="atualizar" (submit)="update()">
+            <select input [(ngModel)]=novoEstado name="estado">
+                <option value="Infetado">Infetado</option>
+                <option value="Suspeito">Suspeito</option>
+                <option value="Saudável">Saudável</option>
+            </select>
+            <button type="submit">Atualizar</button><br>
+        </form>
     </div>
-
-    <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
-
-    <form *ngIf="atualizar" (submit)="update()">
-        <select input [(ngModel)]=novoEstado name="estado">
-            <option value="Infetado">Infetado</option>
-            <option value="Suspeito">Suspeito</option>
-            <option value="Saudável">Saudável</option>
-        </select>
-        <button type="submit">Atualizar</button><br>
-    </form>
-
-</ul>
+</div>

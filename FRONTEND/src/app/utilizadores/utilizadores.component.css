@@ -1,0 +1,9 @@
+.table{
+    max-width: 40%;
+}
+
+.conteiner{
+    display: flex;
+    flex-direction: row;
+}    
+    

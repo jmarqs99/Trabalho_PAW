@@ -19,7 +19,6 @@ export class UtilizadoresComponent implements OnInit {
   atualizarUtilizador: boolean;
   novoEstado: String;
 
-
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
