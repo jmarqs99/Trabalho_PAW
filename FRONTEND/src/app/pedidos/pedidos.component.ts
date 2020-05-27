@@ -12,15 +12,20 @@ import { Pedido } from '../Models/Pedido';
 export class PedidosComponent implements OnInit {
 
   addingPedido: boolean;
-  currentPedido : any;
+  currentPedido: any;
   viewingPedido: boolean;
-  atualizarPedido : boolean;
-  pedidos:any=[];
-  uinformação:boolean;
+  viewingListar: boolean = true;
+  atualizarPedido: boolean;
+  pedidos: any = [];
+  uinformação: boolean;
   estadoUtilizador: string;
+  resultado: String;
+  estadosTeste: String;
+  estadosUser: String;
+  informacaoPedido: String;
+  cc: String;
 
-
-  @Input() pedido:Pedido = new Pedido();
+  @Input() pedido: Pedido = new Pedido();
 
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
@@ -37,95 +42,180 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  getPedido(_id:String){
-    this.pedido=null;
-    this.rest.getPedido(_id).subscribe((data:Pedido)=>{
-      this.pedido=data;
+  resultadosPedido() {
+    this.rest.getPedidos().subscribe((data: {}) => {
+
+      this.pedidos = data;
+      this.viewingListar = true;
+      var pedidosTemp = [];
+
+      new Promise((resolve, reject) => {
+        const pedidos = this.pedidos;
+        const resultToSearch = this.resultado;
+        pedidos.forEach(function (pedido, index) {
+          if (pedido.resultadoTeste == resultToSearch) {
+            pedidosTemp.push(pedido);
+            resolve();
+          }
+          if (index === pedidos.length - 1) resolve();
+        });
+      }).then(() => {
+
+        this.pedidos = pedidosTemp;
+
+      });
+    });
+  }
+
+
+
+  estadoTeste() {
+    var pedidosTemp = [];
+
+    new Promise((resolve, reject) => {
+      const pedidos = this.pedidos;
+      const resultToSearch = this.estadosTeste;
+      pedidos.forEach(function (pedido, index) {
+        if (pedido.estadoTeste == resultToSearch) {
+          pedidosTemp.push(pedido);
+          resolve();
+        }
+        if (index === pedidos.length - 1) resolve();
+      });
+    }).then(() => {
+
+      this.pedidos = pedidosTemp;
+
+    });
+  }
+
+  estadoUser() {
+    var pedidosTemp = [];
+
+    new Promise((resolve, reject) => {
+      const pedidos = this.pedidos;
+      const resultToSearch = this.estadosUser;
+      pedidos.forEach(function (pedido, index) {
+        if (pedido.estadoUtilizador == resultToSearch) {
+          pedidosTemp.push(pedido);
+          resolve();
+        }
+        if (index === pedidos.length - 1) resolve();
+      });
+    }).then(() => {
+
+      this.pedidos = pedidosTemp;
+
+    });
+  }
+  informacao() {
+
+    var pedidosTemp = [];
+
+    new Promise((resolve, reject) => {
+      const pedidos = this.pedidos;
+      const resultToSearch = this.informacaoPedido;
+      pedidos.forEach(function (pedido, index) {
+        if (pedido.informacao == resultToSearch) {
+          pedidosTemp.push(pedido);
+          resolve();
+        }
+        if (index === pedidos.length - 1) resolve();
+      });
+    }).then(() => {
+
+      this.pedidos = pedidosTemp;
+
+    });
+  }
+
+  nmrCC() {
+    var pedidosTemp = [];
+
+    new Promise((resolve, reject) => {
+      const pedidos = this.pedidos;
+      const resultToSearch = this.cc;
+      pedidos.forEach(function (pedido, index) {
+        if (pedido.nmrCC == resultToSearch) {
+          pedidosTemp.push(pedido);
+          resolve();
+        }
+        if (index === pedidos.length - 1) resolve();
+      });
+    }).then(() => {
+
+      this.pedidos = pedidosTemp;
+
+    });
+  }
+
+  getPedido(_id: String) {
+    this.pedido = null;
+    this.rest.getPedido(_id).subscribe((data: Pedido) => {
+      this.pedido = data;
     })
   }
 
   addPedido() {
     console.log(this.pedido)
-    this.rest.addPedido(this.pedido).subscribe((result : Pedido) => {
-     this.getPedidos();
-     this.addingPedido = false;
-      }, (err) => {
+    this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
+      this.getPedidos();
+      this.addingPedido = false;
+    }, (err) => {
       console.log(err);
-      })
+    })
   }
 
   delete(pedidoId: String) {
     var doRemove = confirm("Queres mesmo remover este pedido?");
     if (doRemove == true) {
-    this.rest.deletePedido(pedidoId)
+      this.rest.deletePedido(pedidoId)
+        .subscribe(res => {
+          this.getPedidos();
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    }
+  }
+
+  update(pedidoId: String) {
+    this.rest.updatePedido(pedidoId, this.pedido)
       .subscribe(res => {
+        this.atualizarPedido = true;
         this.getPedidos();
+        this.atualizarPedido = false;
       }, (err) => {
         console.log(err);
       }
       );
-    }
   }
-  /**
-  update() {
-    if (this.atualizarPedido) {
-      this.atualizarPedido = false;
-    }
-    else {
-    this.rest.updatePedido(this.route.snapshot.params["pedidoId"],this.pedido)
-    .subscribe(res => {
-      this.atualizarPedido = true;
-      this.getPedidos();
-    }, (err) => {
-      console.log(err);
-    }
-    );
-  }
-  }
-   */
-  update(pedidoId: String) {
-    this.rest.updatePedido(pedidoId,this.pedido)
-    .subscribe(res => {
-      this.atualizarPedido = true;
-      this.getPedidos();
-      this.atualizarPedido = false;
-    }, (err) => {
-      console.log(err);
-    }
-    );
-  }
-  pedidoInfo(pedidoId:String) {
+  pedidoInfo(pedidoId: String) {
     if (this.viewingPedido) {
       this.viewingPedido = false;
     } else {
-      /**
-      var pedidoResult:any = null;
+
+      var pedidoResult: any = null;
 
       new Promise((resolve, reject) => {
-        this.pedidos.forEach(function(pedido,index){
-          if (pedido._id == pedidoId){
+        const pedidos = this.pedidos;
+        pedidos.forEach(function (pedido, index) {
+          if (pedido._id == pedidoId) {
             pedidoResult = pedido;
             resolve();
           }
-          if (index === this.tecnicos.length -1) resolve();
+          if (index === pedidos.length - 1) resolve();
         });
-        }).then(() => {
-          this.currentPedido = pedidoResult;
-          this.viewingPedido = true
-        });
-         */
-
-      
-      this.rest.getPedido(pedidoId).subscribe((data : Pedido[])=>{
-        this.currentPedido = data;
-        this.viewingPedido = true;
+      }).then(() => {
+        this.currentPedido = pedidoResult;
+        this.viewingPedido = true
       });
-      
-     
+
+
     }
   }
   nrinfetados() {
-    if (this.estadoUtilizador == null || this.estadoUtilizador == ''){
+    if (this.estadoUtilizador == null || this.estadoUtilizador == '') {
       alert("ID de utilizador inválido!")
       return;
     }
