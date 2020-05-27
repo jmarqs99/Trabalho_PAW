@@ -11,13 +11,19 @@ export class LoginComponent implements OnInit {
   @Input() password: string;
   @Input() primeiroNome: string;
   @Input() ultimoNome: string;
+
+  sessionExpired: boolean;
  
 
   isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
   ngOnInit(): void {
+    this.sessionExpired = false;
     if (localStorage.getItem('currentUser')){
       this.router.navigate(['']);
+    } else if (localStorage.getItem('sessionExpired')){
+      localStorage.removeItem("sessionExpired")
+      this.sessionExpired = true;
     }
   }
   login(): void {

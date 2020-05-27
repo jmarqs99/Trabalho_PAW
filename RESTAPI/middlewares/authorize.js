@@ -13,7 +13,7 @@ const authorize = (opts) => {
 
 	return (req, res, next) => {
 		if (!req.user) {
-			next({message:'Not authenticated'})
+			next({message:'Not authenticated',status : 401 })
         } else {
             Utilizador.findOne({ nmrCC: req.user.nmrCC }, function (err, utilizador) {
                 if (err) {
@@ -21,7 +21,7 @@ const authorize = (opts) => {
                 } else {
                     if (utilizador.changed){
                         res.clearCookie('session')
-                        res.json({ status: 'Need to RE-Login due to changes!' })
+                        res.json({ status: 'Need to RE-Login due to changes!',status : 401 })
                         utilizadorController.updateUtilizadorInterno(utilizador._id,{changed:false})
                     } else {
                         const hasAuthorization = opts.includes(req.user.role)
@@ -29,7 +29,7 @@ const authorize = (opts) => {
                         if (hasAuthorization) {
                             next()
                         } else {
-                            next({message:'Not authorized'})
+                            next({message:'Not authorized',status: 403})
                         }
                     }
                 }

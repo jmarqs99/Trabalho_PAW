@@ -1,5 +1,6 @@
 .table{
     max-width: 40%;
+    margin:3%;
 }
 
 .conteiner{
@@ -7,3 +8,11 @@
     flex-direction: row;
 }    
     
+.info{
+    margin:3%;
+}
+
+h2{
+    text-align: center;
+    margin-top: 3%;
+}

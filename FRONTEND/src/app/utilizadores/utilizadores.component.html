@@ -20,14 +20,12 @@
         </tbody>
     </table>
 
-    <div>
-        <div *ngIf="viewingUtilizador">
+    <div class="info" *ngIf="viewingUtilizador">
+        <div>
             <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
             <p>ID do Utilizador: {{currentUtilizador._id}}</p>
-            <p>Estado do utilizador : {{currentUtilizador.estado}} <button type="button" (click)="atualizar = true">
-                    ATUALIZAR</button> </p>
+            <p>Estado do utilizador : {{currentUtilizador.estado}} <button class="btn btn-primary" type="button" (click)="atualizar = true">ATUALIZAR</button> </p>
         </div>
-        <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
 
         <form *ngIf="atualizar" (submit)="update()">
             <select input [(ngModel)]=novoEstado name="estado">
@@ -35,7 +33,7 @@
                 <option value="Suspeito">Suspeito</option>
                 <option value="Saudável">Saudável</option>
             </select>
-            <button type="submit">Atualizar</button><br>
+            <button class="btn btn-primary" type="submit">Atualizar</button><br>
         </form>
     </div>
 </div>

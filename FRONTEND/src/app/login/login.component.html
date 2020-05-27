@@ -1,16 +1,52 @@
-<form *ngIf="isRegistering == false" (submit)="login()">
-    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" placeholder="Username..." /><br>
-    <input [(ngModel)]="password" name="password" placeholder="Password..." type="password" /><br>
-    <button type="submit">Login</button><br>
-</form>
+<body>
+    <p *ngIf="sessionExpired" class="alerta alert alert-danger">Sessão expirada!</p>
+    <div class="container" *ngIf="isRegistering == false">
+        <div class="box">
+            <form (submit)="login()">
+                <div class="form-group">
+                    <label for="nmrCCInput">Número de cartão de cidadão</label>
+                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput"
+                        placeholder="Introduz o número de CC">
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input [(ngModel)]="password" name="password" type="password" class="form-control"
+                        id="passwordInput" placeholder="Introduz a password">
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-primary" type="submit">Login</button><br>
+                    <button class="btn btn-primary" *ngIf="isRegistering == false" type="button"
+                        (click)="isRegistering = true">Registar</button>
+                </div>
 
-<button *ngIf="isRegistering == false" type="button" (click)="isRegistering = true">Registar</button>
-<button *ngIf="isRegistering" type="button" (click)="isRegistering = false">Voltar</button>
+            </form>
+        </div>
+    </div>
+    <div class="container" *ngIf="isRegistering">
+        <div class="box-reg">
+            <button class="btn btn-primary" type="button" (click)="isRegistering = false">Voltar</button>
 
-<form *ngIf="isRegistering" (submit)="register()">
-    <input [(ngModel)]="primeiroNome" name="primeiroNome" type="text" placeholder="Ultimo Nome..."/><br>
-    <input [(ngModel)]="ultimoNome" name="ultimoNome" type="text" placeholder="Primeiro Nome..."/><br>
-    <input [(ngModel)]="nmrCC"name="nmrCC" type="text" placeholder="Username..." /><br>
-    <input [(ngModel)]="password" name="password" placeholder="Password..." type="password" /><br>
-    <button type="submit">Registar</button><br>
-</form>
+            <form *ngIf="isRegistering" (submit)="register()">
+                <div class="form-group">
+                    <label for="nmrCCInput">Primeiro Nome</label>
+                    <input [(ngModel)]="primeiroNome" name="primeiroNome" type="text" class="form-control" placeholder="Primeiro Nome..." />
+                </div>
+                <div class="form-group">
+                    <label for="nmrCCInput">Ultimo Nome</label>
+                    <input [(ngModel)]="ultimoNome" name="ultimoNome" type="text" class="form-control" placeholder="Ultimo Nome..." />
+                </div>
+                <div class="form-group">
+                    <label for="nmrCCInput">Número de cartão de cidadão</label>
+                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput"
+                        placeholder="Introduz o número de CC">
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input [(ngModel)]="password" name="password" type="password" class="form-control"
+                        id="passwordInput" placeholder="Introduz a password">
+                </div>
+                <button class="btn btn-primary" type="submit">Registar</button><br>
+            </form>
+        </div>
+    </div>
+</body>
