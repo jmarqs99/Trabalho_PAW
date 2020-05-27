@@ -54,12 +54,13 @@ export class TecnicosComponent implements OnInit {
     } else {
       var tecnicoResult:any = null;
       new Promise((resolve, reject) => {
-      this.tecnicos.forEach(function(tecnico,index){
+      const tecnicos = this.tecnicos;
+      tecnicos.forEach(function(tecnico,index){
         if (tecnico._id == tecnicoId){
           tecnicoResult = tecnico;
           resolve();
         }
-        if (index === this.tecnicos.length -1) resolve();
+        if (index === tecnicos.length -1) resolve();
       });
       }).then(() => {
         this.currentTecnico = tecnicoResult;

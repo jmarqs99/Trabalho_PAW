@@ -54,14 +54,15 @@ export class AdminsComponent implements OnInit {
     } else {
       var adminResult:any = null;
       new Promise((resolve, reject) => {
-      this.admins.forEach(function(admin,index){
+      const admins = this.admins;
+      admins.forEach(function(admin,index){
         if (admin._id == tecnicoId){
           adminResult = admin;
           this.currentAdmin = admin;
           this.viewingAdmin = true
           resolve();
         }
-        if (index === this.admins.length -1) resolve();
+        if (index === admins.length -1) resolve();
       });
       }).then(() => {
         this.currentAdmin = adminResult;
