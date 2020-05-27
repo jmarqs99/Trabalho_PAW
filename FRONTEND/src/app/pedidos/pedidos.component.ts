@@ -17,6 +17,7 @@ export class PedidosComponent implements OnInit {
   atualizarPedido : boolean;
   pedidos:any=[];
   uinformação:boolean;
+  estadoUtilizador: string;
 
 
   @Input() pedido:Pedido = new Pedido();
@@ -97,17 +98,43 @@ export class PedidosComponent implements OnInit {
     if (this.viewingPedido) {
       this.viewingPedido = false;
     } else {
+      /**
+      var pedidoResult:any = null;
+
+      new Promise((resolve, reject) => {
+        this.pedidos.forEach(function(pedido,index){
+          if (pedido._id == pedidoId){
+            pedidoResult = pedido;
+            resolve();
+          }
+          if (index === this.tecnicos.length -1) resolve();
+        });
+        }).then(() => {
+          this.currentPedido = pedidoResult;
+          this.viewingPedido = true
+        });
+         */
+
+      
       this.rest.getPedido(pedidoId).subscribe((data : Pedido[])=>{
         this.currentPedido = data;
         this.viewingPedido = true;
       });
+      
+     
     }
   }
-  nrinfetados(pedidoId: String) {
-    this.pedido=null;
-    this.rest.getPedido(pedidoId).subscribe((data:Pedido)=>{
-      this.pedido=data;
-    })
+  nrinfetados() {
+    if (this.estadoUtilizador == null || this.estadoUtilizador == ''){
+      alert("ID de utilizador inválido!")
+      return;
+    }
+    this.pedidos = [];
+    this.rest.numeroInfetados(this.estadoUtilizador).subscribe((data: {}) => {
+      console.log(data);
+      this.pedidos = data;
+      alert(this.nrinfetados())
+    });
   }
 
 }

@@ -49,6 +49,11 @@ export class RestService {
     return this.http.put<any>(endpoint +"pedido/"+ id,JSON.stringify(pedido),httpOptions);
   }
   
+  upload(id:String, pedido:Pedido):Observable<any>{
+    return this.http.put<any>(endpoint +"pedido/pedidoUpload/"+ id, JSON.stringify(pedido), httpOptions);
+  }
+  
+
   deletePedido(id:String):Observable<any> {
     return this.http.delete<any>(endpoint + "pedido/" + id);
   }
@@ -60,6 +65,23 @@ export class RestService {
     return this.http.get<any>(endpoint + "pedido/numeroInfetados/" + id);
   }
   
+  resultados(id:String):Observable<any> {
+    return this.http.get<Pedido[]>(endpoint + "pedido/resultados/" + id);
+  }
+  estadosTeste(id:String):Observable<any> {
+    return this.http.get<Pedido[]>(endpoint + "pedido/estadosTeste/" + id);
+  }
+  estadosUtilizador(id:String):Observable<any> {
+    return this.http.get<Pedido[]>(endpoint + "pedido/estadosUtilizador/" + id);
+  }
+  informacaoPedido(id:String):Observable<any> {
+    return this.http.get<Pedido[]>(endpoint + "pedido/informacaoPedido/" + id);
+  }
+
+  cc(id:String):Observable<any> {
+    return this.http.get<Pedido[]>(endpoint + "pedido/cc/" + id);
+  }
+
   getTecnicos():Observable<any> {
     return this.http.get<any>(endpoint + "tecnico");
   }

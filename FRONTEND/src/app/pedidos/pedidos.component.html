@@ -11,15 +11,22 @@
         <br>
         <br>
 
-        <h2>Pedido Add</h2>
+        <h4>Fazer um pedido</h4>
 
-        <label>nmrCC:
-            <input [(ngModel)]="pedido.nmrCC" placeholder="nmrCC" />
+        <label>Número do cartão de cidadão:
+            <input [(ngModel)]="pedido.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão"/><br>
         </label><br>
-        <label>informacao:
-            <input [(ngModel)]="pedido.informacao" placeholder="informacao" />
+        <label>Informação relevante:
+            <input style="width:450px;" [(ngModel)]="pedido.informacao" placeholder  ="escreva a informação aqui ou selecione as opções à direita" />
+            <select input [(ngModel)]="pedido.informacao">
+                <option value="saúde 24">saúde 24</option>
+                <option value="local de risco">local de risco</option>
+                <option value="pessoa de risco">pessoa de risco</option>
+                <input [(ngModel)]="pedido.informacao" name="informacao" type="text" placeholder="Informação"/><br>
+                </select>
+                
         </label><br>
-        <label>estadoUtilizador:
+        <label>O seu estado de saúde:
             <select input [(ngModel)]="pedido.estadoUtilizador">
                 <option value="infetado">Infetado</option>
                 <option value="suspeito">Suspeito</option>
@@ -27,14 +34,21 @@
                 </select>
         </label><br>
    
-    <button (click)="addPedido()">Save</button>
+    <button (click)="addPedido()">Confirmar</button>
 
-        
+  
+    <br>
+    <br>
+    <br>
     
+  
     </div>
     
     
     <ul class="pedidos">
+        <h4>Lista de Pedidos</h4>
+        <br>
+        
         <li *ngFor="let p of pedidos; let i=index;">
             <span (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">ID do pedido: {{p._id}}&nbsp; &nbsp;</span>
             
