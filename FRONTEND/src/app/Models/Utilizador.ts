@@ -1,6 +1,6 @@
 export class Utilizador {
     _id:String;
-    nrCC:String;
+    nmrCC:String;
     primeiroNome:String;
     ultimoNome:String;
     estado:String;

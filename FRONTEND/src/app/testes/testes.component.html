@@ -1,1 +1,20 @@
-<p>testes works!</p>
+<h2>Lista de Testes</h2>
+<ul class="testes">
+    <li *ngFor="let t of testes; let i=index">
+        <span (click)="testeInfo(t._id)" title="Clica para veres/esconderes informações deste teste!">{{t._id}}</span>
+    </li><br>
+
+    <div *ngIf="viewingTeste">
+        <p>Data do Teste: {{currentTeste.dia}}/{{currentTeste.mes}}/{{currentTeste.ano}}  Hora:{{currentTeste.hora}}:{{currentTeste.minuto}}</p>
+        <p>ID do Utilizador: {{currentTeste._id}}</p>
+        <p>Nr CC do Utilizador: {{currentTeste.nmrCC}}</p>
+        <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
+        <p>Resultado do Teste : {{currentTeste.resultadoTeste}} <button type="button" (click)="atualizar = true">
+                ATUALIZAR</button> </p>
+    </div>
+
+    <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
+
+    <form *ngIf="atualizar">
+        Estado do Teste: <input type="text">
+    </form>

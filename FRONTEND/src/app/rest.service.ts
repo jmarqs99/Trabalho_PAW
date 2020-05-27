@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import {Pedido} from './Models/Pedido';
+import { Pedido } from './Models/Pedido';
 import { Utilizador } from './Models/Utilizador';
+import { Teste } from './Models/Teste'
 const endpoint = 'http://localhost:3000/api/';
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,98 +15,117 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RestService {
-  
+
   constructor(private http: HttpClient) { }
   private extractData(res: Response) {
     let body = res;
     return body || {};
   }
- /* getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(endpoint + 'products');
-  }*/
+  /* getProducts(): Observable<Product[]> {
+     return this.http.get<Product[]>(endpoint + 'products');
+   }*/
 
-  getUtilizadores() : Observable<any> {
+  getUtilizadores(): Observable<any> {
     return this.http.get<any>(endpoint + "utilizador")
   }
 
-  getUtilizador(id:String):Observable<any>{
-    return this.http.get<any>(endpoint +"utilizador/" + id);
+  getUtilizador(id: String): Observable<any> {
+    return this.http.get<any>(endpoint + "utilizador/" + id);
   }
 
-  updateUtilizador(id:String,estado:String):Observable<any>{
-    return this.http.put<any>(endpoint +"utilizador/"+ id,JSON.stringify({estado}),httpOptions);
+  updateUtilizador(id: String, estado: String): Observable<any> {
+    return this.http.put<any>(endpoint + "utilizador/" + id, JSON.stringify({ estado }), httpOptions);
   }
 
-  getPedidos() : Observable<Pedido[]>{
+  getPedidos(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(endpoint + "pedido")
   }
 
- 
-  getPedido(id:String):Observable<any>{
-    return this.http.get<any>(endpoint +"pedido/" + id);
+
+  getPedido(id: String): Observable<any> {
+    return this.http.get<any>(endpoint + "pedido/" + id);
   }
 
-  updatePedido(id:String,pedido:Pedido):Observable<any>{
-    return this.http.put<any>(endpoint +"pedido/"+ id,JSON.stringify(pedido),httpOptions);
+  updatePedido(id: String, pedido: Pedido): Observable<any> {
+    return this.http.put<any>(endpoint + "pedido/" + id, JSON.stringify(pedido), httpOptions);
   }
-  
-  upload(id:String, pedido:Pedido):Observable<any>{
-    return this.http.put<any>(endpoint +"pedido/pedidoUpload/"+ id, JSON.stringify(pedido), httpOptions);
-  }
-  
 
-  deletePedido(id:String):Observable<any> {
+  upload(id: String, pedido: Pedido): Observable<any> {
+    return this.http.put<any>(endpoint + "pedido/pedidoUpload/" + id, JSON.stringify(pedido), httpOptions);
+  }
+
+
+  deletePedido(id: String): Observable<any> {
     return this.http.delete<any>(endpoint + "pedido/" + id);
   }
-  addPedido(pedido:Pedido):Observable<any>{
-    return this.http.post<any>(endpoint +"pedido/",JSON.stringify(pedido), httpOptions);
+  addPedido(pedido: Pedido): Observable<any> {
+    return this.http.post<any>(endpoint + "pedido/", JSON.stringify(pedido), httpOptions);
   }
-  
-  numeroInfetados(id:String):Observable<any> {
+
+  numeroInfetados(id: String): Observable<any> {
     return this.http.get<any>(endpoint + "pedido/numeroInfetados/" + id);
   }
-  
-  resultados(id:String):Observable<any> {
+
+  resultados(id: String): Observable<any> {
     return this.http.get<Pedido[]>(endpoint + "pedido/resultados/" + id);
   }
-  estadosTeste(id:String):Observable<any> {
+  estadosTeste(id: String): Observable<any> {
     return this.http.get<Pedido[]>(endpoint + "pedido/estadosTeste/" + id);
   }
-  estadosUtilizador(id:String):Observable<any> {
+  estadosUtilizador(id: String): Observable<any> {
     return this.http.get<Pedido[]>(endpoint + "pedido/estadosUtilizador/" + id);
   }
-  informacaoPedido(id:String):Observable<any> {
+  informacaoPedido(id: String): Observable<any> {
     return this.http.get<Pedido[]>(endpoint + "pedido/informacaoPedido/" + id);
   }
 
-  cc(id:String):Observable<any> {
+  cc(id: String): Observable<any> {
     return this.http.get<Pedido[]>(endpoint + "pedido/cc/" + id);
   }
 
-  getTecnicos():Observable<any> {
+  getTecnicos(): Observable<any> {
     return this.http.get<any>(endpoint + "tecnico");
   }
-  getTecnico(id:string):Observable<any> {
+  getTecnico(id: string): Observable<any> {
     return this.http.get<any>(endpoint + "tecnico/" + id);
   }
-  removeTecnico(id:string):Observable<any> {
-    return this.http.delete<any>(endpoint + "tecnico/"+id);
+  removeTecnico(id: string): Observable<any> {
+    return this.http.delete<any>(endpoint + "tecnico/" + id);
   }
-  addTecnico(id:string):Observable<any> {
-    return this.http.post<any>(endpoint + "tecnico/"+id, {},{});
+  addTecnico(id: string): Observable<any> {
+    return this.http.post<any>(endpoint + "tecnico/" + id, {}, {});
   }
 
-  getAdmins():Observable<any> {
+  getAdmins(): Observable<any> {
     return this.http.get<any>(endpoint + "admin");
   }
-  getAdmin(id:string):Observable<any> {
+  getAdmin(id: string): Observable<any> {
     return this.http.get<any>(endpoint + "admin/" + id);
   }
-  removeAdmin(id:string):Observable<any> {
-    return this.http.delete<any>(endpoint + "admin/"+id);
+  removeAdmin(id: string): Observable<any> {
+    return this.http.delete<any>(endpoint + "admin/" + id);
   }
-  addAdmin(id:string):Observable<any> {
-    return this.http.post<any>(endpoint + "admin/"+id, {},{});
+  addAdmin(id: string): Observable<any> {
+    return this.http.post<any>(endpoint + "admin/" + id, {}, {});
   }
 
+
+  criarTeste(teste: Teste): Observable<any> {
+    return this.http.post<any>(endpoint + "testes/", JSON.stringify(teste), httpOptions);
+  }
+  verTestes(): Observable<any> {
+    return this.http.get<any>(endpoint + "testes/");
+  }
+  verTeste(id: string): Observable<any> {
+    return this.http.get<any>(endpoint + "testes/" + id);
+  }
+  updateTeste(id: String, teste: Teste): Observable<any> {
+    return this.http.put<any>(endpoint + "testes/" + id, JSON.stringify({teste}), httpOptions);
+  }
+  deleteTeste(id:String): Observable<any> {
+    return this.http.delete<any>(endpoint + "testes/" + id);
+  }
+
+
+  
 }
