@@ -8,11 +8,11 @@
 <body>
     <h2>Admins</h2>
 <div class="criarAdmin">
+    <button class="btn btn-primary" (click)="addingAdmin = !addingAdmin">Adicionar Admin</button>
     <form *ngIf="addingAdmin" (submit)="addAdmin()">
         <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
-        <button class="btn btn-primary" type="submit">Registar</button><br>
+        <button class="btn btn-primary" type="submit">Adicionar</button><br>
     </form>
-    <button class="btn btn-primary" (click)="addingAdmin = true">Adicionar Admin</button>
 </div>
 <div class="conteiner">
     <div class="table-div">
@@ -21,7 +21,7 @@
                 <tr>
                     <th scope="col">Primeiro Nome</th>
                     <th scope="col">Último Nome</th>
-                    <th scope="col">Apagar Técnico</th>
+                    <th scope="col">Apagar Admin</th>
                 </tr>
             </thead>
             <tbody>
