@@ -7,6 +7,7 @@ module.exports = mongoose.model('Utilizador', new mongoose.Schema({
     primeiroNome: String,
     ultimoNome: String,
     estado: String,
+    NumeroTestes: Number,
     changed: {type:Boolean, default:false}
 })
 );

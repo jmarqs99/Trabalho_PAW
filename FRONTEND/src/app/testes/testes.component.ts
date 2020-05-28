@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 import { Teste } from '../Models/Teste';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-testes',
@@ -19,6 +20,7 @@ export class TestesComponent implements OnInit {
   novoEstado: String;
   novoResultado: String;
   addingTeste: boolean;
+  date: NgbDate;
   page = 1;
   pageSize = 10;
   collectionSize;
@@ -92,7 +94,16 @@ export class TestesComponent implements OnInit {
   }
 
   deleteTeste(testeId: string){
-
+    var doRemove = confirm("Queres mesmo remover este teste?");
+    if (doRemove == true) {
+      this.rest.deleteTeste(testeId)
+        .subscribe(res => {
+          this.getTestes();
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    }
   }
 
 
