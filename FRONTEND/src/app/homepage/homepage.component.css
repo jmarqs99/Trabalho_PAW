@@ -1,0 +1,15 @@
+
+.texto{
+    margin: 3%;
+}
+
+
+.navBar{
+    margin: 3%;
+}
+
+body{
+    width: 100vw;
+    height: 82vh;
+    background-image: url("https://www.sns24.gov.pt/wp-content/uploads/2020/04/Imagem-Coronavirus-SNS24_2_arredondado-022.png");
+}

@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     font-family: "Lucida Console", Courier, monospace;
-    height: 10%;
+    height: 18vh;
     width: auto;
     background-color: rgba(102,178,255,0.8);
     border-radius: 10%;
@@ -11,7 +11,7 @@
     text-align: center;
     font-size: 100%; 
     line-height: 100%;
-    border-radius: 1%;
+    
     overflow: visible;
     padding: 1% 1%;
     white-space: nowrap;
