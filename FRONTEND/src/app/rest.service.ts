@@ -63,7 +63,7 @@ export class RestService {
   }
 
   numeroInfetados(id: String): Observable<any> {
-    return this.http.get<any>(endpoint + "pedido/numeroInfetados/" + id);
+    return this.http.get<any>(endpoint + "pedido/infetados/" + id);
   }
 
   resultados(id: String): Observable<any> {

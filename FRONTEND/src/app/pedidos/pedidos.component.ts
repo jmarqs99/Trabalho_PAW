@@ -17,13 +17,13 @@ export class PedidosComponent implements OnInit {
   viewingListar: boolean = true;
   atualizarPedido: boolean;
   pedidos: any = [];
-  uinformação: boolean;
   estadoUtilizador: string;
   resultado: String;
   estadosTeste: String;
   estadosUser: String;
   informacaoPedido: String;
   cc: String;
+  numero: Number;
 
   @Input() pedido: Pedido = new Pedido();
 
@@ -215,16 +215,36 @@ export class PedidosComponent implements OnInit {
     }
   }
   nrinfetados() {
-    if (this.estadoUtilizador == null || this.estadoUtilizador == '') {
-      alert("ID de utilizador inválido!")
-      return;
-    }
-    this.pedidos = [];
-    this.rest.numeroInfetados(this.estadoUtilizador).subscribe((data: {}) => {
+
+    
+    
+    //this.pedidos = [];
+    this.rest.numeroInfetados(this.estadosUser).subscribe((data: any) => {
       console.log(data);
-      this.pedidos = data;
-      alert(this.nrinfetados())
+      //this.pedidos = data.length;
+      alert(data);
+      
     });
+    
+   /**
+   var pedidosTemp= [];
+
+    new Promise((resolve, reject) => {
+      const pedidos = this.pedidos;
+      const resultToSearch = this.estadosUser;
+      pedidos.forEach(function (pedido, index) {
+        if (pedido.estadoUtilizador == resultToSearch) {
+          pedidosTemp = pedido;
+          resolve();
+        }
+        if (index === pedidos.length - 1) resolve();
+      });
+    }).then(() => {
+
+      this.pedidos = pedidosTemp.length;
+
+    });
+     */
   }
 
 }

@@ -110,7 +110,18 @@
     <button (click)="getPedidos()">Voltar</button>
 
 
+    <h6>Numero de infetados</h6>
+    <form (submit)="nrinfetados()">
+        
+        <select input [(ngModel)]="estadosUser" name="estadoUtilizador">
+            <option value="infetado">Infetado</option>
+            </select>
+
+        <br><br>
+        <button type="submit">Listar</button><br>
+    </form>
     
+
     <div>
         
 
