@@ -68,14 +68,15 @@ tecnicoController.verTecnicos = function (req,res,next) {
             const result = tecnicos;
             if (result.length >= 1){
                 new Promise((resolve, reject) => {
+                    let done = 0;
                     result.forEach(function(item,index){
                         result[index] = result[index].toObject();
                         utilizadorController.verUtilizadorInterno(item.utilizadorId,function(utilizador){
                             result[index].primeiroNome = utilizador.primeiroNome;
                             result[index].ultimoNome = utilizador.ultimoNome;
                             result[index].estado = utilizador.estado;
-                            console.log(index ,result.length)
-                            if (index === result.length -1) resolve();
+                            done++;
+                            if (done == result.length) resolve();
                         })
                     })
                 }).then(() => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-tecnicos',
@@ -59,7 +60,7 @@ export class TecnicosComponent implements OnInit {
     });
   }
   tecnicoInfo(tecnicoId :string){
-    if (this.viewingTecnico) {
+    if (this.viewingTecnico && this.currentTecnico._id == tecnicoId) {
       this.viewingTecnico = false;
     } else {
       var tecnicoResult:any = null;
