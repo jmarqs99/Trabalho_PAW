@@ -44,7 +44,6 @@ export class PedidosComponent implements OnInit {
     this.pedidos = [];
     this.viewingListar = true;
     this.rest.getPedidos().subscribe((data: {}) => {
-      console.log(data);
       this.pedidos = data;
     });
   }
@@ -198,21 +197,15 @@ export class PedidosComponent implements OnInit {
       );
   }
 
-  uploadFicheiro(pedidoId: String,files: FileList) {
-    const fileR = new FileReader();
+  uploadFicheiro(pedidoId: String) {
     let formData = new FormData();
-    fileR.onload = function(){
-      console.log(fileR.result)
-      /*formData.append('pdf', fileR.result,pdfUpload.name)
+    formData.append('pdf', this.pdf)
       this.rest.upload(pedidoId,formData).subscribe(res => {
         this.getPedidos();
         this.atualizarPedidoUpload = false;
       }, (err) => {
         console.log(err);
-      });*/
-    }
-    fileR.readAsText(this.pdf);
-    
+      });
   }
 
   pedidoInfo(pedidoId: String) {

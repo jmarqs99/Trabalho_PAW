@@ -13,7 +13,7 @@ const httpOptions = {
 };
 const httpOptionsFile = {
   headers: new HttpHeaders({
-    'Content-Type': 'multiplart/form-data',
+  
     'Accept': 'application/json'
   })
 };
@@ -57,7 +57,7 @@ export class RestService {
   }
 
   upload(id: String, pdf: any): Observable<any> {
-    return this.http.put<any>(endpoint + "pedido/pedidoUpload/" + id, pdf, httpOptionsFile);
+    return this.http.put<any>(endpoint + "pedido/pedidoUpload/" + id, pdf);
   }
 
 

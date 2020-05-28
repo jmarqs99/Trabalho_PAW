@@ -191,8 +191,8 @@
         <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
             <br>
             <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
-            <input type="file">
-            <button type="submit" (change)="fileChanged($event)">Save</button><br>
+            <input type="file" (change)="fileChanged($event)"/>
+            <button type="submit">Save</button><br>
         </form>
     </ul>
 

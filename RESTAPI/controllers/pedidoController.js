@@ -49,7 +49,6 @@ pedidoController.updatePedido = function (req, res, next) {
         });
 }
 pedidoController.updateUpload = function (req, res, next) {
-    console.log(req.body)
     const file = req.files.pdf
     if (file){
     Pedido.findByIdAndUpdate(req.params.pedidoId, { havePDF: true }, { new: true },
