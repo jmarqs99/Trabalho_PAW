@@ -1,19 +1,43 @@
-<h1>Admins</h1>
-<button (click)="addingAdmin = true">Adicionar Admin</button>
-<ul>
-    <li *ngFor="let t of admins; let i=index;">
-        <span (click)="adminInfo(t._id)" title="Clica para veres/esconderes informações deste user!">{{t.primeiroNome}} {{t.ultimoNome}}</span>
-        <button (click)="demote(t._id)">Remover Admin</button>
-    </li>
-</ul>
+<h2>Adicionar Admin</h2>
+<div class="criarAdmin">
+    <form *ngIf="addingAdmin" (submit)="addAdmin()">
+        <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
+        <button class="btn btn-primary" type="submit">Registar</button><br>
+    </form>
+    <button class="btn btn-primary" (click)="addingAdmin = true">Adicionar Admin</button>
+</div>
 
-<form *ngIf="addingAdmin" (submit)="addAdmin()">
-    <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador"/><br>
-    <button type="submit">Registar</button><br>
-</form>
+<h2>Lista de Admins</h2>
+<div class="conteiner">
+    <div class="table-div">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Primeiro Nome</th>
+                    <th scope="col">Último Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of admins; let i=index;">
 
-<div *ngIf="viewingAdmin">
-    <p>Nome do Admin: {{currentAdmin.primeiroNome}}  {{currentAdmin.ultimoNome}}</p>
-    <p>ID do Admin: {{currentAdmin._id}}</p>
-    <p>ID de usuário do Admin: {{currentAdmin.utilizadorId}}</p>
+                    <!--   <td><button (click)="demote(t._id)">Remover Admin</button></td> -->
+
+
+                    <td (click)="adminInfo(t._id)" title="Clica para veres/esconderes informações deste Admin!">
+                        {{ t.primeiroNome}} </td>
+                    <td>{{ t.ultimoNome }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="info" *ngIf="viewingAdmin">
+        <p>Nome do Admin: {{currentAdmin.primeiroNome}} {{currentAdmin.ultimoNome}}</p>
+        <p>ID do Admin: {{currentAdmin._id}}</p>
+        <p>ID de usuário do Admin: {{currentAdmin.utilizadorId}}</p>
+
+    </div>
+
+
 </div>

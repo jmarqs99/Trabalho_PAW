@@ -1,0 +1,41 @@
+.info{
+    margin:3%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+h2{
+    text-align: center;
+    margin-top: 3%;
+}
+
+.paginacao{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.conteiner{
+    display: flex;
+    flex-direction: row;
+}
+
+.table-div{
+    margin:3%;
+    width: 47%;
+}
+
+.custom-select{
+    width: 30%;
+}
+
+.updateForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.criarTecnico{
+    margin: 3%;
+}
