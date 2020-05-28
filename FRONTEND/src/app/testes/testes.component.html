@@ -1,10 +1,50 @@
-<h2>Adicionar Testes</h2>
-<div class="criarTeste">
-    <button class="btn btn-primary" (click)="addingTeste = true">Adicionar Teste</button>
+
+<h1>Gestão de Testes</h1>
+
+
+    <!-- 
+
+<button class="btn btn-primary" (click)="addingTeste = true">Adicionar Teste</button>
     <form *ngIf="addingTeste" (submit)="addTeste()">
         <input type="text"><br>
         <button class="btn btn-primary" type="submit">Registar</button><br>
-    </form>
+
+<h2>Adicionar Testes</h2>
+    -->
+
+<div class="criarTeste">
+    <button class="btn btn-primary" (click)="addingTeste = true">Agendar Teste</button>
+    
+    <form *ngIf="addingTeste" (submit)="addTeste()">
+
+    <label>Número do cartão de cidadão do user do pedido:
+        <input [(ngModel)]="teste.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
+    </label><br>
+
+    <label>ID do pedido:
+        <input [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
+    </label><br>
+    <h6>Data do teste</h6>
+    
+    <label>Ano:
+        <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="ano" /><br>
+    </label><br>
+    <label>Mes:
+        <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="mes" /><br>
+    </label><br>
+    <label>Dia:
+        <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="dia" /><br>
+    </label><br>
+    <label>Hora:
+        <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="hora" /><br>
+    </label><br>
+    <label>Minuto:
+        <input [(ngModel)]="teste.minuto" name="minuto" type="number" min="0" max="59" placeholder="minuto" /><br>
+    </label><br>
+
+    <button class="btn btn-primary" (click)="addTeste()">Agendar</button>
+</form>
+    
 </div>
 
 
@@ -14,14 +54,14 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">nmrCC</th>
+                    <th scope="col">ID do teste</th>
                     <th scope="col">Apagar Teste</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let t of testes; let i=index">
                     <td (click)="testeInfo(t._id)" title="Clica para veres/esconderes informações deste teste!">
-                        {{ t.nmrCC}} </td>
+                        {{ t._id}} </td>
                     <td (click)="deleteTeste(t._id)"> <button class="btn btn-primary">Apagar</button></td>
                 </tr>
             </tbody>
@@ -40,21 +80,54 @@
 
 
     <div class="info" *ngIf="viewingTeste">
+        <p>ID do teste: {{currentTeste._id}}</p>
         <p>Data do Teste: {{currentTeste.dia}}/{{currentTeste.mes}}/{{currentTeste.ano}}
             Hora:{{currentTeste.hora}}:{{currentTeste.minuto}}</p>
         <p>Nr CC do Utilizador: {{currentTeste.nmrCC}}</p>
         <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
-        <p>Resultado do Teste : {{currentTeste.resultadoTeste}}
-            <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
-                (click)="atualizar = true">Atualizar</button> </p>
+        <p>Resultado do Teste : {{currentTeste.resultadoTeste}}</p>
+        <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
+                (click)="atualizar = true">Atualizar</button> 
     </div>
 
     <form *ngIf="atualizar" (submit)="update()" class="updateForm">
+
+        
+        <label>Ano:
+            <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="ano" /><br>
+        </label><br>
+        <label>Mes:
+            <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="mes" /><br>
+        </label><br>
+        <label>Dia:
+            <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="dia" /><br>
+        </label><br>
+        <label>Hora:
+            <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="hora" /><br>
+        </label><br>
+        <label>Minuto:
+            <input [(ngModel)]="teste.minuto" name="minuto" type="number" min="0" max="59" placeholder="minuto" /><br>
+        </label><br>
+    
+
+        <label>Estado do utilizador
         <select [(ngModel)]=novoEstado name="estado">
             <option value="Infetado">Infetado</option>
             <option value="Suspeito">Suspeito</option>
             <option value="Saudável">Saudável</option>
         </select>
+        
+    </label><br>
+
+    <label>Resultado do Teste
+        <select input [(ngModel)]="novoResultado" name="resultadoTeste">
+            <option value="positivo">positivo</option>
+            <option value="negativo">negativo</option>
+            <option value="indefinido">indefinido</option>
+        </select>
+    </label>
+    <br>
         <button class="btn btn-primary" type="submit">Atualizar</button><br>
     </form>
+    
 </div>

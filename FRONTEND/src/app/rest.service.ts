@@ -126,8 +126,13 @@ export class RestService {
     return this.http.get<any>(endpoint + "testes/" + id);
   }
   updateTeste(id: String, teste: Teste): Observable<any> {
-    return this.http.put<any>(endpoint + "testes/" + id, JSON.stringify({teste}), httpOptions);
+    return this.http.put<any>(endpoint + "testes/" + id, JSON.stringify(teste), httpOptions);
   }
+  /**
+  updatePedido(id: String, pedido: Pedido): Observable<any> {
+    return this.http.put<any>(endpoint + "pedido/" + id, JSON.stringify(pedido), httpOptions);
+  }
+   */
   deleteTeste(id:String): Observable<any> {
     return this.http.delete<any>(endpoint + "testes/" + id);
   }
