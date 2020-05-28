@@ -1,6 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
-<h2>Lista de utilizadores</h2>
-
+    <h2>Lista de utilizadores</h2>
 <div class="conteiner">
     <div class="table-div">
         <table class="table table-striped">
@@ -29,7 +35,6 @@
                 <option [ngValue]="20">20/página</option>
             </select>
         </div>
-
     </div>
     <div class="info" *ngIf="viewingUtilizador">
         <div>
@@ -40,7 +45,6 @@
                     (click)="atualizar = true">Atualizar</button> 
             </p>
         </div>
-
         <form *ngIf="atualizar" (submit)="update()" class="updateForm">
             <select [(ngModel)]=novoEstado name="estado">
                 <option selected value="Infetado">Infetado</option>
@@ -52,3 +56,6 @@
     </div>
 </div>
 </body>
+</html>
+
+

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testes</title>
 </head>
-
 <body>
     <h2>Testes</h2>
     <div class="criarTeste">
@@ -78,20 +76,20 @@
 
             <form *ngIf="atualizar" (submit)="update()" class="updateForm">
                 <label>Ano:
-                    <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="ano" /><br>
+                    <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="Ano" /><br>
                 </label><br>
                 <label>Mes:
-                    <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="mes" /><br>
+                    <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="Mês" /><br>
                 </label><br>
                 <label>Dia:
-                    <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="dia" /><br>
+                    <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="Dia" /><br>
                 </label><br>
                 <label>Hora:
-                    <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="hora" /><br>
+                    <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="Hora" /><br>
                 </label><br>
                 <label>Minuto:
                     <input [(ngModel)]="teste.minuto" name="minuto" type="number" min="0" max="59"
-                        placeholder="minuto" /><br>
+                        placeholder="Minuto" /><br>
                 </label><br>
                 <label>Estado do utilizador
                     <select [(ngModel)]=novoEstado name="estado">
@@ -112,8 +110,6 @@
             </form>
             <br>
         </div>
-
     </div>
 </body>
-
 </html>
