@@ -1,47 +1,56 @@
-<h2>Adicionar Técnico</h2>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicos</title>
+</head>
 
-<div class="criarTecnico">
-    <button class="btn btn-primary" (click)="addingTecnico = true">Adicionar Técnico</button>
-    <form *ngIf="addingTecnico" (submit)="addTecnico()">
-        <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
-        <button class="btn btn-primary" type="submit">Registar</button><br>
-    </form>
-</div>
-
-
-<h2>Lista de Técnicos</h2>
-<div class="conteiner">
-    <div class="table-div">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Primeiro Nome</th>
-                    <th scope="col">Último Nome</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let t of tecnicos; let i=index;">
-                    <td (click)="tecnicoInfo(t._id)" title="Clica para veres/esconderes informações deste técnico!">
-                        {{ t.primeiroNome}}</td>
-                    <td>{{ t.ultimoNome }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-
+<body>
+    <h2>Técnicos</h2>
+    <div class="criarTecnico">
+        <button class="btn btn-primary" (click)="addingTecnico = true">Adicionar Técnico</button>
+        <form *ngIf="addingTecnico" (submit)="addTecnico()">
+            <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
+            <button class="btn btn-primary" type="submit">Registar</button><br>
+        </form>
     </div>
-
-
-    <div class="info" *ngIf="viewingTecnico">
-        <p>Nome do Técnico: {{currentTecnico.primeiroNome}} {{currentTecnico.ultimoNome}}</p>
-        <p>ID do Técnico: {{currentTecnico._id}}</p>
-        <p>ID de usuário do Técnico: {{currentTecnico.utilizadorId}}</p>
+    <div class="conteiner">
+        <div class="table-div">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Primeiro Nome</th>
+                        <th scope="col">Último Nome</th>
+                        <th scope="col">Apagar Técnico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of tecnicos; let i=index;">
+                        <td (click)="tecnicoInfo(t._id)" title="Clica para veres/esconderes informações deste técnico!">
+                            {{ t.primeiroNome}}</td>
+                        <td>{{ t.ultimoNome }}</td>
+                        <td (click)="demote(t._id)"> <button class="btn btn-danger">Apagar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="paginacao">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                </ngb-pagination>
+                <select class="custom-select" [(ngModel)]="pageSize">
+                    <option [ngValue]="5">5/página</option>
+                    <option [ngValue]="10">10/página</option>
+                    <option [ngValue]="20">20/página</option>
+                </select>
+            </div>
+        </div>
+        <div class="info" *ngIf="viewingTecnico">
+            <p>Nome do Técnico: {{currentTecnico.primeiroNome}} {{currentTecnico.ultimoNome}}</p>
+            <p>ID do Técnico: {{currentTecnico._id}}</p>
+            <p>ID de usuário do Técnico: {{currentTecnico.utilizadorId}}</p>
+        </div>
     </div>
+</body>
 
-
-
-
-
-
-</div>
+</html>

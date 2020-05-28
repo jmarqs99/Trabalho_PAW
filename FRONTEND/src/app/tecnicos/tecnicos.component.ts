@@ -13,6 +13,9 @@ export class TecnicosComponent implements OnInit {
   userId: string;
   currentTecnico : any;
   viewingTecnico: boolean;
+  page = 1;
+  pageSize = 10;
+  collectionSize;
 
   constructor(private router: Router,public rest:RestService) { }
 
@@ -24,7 +27,14 @@ export class TecnicosComponent implements OnInit {
     this.tecnicos = [];
     this.rest.getTecnicos().subscribe((data:{})=>{
       this.tecnicos = data;
+      this.collectionSize = this.tecnicos.length;
     });
+  }
+
+  getTecnicosT(){
+    return this.tecnicos
+      .map((country, i) => ({id: i + 1, ...country}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   demote(tecnicoId : string){
