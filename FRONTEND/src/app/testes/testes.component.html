@@ -9,12 +9,11 @@
         <p>ID do Utilizador: {{currentTeste._id}}</p>
         <p>Nr CC do Utilizador: {{currentTeste.nmrCC}}</p>
         <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
-        <p>Resultado do Teste : {{currentTeste.resultadoTeste}} <button type="button" (click)="atualizar = true">
-                ATUALIZAR</button> </p>
+        <p>Resultado do Teste : {{currentTeste.resultadoTeste}} <button class="btn btn-primary" type="button" (click)="atualizar = true">
+                Atualizar</button> </p>
     </div>
-
-    <button *ngIf="atualizar == false" type="button" (click)="atualizar = true">ATUALIZAR</button>
 
     <form *ngIf="atualizar">
         Estado do Teste: <input type="text">
+        <button class="btn btn-primary" type="submit">Atualizar</button><br>
     </form>

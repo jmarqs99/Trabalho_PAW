@@ -1,18 +1,25 @@
-.table{
-    max-width: 40%;
+.table{ 
     margin:3%;
+    width: 47%;
 }
 
-.conteiner{
-    display: flex;
-    flex-direction: row;
-}    
-    
 .info{
     margin:3%;
+    display: flex;
+    flex-direction: row;
+    margin:3%;
+    width: 47%;
 }
 
 h2{
     text-align: center;
     margin-top: 3%;
 }
+
+.paginacao{
+    display: flex;
+    flex-direction: row;
+    margin:3%;
+    width: 47%;
+}
+

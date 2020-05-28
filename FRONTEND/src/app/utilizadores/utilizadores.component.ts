@@ -18,18 +18,26 @@ export class UtilizadoresComponent implements OnInit {
   atualizar: boolean;
   atualizarUtilizador: boolean;
   novoEstado: String;
+  page = 1;
+  pageSize = 10;
+  collectionSize;
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getUtilizadores();
   }
-
+  get utilizadoresP(): any[] {
+    return this.utilizadores
+      .map((country, i) => ({id: i + 1, ...country}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
 
   getUtilizadores() {
     this.utilizadores = [];
     this.rest.getUtilizadores().subscribe((data: {}) => {
       this.utilizadores = data;
+      this.collectionSize = this.utilizadores.length;
     });
   }
 

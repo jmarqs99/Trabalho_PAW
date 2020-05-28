@@ -1,34 +1,45 @@
 <h2>Lista de utilizadores</h2>
 
 <div class="conteiner">
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Número de CC</th>
+                    <th scope="col">Primeiro Nome</th>
+                    <th scope="col">Último Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of utilizadoresP; let i=index">
+                    <td (click)="utilizadorInfo(u._id)" title="Clica para veres/esconderes informações deste user!">
+                        {{ u.nmrCC}} </td>
+                    <td>{{ u.primeiroNome}}</td>
+                    <td>{{ u.ultimoNome }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="paginacao">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+            </ngb-pagination>
+            <select class="custom-select" [(ngModel)]="pageSize">
+                <option [ngValue]="5">5/página</option>
+                <option [ngValue]="10">10/página</option>
+                <option [ngValue]="20">20/página</option>
+            </select>
+        </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Número de CC</th>
-                <th scope="col">Primeiro Nome</th>
-                <th scope="col">Último Nome</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let u of utilizadores; let i=index">
-                <td (click)="utilizadorInfo(u._id)" title="Clica para veres/esconderes informações deste user!">
-                    {{ u.nmrCC}} </td>
-                <td>{{ u.primeiroNome}}</td>
-                <td>{{ u.ultimoNome }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    </div>
     <div class="info" *ngIf="viewingUtilizador">
         <div>
             <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
             <p>ID do Utilizador: {{currentUtilizador._id}}</p>
-            <p>Estado do utilizador : {{currentUtilizador.estado}} <button class="btn btn-primary" type="button" (click)="atualizar = true">ATUALIZAR</button> </p>
+            <p>Estado do utilizador : {{currentUtilizador.estado}} <button class="btn btn-primary" type="button"
+                    (click)="atualizar = true">Atualizar</button> </p>
         </div>
 
         <form *ngIf="atualizar" (submit)="update()">
-            <select input [(ngModel)]=novoEstado name="estado">
+            <select [(ngModel)]=novoEstado name="estado">
                 <option value="Infetado">Infetado</option>
                 <option value="Suspeito">Suspeito</option>
                 <option value="Saudável">Saudável</option>
