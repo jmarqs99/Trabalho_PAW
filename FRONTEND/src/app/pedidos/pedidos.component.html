@@ -14,73 +14,74 @@
         <h4>Fazer um pedido</h4>
 
         <label>Número do cartão de cidadão:
-            <input [(ngModel)]="pedido.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão"/><br>
+            <input [(ngModel)]="pedido.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
         </label><br>
         <label>Informação relevante:
-            <input style="width:450px;" [(ngModel)]="pedido.informacao" placeholder  ="escreva a informação aqui ou selecione as opções à direita" />
+            <input style="width:450px;" [(ngModel)]="pedido.informacao"
+                placeholder="escreva a informação aqui ou selecione as opções à direita" />
             <select input [(ngModel)]="pedido.informacao">
                 <option value="saúde 24">saúde 24</option>
                 <option value="local de risco">local de risco</option>
                 <option value="pessoa de risco">pessoa de risco</option>
-                <input [(ngModel)]="pedido.informacao" name="informacao" type="text" placeholder="Informação"/><br>
-                </select>
-                
+                <input [(ngModel)]="pedido.informacao" name="informacao" type="text" placeholder="Informação" /><br>
+            </select>
+
         </label><br>
         <label>O seu estado de saúde:
             <select input [(ngModel)]="pedido.estadoUtilizador">
                 <option value="infetado">Infetado</option>
                 <option value="suspeito">Suspeito</option>
                 <option value="saudavel">Saudável</option>
-                </select>
+            </select>
         </label><br>
-   
-    <button (click)="addPedido()">Confirmar</button>
 
-    
-  
-    <br>
-    <br>
-    <br>
-    
-  
+        <button (click)="addPedido()">Confirmar</button>
+
+
+
+        <br>
+        <br>
+        <br>
+
+
     </div>
     <h6>Filtrar por resultado do teste</h6>
     <form (submit)="resultadosPedido()">
-        
+
         <label>
             <select input [(ngModel)]="resultado" name="resultadoTeste">
                 <option value="positivo">positivo</option>
                 <option value="negativo">negativo</option>
                 <option value="indefinido">indefinido</option>
-                </select>
+            </select>
         </label><br>
         <button type="submit">Listar</button><br>
-       
+
 
     </form>
 
     <br>
     <h6>Filtrar por estado do teste</h6>
     <form (submit)="estadoTeste()">
-        
+
         <label>
             <select input [(ngModel)]="estadosTeste" name="estadoTeste">
                 <option value="Por agendar">Por agendar</option>
                 <option value="agendado">agendado</option>
                 <option value="finalizado">finalizado</option>
-                </select>
+            </select>
         </label><br>
         <button type="submit">Listar</button><br>
     </form>
 
     <h6>Filtrar por estado do utilizador</h6>
     <form (submit)="estadoUser()">
-        
+
         <select input [(ngModel)]="estadosUser" name="estadoUtilizador">
             <option value="infetado">Infetado</option>
             <option value="suspeito">Suspeito</option>
             <option value="saudavel">Saudável</option>
-            </select>
+        </select>
 
         <br><br>
         <button type="submit">Listar</button><br>
@@ -88,12 +89,12 @@
 
     <h6>Filtrar pela informação do pedido</h6>
     <form (submit)="informacao()">
-        
+
         <select input [(ngModel)]="informacaoPedido" name="informacao">
             <option value="saúde 24">saúde 24</option>
-                <option value="local de risco">local de risco</option>
-                <option value="pessoa de risco">pessoa de risco</option>
-            </select>
+            <option value="local de risco">local de risco</option>
+            <option value="pessoa de risco">pessoa de risco</option>
+        </select>
 
         <br><br>
         <button type="submit">Listar</button><br>
@@ -101,104 +102,107 @@
 
     <h6>Filtrar pelo número do cartão de cidadão</h6>
     <form (submit)="nmrCC()">
-        
-        <input [(ngModel)]="cc" name="nmrCC" type="text" placeholder="cartão de cidadão"/><br>
 
-        <br><br>
+        <input [(ngModel)]="cc" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
+
         <button type="submit">Listar</button><br>
     </form>
-    <button (click)="getPedidos()">Voltar</button>
+    <button *ngIf="viewingListar == false" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
+
+    <br>
+    <br>
+
+    <button (click)="nrinfetados()">Numero de Infetados</button>
 
 
-    <h6>Numero de infetados</h6>
-    <form (submit)="nrinfetados()">
-        
-        <select input [(ngModel)]="estadosUser" name="estadoUtilizador">
-            <option value="infetado">Infetado</option>
-            </select>
-
-        <br><br>
-        <button type="submit">Listar</button><br>
-    </form>
-    
 
     <div>
-        
 
-</div> 
+
+    </div>
     <ul class="pedidos">
         <br>
         <h4>Lista de Pedidos</h4>
         <br>
-        
+
         <li *ngFor="let p of pedidos; let i=index;">
-            <span (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">ID do pedido: {{p._id}}&nbsp; &nbsp;</span>
-            
+            <span (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">ID do
+                pedido: {{p._id}}&nbsp; &nbsp;</span>
+
             <button (click)="delete(p._id)">Remover pedido</button>
-            
-            
-            
-            
-            
+
+
+
+
+
             <br>
-            
+
         </li>
-        
-    <div *ngIf="viewingPedido">
-        <p>ID do Pedido: {{currentPedido._id}}</p>
-        <p>nmrCC do usuário do pedido: {{currentPedido.nmrCC}}</p>
-        <p>Informação do pedido: {{currentPedido.informacao}}</p>
-        <p>Estado do utilizador deste pedido: {{currentPedido.estadoUtilizador}}</p>
-        <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
-        <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
-        <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
-        <button (click)="atualizarPedido = true">Atualizar este pedido</button>
-    </div>
 
-    <form *ngIf="atualizarPedido" (submit)="update(currentPedido._id)">
-        <h5>Atualizar pedido {{currentPedido._id}}</h5>
-        <label>informacao:
-            <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
-        </label><br>
-        <label>estadoUtilizador:
-            <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
-                <option value="infetado">Infetado</option>
-                <option value="suspeito">Suspeito</option>
-                <option value="saudavel">Saudável</option>
+        <div *ngIf="viewingPedido">
+            <p>ID do Pedido: {{currentPedido._id}}</p>
+            <p>nmrCC do usuário do pedido: {{currentPedido.nmrCC}}</p>
+            <p>Informação do pedido: {{currentPedido.informacao}}</p>
+            <p>Estado do utilizador deste pedido: {{currentPedido.estadoUtilizador}}</p>
+            <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
+            <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
+            <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
+            <button (click)="atualizarPedido = true">Atualizar este pedido</button>
+            <button (click)="atualizarPedidoUpload = true">Upload</button>
+        </div>
+
+        <form *ngIf="atualizarPedido" (submit)="update(currentPedido._id)">
+            <h5>Atualizar pedido {{currentPedido._id}}</h5>
+            <label>informacao:
+                <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
+            </label><br>
+            <label>estadoUtilizador:
+                <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
+                    <option value="infetado">Infetado</option>
+                    <option value="suspeito">Suspeito</option>
+                    <option value="saudavel">Saudável</option>
                 </select>
-        </label><br>
+            </label><br>
 
-        <label>estadoTeste: 
-            <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
-                <option value="Por agendar">Por agendar</option>
-                <option value="agendado">Agendado</option>
-                <option value="finalizado">Finalizado</option>
-            </select>
-        </label>
-<br>
-        <label>resultadoTeste:
-            <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
-                <option value="indefinido">indefinido</option>
-                <option value="positivo">positivo</option>
-                <option value="negativo">negativo</option>
-            </select>
+            <label>estadoTeste:
+                <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
+                    <option value="Por agendar">Por agendar</option>
+                    <option value="agendado">Agendado</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+            </label>
+            <br>
+            <label>resultadoTeste:
+                <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
+                    <option value="indefinido">indefinido</option>
+                    <option value="positivo">positivo</option>
+                    <option value="negativo">negativo</option>
+                </select>
 
-        </label>
-        <br>
-        <button type="submit">Save</button><br>
+            </label>
+            <br>
+            <button type="submit">Save</button><br>
 
 
-    </form>
-    
+
+
+        </form>
+
+        <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
+            <br>
+            <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
+            <input type="file">
+            <button type="submit" (change)="fileChanged($event)">Save</button><br>
+        </form>
     </ul>
 
-    
 
 
-    
 
 
-    
+
+
+
 
 
 

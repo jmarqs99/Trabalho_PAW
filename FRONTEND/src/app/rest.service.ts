@@ -11,6 +11,12 @@ const httpOptions = {
     'Content-Type': 'application/json'
   })
 };
+const httpOptionsFile = {
+  headers: new HttpHeaders({
+    'Content-Type': 'multiplart/form-data',
+    'Accept': 'application/json'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -50,8 +56,8 @@ export class RestService {
     return this.http.put<any>(endpoint + "pedido/" + id, JSON.stringify(pedido), httpOptions);
   }
 
-  upload(id: String, pedido: Pedido): Observable<any> {
-    return this.http.put<any>(endpoint + "pedido/pedidoUpload/" + id, JSON.stringify(pedido), httpOptions);
+  upload(id: String, pdf: any): Observable<any> {
+    return this.http.put<any>(endpoint + "pedido/pedidoUpload/" + id, pdf, httpOptionsFile);
   }
 
 

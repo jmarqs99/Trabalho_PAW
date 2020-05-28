@@ -16,6 +16,7 @@ export class PedidosComponent implements OnInit {
   viewingPedido: boolean;
   viewingListar: boolean = true;
   atualizarPedido: boolean;
+  atualizarPedidoUpload: boolean;
   pedidos: any = [];
   estadoUtilizador: string;
   resultado: String;
@@ -24,6 +25,11 @@ export class PedidosComponent implements OnInit {
   informacaoPedido: String;
   cc: String;
   numero: Number;
+  infetado: String = "infetado";
+  pdf: any;
+  fileChanged(e){
+    this.pdf = e.target.files[0];
+  }
 
   @Input() pedido: Pedido = new Pedido();
 
@@ -36,6 +42,7 @@ export class PedidosComponent implements OnInit {
 
   getPedidos() {
     this.pedidos = [];
+    this.viewingListar = true;
     this.rest.getPedidos().subscribe((data: {}) => {
       console.log(data);
       this.pedidos = data;
@@ -46,7 +53,7 @@ export class PedidosComponent implements OnInit {
     this.rest.getPedidos().subscribe((data: {}) => {
 
       this.pedidos = data;
-      this.viewingListar = true;
+      this.viewingListar = false;
       var pedidosTemp = [];
 
       new Promise((resolve, reject) => {
@@ -71,7 +78,7 @@ export class PedidosComponent implements OnInit {
 
   estadoTeste() {
     var pedidosTemp = [];
-
+    this.viewingListar = false;
     new Promise((resolve, reject) => {
       const pedidos = this.pedidos;
       const resultToSearch = this.estadosTeste;
@@ -91,7 +98,7 @@ export class PedidosComponent implements OnInit {
 
   estadoUser() {
     var pedidosTemp = [];
-
+    this.viewingListar = false;
     new Promise((resolve, reject) => {
       const pedidos = this.pedidos;
       const resultToSearch = this.estadosUser;
@@ -111,7 +118,7 @@ export class PedidosComponent implements OnInit {
   informacao() {
 
     var pedidosTemp = [];
-
+    this.viewingListar = false;
     new Promise((resolve, reject) => {
       const pedidos = this.pedidos;
       const resultToSearch = this.informacaoPedido;
@@ -131,7 +138,7 @@ export class PedidosComponent implements OnInit {
 
   nmrCC() {
     var pedidosTemp = [];
-
+    this.viewingListar = false;
     new Promise((resolve, reject) => {
       const pedidos = this.pedidos;
       const resultToSearch = this.cc;
@@ -190,6 +197,24 @@ export class PedidosComponent implements OnInit {
       }
       );
   }
+
+  uploadFicheiro(pedidoId: String,files: FileList) {
+    const fileR = new FileReader();
+    let formData = new FormData();
+    fileR.onload = function(){
+      console.log(fileR.result)
+      /*formData.append('pdf', fileR.result,pdfUpload.name)
+      this.rest.upload(pedidoId,formData).subscribe(res => {
+        this.getPedidos();
+        this.atualizarPedidoUpload = false;
+      }, (err) => {
+        console.log(err);
+      });*/
+    }
+    fileR.readAsText(this.pdf);
+    
+  }
+
   pedidoInfo(pedidoId: String) {
     if (this.viewingPedido) {
       this.viewingPedido = false;
@@ -216,35 +241,35 @@ export class PedidosComponent implements OnInit {
   }
   nrinfetados() {
 
-    
-    
+
+
     //this.pedidos = [];
-    this.rest.numeroInfetados(this.estadosUser).subscribe((data: any) => {
+    this.rest.numeroInfetados(this.infetado).subscribe((data: Number) => {
       console.log(data);
       //this.pedidos = data.length;
       alert(data);
-      
-    });
-    
-   /**
-   var pedidosTemp= [];
-
-    new Promise((resolve, reject) => {
-      const pedidos = this.pedidos;
-      const resultToSearch = this.estadosUser;
-      pedidos.forEach(function (pedido, index) {
-        if (pedido.estadoUtilizador == resultToSearch) {
-          pedidosTemp = pedido;
-          resolve();
-        }
-        if (index === pedidos.length - 1) resolve();
-      });
-    }).then(() => {
-
-      this.pedidos = pedidosTemp.length;
 
     });
-     */
+
+    /**
+    var pedidosTemp= [];
+ 
+     new Promise((resolve, reject) => {
+       const pedidos = this.pedidos;
+       const resultToSearch = this.estadosUser;
+       pedidos.forEach(function (pedido, index) {
+         if (pedido.estadoUtilizador == resultToSearch) {
+           pedidosTemp = pedido;
+           resolve();
+         }
+         if (index === pedidos.length - 1) resolve();
+       });
+     }).then(() => {
+ 
+       this.pedidos = pedidosTemp.length;
+ 
+     });
+      */
   }
 
 }
