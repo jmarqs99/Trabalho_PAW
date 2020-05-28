@@ -5,4 +5,5 @@ export class Utilizador {
     ultimoNome:String;
     estado:String;
     password:String;
+    NumeroTestes: Number;
 }

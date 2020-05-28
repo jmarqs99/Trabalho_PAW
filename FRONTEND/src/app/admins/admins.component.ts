@@ -24,6 +24,7 @@ export class AdminsComponent implements OnInit {
     this.admins = [];
     this.rest.getAdmins().subscribe((data:{})=>{
       this.admins = data;
+      console.log(data)
     });
   }
 

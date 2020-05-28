@@ -77,7 +77,7 @@ adminController.verAdmins = function (req,res,next) {
                                 result[index].ultimoNome = utilizador.ultimoNome;
                                 result[index].estado = utilizador.estado;
                                 done++;
-                            if (done == result.length) resolve();
+                                if (done == result.length) resolve();
                             })
                         })
                     }).then(() => {
