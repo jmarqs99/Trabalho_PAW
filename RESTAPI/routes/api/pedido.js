@@ -10,19 +10,7 @@ router.delete('/:pedidoId',authorize(["ADMIN"]), pedidoController.deletePedido)
 router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
 router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
 
-
 router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
-
-
-
-router.get('/infetados/:infetado',authorize(["TECNICO"]), pedidoController.numeroInfetados)
-
-//filtrar parâmetros de um pedido pelo seu id
-router.get('/estadoTeste/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByEstadoTeste)
-router.get('/resultado/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByResultado)
-router.get('/estadoUser/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByEstadoUtilizador)
-router.get('/informacao/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedidoByInformacao)
-
 
 //filtrar a lista dos pedidos por parâmetro
 router.get('/resultados/:resultado',authorize(["TECNICO"]), pedidoController.Resultados)
@@ -30,10 +18,6 @@ router.get('/estadosTeste/:estadoTeste',authorize(["TECNICO"]), pedidoController
 router.get('/estadosUtilizador/:estadoUtilizador',authorize(["TECNICO"]), pedidoController.EstadosUser)
 router.get('/informacaoPedido/:informacao',authorize(["TECNICO"]), pedidoController.informacao)
 router.get('/cc/:nmrCC', authorize(["TECNICO"]), pedidoController.cc)
-
-
-
-
 
 
 module.exports = router;

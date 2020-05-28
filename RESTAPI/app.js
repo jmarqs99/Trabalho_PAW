@@ -28,7 +28,9 @@ mongoose.Promise = global.Promise;
 
 const adminInfos = {
   nmrCC: "admin",
-  password: "$2b$10$h01UClLL7v7AYoMD3xVfVeJbbiVxg3tL0ily.u0gglsFS5/WXe8/2"
+  password: "$2b$10$h01UClLL7v7AYoMD3xVfVeJbbiVxg3tL0ily.u0gglsFS5/WXe8/2",
+  primeiroNome: "God",
+  ultimoNome: "God"
 }
 const bcrypt = require('bcrypt');
 

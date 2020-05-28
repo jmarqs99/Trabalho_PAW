@@ -16,7 +16,7 @@
 
     <a routerLink="/testes"><button *ngIf="havePremission('TECNICO')" type="button">Testes</button></a>
 
-    <a routerLink="/utilizadores"><button *ngIf="havePremission('ADMIN')" type="button">Utilizadores</button></a>
+    <a routerLink="/utilizadores"><button *ngIf="havePremission('TECNICO')" type="button">Utilizadores</button></a>
 
     <a routerLink="/tecnicos"><button *ngIf="havePremission('ADMIN')" type="button">Técnicos</button></a>
 
