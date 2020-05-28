@@ -14,8 +14,7 @@
     font-size: 100%; 
     line-height: 100%;
     overflow: visible;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    align-items: center;
     white-space: nowrap;
   }
 
@@ -35,4 +34,5 @@
 
  header button {
    margin-left: 3%;
+   
  }
