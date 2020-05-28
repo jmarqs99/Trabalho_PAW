@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
+import { Teste } from '../Models/Teste';
 
 @Component({
   selector: 'app-testes',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class TestesComponent implements OnInit {
 
   testes: any = [];
-  teste: any;
+  
   currentTeste: any;
   viewingTeste: boolean;
   atualizar: boolean = false; 
@@ -21,6 +22,8 @@ export class TestesComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize;
+
+  @Input() teste: Teste = new Teste();
 
   constructor(private router: Router, public rest: RestService) { }
 
@@ -40,10 +43,14 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
-    this.rest.criarTeste(this.teste).subscribe((data: {}) => {
+    console.log(this.teste)
+    this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
       this.getTestes();
       this.addingTeste = false;
-    });
+    }, (err) => {
+      console.log(err);
+    })
+    
   }
 
   testeInfo(testeId: string) {
@@ -70,7 +77,7 @@ export class TestesComponent implements OnInit {
   }
 
   update() {
-    this.rest.updateUtilizador(this.currentTeste._id, this.novoEstado)
+    this.rest.updateTeste(this.currentTeste._id, this.teste)
       .subscribe(res => {
         this.atualizar = false;
         this.getTestes();
@@ -80,6 +87,8 @@ export class TestesComponent implements OnInit {
         console.log(err);
       }
       );
+
+      
   }
 
   deleteTeste(testeId: string){
