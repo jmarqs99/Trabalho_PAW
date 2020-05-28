@@ -3,7 +3,10 @@
 }
 
 body{
-    background-color: rgb(159, 159, 161);
+    background-image: url("https://media-manager.noticiasaominuto.com/1920/naom_5e7dd98030cec.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0vw -10vh;
 }
 
 .container{
@@ -15,7 +18,7 @@ body{
 }
 
 .box{
-    background-color: rgba(102,178,255,0.8);
+    background-color: rgba(102,178,255,0.9);
     padding:5%;
     border-radius: 20%;
     -webkit-box-shadow: 0px 0px 24px 9px rgba(0,0,0,0.75);

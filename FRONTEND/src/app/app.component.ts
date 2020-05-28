@@ -25,4 +25,12 @@ export class AppComponent {
     );
 
   }
+  havePremission(roleRequired : string) : boolean {
+    if (roleRequired == this.user.role){
+      return true
+    } else if (roleRequired == "TECNICO" && this.user.role == "ADMIN"){
+      return true
+    }
+    return false
+  }
 }

@@ -1,15 +1,32 @@
 
 .texto{
     margin: 3%;
+    margin-top: 7%;
 }
 
+.textoShadow {
+    text-shadow: 1px 1px rgb(255, 255, 255);
+}
 
 .navBar{
-    margin: 3%;
+    margin: 3%; 
+    width: 24.7%;
+    margin-top: 7%;
+}
+
+.navBar button {
+    margin: 1%;
 }
 
 body{
     width: 100vw;
-    height: 82vh;
-    background-image: url("https://www.sns24.gov.pt/wp-content/uploads/2020/04/Imagem-Coronavirus-SNS24_2_arredondado-022.png");
+    height: 100vh;
+    margin:0;
+    background-image: url("https://abrilveja.files.wordpress.com/2020/04/gettyimages-1215609255.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
 }
