@@ -1,7 +1,7 @@
 <h2>Lista de utilizadores</h2>
 
 <div class="conteiner">
-    <div>
+    <div class="table-div">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -32,15 +32,17 @@
     </div>
     <div class="info" *ngIf="viewingUtilizador">
         <div>
-            <p>Nome do Utilizador: {{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</p>
-            <p>ID do Utilizador: {{currentUtilizador._id}}</p>
-            <p>Estado do utilizador : {{currentUtilizador.estado}} <button class="btn btn-primary" type="button"
-                    (click)="atualizar = true">Atualizar</button> </p>
+            <p>Nome do Utilizador: <span>{{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</span></p>
+            <p>ID do Utilizador:  <span>{{currentUtilizador._id}}</span></p>
+            <p>Estado do utilizador : <span>{{currentUtilizador.estado}} </span>
+                <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
+                    (click)="atualizar = true">Atualizar</button> 
+            </p>
         </div>
 
-        <form *ngIf="atualizar" (submit)="update()">
+        <form *ngIf="atualizar" (submit)="update()" class="updateForm">
             <select [(ngModel)]=novoEstado name="estado">
-                <option value="Infetado">Infetado</option>
+                <option selected value="Infetado">Infetado</option>
                 <option value="Suspeito">Suspeito</option>
                 <option value="Saudável">Saudável</option>
             </select>

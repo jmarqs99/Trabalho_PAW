@@ -15,7 +15,7 @@ export class UtilizadoresComponent implements OnInit {
   utilizador: any;
   currentUtilizador: any;
   viewingUtilizador: boolean;
-  atualizar: boolean;
+  atualizar: boolean = false;
   atualizarUtilizador: boolean;
   novoEstado: String;
   page = 1;
@@ -49,7 +49,7 @@ export class UtilizadoresComponent implements OnInit {
   }
 
   utilizadorInfo(Id: string) {
-    if (this.viewingUtilizador) {
+    if (this.viewingUtilizador && this.currentUtilizador._id == Id) {
       this.viewingUtilizador = false;
     } else {
       let utilizadorResult: any = null;
@@ -65,6 +65,8 @@ export class UtilizadoresComponent implements OnInit {
 
       }).then(() => {
         this.currentUtilizador = utilizadorResult;
+        this.novoEstado = utilizadorResult.estado;
+        this.atualizar = false;
         this.viewingUtilizador = true
       });
     }
