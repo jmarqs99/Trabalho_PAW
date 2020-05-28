@@ -85,9 +85,5 @@ export class UtilizadoresComponent implements OnInit {
       }
       );
   }
-  /*  updateUtilizador(Id :string, dados:JSON){
-     this.rest.updateUtilizador(this.route.snapshot.params['id'],dados)
-   } */
-
 
 }
