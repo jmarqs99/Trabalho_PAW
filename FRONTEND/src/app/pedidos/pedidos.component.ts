@@ -15,8 +15,8 @@ export class PedidosComponent implements OnInit {
   currentPedido: any;
   viewingPedido: boolean;
   viewingListar: boolean = true;
-  atualizarPedido: boolean;
-  atualizarPedidoUpload: boolean;
+  atualizarPedido: boolean = false;
+  atualizarPedidoUpload: boolean = false;
   pedidos: any = [];
   estadoUtilizador: string;
   resultado: String;
@@ -27,6 +27,10 @@ export class PedidosComponent implements OnInit {
   numero: Number;
   infetado: String = "infetado";
   pdf: any;
+  page = 1;
+  pageSize = 10;
+  collectionSize;
+
   fileChanged(e){
     this.pdf = e.target.files[0];
   }
@@ -38,6 +42,13 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPedidos()
+
+  }
+
+  get pedidosP(): any[] {
+    return this.pedidos
+      .map((country, i) => ({id: i + 1, ...country}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   getPedidos() {
@@ -45,7 +56,9 @@ export class PedidosComponent implements OnInit {
     this.viewingListar = true;
     this.rest.getPedidos().subscribe((data: {}) => {
       this.pedidos = data;
+      this.collectionSize = this.pedidos.length;
     });
+    
   }
 
   resultadosPedido() {
@@ -185,12 +198,13 @@ export class PedidosComponent implements OnInit {
     }
   }
 
-  update(pedidoId: String) {
-    this.rest.updatePedido(pedidoId, this.pedido)
+  update() {
+    this.rest.updatePedido(this.currentPedido._id, this.pedido)
       .subscribe(res => {
-        this.atualizarPedido = true;
-        this.getPedidos();
         this.atualizarPedido = false;
+        this.getPedidos();
+        this.viewingPedido = false;
+        this.pedidoInfo(this.currentPedido._id)
       }, (err) => {
         console.log(err);
       }
@@ -201,15 +215,18 @@ export class PedidosComponent implements OnInit {
     let formData = new FormData();
     formData.append('pdf', this.pdf)
       this.rest.upload(pedidoId,formData).subscribe(res => {
-        this.getPedidos();
         this.atualizarPedidoUpload = false;
+        this.getPedidos();
+        this.viewingListar = false;
+        this.pedidoInfo(this.currentPedido._id)
+       
       }, (err) => {
         console.log(err);
       });
   }
 
   pedidoInfo(pedidoId: String) {
-    if (this.viewingPedido) {
+    if (this.viewingPedido && this.currentPedido._id == pedidoId) {
       this.viewingPedido = false;
     } else {
 
@@ -234,35 +251,12 @@ export class PedidosComponent implements OnInit {
   }
   nrinfetados() {
 
-
-
-    //this.pedidos = [];
     this.rest.numeroInfetados(this.infetado).subscribe((data: Number) => {
       console.log(data);
-      //this.pedidos = data.length;
       alert(data);
 
     });
 
-    /**
-    var pedidosTemp= [];
- 
-     new Promise((resolve, reject) => {
-       const pedidos = this.pedidos;
-       const resultToSearch = this.estadosUser;
-       pedidos.forEach(function (pedido, index) {
-         if (pedido.estadoUtilizador == resultToSearch) {
-           pedidosTemp = pedido;
-           resolve();
-         }
-         if (index === pedidos.length - 1) resolve();
-       });
-     }).then(() => {
- 
-       this.pedidos = pedidosTemp.length;
- 
-     });
-      */
   }
 
 }

@@ -7,12 +7,11 @@
 
 <body>
     <h2>Pedidos</h2>
-    <div>
-        <br>
-        <br>
+    <div class="criarPedido">
+        
 
         <h4>Fazer um pedido</h4>
-
+        
         <label>Número do cartão de cidadão:
             <input [(ngModel)]="pedido.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
         </label><br>
@@ -35,16 +34,13 @@
             </select>
         </label><br>
 
-        <button (click)="addPedido()">Confirmar</button>
-
-
-
-        <br>
-        <br>
-        <br>
+        <button class="btn btn-primary" (click)="addPedido()">Confirmar</button>
 
 
     </div>
+
+    <div class="filtrosPedido">
+
     <h6>Filtrar por resultado do teste</h6>
     <form (submit)="resultadosPedido()">
 
@@ -55,7 +51,7 @@
                 <option value="indefinido">indefinido</option>
             </select>
         </label><br>
-        <button type="submit">Listar</button><br>
+        <button class="btn btn-primary" type="submit">Listar</button><br>
 
 
     </form>
@@ -71,7 +67,7 @@
                 <option value="finalizado">finalizado</option>
             </select>
         </label><br>
-        <button type="submit">Listar</button><br>
+        <button class="btn btn-primary" type="submit">Listar</button><br>
     </form>
 
     <h6>Filtrar por estado do utilizador</h6>
@@ -84,7 +80,7 @@
         </select>
 
         <br><br>
-        <button type="submit">Listar</button><br>
+        <button class="btn btn-primary" type="submit">Listar</button><br>
     </form>
 
     <h6>Filtrar pela informação do pedido</h6>
@@ -97,49 +93,60 @@
         </select>
 
         <br><br>
-        <button type="submit">Listar</button><br>
+        <button class="btn btn-primary" type="submit">Listar</button><br>
     </form>
-
+<br>
     <h6>Filtrar pelo número do cartão de cidadão</h6>
     <form (submit)="nmrCC()">
 
         <input [(ngModel)]="cc" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
-
-        <button type="submit">Listar</button><br>
+<br>
+        <button class="btn btn-primary" type="submit">Listar</button><br>
     </form>
     <button *ngIf="viewingListar == false" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
 
     <br>
     <br>
 
-    <button (click)="nrinfetados()">Numero de Infetados</button>
+    <button class="btn btn-primary" (click)="nrinfetados()">Numero de Infetados</button>
 
+</div>
 
+   
+    <div class="conteiner">
 
-    <div>
+        <div class="table-div">
+            <table class="table table-striped">
+                <br>
 
+                <br>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Apagar Pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of pedidosP; let i=index;">
+                        <span (click)="pedidoInfo(p._id)"
+                            title="Clica para veres/esconderes informações deste pedido!">ID:
+                            {{p._id}}&nbsp; &nbsp;</span>
+                        <td (click)="delete(p._id)"> <button class="btn btn-danger">Apagar</button></td>
+                    </tr>
 
-    </div>
-    <ul class="pedidos">
-        <br>
-        <h4>Lista de Pedidos</h4>
-        <br>
-
-        <li *ngFor="let p of pedidos; let i=index;">
-            <span (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">ID do
-                pedido: {{p._id}}&nbsp; &nbsp;</span>
-
-            <button (click)="delete(p._id)">Remover pedido</button>
-
-
-
-
-
-            <br>
-
-        </li>
-
-        <div *ngIf="viewingPedido">
+                </tbody>
+            </table>
+            <div class="paginacao">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                </ngb-pagination>
+                <select class="custom-select" [(ngModel)]="pageSize">
+                    <option [ngValue]="5">5/página</option>
+                    <option [ngValue]="10">10/página</option>
+                    <option [ngValue]="20">20/página</option>
+                </select>
+            </div>
+        </div>
+        <div class="info" *ngIf="viewingPedido">
             <p>ID do Pedido: {{currentPedido._id}}</p>
             <p>nmrCC do usuário do pedido: {{currentPedido.nmrCC}}</p>
             <p>Informação do pedido: {{currentPedido.informacao}}</p>
@@ -147,54 +154,57 @@
             <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
             <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
             <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
-            <button (click)="atualizarPedido = true">Atualizar este pedido</button>
-            <button (click)="atualizarPedidoUpload = true">Upload</button>
+            <button *ngIf="atualizarPedido == false && atualizarPedidoUpload == false" class="btn btn-primary"
+                type="button" (click)="atualizarPedido = true">Atualizar</button>
+            <br>
+            <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false" class="btn btn-primary"
+                type="button" (click)="atualizarPedidoUpload = true">Upload</button>
+
+
+            <form *ngIf="atualizarPedido" (submit)="update()" class="updateForm">
+                <br>
+                <h5>Atualizar pedido {{currentPedido._id}}</h5>
+                <label>informacao:
+                    <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
+                </label><br>
+                <label>estadoUtilizador:
+                    <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
+                        <option value="infetado">Infetado</option>
+                        <option value="suspeito">Suspeito</option>
+                        <option value="saudavel">Saudável</option>
+                    </select>
+                </label><br>
+
+                <label>estadoTeste:
+                    <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
+                        <option value="Por agendar">Por agendar</option>
+                        <option value="agendado">Agendado</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </label>
+                <br>
+                <label>resultadoTeste:
+                    <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
+                        <option value="indefinido">indefinido</option>
+                        <option value="positivo">positivo</option>
+                        <option value="negativo">negativo</option>
+                    </select>
+
+                </label>
+                <br>
+                <button class="btn btn-primary" type="submit">Atualizar</button><br>
+
+            </form>
+
+            <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
+                <br>
+                <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
+                <input type="file" (change)="fileChanged($event)" />
+                <button class="btn btn-primary" type="submit">Upload</button><br>
+            </form>
         </div>
 
-        <form *ngIf="atualizarPedido" (submit)="update(currentPedido._id)">
-            <h5>Atualizar pedido {{currentPedido._id}}</h5>
-            <label>informacao:
-                <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
-            </label><br>
-            <label>estadoUtilizador:
-                <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
-                    <option value="infetado">Infetado</option>
-                    <option value="suspeito">Suspeito</option>
-                    <option value="saudavel">Saudável</option>
-                </select>
-            </label><br>
-
-            <label>estadoTeste:
-                <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
-                    <option value="Por agendar">Por agendar</option>
-                    <option value="agendado">Agendado</option>
-                    <option value="finalizado">Finalizado</option>
-                </select>
-            </label>
-            <br>
-            <label>resultadoTeste:
-                <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
-                    <option value="indefinido">indefinido</option>
-                    <option value="positivo">positivo</option>
-                    <option value="negativo">negativo</option>
-                </select>
-
-            </label>
-            <br>
-            <button type="submit">Save</button><br>
-
-
-
-
-        </form>
-
-        <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
-            <br>
-            <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
-            <input type="file" (change)="fileChanged($event)"/>
-            <button type="submit">Save</button><br>
-        </form>
-    </ul>
+    </div>
 
 
 
