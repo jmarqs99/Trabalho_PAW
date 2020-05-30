@@ -19,7 +19,7 @@ export class TestesComponent implements OnInit {
   atualizarTeste: boolean;
   novoEstado: String;
   novoResultado: String;
-  addingTeste: boolean;
+  addingTeste: boolean = false;
   date: NgbDate;
   page = 1;
   pageSize = 10;
@@ -50,8 +50,9 @@ export class TestesComponent implements OnInit {
   addTeste() {
     console.log(this.teste)
     this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
-      this.getTestes();
       this.addingTeste = false;
+      this.getTestes();
+      //this.addingTeste = false;
     }, (err) => {
       console.log(err);
     })
