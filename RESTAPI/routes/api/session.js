@@ -37,7 +37,7 @@ sessionRouter.post('/login', (req, res, next) => {
 												httpOnly: true
 											}
 										)
-										res.status(200).json({nome: utilizador.primeiroNome,role: "TECNICO",token:jwtToken})
+										res.status(200).json({nome: utilizador.primeiroNome,role: "TECNICO",nmrCC:req.body.nmrCC,token:jwtToken})
 									} else {
 										Admin.findOne({utilizadorId:utilizador._id},function (err, admin) {
 											if(err){
@@ -59,7 +59,7 @@ sessionRouter.post('/login', (req, res, next) => {
 														httpOnly: true
 													}
 												)
-												res.status(200).json({nome: utilizador.primeiroNome,role: cookie.role,token:jwtToken})
+												res.status(200).json({nome: utilizador.primeiroNome,role: cookie.role,nmrCC:req.body.nmrCC,token:jwtToken})
 											}
 										})
 									}
