@@ -10,7 +10,7 @@
     <div class="criarPedido">
 
         <button *ngIf="addingPedido == false" class="btn btn-primary" type="button"
-            (click)="addingPedido = true">Agendar Teste</button>
+            (click)="addingPedido = true">Fazer Pedido</button>
 
 
         <label *ngIf="addingPedido">Número do cartão de cidadão:
@@ -238,10 +238,10 @@
             <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
             <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
             <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
-            <button *ngIf="atualizarPedido == false && atualizarPedidoUpload == false" class="btn btn-primary"
+            <button *ngIf="atualizarPedido == false && atualizarPedidoUpload == false && user.role != 'UTILIZADOR'" class="btn btn-primary"
                 type="button" (click)="atualizarPedido = true">Atualizar</button>
             <br>
-            <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false" class="btn btn-primary"
+            <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false && user.role != 'UTILIZADOR'" class="btn btn-primary"
                 type="button" (click)="atualizarPedidoUpload = true">Upload</button>
 
 
@@ -250,13 +250,6 @@
                 <h5>Atualizar pedido {{currentPedido._id}}</h5>
                 <label>informacao:
                     <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
-                </label><br>
-                <label>estadoUtilizador:
-                    <select input [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
-                        <option value="infetado">Infetado</option>
-                        <option value="suspeito">Suspeito</option>
-                        <option value="saudavel">Saudável</option>
-                    </select>
                 </label><br>
 
                 <label>estadoTeste:

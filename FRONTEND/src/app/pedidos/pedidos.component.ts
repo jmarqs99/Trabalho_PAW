@@ -10,7 +10,7 @@ import { Pedido } from '../Models/Pedido';
   styleUrls: ['./pedidos.component.css']
 })
 export class PedidosComponent implements OnInit {
-
+  user: any;
   addingPedido: boolean = false;
   currentPedido: any;
   viewingPedido: boolean;
@@ -50,7 +50,7 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPedidos()
-
+    this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
   get pedidosP(): any[] {

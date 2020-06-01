@@ -25,8 +25,15 @@ body{
     background-image: url("https://abrilveja.files.wordpress.com/2020/04/gettyimages-1215609255.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+
+}
+
+.infoDiv{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
 
+#chartContainer{
+    width: 50%;
 }

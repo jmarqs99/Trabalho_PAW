@@ -5,7 +5,7 @@ const authorize = require('../../middlewares/authorize')
 
 
 router.post('/',authorize(["UTILIZADOR"]), pedidoController.criarPedido);
-router.get('/',authorize(["TECNICO"]), pedidoController.getAllPedidos);
+router.get('/',authorize(["UTILIZADOR"]), pedidoController.getAllPedidos);
 router.delete('/:pedidoId',authorize(["ADMIN"]), pedidoController.deletePedido)
 router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
 router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);

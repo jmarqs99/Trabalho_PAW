@@ -82,9 +82,17 @@ pedidoController.getAllPedidos = function (req, res, next) {
         if (err) {
             next(err)
         } else {
-
-            res.json(pedidos)
-
+            if ( req.user.role == "UTILIZADOR"){
+                let result = []
+                pedidos.forEach(function(pedido,index){
+                    if (req.user.nmrCC == pedido.nmrCC){
+                        result.push(pedido);
+                    }
+                })
+                res.json(result)
+            } else {
+                res.json(pedidos)
+            }  
         }
     })
 }

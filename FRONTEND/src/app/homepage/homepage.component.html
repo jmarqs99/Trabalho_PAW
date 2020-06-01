@@ -6,24 +6,27 @@
 </head>
 
 <body>
+        <div class="infoDiv">
+                <div class="texto">
+                        <h3 class="textoShadow">Bem-vindo {{user.nome}}</h3>
+                        <h4 class="textoShadow">Estás logado como
+                                {{user.role.toLowerCase().charAt(0).toUpperCase() + user.role.toLowerCase().slice(1)}}
+                        </h4>
+                </div>
 
-    <div class="texto">
-        <h3 class="textoShadow">Bem-vindo {{user.nome}}</h3>
-        <h4 class="textoShadow">Estás logado como {{user.role.toLowerCase().charAt(0).toUpperCase() + user.role.toLowerCase().slice(1)}}</h4>
-    </div>
-
-    <div class="navBar">
-        <button routerLink="/pedidos" class="btn btn-dark" type="button">Pedidos</button>
-        <button routerLink="/utilizadores" class="btn btn-warning" *ngIf="havePremission('TECNICO')"
-                type="button">Utilizadores</button>
-        <button routerLink="/testes" class="btn btn-info" *ngIf="havePremission('TECNICO')"
-                type="button">Testes</button>
-        <button routerLink="/tecnicos" class="btn btn-success" *ngIf="havePremission('ADMIN')"
-                type="button">Técnicos</button>
-        <button routerLink="/admins" class="btn btn-secondary" *ngIf="havePremission('ADMIN')"
-                type="button">Admins</button>
-    </div>
-
+                <div class="navBar">
+                        <button routerLink="/pedidos" class="btn btn-dark" type="button">Pedidos</button>
+                        <button routerLink="/utilizadores" class="btn btn-warning" *ngIf="havePremission('TECNICO')"
+                                type="button">Utilizadores</button>
+                        <button routerLink="/testes" class="btn btn-info" *ngIf="havePremission('TECNICO')"
+                                type="button">Testes</button>
+                        <button routerLink="/tecnicos" class="btn btn-success" *ngIf="havePremission('ADMIN')"
+                                type="button">Técnicos</button>
+                        <button routerLink="/admins" class="btn btn-secondary" *ngIf="havePremission('ADMIN')"
+                                type="button">Admins</button>
+                </div>
+        </div>
+        <div id="chartContainer"></div>
 </body>
 
 </html>
