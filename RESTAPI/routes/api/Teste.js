@@ -11,6 +11,7 @@ router.put('/:testeId',authorize(["TECNICO"]), TesteController.updateTeste)
 router.delete('/:testeId',authorize(["ADMIN"]), TesteController.deleteTeste)
 
 router.get('/numeroTestesDia/:dia/:mes/:ano',authorize(["TECNICO"]), TesteController.totalTestesPorDia)
+//router.get('/events',authorize(["TECNICO"]), TesteController.find)
 router.get('/numeroTestesPessoa/:nmrCC',authorize(["TECNICO"]), TesteController.totalTestesPorPessoa)
 
 module.exports = router;

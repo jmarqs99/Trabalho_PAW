@@ -6,7 +6,7 @@ const TesteController = {};
 
 TesteController.criarTeste = function (req, res, next) {
 
-    if (req.body.pedidoId && req.body.nmrCC && req.body.ano && req.body.mes && req.body.dia) {
+    if (req.body.pedidoId && req.body.nmrCC) {
         Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
             if (err) {
                 next(err);
@@ -90,8 +90,25 @@ TesteController.deleteTeste = function (req, res, next) {
         }
     })
 }
-
+/**
+const createFilters = (query) => {
+    const { sort, date, code } = query
+    const [startDate, , endDate] = date || []
+    const filter = {}
+    const sortObject = {}
+    if (startDate && endDate) {
+        filter.date = {
+            $gt: new Date(startDate) || undefined,
+            $lt: new Date(endDate) || undefined,
+           
+        }
+    }
+    return [filter]
+}
+ */
 TesteController.totalTestesPorDia = function (req, res, next) {
+    
+    
     Teste.find({ dia: req.params.dia }, { mes: req.params.mes }, { ano: req.params.ano }, function (err, teste) {
         if (err) {
             next(err)
@@ -101,6 +118,14 @@ TesteController.totalTestesPorDia = function (req, res, next) {
     })
 
 }
+/**
+TesteController.find = async(req,res,next) => {
+    const [filter] = createFilters(req.query)
+    const events = await Teste.find(filter).sort(sort)//.populate("user")
+    res.json(events)
+}
+ */
+
 
 TesteController.totalTestesPorPessoa = function (req, res, next) {
     Teste.find({ nmrCC: req.params.nmrCC }, function (err, teste) {

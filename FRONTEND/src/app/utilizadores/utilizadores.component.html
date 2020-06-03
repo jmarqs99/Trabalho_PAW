@@ -40,6 +40,7 @@
         <div>
             <p>Nome do Utilizador: <span>{{currentUtilizador.primeiroNome}} {{currentUtilizador.ultimoNome}}</span></p>
             <p>ID do Utilizador:  <span>{{currentUtilizador._id}}</span></p>
+            <p>Numero de testes: {{currentUtilizador.NumeroTestes}}</p>
             <p>Estado do utilizador : <span>{{currentUtilizador.estado}} </span>
                 <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
                     (click)="atualizar = true">Atualizar</button> 

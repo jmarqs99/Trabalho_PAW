@@ -16,6 +16,9 @@ import { TecnicosComponent } from './tecnicos/tecnicos.component';
 import { AdminsComponent } from './admins/admins.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+//import {DpDatePickerModule} from 'ng2-date-picker';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 
 
 
@@ -86,7 +89,14 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    //AngularDateTimePickerModule
+    //DpDatePickerModule,
+    DlDateTimeDateModule,  // <--- Determines the data type of the model
+    DlDateTimePickerModule,
+    
+    
+   
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi:true}],
   bootstrap: [AppComponent]

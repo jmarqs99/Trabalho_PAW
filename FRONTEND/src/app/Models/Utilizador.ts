@@ -5,5 +5,5 @@ export class Utilizador {
     ultimoNome:String;
     estado:String;
     password:String;
-    NumeroTestes: Number;
+    NumeroTestes: {type:Number, default: 0};
 }

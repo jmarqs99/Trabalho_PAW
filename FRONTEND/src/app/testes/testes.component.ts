@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 import { Teste } from '../Models/Teste';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+//import datepicker from './datepicker';
+
 
 @Component({
   selector: 'app-testes',
@@ -10,6 +12,8 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./testes.component.css']
 })
 export class TestesComponent implements OnInit {
+
+  user: any;
 
   testes: any = [];
   
@@ -20,10 +24,20 @@ export class TestesComponent implements OnInit {
   novoEstado: String;
   novoResultado: String;
   addingTeste: boolean = false;
-  date: NgbDate;
+  //date: NgbDate;
   page = 1;
   pageSize = 10;
   collectionSize;
+
+  //data: Date = new Date();
+    //settings = {
+      //  bigBanner: true,
+        //timePicker: false,
+        //format: 'dd-MM-yyyy',
+        //defaultOpen: true
+    //}
+
+  
 
   @Input() teste: Teste = new Teste();
 
@@ -31,6 +45,7 @@ export class TestesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTestes();
+    //this.user = JSON.parse(localStorage.getItem("currentTeste"))
   }
 
   get testesP(): any[] {
@@ -48,7 +63,9 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
+    //this.user.NumeroTestes = this.user.NumeroTestes + 1;
     console.log(this.teste)
+    //console.log(this.teste.date)
     this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
       this.addingTeste = false;
       this.getTestes();

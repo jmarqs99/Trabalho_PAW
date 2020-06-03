@@ -7,6 +7,7 @@ export class Teste{
     dia:Number;
     hora:Number;
     minuto:Number;
+    date:Date;
     resultadoTeste: {type:String, default:"indefinido"};
     estadoTeste: {type:String, default: "agendado"};
 }

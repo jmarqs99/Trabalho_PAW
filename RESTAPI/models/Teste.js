@@ -9,6 +9,7 @@ module.exports = mongoose.model('Teste', new mongoose.Schema({
     dia: Number,
     hora: Number,
     minuto: Number,
+    date: Date,
     resultadoTeste: {type:String, default:"indefinido"},
     estadoTeste: {type:String, default: "agendado"},
  

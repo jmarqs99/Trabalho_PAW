@@ -13,9 +13,6 @@
             (click)="addingPedido = true">Fazer Pedido</button>
 
 
-        <label *ngIf="addingPedido">Número do cartão de cidadão:
-            <input [(ngModel)]="pedido.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
-        </label><br>
         <label *ngIf="addingPedido">Informação relevante:
             <input style="width:450px;" [(ngModel)]="pedido.informacao"
                 placeholder="escreva a informação aqui ou selecione as opções à direita" />
@@ -78,11 +75,7 @@
                     <option value="pessoa de risco">pessoa de risco</option>
                 </select>
                 <br>
-                <!--
-                Filtrar pelo número do cartão de cidadão
-                <input [(ngModel)]="ccFiltro" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
-                <br>
-                -->
+                
                 <button class="btn btn-primary" type="submit">listar</button>
                 <button *ngIf="viewingFiltros == true" class="btn btn-danger" type="button"
                     (click)="viewingFiltros = false">Sair dos filtros</button>
@@ -97,16 +90,7 @@
         <br>
 
         <div>
-            <!--
-            <form *ngIf="viewingListarID" (submit)="getPedidos()">
-                <button  *ngIf="viewingListarID == true" class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
-                <br>
-                <button *ngIf="viewingListarID == true" class="btn btn-danger" type="button"
-                (click)="viewingListarID = false">Sair dos filtros</button>
-                
-    
-            </form>
-            -->
+            
             <h5>Pesquisar por ID </h5>
             <input [(ngModel)]="IDfiltro" name="_id" type="text" placeholder="id" />
                 <button  class="btn btn-primary" type="button"
@@ -125,78 +109,6 @@
 
         </div>
         
-        <!-- comentário
-        <button *ngIf="viewingFiltros == false" class="btn btn-primary" type="button"
-            (click)="viewingFiltros = true">Filtros</button>
-        <form *ngIf="viewingFiltros" (submit)="resultadosPedido()">
-
-            <label>Filtrar por resultado do teste
-                <select input [(ngModel)]="resultado" name="resultadoTeste">
-                    <option value="positivo">positivo</option>
-                    <option value="negativo">negativo</option>
-                    <option value="indefinido">indefinido</option>
-                </select>
-            </label><br>
-
-            <button class="btn btn-primary" (click)="resultadosPedido()">Listar</button>
-        </form>
-
-        <form *ngIf="viewingFiltros" (submit)="estadoTeste()">
-
-            <label>Filtrar por estado do teste
-                <select input [(ngModel)]="estadosTeste" name="estadoTeste">
-                    <option value="Por agendar">Por agendar</option>
-                    <option value="agendado">agendado</option>
-                    <option value="finalizado">finalizado</option>
-                </select>
-            </label><br>
-            <button class="btn btn-primary" (click)="resultadosPedido()">Listar</button>
-        </form>
-
-
-        <form *ngIf="viewingFiltros" (submit)="estadoUser()">
-            Filtrar por estado do utilizador
-            <select input [(ngModel)]="estadosUser" name="estadoUtilizador">
-                <option value="infetado">Infetado</option>
-                <option value="suspeito">Suspeito</option>
-                <option value="saudavel">Saudável</option>
-            </select>
-
-            <br><br>
-            <button class="btn btn-primary" (click)="resultadosPedido()">Listar</button>
-        </form>
-
-
-        <form *ngIf="viewingFiltros" (submit)="informacao()">
-            Filtrar pela informação do pedido
-            <select input [(ngModel)]="informacaoPedido" name="informacao">
-                <option value="saúde 24">saúde 24</option>
-                <option value="local de risco">local de risco</option>
-                <option value="pessoa de risco">pessoa de risco</option>
-            </select>
-
-            <br><br>
-            <button class="btn btn-primary" (click)="resultadosPedido()">Listar</button>
-        </form>
-
-        <form *ngIf="viewingFiltros" (submit)="nmrCC()">
-            Filtrar pelo número do cartão de cidadão
-            <input [(ngModel)]="cc" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
-            <br>
-            <button class="btn btn-primary" (click)="resultadosPedido()">Listar</button>
-        </form>
-        
-       
-
-        <form *ngIf="viewingFiltros" (submit)="getPedidos()">
-            <button class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
-            <br>
-            <button *ngIf="viewingFiltros == true" class="btn btn-danger" type="button"
-            (click)="viewingFiltros = false">Sair dos filtros</button>
-
-        </form>
-        
- -->
     </div>
 
 
@@ -248,11 +160,8 @@
             <form *ngIf="atualizarPedido" (submit)="update()" class="updateForm">
                 <br>
                 <h5>Atualizar pedido {{currentPedido._id}}</h5>
-                <label>informacao:
-                    <input [(ngModel)]="pedido.informacao" name="informacao" placeholder="informacao" />
-                </label><br>
-
-                <label>estadoTeste:
+                
+                <label>Estado do Teste:
                     <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
                         <option value="Por agendar">Por agendar</option>
                         <option value="agendado">Agendado</option>
@@ -260,7 +169,7 @@
                     </select>
                 </label>
                 <br>
-                <label>resultadoTeste:
+                <label>Resultado do Teste:
                     <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
                         <option value="indefinido">indefinido</option>
                         <option value="positivo">positivo</option>
@@ -270,6 +179,8 @@
                 </label>
                 <br>
                 <button class="btn btn-primary" type="submit">Atualizar</button><br>
+                <button *ngIf="atualizarPedido == true" class="btn btn-danger" type="button"
+                (click)="atualizarPedido = false">Cancelar</button>
 
             </form>
 
@@ -278,6 +189,8 @@
                 <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
                 <input type="file" (change)="fileChanged($event)" />
                 <button class="btn btn-primary" type="submit">Upload</button><br>
+                <button *ngIf="atualizarPedidoUpload == true" class="btn btn-danger" type="button"
+                (click)="atualizarPedidoUpload = false">Cancelar</button>
             </form>
         </div>
 

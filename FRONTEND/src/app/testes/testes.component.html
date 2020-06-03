@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testes</title>
+
 </head>
+
 <body>
+
+
     <h2>Testes</h2>
     <div class="criarTeste">
-       
-        <button *ngIf="addingTeste == false" class="btn btn-primary" type="button"
-        (click)="addingTeste = true">Agendar Teste</button>
+
+        <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
+            Teste</button>
         <form *ngIf="addingTeste" (submit)="addTeste()">
             <label>Número do cartão de cidadão do user do pedido:
                 <input [(ngModel)]="teste.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
@@ -18,27 +23,27 @@
             <label>ID do pedido:
                 <input [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
             </label><br>
-            <h6>Data do teste</h6>
-            <label>Ano:
-                <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="ano" /><br>
-            </label><br>
-            <label>Mes:
-                <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="mes" /><br>
-            </label><br>
-            <label>Dia:
-                <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="dia" /><br>
-            </label><br>
-            <label>Hora:
-                <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="hora" /><br>
-            </label><br>
-            <label>Minuto:
-                <input [(ngModel)]="teste.minuto" name="minuto" type="number" min="0" max="59"
-                    placeholder="minuto" /><br>
-            </label><br>
-            <button class="btn btn-primary" (click)="addTeste()">Agendar</button>
-            
+
+
+            <!--<label for="date">Data do teste</label>-->
+
+            <!--<input [(ngModel)]="teste.date" name="date" type="date" >
+            -->
+
+
+
+            <div class="input-group">
+                <dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5"
+                    [(ngModel)]="teste.date" name="date"></dl-date-time-picker>
+            </div>
+
+
+            <br>
+
+            <button class="btn btn-primary" type="submit">agendar</button><br>
+
             <button *ngIf="addingTeste == true" class="btn btn-danger" type="button"
-            (click)="addingTeste = false">Cancelar</button>
+                (click)="addingTeste = false">Cancelar</button>
         </form>
     </div>
     <div class="conteiner">
@@ -53,7 +58,7 @@
                 <tbody>
                     <tr *ngFor="let t of testesP; let i=index">
                         <td (click)="testeInfo(t._id)" title="Clica para veres/esconderes informações deste teste!">
-                           {{ t._id}} </td>
+                            {{ t._id}} </td>
                         <td (click)="deleteTeste(t._id)"> <button class="btn btn-danger">Apagar</button></td>
                     </tr>
                 </tbody>
@@ -66,36 +71,20 @@
                     <option [ngValue]="10">10/página</option>
                     <option [ngValue]="20">20/página</option>
                 </select>
-            <br>
+                <br>
             </div>
         </div>
         <div class="info" *ngIf="viewingTeste">
             <p>ID do teste: {{currentTeste._id}}</p>
-            <p>Data do Teste: {{currentTeste.dia}}/{{currentTeste.mes}}/{{currentTeste.ano}}
-                Hora:{{currentTeste.hora}}:{{currentTeste.minuto}}</p>
             <p>Nr CC do Utilizador: {{currentTeste.nmrCC}}</p>
             <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
             <p>Resultado do Teste : {{currentTeste.resultadoTeste}}</p>
+            <p>Data do teste: {{currentTeste.date}}</p>
             <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
                 (click)="atualizar = true">Atualizar</button>
 
             <form *ngIf="atualizar" (submit)="update()" class="updateForm">
-                <label>Ano:
-                    <input [(ngModel)]="teste.ano" name="ano" type="number" min="2020" placeholder="Ano" /><br>
-                </label><br>
-                <label>Mes:
-                    <input [(ngModel)]="teste.mes" name="mes" type="number" min="1" max="12" placeholder="Mês" /><br>
-                </label><br>
-                <label>Dia:
-                    <input [(ngModel)]="teste.dia" name="dia" type="number" min="1" max="31" placeholder="Dia" /><br>
-                </label><br>
-                <label>Hora:
-                    <input [(ngModel)]="teste.hora" name="hora" type="number" min="0" max="23" placeholder="Hora" /><br>
-                </label><br>
-                <label>Minuto:
-                    <input [(ngModel)]="teste.minuto" name="minuto" type="number" min="0" max="59"
-                        placeholder="Minuto" /><br>
-                </label><br>
+
                 <label>Resultado do Teste
                     <select input [(ngModel)]="novoResultado" name="resultadoTeste">
                         <option value="positivo">positivo</option>
@@ -103,11 +92,27 @@
                         <option value="indefinido">indefinido</option>
                     </select>
                 </label>
+
+                <label>Estado do Teste:
+                    <select input [(ngModel)]="novoEstado" name="estadoTeste">
+                        <option value="Por agendar">Por agendar</option>
+                        <option value="agendado">Agendado</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </label>
+
+                <div class="input-group">
+                    <dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5"
+                        [(ngModel)]="teste.date" name="date"></dl-date-time-picker>
+                </div>
                 <br>
                 <button class="btn btn-primary" type="submit">Atualizar</button><br>
+                <button *ngIf="atualizar == true" class="btn btn-danger" type="button"
+                    (click)="atualizar = false">Cancelar</button>
             </form>
             <br>
         </div>
     </div>
 </body>
+
 </html>

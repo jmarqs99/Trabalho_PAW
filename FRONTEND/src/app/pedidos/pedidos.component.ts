@@ -23,8 +23,6 @@ export class PedidosComponent implements OnInit {
   estadosTeste: String;
   estadosUser: String;
   informacaoPedido: String;
-  cc: String;
-  numero: Number;
   infetado: String = "infetado";
   pdf: any;
   page = 1;
@@ -69,30 +67,19 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  resultadosPedido() {
-    this.rest.getPedidos().subscribe((data: {}) => {
 
-      this.pedidos = data;
-      this.viewingFiltros = false;
-      var pedidosTemp = [];
-      this.viewingFiltros = true;
-      new Promise((resolve, reject) => {
-        const pedidos = this.pedidos;
-        const resultToSearch = this.resultado;
-        pedidos.forEach(function (pedido, index) {
-          if (pedido.resultadoTeste == resultToSearch) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-          if (index === pedidos.length - 1) resolve();
-        });
-      }).then(() => {
-
-        this.pedidos = pedidosTemp;
-
-      });
-    });
+  addPedido() {
+    //console.log(this.pedido)
+    this.pedido.nmrCC = this.user.nmrCC;
+    console.log(this.pedido)
+    this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
+      this.addingPedido = false;
+      this.getPedidos();
+    }, (err) => {
+      console.log(err);
+    })
   }
+
 
   filtroNCC() {
     this.rest.getPedidos().subscribe((data: {}) => {
@@ -104,20 +91,20 @@ export class PedidosComponent implements OnInit {
       //this.viewingFiltros = true;
       new Promise((resolve, reject) => {
         const pedidos = this.pedidos;
-        
+
         const resultToSearchcc = this.ccFiltro;
 
-        
+
 
         pedidos.forEach(function (pedido, index) {
 
-         
-          
+
+
           if (pedido.nmrCC == resultToSearchcc) {
             pedidosTemp.push(pedido);
             resolve();
           }
-          
+
 
           if (index === pedidos.length - 1) resolve();
         });
@@ -135,33 +122,24 @@ export class PedidosComponent implements OnInit {
 
       this.pedidos = data;
       this.viewingListarID = true;
-      //this.viewingFiltros = false;
       var pedidosTemp = [];
-      //this.viewingFiltros = true;
       new Promise((resolve, reject) => {
         const pedidos = this.pedidos;
-        
-        const resultToSearchID = this.IDfiltro;
 
-        
+        const resultToSearchID = this.IDfiltro;
 
         pedidos.forEach(function (pedido, index) {
 
-         
-          
           if (pedido._id == resultToSearchID) {
             pedidosTemp.push(pedido);
             resolve();
           }
-          
 
           if (index === pedidos.length - 1) resolve();
         });
       }).then(() => {
 
         this.pedidos = pedidosTemp;
-
-
       });
     });
   }
@@ -183,7 +161,7 @@ export class PedidosComponent implements OnInit {
 
         pedidos.forEach(function (pedido, index) {
 
-          if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && resultToSearch3 == undefined && resultToSearch4 == undefined ) {
+          if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && resultToSearch3 == undefined && resultToSearch4 == undefined) {
             pedidosTemp.push(pedido);
             resolve();
           }
@@ -192,15 +170,15 @@ export class PedidosComponent implements OnInit {
             pedidosTemp.push(pedido);
             resolve();
           }
-          else if (pedido.estadoTeste == resultToSearch2 && resultToSearch == undefined && resultToSearch3 == undefined && resultToSearch4 == undefined ) {
+          else if (pedido.estadoTeste == resultToSearch2 && resultToSearch == undefined && resultToSearch3 == undefined && resultToSearch4 == undefined) {
             pedidosTemp.push(pedido);
             resolve();
           }
-          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined ) {
+          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined) {
             pedidosTemp.push(pedido);
             resolve();
           }
-          else if (resultToSearch == undefined && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined ) {
+          else if (resultToSearch == undefined && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined) {
             pedidosTemp.push(pedido);
             resolve();
           }
@@ -209,7 +187,7 @@ export class PedidosComponent implements OnInit {
             pedidosTemp.push(pedido);
             resolve();
           }
-          else if (resultToSearch == undefined && resultToSearch2 == undefined && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined ) {
+          else if (resultToSearch == undefined && resultToSearch2 == undefined && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == undefined) {
             pedidosTemp.push(pedido);
             resolve();
           }
@@ -227,13 +205,13 @@ export class PedidosComponent implements OnInit {
           }
 
           //informação + resultado teste
-          else if (pedido.resultadoTeste == resultToSearch && resultToSearch2 == undefined && resultToSearch3 == undefined && resultToSearch4 == pedido.informacao ) {
+          else if (pedido.resultadoTeste == resultToSearch && resultToSearch2 == undefined && resultToSearch3 == undefined && resultToSearch4 == pedido.informacao) {
             pedidosTemp.push(pedido);
             resolve();
           }
 
           //informaçao + estado user
-          else if (resultToSearch == undefined && resultToSearch2 == undefined && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao ) {
+          else if (resultToSearch == undefined && resultToSearch2 == undefined && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao) {
             pedidosTemp.push(pedido);
             resolve();
           }
@@ -254,58 +232,18 @@ export class PedidosComponent implements OnInit {
 
           //informaçao + resultado teste + estado user
 
-          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao ) {
+          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao) {
             pedidosTemp.push(pedido);
             resolve();
           }
 
           //informação + estado teste + resultado teste + estado user 
 
-          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2  && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao) {
+          else if (pedido.resultadoTeste == resultToSearch && pedido.estadoTeste == resultToSearch2 && pedido.estadoUtilizador == resultToSearch3 && resultToSearch4 == pedido.informacao) {
             pedidosTemp.push(pedido);
             resolve();
           }
 
-          //ncc solo
-          /**
-          else if (resultToSearch == undefined && resultToSearch2 == undefined &&  resultToSearch3 == undefined && resultToSearch4 == undefined && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-
-          //ncc +informacao
-
-          else if (resultToSearch == undefined && resultToSearch2 == undefined &&  resultToSearch3 == undefined && pedido.informacao == resultToSearch4 && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-
-          //ncc + estado teste
-          else if (resultToSearch == undefined && pedido.estadoTeste == resultToSearch2  &&  resultToSearch3 == undefined && resultToSearch4 == undefined && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-
-          //ncc + resultado teste
-          else if (pedido.resultadoTeste == resultToSearch  &&  resultToSearch2 == undefined  &&  resultToSearch3 == undefined && resultToSearch4 == undefined && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-
-          //ncc + estado user
-          else if (resultToSearch == undefined  &&  resultToSearch2 == undefined  && pedido.estadoUtilizador == resultToSearch3  && resultToSearch4 == undefined && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
-
-          //ncc + estado teste + resultado
-          else if (pedido.resultadoTeste == resultToSearch  &&  pedido.estadoTeste == resultToSearch2   && resultToSearch3 == undefined && resultToSearch4 == undefined && pedido.nmrCC == resultToSearch5 ) {
-            pedidosTemp.push(pedido);
-            resolve();
-          } */
-
-
-          
 
           if (index === pedidos.length - 1) resolve();
         });
@@ -319,86 +257,6 @@ export class PedidosComponent implements OnInit {
   }
 
 
-  estadoTeste() {
-    var pedidosTemp = [];
-    this.viewingFiltros = false;
-    new Promise((resolve, reject) => {
-      const pedidos = this.pedidos;
-      const resultToSearch = this.estadosTeste;
-      pedidos.forEach(function (pedido, index) {
-        if (pedido.estadoTeste == resultToSearch) {
-          pedidosTemp.push(pedido);
-          resolve();
-        }
-        if (index === pedidos.length - 1) resolve();
-      });
-    }).then(() => {
-
-      this.pedidos = pedidosTemp;
-
-    });
-  }
-
-  estadoUser() {
-    var pedidosTemp = [];
-    this.viewingFiltros = false;
-    new Promise((resolve, reject) => {
-      const pedidos = this.pedidos;
-      const resultToSearch = this.estadosUser;
-      pedidos.forEach(function (pedido, index) {
-        if (pedido.estadoUtilizador == resultToSearch) {
-          pedidosTemp.push(pedido);
-          resolve();
-        }
-        if (index === pedidos.length - 1) resolve();
-      });
-    }).then(() => {
-
-      this.pedidos = pedidosTemp;
-
-    });
-  }
-  informacao() {
-
-    var pedidosTemp = [];
-    this.viewingFiltros = false;
-    new Promise((resolve, reject) => {
-      const pedidos = this.pedidos;
-      const resultToSearch = this.informacaoPedido;
-      pedidos.forEach(function (pedido, index) {
-        if (pedido.informacao == resultToSearch) {
-          pedidosTemp.push(pedido);
-          resolve();
-        }
-        if (index === pedidos.length - 1) resolve();
-      });
-    }).then(() => {
-
-      this.pedidos = pedidosTemp;
-
-    });
-  }
-
-  nmrCC() {
-    var pedidosTemp = [];
-    this.viewingFiltros = false;
-    new Promise((resolve, reject) => {
-      const pedidos = this.pedidos;
-      const resultToSearch = this.cc;
-      pedidos.forEach(function (pedido, index) {
-        if (pedido.nmrCC == resultToSearch) {
-          pedidosTemp.push(pedido);
-          resolve();
-        }
-        if (index === pedidos.length - 1) resolve();
-      });
-    }).then(() => {
-
-      this.pedidos = pedidosTemp;
-
-    });
-  }
-
   getPedido(_id: String) {
     this.pedido = null;
     this.rest.getPedido(_id).subscribe((data: Pedido) => {
@@ -406,15 +264,6 @@ export class PedidosComponent implements OnInit {
     })
   }
 
-  addPedido() {
-    console.log(this.pedido)
-    this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
-      this.addingPedido = false;
-      this.getPedidos();
-    }, (err) => {
-      console.log(err);
-    })
-  }
 
   delete(pedidoId: String) {
     var doRemove = confirm("Queres mesmo remover este pedido?");
@@ -480,16 +329,6 @@ export class PedidosComponent implements OnInit {
 
     }
   }
-  nrinfetados() {
-
-    this.rest.numeroInfetados(this.infetado).subscribe((data: Number) => {
-      console.log(data);
-      alert(data);
-
-    });
-
-  }
-
 
 
 }
