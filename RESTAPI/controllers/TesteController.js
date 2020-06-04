@@ -5,8 +5,8 @@ const Teste = require("../models/Teste");
 const TesteController = {};
 
 TesteController.criarTeste = function (req, res, next) {
-
     if (req.body.pedidoId && req.body.nmrCC) {
+
         Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
             if (err) {
                 next(err);
@@ -20,6 +20,11 @@ TesteController.criarTeste = function (req, res, next) {
                         if (err) {
                             next(err);
                         } else {
+                            /*const data = new Date(req.body.date);
+                            Teste.find({date : {"$gte": new Date(data.getFullYear(),data.getMonth(),data.getDate()),
+                            "$lt": new Date(data.getFullYear(),data.getMonth(),data.getDate()+1)}}, function(err,teste){
+                                console.log(teste)
+                            })*/
                             res.json(newTeste);
                         }
                     })
@@ -69,6 +74,7 @@ TesteController.updateTeste = function (req, res, next) {
             if (err) {
                 next(err);
             } else {
+                if(req.body.estadoTeste)
                 res.json(teste);
             }
         });

@@ -16,10 +16,10 @@ export class TestesComponent implements OnInit {
   user: any;
 
   testes: any = [];
-  
+
   currentTeste: any;
   viewingTeste: boolean;
-  atualizar: boolean = false; 
+  atualizar: boolean = false;
   atualizarTeste: boolean;
   novoEstado: String;
   novoResultado: String;
@@ -30,14 +30,14 @@ export class TestesComponent implements OnInit {
   collectionSize;
 
   //data: Date = new Date();
-    //settings = {
-      //  bigBanner: true,
-        //timePicker: false,
-        //format: 'dd-MM-yyyy',
-        //defaultOpen: true
-    //}
+  //settings = {
+  //  bigBanner: true,
+  //timePicker: false,
+  //format: 'dd-MM-yyyy',
+  //defaultOpen: true
+  //}
 
-  
+
 
   @Input() teste: Teste = new Teste();
 
@@ -50,7 +50,7 @@ export class TestesComponent implements OnInit {
 
   get testesP(): any[] {
     return this.testes
-      .map((country, i) => ({id: i + 1, ...country}))
+      .map((country, i) => ({ id: i + 1, ...country }))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
@@ -63,9 +63,7 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
-    //this.user.NumeroTestes = this.user.NumeroTestes + 1;
-    console.log(this.teste)
-    //console.log(this.teste.date)
+    console.log(this.teste.date.valueOf());
     this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
       this.addingTeste = false;
       this.getTestes();
@@ -73,7 +71,7 @@ export class TestesComponent implements OnInit {
     }, (err) => {
       console.log(err);
     })
-    
+
   }
 
   testeInfo(testeId: string) {
@@ -92,6 +90,10 @@ export class TestesComponent implements OnInit {
         });
       }).then(() => {
         this.currentTeste = testeResult;
+        if (Date.parse(testeResult.date)) {
+          const data = new Date(testeResult.date)
+          this.currentTeste.date = (data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear() + " " + data.getHours() + "h")
+        }
         this.novoEstado = testeResult.estado;
         this.atualizar = false;
         this.viewingTeste = true
@@ -111,10 +113,10 @@ export class TestesComponent implements OnInit {
       }
       );
 
-      
+
   }
 
-  deleteTeste(testeId: string){
+  deleteTeste(testeId: string) {
     var doRemove = confirm("Queres mesmo remover este teste?");
     if (doRemove == true) {
       this.rest.deleteTeste(testeId)
