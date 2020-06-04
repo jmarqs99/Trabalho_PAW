@@ -152,13 +152,18 @@ TesteController.find = async(req,res,next) => {
 
 
 TesteController.totalTestesPorPessoa = function (req, res, next) {
-    Teste.find({ nmrCC: req.params.nmrCC }, function (err, teste) {
-        if (err) {
-            next(err)
-        } else {
-            res.json(teste.length)
-        }
-    })
+    Teste.countDocuments({ nmrCC: req.params.nmrCC }, function (err, count) {
+        console.log(count);
+        res.json(count)
+      });
 }
+
+
+
+/**
+Adventure.countDocuments({ type: 'jungle' }, function (err, count) {
+    console.log('there are %d jungle adventures', count);
+  });
+ */
 
 module.exports = TesteController;
