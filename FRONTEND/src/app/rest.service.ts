@@ -13,7 +13,7 @@ const httpOptions = {
 };
 const httpOptionsFile = {
   headers: new HttpHeaders({
-  
+
     'Accept': 'application/json'
   })
 };
@@ -133,12 +133,16 @@ export class RestService {
     return this.http.put<any>(endpoint + "pedido/" + id, JSON.stringify(pedido), httpOptions);
   }
    */
-  deleteTeste(id:String): Observable<any> {
+  deleteTeste(id: String): Observable<any> {
     return this.http.delete<any>(endpoint + "testes/" + id);
   }
 
-  testesPessoa(nmrCC:String) : Observable<any>{
-    return this.http.get<any>(endpoint+"testes/numeroTestesPessoa/" + nmrCC)
+  testesPessoa(nmrCC: String): Observable<any> {
+    return this.http.get<any>(endpoint + "testes/numeroTestesPessoa/" + nmrCC)
+  }
+
+  numInfetados(): Observable<any> {
+    return this.http.get<any>(endpoint + "utilizador/numInfetados/Infetado")
   }
 
 }
