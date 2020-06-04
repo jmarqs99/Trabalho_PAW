@@ -79,11 +79,18 @@
             <p>Resultado do Teste : {{currentTeste.resultadoTeste}}</p>
             <p>Data do teste: {{currentTeste.date}}</p>
             <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
-                (click)="atualizar = true">Modificar Data</button>
+                (click)="atualizar = true">Atualizar</button>
 
             <form *ngIf="atualizar" (submit)="update()" class="updateForm">
 
-              
+              <label>Resultado do Teste
+                <select input [(ngModel)]="teste.resultadoTeste" name="resultadoTeste">
+                    <option value="positivo">positivo</option>
+                    <option value="negativo">negativo</option>
+                </select>
+            </label>
+            <br>
+
                 <div class="input-group">
                     <dl-date-time-picker startView="day" maxView="year" minView="hour"
                         [(ngModel)]="teste.date" name="date"></dl-date-time-picker>
