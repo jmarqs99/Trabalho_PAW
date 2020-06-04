@@ -17,9 +17,7 @@
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
         <form *ngIf="addingTeste" (submit)="addTeste()">
-            <label>Número do cartão de cidadão do user do pedido:
-                <input [(ngModel)]="teste.nmrCC" name="nmrCC" type="text" placeholder="cartão de cidadão" /><br>
-            </label><br>
+           
             <label>ID do pedido:
                 <input [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
             </label><br>

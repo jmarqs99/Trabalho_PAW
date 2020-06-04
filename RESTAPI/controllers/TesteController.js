@@ -1,19 +1,21 @@
 const mongoose = require("mongoose");
 const Teste = require("../models/Teste");
-
+const Pedido = require('../models/pedido');
 
 const TesteController = {};
 
 TesteController.criarTeste = function (req, res, next) {
-    if (req.body.pedidoId && req.body.nmrCC) {
 
-        Teste.findOne({ _id: req.body.testeId }, function (err, teste) {
+    if (req.body.pedidoId) {
+
+        Pedido.findById(req.body.pedidoId, function (err, pedido) {
+
             if (err) {
-                next(err);
+                next(err)
             } else {
+                if (pedido != null) {
+                    req.body.nmrCC = pedido.nmrCC;
 
-
-                if (teste == null) {
                     const newTeste = new Teste(req.body)
 
                     newTeste.save(function (err) {
@@ -32,16 +34,14 @@ TesteController.criarTeste = function (req, res, next) {
                 else {
                     res.status(400).json({ invalidArguments: 'true' });
                 }
-
-
             }
         })
+
     }
+
     else {
         res.status(400).json({ invalidArguments: 'true' });
     }
-
-
 }
 
 TesteController.verTestes = function (req, res, next) {
@@ -74,8 +74,8 @@ TesteController.updateTeste = function (req, res, next) {
             if (err) {
                 next(err);
             } else {
-                if(req.body.estadoTeste)
-                res.json(teste);
+                if (req.body.estadoTeste)
+                    res.json(teste);
             }
         });
 }
@@ -113,8 +113,8 @@ const createFilters = (query) => {
 }
  */
 TesteController.totalTestesPorDia = function (req, res, next) {
-    
-    
+
+
     Teste.find({ dia: req.params.dia }, { mes: req.params.mes }, { ano: req.params.ano }, function (err, teste) {
         if (err) {
             next(err)
