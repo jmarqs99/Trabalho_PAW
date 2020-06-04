@@ -10,7 +10,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class TecnicosComponent implements OnInit {
   tecnicos : any;
-  addingTecnico: boolean;
+  addingTecnico: boolean = false;
   userId: string;
   currentTecnico : any;
   viewingTecnico: boolean;

@@ -52,7 +52,10 @@
                 <option value="Suspeito">Suspeito</option>
                 <option value="Saudável">Saudável</option>
             </select>
+            <br>
             <button class="btn btn-primary" type="submit">Atualizar</button><br>
+            <button *ngIf="atualizar == true" class="btn btn-danger" type="button"
+                    (click)="atualizar = false">Cancelar</button>
         </form>
     </div>
 </div>

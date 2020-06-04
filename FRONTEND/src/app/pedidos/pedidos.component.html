@@ -150,39 +150,12 @@
             <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
             <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
             <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
-            <button *ngIf="atualizarPedido == false && atualizarPedidoUpload == false && user.role != 'UTILIZADOR'" class="btn btn-primary"
-                type="button" (click)="atualizarPedido = true">Atualizar</button>
-            <br>
+            
             <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false && user.role != 'UTILIZADOR'" class="btn btn-primary"
                 type="button" (click)="atualizarPedidoUpload = true">Upload</button>
 
 
-            <form *ngIf="atualizarPedido" (submit)="update()" class="updateForm">
-                <br>
-                <h5>Atualizar pedido {{currentPedido._id}}</h5>
-                
-                <label>Estado do Teste:
-                    <select input [(ngModel)]="pedido.estadoTeste" name="estadoTeste">
-                        <option value="Por agendar">Por agendar</option>
-                        <option value="agendado">Agendado</option>
-                        <option value="finalizado">Finalizado</option>
-                    </select>
-                </label>
-                <br>
-                <label>Resultado do Teste:
-                    <select input [(ngModel)]="pedido.resultadoTeste" name="resultadoTeste">
-                        <option value="indefinido">indefinido</option>
-                        <option value="positivo">positivo</option>
-                        <option value="negativo">negativo</option>
-                    </select>
-
-                </label>
-                <br>
-                <button class="btn btn-primary" type="submit">Atualizar</button><br>
-                <button *ngIf="atualizarPedido == true" class="btn btn-danger" type="button"
-                (click)="atualizarPedido = false">Cancelar</button>
-
-            </form>
+           
 
             <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
                 <br>
