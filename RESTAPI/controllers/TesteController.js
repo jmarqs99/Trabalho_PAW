@@ -13,7 +13,7 @@ TesteController.criarTeste = function (req, res, next) {
             if (err) {
                 next(err)
             } else {
-                if (pedido != null) {
+                if (pedido != null && pedido.estadoTeste != "finalizado") {
                     req.body.nmrCC = pedido.nmrCC;
 
                     const newTeste = new Teste(req.body)
@@ -27,7 +27,9 @@ TesteController.criarTeste = function (req, res, next) {
                             "$lt": new Date(data.getFullYear(),data.getMonth(),data.getDate()+1)}}, function(err,teste){
                                 console.log(teste)
                             })*/
-                            res.json(newTeste);
+                            Pedido.findByIdAndUpdate(req.body.pedidoId,{estadoTeste: "agendado"}, { new: true },function(err,pedido){
+                                res.json(newTeste);
+                            }) 
                         }
                     })
                 }
@@ -74,8 +76,19 @@ TesteController.updateTeste = function (req, res, next) {
             if (err) {
                 next(err);
             } else {
-                if (req.body.estadoTeste)
-                    res.json(teste);
+                if (req.body.resultadoTeste == "positivo"){
+                    console.log("here")
+                    Pedido.findByIdAndUpdate(teste.pedidoId,{resultadoTeste : req.body.resultadoTeste, estadoTeste: "finalizado"}, { new: true })
+                } else if (req.body.resultadoTeste == "negatico"){
+                    Teste.find({ pedidoId: teste.pedidoId }, function (err, testes) {
+                        if (err) {} else {
+                           if (testes.length >= 2){
+                            Pedido.findByIdAndUpdate(teste.pedidoId,{resultadoTeste : req.body.resultadoTeste, estadoTeste: "finalizado"})
+                           }
+                        }
+                    })
+                }
+                res.json(teste);
             }
         });
 }
@@ -136,7 +149,6 @@ TesteController.find = async(req,res,next) => {
 TesteController.totalTestesPorPessoa = function (req, res, next) {
     Teste.find({ nmrCC: req.params.nmrCC }, function (err, teste) {
         if (err) {
-            teste
             next(err)
         } else {
             res.json(teste.length)

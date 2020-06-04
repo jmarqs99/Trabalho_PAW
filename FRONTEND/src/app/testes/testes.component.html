@@ -84,18 +84,10 @@
             <form *ngIf="atualizar" (submit)="update()" class="updateForm">
 
                 <label>Resultado do Teste
-                    <select input [(ngModel)]="novoResultado" name="resultadoTeste">
+                    <select input [(ngModel)]="teste.resultadoTeste" name="resultadoTeste">
                         <option value="positivo">positivo</option>
                         <option value="negativo">negativo</option>
                         <option value="indefinido">indefinido</option>
-                    </select>
-                </label>
-
-                <label>Estado do Teste:
-                    <select input [(ngModel)]="novoEstado" name="estadoTeste">
-                        <option value="Por agendar">Por agendar</option>
-                        <option value="agendado">Agendado</option>
-                        <option value="finalizado">Finalizado</option>
                     </select>
                 </label>
 
