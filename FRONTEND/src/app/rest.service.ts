@@ -137,6 +137,8 @@ export class RestService {
     return this.http.delete<any>(endpoint + "testes/" + id);
   }
 
+  testesPessoa(nmrCC:String) : Observable<any>{
+    return this.http.get<any>(endpoint+"testes/numeroTestesPessoa/" + nmrCC)
+  }
 
-  
 }

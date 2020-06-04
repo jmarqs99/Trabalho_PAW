@@ -21,6 +21,8 @@ export class UtilizadoresComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize;
+  numeroTestes: number;
+
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
@@ -29,7 +31,7 @@ export class UtilizadoresComponent implements OnInit {
   }
   get utilizadoresP(): any[] {
     return this.utilizadores
-      .map((country, i) => ({id: i + 1, ...country}))
+      .map((country, i) => ({ id: i + 1, ...country }))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
@@ -67,7 +69,11 @@ export class UtilizadoresComponent implements OnInit {
         this.currentUtilizador = utilizadorResult;
         this.novoEstado = utilizadorResult.estado;
         this.atualizar = false;
-        this.viewingUtilizador = true
+        
+        this.rest.testesPessoa(this.currentUtilizador.nmrCC).subscribe((data:number) => {
+          this.viewingUtilizador = true
+          this.currentUtilizador.NumeroTestes = data;
+        })
       });
     }
   }
