@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Teste = require("../models/Teste");
 const Pedido = require('../models/pedido');
+const Utilizador = require('../models/utilizador');
 
 const TesteController = {};
 
@@ -27,9 +28,9 @@ TesteController.criarTeste = function (req, res, next) {
                             "$lt": new Date(data.getFullYear(),data.getMonth(),data.getDate()+1)}}, function(err,teste){
                                 console.log(teste)
                             })*/
-                            Pedido.findByIdAndUpdate(req.body.pedidoId,{estadoTeste: "agendado"}, { new: true },function(err,pedido){
+                            Pedido.findByIdAndUpdate(req.body.pedidoId, { estadoTeste: "agendado" }, { new: true }, function (err, pedido) {
                                 res.json(newTeste);
-                            }) 
+                            })
                         }
                     })
                 }
@@ -76,15 +77,19 @@ TesteController.updateTeste = function (req, res, next) {
             if (err) {
                 next(err);
             } else {
-                if (req.body.resultadoTeste == "positivo"){
+                if (req.body.resultadoTeste == "positivo") {
                     console.log("here")
-                    Pedido.findByIdAndUpdate(teste.pedidoId,{resultadoTeste : req.body.resultadoTeste, estadoTeste: "finalizado"}, { new: true })
-                } else if (req.body.resultadoTeste == "negatico"){
+                    Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" }, { new: true })
+                    Utilizador.findOneAndUpdate({nmrCC : teste.nmrCC}, {estado:"Infetado"}, { new: true })
+                } else if (req.body.resultadoTeste == "negatico") {
                     Teste.find({ pedidoId: teste.pedidoId }, function (err, testes) {
-                        if (err) {} else {
-                           if (testes.length >= 2){
-                            Pedido.findByIdAndUpdate(teste.pedidoId,{resultadoTeste : req.body.resultadoTeste, estadoTeste: "finalizado"})
-                           }
+                        if (err) { } else {
+                            if (testes.length >= 2) {
+                                Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" })
+                                Utilizador.findOneAndUpdate({nmrCC : teste.nmrCC}, {estado:"Saudável"}, { new: true })
+                            } else {
+                                
+                            }
                         }
                     })
                 }
