@@ -8,4 +8,15 @@ router.put('/:utilizadorId', authorize(["ADMIN"]),utilizadorController.updateUti
 router.get('/:utilizadorId' , authorize(["TECNICO"]),utilizadorController.verUtilizador);
 router.get('/' , authorize(["TECNICO"]),utilizadorController.verTodosUtilizadores);
 
+
+
+
+
+router.get('/numInfetados/Infetado' , authorize(["ADMIN"]), utilizadorController.numeroInfetados);
+
+
+
+
+
+
 module.exports = router;

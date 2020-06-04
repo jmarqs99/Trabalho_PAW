@@ -88,4 +88,20 @@ utilizadorController.verTodosUtilizadores = function (req, res, next) {
   });
 }
 
+/* TesteController.totalTestesPorPessoa = function (req, res, next) {
+  Teste.countDocuments({ nmrCC: req.params.nmrCC }, function (err, count) {
+      console.log(count);
+      res.json(count)
+    });
+}
+ */
+
+utilizadorController.numeroInfetados = function (req, res, next) {
+  Utilizador.countDocuments({ estado: 'Infetado' }, function (err, count) {
+    res.json(count);
+  })
+
+ 
+}
+
 module.exports = utilizadorController;
