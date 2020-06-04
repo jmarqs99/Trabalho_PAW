@@ -22,12 +22,14 @@ export class UtilizadoresComponent implements OnInit {
   pageSize = 10;
   collectionSize;
   numeroTestes: number;
+  user:any
 
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getUtilizadores();
+    this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
   get utilizadoresP(): any[] {
     return this.utilizadores
@@ -91,5 +93,6 @@ export class UtilizadoresComponent implements OnInit {
       }
       );
   }
+
 
 }
