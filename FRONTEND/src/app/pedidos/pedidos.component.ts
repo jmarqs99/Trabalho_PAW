@@ -34,8 +34,10 @@ export class PedidosComponent implements OnInit {
   ccFiltro: String;
   IDfiltro: String;
 
-  viewingListarID: boolean = true;
-  viewingListarCC: boolean = true;
+  viewingListarID: boolean = false;
+  viewingListarCC: boolean = false;
+
+  pesquisar: boolean = false;
 
   fileChanged(e) {
     this.pdf = e.target.files[0];
@@ -60,6 +62,9 @@ export class PedidosComponent implements OnInit {
   getPedidos() {
     this.pedidos = [];
     this.viewingListar = true;
+    this.viewingListarCC = false;
+    this.viewingListarID = false;
+    this.pesquisar = false;
     this.rest.getPedidos().subscribe((data: {}) => {
       this.pedidos = data;
       this.collectionSize = this.pedidos.length;
@@ -74,6 +79,7 @@ export class PedidosComponent implements OnInit {
     console.log(this.pedido)
     this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
       this.addingPedido = false;
+      
       this.getPedidos();
     }, (err) => {
       console.log(err);
@@ -94,17 +100,12 @@ export class PedidosComponent implements OnInit {
 
         const resultToSearchcc = this.ccFiltro;
 
-
-
         pedidos.forEach(function (pedido, index) {
-
-
 
           if (pedido.nmrCC == resultToSearchcc) {
             pedidosTemp.push(pedido);
             resolve();
           }
-
 
           if (index === pedidos.length - 1) resolve();
         });
@@ -151,6 +152,7 @@ export class PedidosComponent implements OnInit {
       this.viewingFiltros = false;
       var pedidosTemp = [];
       this.viewingFiltros = true;
+      this.pesquisar = true;
       new Promise((resolve, reject) => {
         const pedidos = this.pedidos;
         const resultToSearch = this.resultado;

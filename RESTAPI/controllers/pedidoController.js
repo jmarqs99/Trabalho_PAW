@@ -7,7 +7,7 @@ const pedidoController = {};
 
 
 pedidoController.criarPedido = function (req, res, next) {
-    if (req.body.nmrCC && req.body.informacao && req.body.estadoUtilizador) {
+    if (req.body.nmrCC && req.body.informacao) {
         Pedido.findOne({ _id: req.body.pedidoId }, function (err, pedido) {
             if (err) {
                 next(err);
@@ -21,8 +21,11 @@ pedidoController.criarPedido = function (req, res, next) {
                             next(err);
                         } else {
                             res.json(newPedido);
+                         
                         }
                     })
+
+                    
                 }
                 else {
                     res.status(400).json({ invalidArguments: 'true' });

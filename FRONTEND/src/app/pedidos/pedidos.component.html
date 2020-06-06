@@ -37,7 +37,7 @@
         <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
             (click)="addingPedido = false">Cancelar</button>
 
-
+    
         <br>
         <br>
         <div>
@@ -77,13 +77,13 @@
                 <br>
                 
                 <button class="btn btn-primary" type="submit">listar</button>
-                <button *ngIf="viewingFiltros == true" class="btn btn-danger" type="button"
+                <button *ngIf="pesquisar == false" class="btn btn-danger" type="button"
                     (click)="viewingFiltros = false">Sair dos filtros</button>
                     
                     
             </form>
             <br>
-            <form *ngIf="viewingFiltros" (submit)="getPedidos()">
+            <form *ngIf="pesquisar == true" (submit)="getPedidos()">
                 <button class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
             </form>
         </div>
@@ -91,22 +91,24 @@
 
         <div>
             
-            <h5>Pesquisar por ID </h5>
+            <h5>Pesquisar pelo ID do pedido </h5>
             <input [(ngModel)]="IDfiltro" name="_id" type="text" placeholder="id" />
                 <button  class="btn btn-primary" type="button"
                 (click)="filtroID()">Pesquisar</button>
+                <button *ngIf="viewingListarID == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
                 <br>
             <br>
-            <h5>Pesquisar pelo CC </h5>
+            <h5>Pesquisar pelo CC do utilizador </h5>
            
             
                 <input [(ngModel)]="ccFiltro" name="nmrCC" type="text" placeholder="cartão de cidadão" />
                 <button  class="btn btn-primary" type="button"
                 (click)="filtroNCC()">Pesquisar</button>
+                <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
                 <br>
+                <br>
+                   
                 
-        
-
         </div>
         
     </div>

@@ -16,33 +16,30 @@
 
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
-        <form *ngIf="addingTeste" (submit)="addTeste()">
-           
-            <label>ID do pedido:
-                <input [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
-            </label><br>
+        <form #testeform="ngForm" *ngIf="addingTeste" (submit)="addTeste()">
+            <div class="form-group" [class.has-error] = "fullid.invalid">
+            <label class="control-label">ID do pedido:
+                <input required id="teste.pedidoId" class="form-control" #fullid = "ngModel" [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
+            </label>
+            <span class="help-block" *ngIf="fullid.invalid && fullid.touched" style="color: red;">ID é obrigatorio</span>
+            <br>
+        </div>
 
 
-            <!--<label for="date">Data do teste</label>-->
-
-            <!--<input [(ngModel)]="teste.date" name="date" type="date" >
-            -->
-
-
-
-            <div class="input-group">
-                <dl-date-time-picker startView="day" maxView="year" minView="hour"
-                    [(ngModel)]="teste.date" name="date"></dl-date-time-picker>
+            <div class="input-group" [class.has-error] = "fulldate.invalid">
+                <dl-date-time-picker required id="teste.date" startView="day" maxView="year" minView="hour"
+                    [(ngModel)]="teste.date" name="date" #fulldate = "ngModel" ></dl-date-time-picker>
             </div>
-
+            <span class="help-block" *ngIf="fulldate.invalid" style="color: red;">Data é obrigatoria</span>
 
             <br>
 
-            <button class="btn btn-primary" type="submit">agendar</button><br>
+            <button class="btn btn-primary" type="submit" [disabled]="testeform.invalid">agendar</button><br>
 
             <button *ngIf="addingTeste == true" class="btn btn-danger" type="button"
                 (click)="addingTeste = false">Cancelar</button>
         </form>
+
     </div>
     <div class="conteiner">
         <div class="table-div">

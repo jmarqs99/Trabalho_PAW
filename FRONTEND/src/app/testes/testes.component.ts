@@ -48,6 +48,7 @@ export class TestesComponent implements OnInit {
     //this.user = JSON.parse(localStorage.getItem("currentTeste"))
   }
 
+
   get testesP(): any[] {
     return this.testes
       .map((country, i) => ({ id: i + 1, ...country }))
