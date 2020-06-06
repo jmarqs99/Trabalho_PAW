@@ -41,4 +41,11 @@ export class LoginComponent implements OnInit {
     this.isRegistering = false;
     })
   }
+
+  validar(){
+    if(this.primeiroNome == null || this.ultimoNome == null || this.nmrCC == null || this.password == null ){
+      alert("Faltam preencher campos!");
+    }
+  }
+
 }
