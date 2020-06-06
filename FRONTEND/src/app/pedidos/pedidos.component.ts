@@ -79,8 +79,11 @@ export class PedidosComponent implements OnInit {
     console.log(this.pedido)
     this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
       this.addingPedido = false;
-      
       this.getPedidos();
+      
+      this.pedido.estadoUtilizador = null;
+      this.pedido.informacao = null;
+      
     }, (err) => {
       console.log(err);
     })
@@ -112,6 +115,7 @@ export class PedidosComponent implements OnInit {
       }).then(() => {
 
         this.pedidos = pedidosTemp;
+        this.ccFiltro = null;
 
 
       });
@@ -141,6 +145,7 @@ export class PedidosComponent implements OnInit {
       }).then(() => {
 
         this.pedidos = pedidosTemp;
+        this.IDfiltro = null;
       });
     });
   }
@@ -252,8 +257,10 @@ export class PedidosComponent implements OnInit {
       }).then(() => {
 
         this.pedidos = pedidosTemp;
-
-
+        this.resultado = null;
+        this.estadosTeste = null;
+        this.estadosUser = null;
+        this.informacaoPedido = null;
       });
     });
   }

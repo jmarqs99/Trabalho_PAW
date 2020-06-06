@@ -67,6 +67,8 @@ export class TestesComponent implements OnInit {
     this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
       this.addingTeste = false;
       this.getTestes();
+      this.teste.pedidoId = null;
+      this.teste.date = null;
       //this.addingTeste = false;
     }, (err) => {
       console.log(err);

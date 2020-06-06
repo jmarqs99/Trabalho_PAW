@@ -24,6 +24,14 @@ h2{
     flex-direction: row;
 }
 
+.filtros{
+    margin: 3%
+}
+
+.pesquisa{
+    margin: 3%
+}
+
 .table-div{
     margin:3%;
     width: 47%;

@@ -9,109 +9,146 @@
     <h2>Pedidos</h2>
     <div class="criarPedido">
 
-        <button *ngIf="addingPedido == false" class="btn btn-primary" type="button"
-            (click)="addingPedido = true">Fazer Pedido</button>
+        <button *ngIf="addingPedido == false" class="btn btn-primary" type="button" (click)="addingPedido = true">Fazer
+            Pedido</button>
 
 
-        <label *ngIf="addingPedido">Informação relevante:
-            <input style="width:450px;" [(ngModel)]="pedido.informacao"
-                placeholder="escreva a informação aqui ou selecione as opções à direita" />
-            <select input [(ngModel)]="pedido.informacao">
-                <option value="saúde 24">saúde 24</option>
-                <option value="local de risco">local de risco</option>
-                <option value="pessoa de risco">pessoa de risco</option>
-                <input [(ngModel)]="pedido.informacao" name="informacao" type="text" placeholder="Informação" /><br>
-            </select>
+        <form #testeform="ngForm" *ngIf="addingPedido" (submit)="addPedido()">
 
-        </label>
-        <br>
-        <label *ngIf="addingPedido">O seu estado de saúde:
-            <select input [(ngModel)]="pedido.estadoUtilizador">
-                <option value="infetado">Infetado</option>
-                <option value="suspeito">Suspeito</option>
-                <option value="saudavel">Saudável</option>
-            </select>
-        </label>
-        <br>
-        <button *ngIf="addingPedido" class="btn btn-primary" (click)="addPedido()">Confirmar</button>
-        <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
-            (click)="addingPedido = false">Cancelar</button>
-
-    
-        <br>
-        <br>
-        <div>
-
-            <button *ngIf="viewingFiltros == false" class="btn btn-primary" type="button"
-                (click)="viewingFiltros = true">Filtros</button>
-
-            <form *ngIf="viewingFiltros" (submit)="filtros()">
-                <label>Filtrar por resultado do teste
-                    <select input [(ngModel)]="resultado" name="resultadoTeste">
-                        <option value="positivo">positivo</option>
-                        <option value="negativo">negativo</option>
-                        <option value="indefinido">indefinido</option>
+            <div class="form-group" [class.has-error]="info.invalid">
+                <label class="control-label">Informação relevante:
+                    <input required id="pedido.informacao" #info="ngModel" class="form-control" style="width:240%;" [(ngModel)]="pedido.informacao" name="informacao"
+                        placeholder="escreva a informação aqui ou selecione uma das opções abaixo" />
+                    <select input required id="pedido.informacao" #info="ngModel" class="form-control" [(ngModel)]="pedido.informacao" name="informacao">
+                        <option value="saúde 24">Fui encaminhado pela linha Saúde24</option>
+                        <option value="local de risco">Trabalho em locais de risco</option>
+                        <option value="pessoa de risco">Pertenço a um grupo de risco </option>
+                        <input required id="pedido.informacao" #info="ngModel" class="form-control" [(ngModel)]="pedido.informacao" name="informacao" type="text"
+                            placeholder="Informação" /><br>
                     </select>
-                </label><br>
 
-                <label>Filtrar por estado do teste
-                    <select input [(ngModel)]="estadosTeste" name="estadoTeste">
-                        <option value="Por agendar">Por agendar</option>
-                        <option value="agendado">agendado</option>
-                        <option value="finalizado">finalizado</option>
+                </label>
+                <span class="help-block" *ngIf="info.invalid && info.touched" style="color: red;">Info obrigatoria</span>
+            </div>
+
+            <div class="form-group">
+                <br>
+                <label class="control-label">O seu estado de saúde:
+                    <select class="form-control" [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
+                        <option value="infetado">Infetado</option>
+                        <option value="suspeito">Suspeito</option>
+                        <option value="saudavel">Saudável</option>
                     </select>
-                </label><br>
+                </label>
+                
+            </div>
+
+
+
+
+            <br>
+            <button class="btn btn-primary" type="submit" [disabled]="testeform.invalid" >Confirmar</button><br>
+            <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
+                (click)="addingPedido = false">Cancelar</button>
+        </form>
+
+
+    </div>
+
+    <div class="filtros">
+
+        <button *ngIf="viewingFiltros == false" class="btn btn-primary" type="button"
+            (click)="viewingFiltros = true">Filtros</button>
+
+        <form *ngIf="viewingFiltros" (submit)="filtros()">
+            <label class="control-label">Filtrar por resultado do teste
+                <select input class="form-control" [(ngModel)]="resultado" name="resultadoTeste">
+                    <option value="positivo">positivo</option>
+                    <option value="negativo">negativo</option>
+                    <option value="indefinido">indefinido</option>
+                </select>
+            </label><br>
+
+            <label class="control-label">Filtrar por estado do teste
+                <select input class="form-control" [(ngModel)]="estadosTeste" name="estadoTeste">
+                    <option value="Por agendar">Por agendar</option>
+                    <option value="agendado">agendado</option>
+                    <option value="finalizado">finalizado</option>
+                </select>
+            </label><br>
+            <label class="control-label">
                 Filtrar por estado do utilizador
-                <select input [(ngModel)]="estadosUser" name="estadoUtilizador">
+                <select input class="form-control" [(ngModel)]="estadosUser" name="estadoUtilizador">
                     <option value="infetado">Infetado</option>
                     <option value="suspeito">Suspeito</option>
                     <option value="saudavel">Saudável</option>
                 </select>
-                <br>
+            </label>
+            <br>
+            <label class="control-label">
                 Filtrar pela informação do pedido
-                <select input [(ngModel)]="informacaoPedido" name="informacao">
+                <select input class="form-control" [(ngModel)]="informacaoPedido" name="informacao">
                     <option value="saúde 24">saúde 24</option>
                     <option value="local de risco">local de risco</option>
                     <option value="pessoa de risco">pessoa de risco</option>
                 </select>
-                <br>
-                
-                <button class="btn btn-primary" type="submit">listar</button>
-                <button *ngIf="pesquisar == false" class="btn btn-danger" type="button"
-                    (click)="viewingFiltros = false">Sair dos filtros</button>
-                    
-                    
-            </form>
+            </label>
             <br>
-            <form *ngIf="pesquisar == true" (submit)="getPedidos()">
-                <button class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
-            </form>
-        </div>
+
+            <button class="btn btn-primary" type="submit">listar</button>
+            <button *ngIf="pesquisar == false" class="btn btn-danger" type="button"
+                (click)="viewingFiltros = false">Sair dos filtros</button>
+
+
+        </form>
+        <br>
+        <form *ngIf="pesquisar == true" (submit)="getPedidos()">
+            <button class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
+        </form>
+    </div>
+
+
+    <div class="pesquisa">
+
+        <h5>Pesquisar pelo ID do pedido </h5>
+        <form #testeformID="ngForm" (submit)="filtroID()">
+            <div class="form-group" [class.has-error]="fullid.invalid">
+                <label class="control-label">
+                    <input required id="IDfiltro" class="form-control" #fullid="ngModel" [(ngModel)]="IDfiltro"
+                        name="_id" type="text" placeholder="id" />
+                </label>
+                <span class="help-block" *ngIf="fullid.invalid && fullid.touched" style="color: red;">ID é
+                    obrigatorio</span>
+            </div>
+            <button class="btn btn-primary" type="submit" [disabled]="testeformID.invalid">pesquisar</button>
+            <button *ngIf="viewingListarID == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
+        </form>
+
         <br>
 
-        <div>
-            
-            <h5>Pesquisar pelo ID do pedido </h5>
-            <input [(ngModel)]="IDfiltro" name="_id" type="text" placeholder="id" />
-                <button  class="btn btn-primary" type="button"
-                (click)="filtroID()">Pesquisar</button>
-                <button *ngIf="viewingListarID == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
-                <br>
-            <br>
-            <h5>Pesquisar pelo CC do utilizador </h5>
-           
-            
-                <input [(ngModel)]="ccFiltro" name="nmrCC" type="text" placeholder="cartão de cidadão" />
-                <button  class="btn btn-primary" type="button"
-                (click)="filtroNCC()">Pesquisar</button>
-                <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
-                <br>
-                <br>
-                   
-                
-        </div>
-        
+        <h5>Pesquisar pelo CC do utilizador </h5>
+        <form #testeformCC="ngForm" (submit)="filtroNCC()">
+            <div class="form-group" [class.has-error]="fullcc.invalid">
+
+                <label class="control-label">
+                    <input required id="ccFiltro" class="form-control" #fullcc="ngModel" [(ngModel)]="ccFiltro"
+                        name="nmrCC" type="text" placeholder="cartão de cidadão" />
+                </label>
+                <span class="help-block" *ngIf="fullcc.invalid && fullcc.touched" style="color: red;">CC é
+                    obrigatorio</span>
+
+            </div>
+
+
+            <button class="btn btn-primary" type="submit" [disabled]="testeformCC.invalid">pesquisar</button>
+            <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
+        </form>
+
+
+
     </div>
+
+
 
 
     <div class="conteiner">
@@ -152,12 +189,12 @@
             <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
             <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
             <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
-            
-            <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false && user.role != 'UTILIZADOR'" class="btn btn-primary"
-                type="button" (click)="atualizarPedidoUpload = true">Upload</button>
+
+            <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false && user.role != 'UTILIZADOR'"
+                class="btn btn-primary" type="button" (click)="atualizarPedidoUpload = true">Upload</button>
 
 
-           
+
 
             <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
                 <br>
@@ -165,7 +202,7 @@
                 <input type="file" (change)="fileChanged($event)" />
                 <button class="btn btn-primary" type="submit">Upload</button><br>
                 <button *ngIf="atualizarPedidoUpload == true" class="btn btn-danger" type="button"
-                (click)="atualizarPedidoUpload = false">Cancelar</button>
+                    (click)="atualizarPedidoUpload = false">Cancelar</button>
             </form>
         </div>
 
