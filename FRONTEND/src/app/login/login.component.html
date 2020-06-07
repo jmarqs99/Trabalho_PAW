@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
     <p *ngIf="sessionExpired" class="alerta alert alert-danger">Sessão expirada!</p>
     <div class="container" *ngIf="isRegistering == false">
@@ -5,17 +12,17 @@
             <form (submit)="login()">
                 <div class="form-group">
                     <label for="nmrCCInput">Número de cartão de cidadão</label>
-                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput"
+                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput" required
                         placeholder="Introduz o número de CC">
                 </div>
                 <div class="form-group">
                     <label for="passwordInput">Password</label>
-                    <input [(ngModel)]="password" name="password" type="password" class="form-control"
+                    <input [(ngModel)]="password" name="password" type="password" class="form-control" required
                         id="passwordInput" placeholder="Introduz a password">
                 </div>
                 <div class="buttons">
                     <button class="btn btn-primary" type="submit">Login</button><br>
-                    <button class="btn btn-primary" *ngIf="isRegistering == false" type="button"
+                    <button class="btn btn-primary" *ngIf="isRegistering == false" type="button" 
                         (click)="isRegistering = true">Registar</button>
                 </div>
 
@@ -26,41 +33,33 @@
         <div class="box-reg">
             <button class="btn btn-primary" type="button" (click)="isRegistering = false">Voltar</button>
 
-            <form *ngIf="isRegistering" (submit)="register()" name="registo" (submit)="validar()">
+            <form *ngIf="isRegistering" (submit)="register()" name="registo" (submit)="validarRegisto()">
                 <div class="form-group">
                     <label for="nmrCCInput">Primeiro Nome</label>
                     <input [(ngModel)]="primeiroNome" name="primeiroNome" type="text" class="form-control" required
                         placeholder="Primeiro Nome..." />
-                        <span *ngIf="primeiroNome == null "><strong>*Necessário preencher campo</strong></span>
                 </div>
                 <div class="form-group">
                     <label for="nmrCCInput">Ultimo Nome</label>
-                    <input [(ngModel)]="ultimoNome" name="ultimoNome" type="text" class="form-control"
+                    <input [(ngModel)]="ultimoNome" name="ultimoNome" type="text" class="form-control" required
                         placeholder="Ultimo Nome..." />
-                        <span *ngIf="ultimoNome == null "><strong>*Necessário preencher campo</strong></span>
                 </div>
                 <div class="form-group">
                     <label for="nmrCCInput">Número de cartão de cidadão</label>
-                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput"
-                        placeholder="Introduz o número de CC">
-                        <span *ngIf="nmrCC == null "><strong>*Necessário preencher campo</strong></span>
+                    <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput" required
+                        placeholder="Introduz o número de CC...">
                 </div>
                 <div class="form-group">
                     <label for="passwordInput">Password</label>
-                    <input [(ngModel)]="password" name="password" type="password" class="form-control"
-                        id="passwordInput" placeholder="Introduz a password">
-                        <span *ngIf="password == null "><strong>*Necessário preencher campo</strong></span>
+                    <input [(ngModel)]="password" name="password" type="password" class="form-control" required
+                        id="passwordInput" placeholder="Introduz a password...">
                 </div>
                 <button class="btn btn-primary" type="submit">Registar</button><br>
             </form>
         </div>
     </div>
-
-
-
-
-
-
-
-
 </body>
+</html>
+
+
+

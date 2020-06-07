@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  validar(){
+  validarRegisto(){
     if(this.primeiroNome == null || this.ultimoNome == null || this.nmrCC == null || this.password == null ){
       alert("Faltam preencher campos!");
     }
