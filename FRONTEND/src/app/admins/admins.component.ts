@@ -13,6 +13,9 @@ export class AdminsComponent implements OnInit {
   userId: string;
   currentAdmin: any;
   viewingAdmin: boolean;
+  page = 1;
+  pageSize = 10;
+  collectionSize;
 
   constructor(private router: Router, public rest: RestService) { }
 
@@ -24,7 +27,7 @@ export class AdminsComponent implements OnInit {
     this.admins = [];
     this.rest.getAdmins().subscribe((data: {}) => {
       this.admins = data;
-      console.log(data)
+      this.collectionSize = this.admins.length;
     });
   }
 
