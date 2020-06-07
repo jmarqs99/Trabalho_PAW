@@ -9,11 +9,10 @@
 <body>
     <h2>Técnicos</h2>
     <div class="criarTecnico">
-        
         <button *ngIf="addingTecnico == false" class="btn btn-primary" (click)="addingTecnico = true">Adicionar Técnico</button>
         <form *ngIf="addingTecnico" (submit)="addTecnico()">
             <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
-            <button class="btn btn-primary" type="submit">Registar</button>
+            <button class="btn btn-primary" type="submit">Adicionar</button>
             <button *ngIf="addingTecnico == true" class="btn btn-danger" type="button"
                 (click)="addingTecnico = false">Cancelar</button>
         </form>

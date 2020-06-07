@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admins</title>
 </head>
+
 <body>
     <h2>Admins</h2>
-<div class="criarAdmin">
-    <button class="btn btn-primary" (click)="addingAdmin = !addingAdmin">Adicionar Admin</button>
-    <form *ngIf="addingAdmin" (submit)="addAdmin()">
-        <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
-        <button class="btn btn-primary" type="submit">Adicionar</button><br>
-    </form>
-</div>
-<div class="conteiner">
-    <div class="table-div">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Primeiro Nome</th>
-                    <th scope="col">Último Nome</th>
-                    <th scope="col">Apagar Admin</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let t of admins; let i=index;">
-                    <td (click)="adminInfo(t._id)" title="Clica para veres/esconderes informações deste Admin!">
-                        {{ t.primeiroNome}} </td>
-                    <td>{{ t.ultimoNome }}</td>
-                    <td (click)="demote(t._id)"> <button class="btn btn-danger" >Apagar</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="paginacao">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-            </ngb-pagination>
-            <select class="custom-select" [(ngModel)]="pageSize">
-                <option [ngValue]="5">5/página</option>
-                <option [ngValue]="10">10/página</option>
-                <option [ngValue]="20">20/página</option>
-            </select>
+    <div class="criarAdmin">
+        <button class="btn btn-primary" (click)="addingAdmin = true">Adicionar Técnico</button>
+        <form *ngIf="addingAdmin" (submit)="addAdmin()">
+            <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
+            <button class="btn btn-primary" type="submit" >Adicionar</button>
+            <button *ngIf="addingAdmin == true" class="btn btn-danger" type="button"
+                (click)="addingAdmin = false">Cancelar</button>
+        </form>
+    </div>
+    <div class="conteiner">
+        <div class="table-div">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Primeiro Nome</th>
+                        <th scope="col">Último Nome</th>
+                        <th scope="col">Apagar Admin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of admins; let i=index;">
+                        <td (click)="adminInfo(t._id)" title="Clica para veres/esconderes informações deste Admin!">
+                            {{ t.primeiroNome}} </td>
+                        <td>{{ t.ultimoNome }}</td>
+                        <td (click)="demote(t._id)"> <button class="btn btn-danger">Apagar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="paginacao">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                </ngb-pagination>
+                <select class="custom-select" [(ngModel)]="pageSize">
+                    <option [ngValue]="5">5/página</option>
+                    <option [ngValue]="10">10/página</option>
+                    <option [ngValue]="20">20/página</option>
+                </select>
+            </div>
+        </div>
+        <div class="info" *ngIf="viewingAdmin">
+            <p>Nome do Admin: {{currentAdmin.primeiroNome}} {{currentAdmin.ultimoNome}}</p>
+            <p>ID do Admin: {{currentAdmin._id}}</p>
+            <p>ID de usuário do Admin: {{currentAdmin.utilizadorId}}</p>
         </div>
     </div>
-    <div class="info" *ngIf="viewingAdmin">
-        <p>Nome do Admin: {{currentAdmin.primeiroNome}} {{currentAdmin.ultimoNome}}</p>
-        <p>ID do Admin: {{currentAdmin._id}}</p>
-        <p>ID de usuário do Admin: {{currentAdmin.utilizadorId}}</p>
-    </div>
-</div>
 </body>
+
 </html>
-
-
