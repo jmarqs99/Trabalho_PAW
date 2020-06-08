@@ -12,7 +12,7 @@ router.get('/' , authorize(["TECNICO"]),utilizadorController.verTodosUtilizadore
 
 
 
-router.get('/numInfetados/Infetado' , authorize(["ADMIN"]), utilizadorController.numeroInfetados);
+router.get('/numInfetados' , authorize(["ADMIN"]), utilizadorController.numeroInfetados);
 
 
 
