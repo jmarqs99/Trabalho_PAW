@@ -49,13 +49,5 @@ form{
 
 input{
     width: 100%;
-}
-
-input:invalid:required {
-    border-color: #900;
-    background-color: #FDD;
-}
-
-input:valid {
     border: 2px solid black;
-  }
+}
