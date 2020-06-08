@@ -10,10 +10,13 @@ import * as CanvasJS from '../canvasjs.min';
 })
 export class HomepageComponent implements OnInit {
   user:any
-  constructor(private router: Router, private restService: RestService) { }
+  numeroInfetados : number;
+  constructor(public rest: RestService,private router: Router, private restService: RestService) { }
 
   ngOnInit(): void {
+    
     this.user = JSON.parse(localStorage.getItem("currentUser"))
+    this.getNumeroInfetados();
     let chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: false,
@@ -46,6 +49,13 @@ export class HomepageComponent implements OnInit {
       return true
     }
     return false
+  }
+
+  getNumeroInfetados(){
+    this.rest.numInfetados().subscribe((numero : number) =>{
+      this.numeroInfetados = numero;
+      console.log(numero)
+    })
   }
   
 }
