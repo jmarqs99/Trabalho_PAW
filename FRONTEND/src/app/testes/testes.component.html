@@ -46,7 +46,7 @@
 
     <div class="pesquisa">
 
-        <h5>Pesquisar pelo ID do teste </h5>
+        <h6>Pesquisar pelo ID do teste </h6>
         <form (submit)="listarID()" (submit)="validarId()">
             <div class="form-group">
                 <label class="control-label">
@@ -60,8 +60,8 @@
 
         <br>
 
-        
-        <form (submit)="pesquisaCC()">
+        <h6>Pesquisar pelo cc do user do teste</h6>
+        <form (submit)="pesquisaCC()"  (submit)= "validarCC()">
             <div class="form-group">
 
                 <label class="control-label">
@@ -73,7 +73,7 @@
 
 
             <button class="btn btn-primary" type="submit">pesquisar</button>
-            <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
+            <button *ngIf="viewingPesquisarCC == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
         </form>
 
 

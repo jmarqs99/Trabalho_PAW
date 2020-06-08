@@ -29,7 +29,7 @@ export class TestesComponent implements OnInit {
   pageSize = 10;
   collectionSize;
   viewingPesquisarID: boolean = false;
-  viewingListarCC: boolean = false;
+  viewingPesquisarCC: boolean = false;
   IDpesquisa: String;
   ccpesquisa: String;
 
@@ -62,6 +62,7 @@ export class TestesComponent implements OnInit {
   getTestes() {
     this.testes = [];
     this.viewingPesquisarID = false;
+    this.viewingPesquisarCC = false;
     this.rest.verTestes().subscribe((data: {}) => {
       this.testes = data;
       this.collectionSize = this.testes.length;
@@ -130,7 +131,7 @@ export class TestesComponent implements OnInit {
     this.rest.verTestes().subscribe((data: {}) => {
 
       this.testes = data;
-      this.viewingListarCC = true;
+      this.viewingPesquisarCC = true;
       var testesTemp = [];
       new Promise((resolve, reject) => {
         const testes = this.testes;
@@ -149,10 +150,17 @@ export class TestesComponent implements OnInit {
       }).then(() => {
 
         this.testes = testesTemp;
-        this.IDpesquisa = null;
+        this.ccpesquisa = null;
       });
     });
   }
+
+  validarCC() {
+    if(this.ccpesquisa == null || this.ccpesquisa == '') {
+     window.alert("Faltam preencher campos!");
+     this.getTestes()
+    }
+   }
 
   testeInfo(testeId: string) {
     if (this.viewingTeste && this.currentTeste._id == testeId) {
