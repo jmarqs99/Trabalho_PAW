@@ -89,6 +89,12 @@ export class PedidosComponent implements OnInit {
     })
   }
 
+  validarPedido() {
+    if(this.pedido.informacao == null) {
+      window.alert("Faltam preencher campos!");
+    }
+  }
+
 
   filtroNCC() {
     this.rest.getPedidos().subscribe((data: {}) => {
@@ -122,6 +128,14 @@ export class PedidosComponent implements OnInit {
     });
   }
 
+  validarNcc() {
+    if(this.ccFiltro == null) {
+      window.alert("Faltam preencher campos!");
+      
+      this.getPedidos();
+    }
+  }
+
   filtroID() {
     this.rest.getPedidos().subscribe((data: {}) => {
 
@@ -149,6 +163,15 @@ export class PedidosComponent implements OnInit {
       });
     });
   }
+
+  validarId() {
+    if(this.IDfiltro == null) {
+      window.alert("Faltam preencher campos!");
+      this.getPedidos();
+      this.viewingListarID == false;
+    }
+  }
+
 
   filtros() {
     this.rest.getPedidos().subscribe((data: {}) => {

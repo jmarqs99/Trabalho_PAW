@@ -16,27 +16,26 @@
 
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
-        <form #testeform="ngForm" *ngIf="addingTeste" (submit)="addTeste()">
-            <div class="form-group" [class.has-error]="fullid.invalid">
+        <form *ngIf="addingTeste" (submit)="addTeste()" (submit)="validarregisto()">
+            <div class="form-group">
                 <label class="control-label">ID do pedido:
-                    <input required id="teste.pedidoId" class="form-control" #fullid="ngModel"
+                    <input class="form-control"
                         [(ngModel)]="teste.pedidoId" name="pedidoId" type="text" placeholder="pedidoId" /><br>
                 </label>
-                <span class="help-block" *ngIf="fullid.invalid && fullid.touched" style="color: red;">ID é
-                    obrigatorio</span>
+                
                 <br>
             </div>
 
 
-            <div class="input-group" [class.has-error]="fulldate.invalid">
-                <dl-date-time-picker required id="teste.date" startView="day" maxView="year" minView="hour"
-                    [(ngModel)]="teste.date" name="date" #fulldate="ngModel"></dl-date-time-picker>
+            <div class="input-group">
+                <dl-date-time-picker startView="day" maxView="year" minView="hour"
+                    [(ngModel)]="teste.date" name="date"></dl-date-time-picker>
             </div>
-            <span class="help-block" *ngIf="fulldate.invalid" style="color: red;">Data é obrigatoria</span>
+           
 
             <br>
 
-            <button class="btn btn-primary" type="submit" [disabled]="testeform.invalid">agendar</button><br>
+            <button class="btn btn-primary" type="submit">agendar</button><br>
 
             <button *ngIf="addingTeste == true" class="btn btn-danger" type="button"
                 (click)="addingTeste = false">Cancelar</button>

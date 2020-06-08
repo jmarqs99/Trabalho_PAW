@@ -13,22 +13,22 @@
             Pedido</button>
 
 
-        <form #testeform="ngForm" *ngIf="addingPedido" (submit)="addPedido()">
+        <form *ngIf="addingPedido" (submit)="addPedido()" (submit)="validarPedido()">
 
-            <div class="form-group" [class.has-error]="info.invalid">
+            <div class="form-group">
                 <label class="control-label">Informação relevante:
-                    <input required id="pedido.informacao" #info="ngModel" class="form-control" style="width:240%;" [(ngModel)]="pedido.informacao" name="informacao"
+                    <input class="form-control" style="width:240%;" [(ngModel)]="pedido.informacao" name="informacao"
                         placeholder="escreva a informação aqui ou selecione uma das opções abaixo" />
-                    <select input required id="pedido.informacao" #info="ngModel" class="form-control" [(ngModel)]="pedido.informacao" name="informacao">
+                    <select input class="form-control" [(ngModel)]="pedido.informacao" name="informacao">
                         <option value="saúde 24">Fui encaminhado pela linha Saúde24</option>
                         <option value="local de risco">Trabalho em locais de risco</option>
                         <option value="pessoa de risco">Pertenço a um grupo de risco </option>
-                        <input required id="pedido.informacao" #info="ngModel" class="form-control" [(ngModel)]="pedido.informacao" name="informacao" type="text"
+                        <input class="form-control" [(ngModel)]="pedido.informacao" name="informacao" type="text"
                             placeholder="Informação" /><br>
                     </select>
 
                 </label>
-                <span class="help-block" *ngIf="info.invalid && info.touched" style="color: red;">Info obrigatoria</span>
+
             </div>
 
             <div class="form-group">
@@ -40,14 +40,10 @@
                         <option value="saudavel">Saudável</option>
                     </select>
                 </label>
-                
+
             </div>
-
-
-
-
             <br>
-            <button class="btn btn-primary" type="submit" [disabled]="testeform.invalid" >Confirmar</button><br>
+            <button class="btn btn-primary" type="submit">Confirmar</button><br>
             <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
                 (click)="addingPedido = false">Cancelar</button>
         </form>
@@ -111,36 +107,32 @@
     <div class="pesquisa">
 
         <h5>Pesquisar pelo ID do pedido </h5>
-        <form #testeformID="ngForm" (submit)="filtroID()">
-            <div class="form-group" [class.has-error]="fullid.invalid">
+        <form (submit)="filtroID()" (submit)="validarNcc()">
+            <div class="form-group">
                 <label class="control-label">
-                    <input required id="IDfiltro" class="form-control" #fullid="ngModel" [(ngModel)]="IDfiltro"
+                    <input class="form-control" [(ngModel)]="IDfiltro"
                         name="_id" type="text" placeholder="id" />
                 </label>
-                <span class="help-block" *ngIf="fullid.invalid && fullid.touched" style="color: red;">ID é
-                    obrigatorio</span>
             </div>
-            <button class="btn btn-primary" type="submit" [disabled]="testeformID.invalid">pesquisar</button>
+            <button class="btn btn-primary" type="submit">pesquisar</button>
             <button *ngIf="viewingListarID == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
         </form>
 
         <br>
 
         <h5>Pesquisar pelo CC do utilizador </h5>
-        <form #testeformCC="ngForm" (submit)="filtroNCC()">
-            <div class="form-group" [class.has-error]="fullcc.invalid">
+        <form (submit)="filtroNCC()" (submit)="validarNcc()">
+            <div class="form-group">
 
                 <label class="control-label">
-                    <input required id="ccFiltro" class="form-control" #fullcc="ngModel" [(ngModel)]="ccFiltro"
+                    <input class="form-control" [(ngModel)]="ccFiltro"
                         name="nmrCC" type="text" placeholder="cartão de cidadão" />
                 </label>
-                <span class="help-block" *ngIf="fullcc.invalid && fullcc.touched" style="color: red;">CC é
-                    obrigatorio</span>
 
             </div>
 
 
-            <button class="btn btn-primary" type="submit" [disabled]="testeformCC.invalid">pesquisar</button>
+            <button class="btn btn-primary" type="submit">pesquisar</button>
             <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
         </form>
 

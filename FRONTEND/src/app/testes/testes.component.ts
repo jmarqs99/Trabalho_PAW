@@ -76,6 +76,14 @@ export class TestesComponent implements OnInit {
 
   }
 
+  
+
+  validarregisto() {
+   if(this.teste.pedidoId == null || this.teste.date == null) {
+    window.alert("Faltam preencher campos!");
+   }
+  }
+
   testeInfo(testeId: string) {
     if (this.viewingTeste && this.currentTeste._id == testeId) {
       this.viewingTeste = false;
