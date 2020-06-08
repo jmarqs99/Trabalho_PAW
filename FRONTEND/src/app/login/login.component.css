@@ -51,15 +51,11 @@ input{
     width: 100%;
 }
 
-input:invalid {
-    border: 2px dashed red;
-  }
-
-  input:invalid:required {
+input:invalid:required {
     border-color: #900;
-  background-color: #FDD;
-  }
+    background-color: #FDD;
+}
 
-  input:valid {
+input:valid {
     border: 2px solid black;
   }

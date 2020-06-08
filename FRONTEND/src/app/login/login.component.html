@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <p *ngIf="sessionExpired" class="alerta alert alert-danger">Sessão expirada!</p>
     <div class="container" *ngIf="isRegistering == false">
         <div class="box">
-            <form (submit)="login()">
+            <form (submit)="login()" (submit)="validarLogin()">
                 <div class="form-group">
                     <label for="nmrCCInput">Número de cartão de cidadão</label>
                     <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput" required
@@ -22,7 +24,7 @@
                 </div>
                 <div class="buttons">
                     <button class="btn btn-primary" type="submit">Login</button><br>
-                    <button class="btn btn-primary" *ngIf="isRegistering == false" type="button" 
+                    <button class="btn btn-primary" *ngIf="isRegistering == false" type="button"
                         (click)="isRegistering = true">Registar</button>
                 </div>
 
@@ -60,6 +62,3 @@
     </div>
 </body>
 </html>
-
-
-

@@ -48,4 +48,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  validarLogin(){
+    if(this.nmrCC == null || this.password == null ){
+      window.alert("Faltam preencher campos!");
+    }
+  }
+
 }
