@@ -28,6 +28,10 @@ export class TestesComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize;
+  viewingPesquisarID: boolean = false;
+  viewingListarCC: boolean = false;
+  IDpesquisa: String;
+  ccpesquisa: String;
 
   //data: Date = new Date();
   //settings = {
@@ -57,6 +61,7 @@ export class TestesComponent implements OnInit {
 
   getTestes() {
     this.testes = [];
+    this.viewingPesquisarID = false;
     this.rest.verTestes().subscribe((data: {}) => {
       this.testes = data;
       this.collectionSize = this.testes.length;
@@ -69,6 +74,7 @@ export class TestesComponent implements OnInit {
       this.getTestes();
       this.teste.pedidoId = null;
       this.teste.date = null;
+      
       //this.addingTeste = false;
     }, (err) => {
       console.log(err);
@@ -76,12 +82,76 @@ export class TestesComponent implements OnInit {
 
   }
 
+  validarTeste() {
+    if(this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null) {
+      window.alert("Faltam preencher campos!");
+     }
+  }
   
 
-  validarregisto() {
-   if(this.teste.pedidoId == null || this.teste.date == null) {
+  listarID() {
+    this.rest.verTestes().subscribe((data: {}) => {
+
+      this.testes = data;
+      this.viewingPesquisarID = true;
+      var testesTemp = [];
+      new Promise((resolve, reject) => {
+        const testes = this.testes;
+
+        const resultToSearchID = this.IDpesquisa;
+
+        testes.forEach(function (teste, index) {
+
+          if (teste._id == resultToSearchID) {
+            testesTemp.push(teste);
+            resolve();
+          }
+
+          if (index === testes.length - 1) resolve();
+        });
+      }).then(() => {
+
+        this.testes = testesTemp;
+        this.IDpesquisa = null;
+      });
+    });
+  }
+
+  
+
+  validarId() {
+   if(this.IDpesquisa == null || this.IDpesquisa == '') {
     window.alert("Faltam preencher campos!");
+    this.getTestes()
    }
+  }
+
+  pesquisaCC() {
+    this.rest.verTestes().subscribe((data: {}) => {
+
+      this.testes = data;
+      this.viewingListarCC = true;
+      var testesTemp = [];
+      new Promise((resolve, reject) => {
+        const testes = this.testes;
+
+        const resultToSearchCC = this.ccpesquisa;
+
+        testes.forEach(function (teste, index) {
+
+          if (teste.nmrCC == resultToSearchCC) {
+            testesTemp.push(teste);
+            resolve();
+          }
+
+          if (index === testes.length - 1) resolve();
+        });
+      }).then(() => {
+
+        this.testes = testesTemp;
+        this.IDpesquisa = null;
+      });
+    });
   }
 
   testeInfo(testeId: string) {

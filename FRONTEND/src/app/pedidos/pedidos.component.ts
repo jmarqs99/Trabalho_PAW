@@ -90,7 +90,7 @@ export class PedidosComponent implements OnInit {
   }
 
   validarPedido() {
-    if(this.pedido.informacao == null) {
+    if(this.pedido.informacao == null || this.pedido.informacao == '') {
       window.alert("Faltam preencher campos!");
     }
   }
@@ -168,7 +168,7 @@ export class PedidosComponent implements OnInit {
     if(this.IDfiltro == null) {
       window.alert("Faltam preencher campos!");
       this.getPedidos();
-      this.viewingListarID == false;
+      
     }
   }
 

@@ -16,7 +16,7 @@
 
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
-        <form *ngIf="addingTeste" (submit)="addTeste()" (submit)="validarregisto()">
+        <form *ngIf="addingTeste" (submit)="addTeste()" (submit)="validarTeste()">
             <div class="form-group">
                 <label class="control-label">ID do pedido:
                     <input class="form-control"
@@ -42,6 +42,45 @@
         </form>
 
     </div>
+
+
+    <div class="pesquisa">
+
+        <h5>Pesquisar pelo ID do teste </h5>
+        <form (submit)="listarID()" (submit)="validarId()">
+            <div class="form-group">
+                <label class="control-label">
+                    <input class="form-control" [(ngModel)]="IDpesquisa"
+                        name="_id" type="text" placeholder="id" />
+                </label>
+            </div>
+            <button class="btn btn-primary" type="submit">pesquisar</button>
+            <button *ngIf="viewingPesquisarID == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
+        </form>
+
+        <br>
+
+        
+        <form (submit)="pesquisaCC()">
+            <div class="form-group">
+
+                <label class="control-label">
+                    <input class="form-control" [(ngModel)]="ccpesquisa"
+                        name="nmrCC" type="text" placeholder="cartão de cidadão" />
+                </label>
+
+            </div>
+
+
+            <button class="btn btn-primary" type="submit">pesquisar</button>
+            <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
+        </form>
+
+
+    </div>
+   
+
+
     <div class="conteiner">
         <div class="table-div">
             <table class="table table-striped">
