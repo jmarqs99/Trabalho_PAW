@@ -5,14 +5,10 @@ const authorize = require('../../middlewares/authorize')
 
 router.post('/', utilizadorController.createUtilizador);
 router.put('/:utilizadorId', authorize(["ADMIN"]),utilizadorController.updateUtilizador);
+router.get('/nmrInfetados' , authorize(["ADMIN"]), utilizadorController.numeroInfetados);
 router.get('/:utilizadorId' , authorize(["TECNICO"]),utilizadorController.verUtilizador);
 router.get('/' , authorize(["TECNICO"]),utilizadorController.verTodosUtilizadores);
 
-
-
-
-
-router.get('/numInfetados' , authorize(["ADMIN"]), utilizadorController.numeroInfetados);
 
 
 

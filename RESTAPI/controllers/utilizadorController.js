@@ -96,12 +96,22 @@ utilizadorController.verTodosUtilizadores = function (req, res, next) {
 }
  */
 
-utilizadorController.numeroInfetados = function (req, res, next) {
+/*utilizadorController.numeroInfetados = function (req, res, next) {
+  console.log("got to controller")
   Utilizador.countDocuments({ estado: 'Infetado' }, function (err, count) {
-    res.json(count);
+    console.log("here",count)
+    res.status(200).json(count);
   })
 
  
+}*/
+
+utilizadorController.numeroInfetados = function (req, res, next) {
+  Utilizador.countDocuments({ estado: 'Infetado' }, function (err, count) {
+    if(err) {} else {
+    res.status(200).json(count);
+    }
+  })
 }
 
 module.exports = utilizadorController;
