@@ -43,13 +43,13 @@ export class LoginComponent implements OnInit {
   }
 
   validarRegisto(){
-    if(this.primeiroNome == null || this.ultimoNome == null || this.nmrCC == null || this.password == null ){
+    if(this.primeiroNome == null || this.primeiroNome == '' || this.ultimoNome == null || this.ultimoNome == '' || this.nmrCC == null || this.nmrCC == '' ||this.password == null || this.password == ''){
       window.alert("Faltam preencher campos!");
     }
   }
 
   validarLogin(){
-    if(this.nmrCC == null || this.password == null ){
+    if(this.nmrCC == null || this.nmrCC == '' || this.password == null || this.password == '' ){
       window.alert("Faltam preencher campos!");
     }
   }
