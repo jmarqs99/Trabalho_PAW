@@ -26,8 +26,8 @@
                                 type="button">Admins</button>
                 </div>
         </div>
-        <div class="texto">
-                <h4 class="textoShadow">Número de infetados: {{numeroInfetados}}</h4>
+        <div class="texto2">
+                <h4 *ngIf="havePremission('ADMIN')" class="textoShadow">Número de infetados: {{numeroInfetados}}</h4>
         </div>
         <div id="chartContainer"></div>
 </body>

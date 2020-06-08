@@ -4,6 +4,10 @@
     margin-top: 7%;
 }
 
+.texto2{
+    margin: 3%;  
+}
+
 .textoShadow {
     text-shadow: 1px 1px rgb(255, 255, 255);
 }
