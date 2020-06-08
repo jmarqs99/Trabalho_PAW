@@ -54,7 +54,6 @@ export class HomepageComponent implements OnInit {
   getNumeroInfetados(){
     this.rest.numInfetados().subscribe((numero : number) =>{
       this.numeroInfetados = numero;
-      console.log(numero)
     })
   }
   

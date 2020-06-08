@@ -75,7 +75,7 @@ export class TestesComponent implements OnInit {
       this.getTestes();
       this.teste.pedidoId = null;
       this.teste.date = null;
-      
+
       //this.addingTeste = false;
     }, (err) => {
       console.log(err);
@@ -84,11 +84,11 @@ export class TestesComponent implements OnInit {
   }
 
   validarTeste() {
-    if(this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null) {
+    if (this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null) {
       window.alert("Faltam preencher campos!");
-     }
+    }
   }
-  
+
 
   listarID() {
     this.rest.verTestes().subscribe((data: {}) => {
@@ -118,13 +118,13 @@ export class TestesComponent implements OnInit {
     });
   }
 
-  
+
 
   validarId() {
-   if(this.IDpesquisa == null || this.IDpesquisa == '') {
-    window.alert("Faltam preencher campos!");
-    this.getTestes()
-   }
+    if (this.IDpesquisa == null || this.IDpesquisa == '') {
+      window.alert("Faltam preencher campos!");
+      this.getTestes()
+    }
   }
 
   pesquisaCC() {
@@ -156,11 +156,11 @@ export class TestesComponent implements OnInit {
   }
 
   validarCC() {
-    if(this.ccpesquisa == null || this.ccpesquisa == '') {
-     window.alert("Faltam preencher campos!");
-     this.getTestes()
+    if (this.ccpesquisa == null || this.ccpesquisa == '') {
+      window.alert("Faltam preencher campos!");
+      this.getTestes()
     }
-   }
+  }
 
   testeInfo(testeId: string) {
     if (this.viewingTeste && this.currentTeste._id == testeId) {
@@ -190,17 +190,31 @@ export class TestesComponent implements OnInit {
   }
 
   update() {
-    this.rest.updateTeste(this.currentTeste._id, this.teste)
-      .subscribe(res => {
-        this.atualizar = false;
-        this.getTestes();
-        this.viewingTeste = false;
-        this.testeInfo(this.currentTeste._id);
-      }, (err) => {
-        console.log(err);
+    let teste = {};
+    if (this.teste.resultadoTeste == null && this.teste.date == null) {
+      this.atualizar = false;
+      this.viewingTeste = false;
+    }
+    else {
+      if (this.teste.resultadoTeste != null) {
+        teste["resultadoTeste"] = this.teste.resultadoTeste;
       }
-      );
+      if (this.teste.date != null) {
+        teste["date"] = this.teste.date;
+      }
 
+      this.rest.updateTeste(this.currentTeste._id, this.teste)
+        .subscribe(res => {
+          this.atualizar = false;
+          this.getTestes();
+          this.viewingTeste = false;
+          this.testeInfo(this.currentTeste._id);
+          this.teste.date = null;
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    }
 
   }
 
