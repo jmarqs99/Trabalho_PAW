@@ -87,13 +87,18 @@ TesteController.updateTeste = function (req, res, next) {
                     Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" }, { new: true })
                     Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Infetado" }, { new: true })
                 } else if (req.body.resultadoTeste == "negativo") {
-                    Teste.countDocuments({ pedidoId: teste.pedidoId }, function (err, testes) {
+                    Teste.countDocuments({ pedidoId: teste.pedidoId }, function (err, testesCount) {
                         if (err) { } else {
-                            if (testes >= 2) {
+                            if (testesCount >= 2) {
                                 Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" })
                                 Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Saudável" }, { new: true })
                             } else {
                                 var today = new Date();
+                                today.setDate(today.getDate() + 1);
+                                if( Math.abs(today - new Date(teste.date))/ (1000 * 60 * 60 * 24) < 2.0){
+                                    today = new Date(teste.date)
+                                    today.setDate(today.getDate() + 3);
+                                }
                                 Teste.find({
                                     date: {
                                         "$gte": new Date(today.getFullYear(), today.getMonth(), today.getDate()),
@@ -108,19 +113,31 @@ TesteController.updateTeste = function (req, res, next) {
                                             testes.forEach(function (teste, index) {
                                                 usedHours.push(new Date(teste.date).getHours());
                                             })
-                                            for (let h = 8; h < 17; h++) {
-                                                if (usedHours.find(element => element != h)) {
-                                                    today.setHours(h,0,0,0);
-                                                    const newTeste = new Teste({nmrCC : req.body.nmrCC,pedidoId:req.body.pedidoId,date:today});
-                                                    newTeste.save(function (err) {
-                                                        if (err) {
-                                                            next(err);
-                                                        } else {
-                                                            res.status(200);
-                                                        }
-                                                    })
-                                                    break;
+                                            if (testes.length != 0) {
+                                                for (let h = 8; h < 17; h++) {
+                                                    if (usedHours.find(element => element != h)) {
+                                                        today.setHours(h, 0, 0, 0);
+                                                        const newTeste = new Teste({ nmrCC: teste.nmrCC, pedidoId: teste.pedidoId, date: today });
+                                                        newTeste.save(function (err) {
+                                                            if (err) {
+                                                                next(err);
+                                                            } else {
+                                                                res.status(200);
+                                                            }
+                                                        })
+                                                        break;
+                                                    }
                                                 }
+                                            } else {
+                                                today.setHours(8, 0, 0, 0);
+                                                const newTeste = new Teste({ nmrCC: teste.nmrCC, pedidoId: teste.pedidoId, date: today });
+                                                newTeste.save(function (err) {
+                                                    if (err) {
+                                                        next(err);
+                                                    } else {
+                                                        res.status(200);
+                                                    }
+                                                })
                                             }
                                         }
                                     }
