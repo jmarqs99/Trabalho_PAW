@@ -9,7 +9,22 @@ import { Teste } from '../Models/Teste';
 @Component({
   selector: 'app-testes',
   templateUrl: './testes.component.html',
-  styleUrls: ['./testes.component.css']
+  styleUrls: ['./testes.component.css'],
+  /**
+    template: `
+        <div class="example-config">
+            Only values between <strong>{{min | kendoDate:'g'}}</strong> and <strong>{{max | kendoDate:'g'}}</strong> are displayed in the Calendar and the TimePicker.
+        </div>
+        <div class="example-wrapper">
+            <kendo-datetimepicker
+                [min]="min"
+                [max]="max"
+            >
+            </kendo-datetimepicker>
+        </div>
+        
+    `
+     */
 })
 export class TestesComponent implements OnInit {
 
@@ -33,6 +48,9 @@ export class TestesComponent implements OnInit {
   IDpesquisa: String;
   ccpesquisa: String;
 
+
+
+
   //data: Date = new Date();
   //settings = {
   //  bigBanner: true,
@@ -52,6 +70,7 @@ export class TestesComponent implements OnInit {
     //this.user = JSON.parse(localStorage.getItem("currentTeste"))
   }
 
+  
 
   get testesP(): any[] {
     return this.testes
@@ -70,6 +89,12 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
+    
+    if(this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
+      window.alert("Horario permitido da clinica: Entre as 8 e as 17");
+    }
+    else {
+    
     this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
       this.addingTeste = false;
       this.getTestes();
@@ -80,11 +105,12 @@ export class TestesComponent implements OnInit {
     }, (err) => {
       console.log(err);
     })
-
+  }
+ 
   }
 
   validarTeste() {
-    if (this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null) {
+    if (this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null || this.teste.hora < 8 || this.teste.hora > 17) {
       window.alert("Faltam preencher campos!");
     }
   }
