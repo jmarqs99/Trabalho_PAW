@@ -343,6 +343,14 @@ export class PedidosComponent implements OnInit {
     });
   }
 
+  verificarUpload() {
+    if(this.pdf == null) {
+      window.alert("Faltam preencher campos!");
+      this.getPedidos();
+      
+    }
+  }
+
   pedidoInfo(pedidoId: String) {
     if (this.viewingPedido && this.currentPedido._id == pedidoId) {
       this.viewingPedido = false;
