@@ -29,7 +29,13 @@
         <div class="texto2">
                 <h4 *ngIf="havePremission('ADMIN')" class="textoShadow">Número de infetados: {{numeroInfetados}}</h4>
         </div>
-        <div id="chartContainer"></div>
+        <div id="chartContainer" *ngIf="havePremission('ADMIN')"></div>
+        <footer *ngIf="havePremission('ADMIN')" id="adminView">
+                <p>Trabalho PAW Grupo 21 © | João Marques, Miguel Silva, Miguel Cabeleira</p>
+        </footer>
+        <footer *ngIf="havePremission('ADMIN') == false" id="otherView">
+                <p>Trabalho PAW Grupo 21 © | João Marques, Miguel Silva, Miguel Cabeleira</p>
+        </footer>
 </body>
 
 </html>

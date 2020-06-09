@@ -78,14 +78,21 @@ TesteController.verTeste = function (req, res, next) {
 }
 
 TesteController.updateTeste = function (req, res, next) {
+    if (req.body.resultadoTeste){
+        req.body.estadoTeste = "Finalizado"
+    }
     Teste.findByIdAndUpdate(req.params.testeId, req.body, { new: true },
         function (err, teste) {
             if (err) {
                 next(err);
             } else {
                 if (req.body.resultadoTeste == "positivo") {
-                    Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" }, { new: true })
-                    Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Infetado" }, { new: true })
+                    Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" }, { new: true },function(err){
+                        if(err){ console.log(err)}
+                    })
+                    Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Infetado" }, { new: true },function(err,teste){
+                        if(err){ console.log(err)}
+                    })
                 } else if (req.body.resultadoTeste == "negativo") {
                     Teste.countDocuments({ pedidoId: teste.pedidoId }, function (err, testesCount) {
                         if (err) { } else {

@@ -125,7 +125,7 @@ export class RestService {
   verTeste(id: string): Observable<any> {
     return this.http.get<any>(endpoint + "testes/" + id);
   }
-  updateTeste(id: String, teste: Teste): Observable<any> {
+  updateTeste(id: String, teste: any): Observable<any> {
     return this.http.put<any>(endpoint + "testes/" + id, JSON.stringify(teste), httpOptions);
   }
   /**

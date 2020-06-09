@@ -36,7 +36,7 @@ const bcrypt = require('bcrypt');
 
 const Admin = require("./models/admin");
 const Utilizador = require("./models/utilizador");
-mongoose.connect('mongodb+srv://admin:pawtrabalhopaw2020@cluster0-6uaiy.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://admin:pawtrabalhopaw2020@cluster0-6uaiy.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true  })
   .then(() => {
     console.log('connection succesful')
     Admin.find(function (err, admins) {

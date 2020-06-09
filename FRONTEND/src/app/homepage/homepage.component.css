@@ -6,6 +6,7 @@
 
 .texto2{
     margin: 3%;  
+    margin-top: 45%;
 }
 
 .textoShadow {
@@ -40,4 +41,22 @@ body{
 
 #chartContainer{
     width: 50%;
+    margin-left: 25%;
 }
+
+#adminView{
+    border-top: 3px solid black;
+    display: flex;
+     align-items: center;
+     justify-content: center;
+     color: black;
+    margin-top: 34%;
+  }
+#otherView{
+    border-top: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin-top: -12.5%;
+  }

@@ -224,7 +224,7 @@ export class TestesComponent implements OnInit {
         teste["date"] = this.teste.date;
       }
 
-      this.rest.updateTeste(this.currentTeste._id, this.teste)
+      this.rest.updateTeste(this.currentTeste._id, teste)
         .subscribe(res => {
           this.atualizar = false;
           this.getTestes();

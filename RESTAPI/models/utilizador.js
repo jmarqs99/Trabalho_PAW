@@ -6,8 +6,7 @@ module.exports = mongoose.model('Utilizador', new mongoose.Schema({
     password: String,
     primeiroNome: String,
     ultimoNome: String,
-    estado: String,
-    NumeroTestes: {type:Number, default: 0},
+    estado: {type:String, default: "suspeito"},
     changed: {type:Boolean, default:false}
 })
 );

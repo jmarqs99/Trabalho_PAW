@@ -38,27 +38,32 @@ export class HomepageComponent implements OnInit {
     let testeData = [];
     new Promise((resolve, reject) => {
       let done = 0;
-      for (let index = 0; index < 9; index++) {
+      for (let index = 0; index < 10; index++) {
         const data = new Date();
         data.setDate(data.getDate() - index)
-        console.log(data)
         this.rest.testesPorDia(data).subscribe((numTestes: any) => {
           testeData.push({ y: numTestes, label: (data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear()) })
           done++;
           data.setDate(data.getDate() - 1)
-          if (done == 9) resolve();
+          if (done == 10) resolve();
         })
       }
     }).then(() => {
-
+      testeData.sort(function(a, b) {
+        if (new Date(a.label) > new Date(b.label)){
+          return 1;
+        }  
+        return -1;
+      })
       let chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         exportEnabled: false,
+        theme: "dark2",
         title: {
           text: "Número de testes realizados por dia"
         },
         data: [{
-          type: "column",
+          type: "area",
           dataPoints: testeData
         }]
       });
