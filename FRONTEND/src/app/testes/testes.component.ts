@@ -74,41 +74,34 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
+    const data = new Date();
 
-    if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
-      window.alert("Horario permitido da clinica: Entre as 8 e as 17");
+    if (this.teste.date < data) {
+      window.alert("Erro. Apenas é permitido agendamentos a partir do dia " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear());
+    }
+
+    else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
+      window.alert("Horario permitido da clinica: 8:00 até 17:00");
     }
     else {
-      const data = new Date();
-
-      if(this.teste.date < data) {
-        window.alert("Erro. Esse dia já passou");
-      }
-      else {
 
       this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
         this.addingTeste = false;
-        err => {
-          window.alert(err.error)
-
-        }
         this.getTestes();
         this.teste.pedidoId = null;
         this.teste.date = null;
 
-
-        //this.addingTeste = false;
       }, (err) => {
 
         console.log(err);
         if (err.error.dayFull) {
           window.alert("numero maximo de testes diarios alcançado!")
         }
-
+        if(err.error.invalidArguments) {
+          window.alert("Argumentos inválidos!");
+        }
       })
     }
-    }
-
   }
 
   validarTeste() {

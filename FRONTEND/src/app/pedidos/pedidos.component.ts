@@ -86,6 +86,9 @@ export class PedidosComponent implements OnInit {
       
     }, (err) => {
       console.log(err);
+      if(err.error.invalidArguments) {
+        window.alert("Argumentos inválidos!");
+      }
     })
   }
 
@@ -334,6 +337,9 @@ export class PedidosComponent implements OnInit {
 
     }, (err) => {
       console.log(err);
+      if(err.error.invalidFile) {
+        window.alert("Ficheiro inválido");
+      }
     });
   }
 
