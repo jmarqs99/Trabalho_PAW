@@ -39,7 +39,6 @@ export class TestesComponent implements OnInit {
   novoEstado: String;
   novoResultado: String;
   addingTeste: boolean = false;
-  //date: NgbDate;
   page = 1;
   pageSize = 10;
   collectionSize;
@@ -48,29 +47,15 @@ export class TestesComponent implements OnInit {
   IDpesquisa: String;
   ccpesquisa: String;
 
-
-
-
-  //data: Date = new Date();
-  //settings = {
-  //  bigBanner: true,
-  //timePicker: false,
-  //format: 'dd-MM-yyyy',
-  //defaultOpen: true
-  //}
-
-
-
   @Input() teste: Teste = new Teste();
 
   constructor(private router: Router, public rest: RestService) { }
 
   ngOnInit(): void {
     this.getTestes();
-    //this.user = JSON.parse(localStorage.getItem("currentTeste"))
   }
 
-  
+
 
   get testesP(): any[] {
     return this.testes
@@ -89,24 +74,41 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
-    
-    if(this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
+
+    if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
       window.alert("Horario permitido da clinica: Entre as 8 e as 17");
     }
     else {
-    
-    this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
-      this.addingTeste = false;
-      this.getTestes();
-      this.teste.pedidoId = null;
-      this.teste.date = null;
+      const data = new Date();
 
-      //this.addingTeste = false;
-    }, (err) => {
-      console.log(err);
-    })
-  }
- 
+      if(this.teste.date < data) {
+        window.alert("Erro. Esse dia já passou");
+      }
+      else {
+
+      this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
+        this.addingTeste = false;
+        err => {
+          window.alert(err.error)
+
+        }
+        this.getTestes();
+        this.teste.pedidoId = null;
+        this.teste.date = null;
+
+
+        //this.addingTeste = false;
+      }, (err) => {
+
+        console.log(err);
+        if (err.error.dayFull) {
+          window.alert("numero maximo de testes diarios alcançado!")
+        }
+
+      })
+    }
+    }
+
   }
 
   validarTeste() {
