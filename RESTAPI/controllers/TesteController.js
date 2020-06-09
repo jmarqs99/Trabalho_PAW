@@ -175,7 +175,15 @@ TesteController.totalTestesPorPessoa = function (req, res, next) {
 
 
 TesteController.testePorDia = function (req, res, next) {
-    Teste.countDocuments({ date: "2020-" + req.params.data  + "T09:00:00.000+00:00"}, function (err, count) {
+    const data = new Date(req.params.data);
+    const nextDate = new Date(req.params.data)
+    data.setHours(0,0,0,0);
+    nextDate.setDate(nextDate.getDate() + 1);
+    nextDate.setHours(0,0,0,0);
+    Teste.countDocuments({  date: {
+        "$gte": data,
+        "$lt": nextDate
+    } }, function (err, count) {
         res.json(count);
     });
 }

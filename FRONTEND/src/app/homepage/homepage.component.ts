@@ -35,28 +35,36 @@ export class HomepageComponent implements OnInit {
   }
 
   getTestesPorDia() {
-    let chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      exportEnabled: false,
-      title: {
-        text: "Número de testes realizados por dia"
-      },
-      data: [{
-        type: "column",
-        dataPoints: [
-          { y: 71, label: "7 de Junho" },
-          { y: 55, label: "6 de Junho" },
-          { y: 50, label: "5 de Junho" },
-          { y: 65, label: "4 de Junho" },
-          { y: 95, label: "3 de Junho" },
-          { y: 68, label: "2 de Junho" },
-          { y: 28, label: "1 de Junho" },
-          { y: 34, label: "31 de Maio" },
-          { y: 14, label: "30 de Maio" }
-        ]
-      }]
+    let testeData = [];
+    new Promise((resolve, reject) => {
+      let done = 0;
+      for (let index = 0; index < 9; index++) {
+        const data = new Date();
+        data.setDate(data.getDate() - index)
+        console.log(data)
+        this.rest.testesPorDia(data).subscribe((numTestes: any) => {
+          testeData.push({ y: numTestes, label: (data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear()) })
+          done++;
+          data.setDate(data.getDate() - 1)
+          if (done == 9) resolve();
+        })
+      }
+    }).then(() => {
+
+      let chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: false,
+        title: {
+          text: "Número de testes realizados por dia"
+        },
+        data: [{
+          type: "column",
+          dataPoints: testeData
+        }]
+      });
+      chart.render();
     });
-    chart.render();
+
   }
 
 }
