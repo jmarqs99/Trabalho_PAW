@@ -95,7 +95,7 @@ TesteController.updateTeste = function (req, res, next) {
                             } else {
                                 var today = new Date();
                                 today.setDate(today.getDate() + 1);
-                                if( Math.abs(today - new Date(teste.date))/ (1000 * 60 * 60 * 24) < 2.0){
+                                if (Math.abs(today - new Date(teste.date)) / (1000 * 60 * 60 * 24) < 2.0) {
                                     today = new Date(teste.date)
                                     today.setDate(today.getDate() + 3);
                                 }
@@ -160,7 +160,6 @@ TesteController.deleteTeste = function (req, res, next) {
                 if (err) {
                     next(err);
                 } else {
-
                     res.json({ status: "Done" });
                 }
             });
@@ -170,9 +169,15 @@ TesteController.deleteTeste = function (req, res, next) {
 
 TesteController.totalTestesPorPessoa = function (req, res, next) {
     Teste.countDocuments({ nmrCC: req.params.nmrCC }, function (err, count) {
-        res.json(count)
+        res.json(count);
     });
 }
 
+
+TesteController.testePorDia = function (req, res, next) {
+    Teste.countDocuments({ date: "2020-" + req.params.data  + "T09:00:00.000+00:00"}, function (err, count) {
+        res.json(count);
+    });
+}
 
 module.exports = TesteController;

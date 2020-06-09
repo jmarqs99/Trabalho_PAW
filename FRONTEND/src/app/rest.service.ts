@@ -145,4 +145,8 @@ export class RestService {
     return this.http.get<any>(endpoint + "utilizador/nmrInfetados")
   }
 
+  /* testesPorDia(data: String): Observable<any> {
+    return this.http.get<any>(endpoint + "testes/numeroTestesDia/" + data)
+  }
+ */
 }
