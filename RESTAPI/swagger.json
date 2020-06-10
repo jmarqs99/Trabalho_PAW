@@ -61,10 +61,23 @@
             }
           }
         }
+      },
+    "delete": {
+      "summary": "Apagar um pedido com o seu id",
+      "tags": [
+        "Pedido"
+      ],
+      "responses": {
+        "200": {
+          "description": "o pedido foi apagado",
+          "schema": {
+            "$ref": "#/definitions/pedido"
+          }
+        }
       }
-    },
+    }
+  },
     "/pedido/{pedidoId}": {
-
       "parameters": [
         {
           "name": "pedidoId",
@@ -74,13 +87,11 @@
           "type": "string"
         }
       ],
-      
       "get": {
         "summary": "Retorna um pedido com um determinado id",
         "tags": [
           "Pedido"
-        ],
-        
+        ],  
         "responses": {
           "200": {
             "description": "Pedido retornado",
@@ -115,99 +126,31 @@
         }
       }
     },
-    "/pedido/estadoTeste/{pedidoId}": {
-      "get": {
-        "summary": "Retorna o estado do teste de um pedido com um determinado id",
+    "/pedido/pedidoUpload/{pedidoId}": {  
+      "put": {
+        "summary": "Anexar um ficheiro pdf com os resultados clínicos",
         "tags": [
           "Pedido"
         ],
         "parameters": [
           {
+            "in":"formData",
+            "name":"pdf",
+            "type":"file",
+            "require": true
+          },
+          {
             "name": "pedidoId",
             "in": "path",
-            "description": "id do pedido a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
+            "description": "Resultados cínicos anexados à ficha do pedido",
             "schema": {
               "$ref": "#/definitions/pedido"
             }
           }
-        }
-      }
-    },
-    "/pedido/resultado/{pedidoId}": {
-      "get": {
-        "summary": "Retorna o resultado do teste de um pedido com um determinado id",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "pedidoId",
-            "in": "path",
-            "description": "id do pedido a encontrar",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/estadoUser/{pedidoId}": {
-      "get": {
-        "summary": "Retorna o estado do utilizador de um pedido com um determinado id",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "pedidoId",
-            "in": "path",
-            "description": "id do pedido a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/informacao/{pedidoId}": {
-      "get": {
-        "summary": "Retorna a informação do utilizador de um pedido com um determinado id",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "pedidoId",
-            "in": "path",
-            "description": "id do pedido a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
+            "description": "ficheiro anexado com sucesso",
             "schema": {
               "$ref": "#/definitions/pedido"
             }
@@ -314,68 +257,6 @@
           }
         }
       }
-    },
-    "/pedido/infetados/{infetado}": {
-      "get": {
-        "summary": "Retorna número de utilizadores infetados",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "infetado",
-            "in": "path",
-            "description": "estado infetado do utilizador dado como parâmetro",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Total de infetados retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/pedidoUpload/{pedidoId}": {
-      
-      "put": {
-        "summary": "Anexar um ficheiro pdf com os resultados clínicos",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-
-          {
-            "in":"formData",
-            "name":"pdf",
-            "type":"file",
-            "require": true
-
-          },
-
-          {
-            "name": "pedidoId",
-            "in": "path",
-            "description": "Resultados cínicos anexados à ficha do pedido",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ficheiro anexado com sucesso",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    
     },
     "/pedido/cc/{nmrCC}": {
       "get": {
@@ -509,7 +390,7 @@
         }
       }
     },
-    "/testes/numeroTestesDia/{dia}/{mes}/{ano}": {
+    "/testes/numeroTestesDia/{data}": {
       "parameters": [
         {
           "name": "testes",
@@ -650,7 +531,23 @@
           }
         }
       }
+    },"/utilizador/nmrInfetados":{
+      "get":{
+        "summary": "Retorna o número de utilizadores infetados",
+        "tags": [
+          "Utilizador"
+        ],
+        "responses": {
+          "200": {
+            "description": "Número de utilizadores infetados",
+            "schema": {
+              "$ref": "#/definitions/utilizador"
+            }
+          }
+        }
+      }
     },
+
     "/tecnico": {
       "get": {
         "summary": "Retorna todos os técnicos existentes",
@@ -904,20 +801,8 @@
         "pedidoId": {
           "type": "string"
         },
-        "ano": {
-          "type": "number"
-        },
-        "mes": {
-          "type": "number"
-        },
-        "dia": {
-          "type": "number"
-        },
-        "hora": {
-          "type": "number"
-        },
-        "minuto": {
-          "type": "number"
+        "data": {
+          "type": "date"
         },
         "resultadoTeste": {
           "type": "string",
