@@ -240,7 +240,7 @@ export class TestesComponent implements OnInit {
   }
 
   deleteTeste(testeId: string) {
-    var doRemove = confirm("Queres mesmo remover este teste?");
+    let doRemove = confirm("Queres mesmo remover este teste?");
     if (doRemove == true) {
       this.rest.deleteTeste(testeId)
         .subscribe(res => {

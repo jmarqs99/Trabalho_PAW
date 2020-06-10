@@ -57,7 +57,9 @@ export class TecnicosComponent implements OnInit {
       this.getTecnicos();
       this.addingTecnico = false;
       this.userId = null;
-    });
+    }, (err) => {
+      alert("ID de utilizador inexistente")
+  });
   }
   tecnicoInfo(tecnicoId :string){
     if (this.viewingTecnico && this.currentTecnico._id == tecnicoId) {

@@ -13,15 +13,15 @@ export class LoginComponent implements OnInit {
   @Input() ultimoNome: string;
 
   sessionExpired: boolean;
- 
+
 
   isRegistering: boolean = false;
   constructor(private router: Router, private authServive: AuthenticationServiceService) { }
   ngOnInit(): void {
     this.sessionExpired = false;
-    if (localStorage.getItem('currentUser')){
+    if (localStorage.getItem('currentUser')) {
       this.router.navigate(['']);
-    } else if (localStorage.getItem('sessionExpired')){
+    } else if (localStorage.getItem('sessionExpired')) {
       localStorage.removeItem("sessionExpired")
       this.sessionExpired = true;
     }
@@ -33,25 +33,16 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.router.navigate(['']);
       }
+    }, (err) => {
+        alert("Credencias Invalidas!")
     })
   }
   register(): void {
-    this.authServive.register(this.nmrCC,this.password,this.primeiroNome, this.ultimoNome).subscribe((user: any) => {
-    this.router.navigate(['/login']);
-    this.isRegistering = false;
-    })
+    this.authServive.register(this.nmrCC, this.password, this.primeiroNome, this.ultimoNome).subscribe((user: any) => {
+      this.router.navigate(['/login']);
+      this.isRegistering = false;
+    }, (err) => {
+      alert("Faltam preencher campos!")
+  })
   }
-
-  validarRegisto(){
-    if(this.primeiroNome == null || this.primeiroNome == '' || this.ultimoNome == null || this.ultimoNome == '' || this.nmrCC == null || this.nmrCC == '' ||this.password == null || this.password == ''){
-      window.alert("Faltam preencher campos!");
-    }
-  }
-
-  validarLogin(){
-    if(this.nmrCC == null || this.nmrCC == '' || this.password == null || this.password == '' ){
-      window.alert("Faltam preencher campos!");
-    }
-  }
-
 }

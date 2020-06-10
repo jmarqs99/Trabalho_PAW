@@ -11,7 +11,7 @@
     <p *ngIf="sessionExpired" class="alerta alert alert-danger">Sessão expirada!</p>
     <div class="container" *ngIf="isRegistering == false">
         <div class="box">
-            <form (submit)="login()" (submit)="validarLogin()">
+            <form (submit)="login()">
                 <div class="form-group">
                     <label for="nmrCCInput">Número de cartão de cidadão</label>
                     <input [(ngModel)]="nmrCC" name="nmrCC" type="text" class="form-control" id="nmrCCInput" required
@@ -35,7 +35,7 @@
         <div class="box-reg">
             <button class="btn btn-primary" type="button" (click)="isRegistering = false">Voltar</button>
 
-            <form *ngIf="isRegistering" (submit)="register()" name="registo" (submit)="validarRegisto()">
+            <form *ngIf="isRegistering" (submit)="register()" name="registo">
                 <div class="form-group">
                     <label for="nmrCCInput">Primeiro Nome</label>
                     <input [(ngModel)]="primeiroNome" name="primeiroNome" type="text" class="form-control" required

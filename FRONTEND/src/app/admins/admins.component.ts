@@ -50,7 +50,9 @@ export class AdminsComponent implements OnInit {
       this.getAdmins();
       this.addingAdmin = false;
       this.userId = null;
-    });
+    }, (err) => {
+      alert("ID de utilizador inexistente")
+  });
   }
   adminInfo(adminId: string) {
     if (this.viewingAdmin && this.currentAdmin._id == adminId) {
