@@ -31,11 +31,6 @@ export class UtilizadoresComponent implements OnInit {
     this.getUtilizadores();
     this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
-  get utilizadoresP(): any[] {
-    return this.utilizadores
-      .map((country, i) => ({ id: i + 1, ...country }))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
 
   getUtilizadores() {
     this.utilizadores = [];

@@ -95,7 +95,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let t of testesP; let i=index">
+                    <tr *ngFor="let t of testes; let i=index">
                         <td (click)="testeInfo(t._id)" title="Clica para veres/esconderes informações deste teste!">
                             {{ t._id}} </td>
                         <td (click)="deleteTeste(t._id)"> <button class="btn btn-danger">Apagar</button></td>

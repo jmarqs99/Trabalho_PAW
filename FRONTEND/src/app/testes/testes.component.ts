@@ -55,14 +55,6 @@ export class TestesComponent implements OnInit {
     this.getTestes();
   }
 
-
-
-  get testesP(): any[] {
-    return this.testes
-      .map((country, i) => ({ id: i + 1, ...country }))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
-
   getTestes() {
     this.testes = [];
     this.viewingPesquisarID = false;
@@ -75,29 +67,24 @@ export class TestesComponent implements OnInit {
 
   addTeste() {
     const data = new Date();
-
     if (this.teste.date < data) {
       window.alert("Erro. Apenas é permitido agendamentos a partir do dia " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear());
     }
-
     else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
       window.alert("Horario permitido da clinica: 8:00 até 17:00");
     }
     else {
-
       this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
         this.addingTeste = false;
         this.getTestes();
         this.teste.pedidoId = null;
         this.teste.date = null;
-
       }, (err) => {
-
         console.log(err);
         if (err.error.dayFull) {
           window.alert("numero maximo de testes diarios alcançado!")
         }
-        if(err.error.invalidArguments) {
+        if (err.error.invalidArguments) {
           window.alert("Argumentos inválidos!");
         }
       })
@@ -110,36 +97,27 @@ export class TestesComponent implements OnInit {
     }
   }
 
-
   listarID() {
     this.rest.verTestes().subscribe((data: {}) => {
-
       this.testes = data;
       this.viewingPesquisarID = true;
       var testesTemp = [];
       new Promise((resolve, reject) => {
         const testes = this.testes;
-
         const resultToSearchID = this.IDpesquisa;
-
         testes.forEach(function (teste, index) {
-
           if (teste._id == resultToSearchID) {
             testesTemp.push(teste);
             resolve();
           }
-
           if (index === testes.length - 1) resolve();
         });
       }).then(() => {
-
         this.testes = testesTemp;
         this.IDpesquisa = null;
       });
     });
   }
-
-
 
   validarId() {
     if (this.IDpesquisa == null || this.IDpesquisa == '') {
@@ -150,26 +128,20 @@ export class TestesComponent implements OnInit {
 
   pesquisaCC() {
     this.rest.verTestes().subscribe((data: {}) => {
-
       this.testes = data;
       this.viewingPesquisarCC = true;
       var testesTemp = [];
       new Promise((resolve, reject) => {
         const testes = this.testes;
-
         const resultToSearchCC = this.ccpesquisa;
-
         testes.forEach(function (teste, index) {
-
           if (teste.nmrCC == resultToSearchCC) {
             testesTemp.push(teste);
             resolve();
           }
-
           if (index === testes.length - 1) resolve();
         });
       }).then(() => {
-
         this.testes = testesTemp;
         this.ccpesquisa = null;
       });
@@ -223,7 +195,6 @@ export class TestesComponent implements OnInit {
       if (this.teste.date != null) {
         teste["date"] = this.teste.date;
       }
-
       this.rest.updateTeste(this.currentTeste._id, teste)
         .subscribe(res => {
           this.atualizar = false;
@@ -236,7 +207,6 @@ export class TestesComponent implements OnInit {
         }
         );
     }
-
   }
 
   deleteTeste(testeId: string) {
@@ -251,6 +221,5 @@ export class TestesComponent implements OnInit {
         );
     }
   }
-
 
 }
