@@ -24,12 +24,38 @@ h2{
     flex-direction: row;
 }
 
-.filtros{
-    margin: 3%
+.filtros form{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.filtros form *{
+    align-self: flex-end;
+}
+
+.filtros form button{
+    height: 100%;
+    align-self: flex-end;
+    margin-bottom: 1%;
+}
+
+#pedidoButtons{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#pedidoButtons *{
+    width: 35%;
 }
 
 .pesquisa{
-    margin: 3%
+    margin: 3%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.pesquisa *{
+    margin-right: 5%;
 }
 
 .table-div{
@@ -49,6 +75,11 @@ h2{
 
 .criarPedido {
     margin: 3%;
+    width: 30%;
+}
+
+.criarPedido *{
+    width: 100%;
 }
 
 .filtrosPedido {
