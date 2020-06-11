@@ -115,7 +115,7 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Apagar Pedido</th>
+                        <th *ngIf="user.role != 'UTILIZADOR'" scope="col">Apagar Pedido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,7 +123,7 @@
                         <span (click)="pedidoInfo(p._id)"
                             title="Clica para veres/esconderes informações deste pedido!">ID:
                             {{p._id}}&nbsp; &nbsp;</span>
-                        <td (click)="delete(p._id)"> <button class="btn btn-danger">Apagar</button></td>
+                        <td *ngIf="user.role != 'UTILIZADOR'" (click)="delete(p._id)"> <button class="btn btn-danger">Apagar</button></td>
                     </tr>
 
                 </tbody>

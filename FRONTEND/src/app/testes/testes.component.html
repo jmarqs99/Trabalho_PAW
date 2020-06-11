@@ -61,14 +61,14 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Apagar Teste</th>
+                        <th *ngIf="user.role != 'UTILIZADOR'" scope="col">Apagar Pedido</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let t of testes; let i=index">
                         <td (click)="testeInfo(t._id)" title="Clica para veres/esconderes informações deste teste!">
                             {{ t._id}} </td>
-                        <td (click)="deleteTeste(t._id)"> <button class="btn btn-danger">Apagar</button></td>
+                        <td *ngIf="user.role != 'UTILIZADOR'" (click)="deleteTeste(t._id)"> <button class="btn btn-danger">Apagar</button></td>
                     </tr>
                 </tbody>
             </table>

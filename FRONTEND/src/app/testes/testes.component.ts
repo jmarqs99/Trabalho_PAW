@@ -75,12 +75,12 @@ export class TestesComponent implements OnInit {
 
       if (this.teste.date < data || (this.teste.date == data && this.teste.date.getHours() + 1 < data.getHours())) {
 
-        //if (this.teste.date.getHours() + 1 >= 17) {
-          //alert("Erro. Apenas permitido agendamentos a partir das 8 horas do dia " + (data.getDate() + 1) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear())
-        //}
-        //else {
+        if (this.teste.date.getHours() + 1 >= 17 && (this.teste.date.getDay() == data.getDay())) {
+          alert("Erro. Apenas permitido agendamentos a partir das 8 horas do dia " + (data.getDate() + 1) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear())
+        }
+        else {
           alert("Erro. Apenas é permitido agendamentos a partir das " + (data.getHours() + 1) + " horas do dia " + data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear());
-        //}
+        }
       }
 
       else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() >= 17) {
