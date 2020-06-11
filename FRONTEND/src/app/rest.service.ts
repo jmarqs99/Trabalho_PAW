@@ -27,10 +27,7 @@ export class RestService {
     let body = res;
     return body || {};
   }
-  /* getProducts(): Observable<Product[]> {
-     return this.http.get<Product[]>(endpoint + 'products');
-   }*/
-
+ y
   getUtilizadores(): Observable<any> {
     return this.http.get<any>(endpoint + "utilizador")
   }
@@ -68,26 +65,6 @@ export class RestService {
     return this.http.post<any>(endpoint + "pedido/", JSON.stringify(pedido), httpOptions);
   }
 
-  numeroInfetados(id: String): Observable<any> {
-    return this.http.get<any>(endpoint + "pedido/infetados/" + id);
-  }
-
-  resultados(id: String): Observable<any> {
-    return this.http.get<Pedido[]>(endpoint + "pedido/resultados/" + id);
-  }
-  estadosTeste(id: String): Observable<any> {
-    return this.http.get<Pedido[]>(endpoint + "pedido/estadosTeste/" + id);
-  }
-  estadosUtilizador(id: String): Observable<any> {
-    return this.http.get<Pedido[]>(endpoint + "pedido/estadosUtilizador/" + id);
-  }
-  informacaoPedido(id: String): Observable<any> {
-    return this.http.get<Pedido[]>(endpoint + "pedido/informacaoPedido/" + id);
-  }
-
-  cc(id: String): Observable<any> {
-    return this.http.get<Pedido[]>(endpoint + "pedido/cc/" + id);
-  }
 
   getTecnicos(): Observable<any> {
     return this.http.get<any>(endpoint + "tecnico");
@@ -128,11 +105,7 @@ export class RestService {
   updateTeste(id: String, teste: any): Observable<any> {
     return this.http.put<any>(endpoint + "testes/" + id, JSON.stringify(teste), httpOptions);
   }
-  /**
-  updatePedido(id: String, pedido: Pedido): Observable<any> {
-    return this.http.put<any>(endpoint + "pedido/" + id, JSON.stringify(pedido), httpOptions);
-  }
-   */
+ 
   deleteTeste(id: String): Observable<any> {
     return this.http.delete<any>(endpoint + "testes/" + id);
   }

@@ -142,7 +142,7 @@
           {
             "name": "pedidoId",
             "in": "path",
-            "description": "Resultados cínicos anexados à ficha do pedido",
+            "description": "Resultados clínicos anexados à ficha do pedido",
             "schema": {
               "$ref": "#/definitions/pedido"
             }
@@ -151,131 +151,6 @@
         "responses": {
           "200": {
             "description": "ficheiro anexado com sucesso",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/resultados/{resultado}": {
-      "get": {
-        "summary": "Retorna os pedidos com o resultado dado como parâmetro",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "resultado",
-            "in": "path",
-            "description": "resultado dos pedidos a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/estadosTeste/{estadoTeste}": {
-      "get": {
-        "summary": "Retorna os pedidos com o estado do teste dado como parâmetro",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "estadoTeste",
-            "in": "path",
-            "description": "estado do teste dos pedidos a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/estadosUtilizador/{estadoUtilizador}": {
-      "get": {
-        "summary": "Retorna os pedidos com o estado do utilizador dado como parâmetro",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "estadoUtilizador",
-            "in": "path",
-            "description": "estado do utilizador dos pedidos a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/informacaoPedido/{informacao}": {
-      "get": {
-        "summary": "Retorna os pedidos com a informação dado como parâmetro",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "informacao",
-            "in": "path",
-            "description": "informação dos pedidos a encontrar",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pedido retornado",
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        }
-      }
-    },
-    "/pedido/cc/{nmrCC}": {
-      "get": {
-        "summary": "Retorna o pedido com o numero de cartao de cidadao dado como parâmetro",
-        "tags": [
-          "Pedido"
-        ],
-        "parameters": [
-          {
-            "name": "nmrCC",
-            "in": "path",
-            "description": "numero de cartao de cidadao do utilizador dado como parâmetro",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "pedido retornado",
             "schema": {
               "$ref": "#/definitions/pedido"
             }
