@@ -32,7 +32,7 @@ export class AdminsComponent implements OnInit {
   }
 
   demote(tecnicoId: string) {
-    var doRemove = confirm("Queres mesmo remover este técnico?");
+    var doRemove = confirm("Queres mesmo remover este admin?");
     if (doRemove == true) {
       this.rest.removeAdmin(tecnicoId).subscribe((data: {}) => {
         this.getAdmins();

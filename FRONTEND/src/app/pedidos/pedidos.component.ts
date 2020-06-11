@@ -69,7 +69,7 @@ export class PedidosComponent implements OnInit {
 
   addPedido() {
 
-    if (this.pedido.nmrCC == null || this.pedido.informacao == null) {
+    if (this.pedido.informacao == null) {
       alert("Faltam preencher campos!");
     }
     else {
