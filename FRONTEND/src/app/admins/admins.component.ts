@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdminsComponent implements OnInit {
   admins: any;
-  addingAdmin: boolean;
+  addingAdmin: boolean = false;
   userId: string;
   currentAdmin: any;
   viewingAdmin: boolean;

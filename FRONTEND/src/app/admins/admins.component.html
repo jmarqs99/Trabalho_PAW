@@ -8,7 +8,7 @@
 <body>
     <h2>Admins</h2>
     <div class="criarAdmin">
-        <button class="btn btn-primary" (click)="addingAdmin = true">Adicionar Admin</button>
+        <button *ngIf="addingAdmin == false" class="btn btn-primary" (click)="addingAdmin = true">Adicionar Admin</button>
         <form *ngIf="addingAdmin" (submit)="addAdmin()">
             <input [(ngModel)]="userId" name="userId" type="text" placeholder="Id do Utilizador" /><br>
             <button class="btn btn-primary" type="submit" >Adicionar</button>

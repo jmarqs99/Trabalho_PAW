@@ -10,21 +10,7 @@ import { Teste } from '../Models/Teste';
   selector: 'app-testes',
   templateUrl: './testes.component.html',
   styleUrls: ['./testes.component.css'],
-  /**
-    template: `
-        <div class="example-config">
-            Only values between <strong>{{min | kendoDate:'g'}}</strong> and <strong>{{max | kendoDate:'g'}}</strong> are displayed in the Calendar and the TimePicker.
-        </div>
-        <div class="example-wrapper">
-            <kendo-datetimepicker
-                [min]="min"
-                [max]="max"
-            >
-            </kendo-datetimepicker>
-        </div>
-        
-    `
-     */
+ 
 })
 export class TestesComponent implements OnInit {
 

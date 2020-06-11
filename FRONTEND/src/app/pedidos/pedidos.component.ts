@@ -53,6 +53,12 @@ export class PedidosComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
+  get pedidosP(): any[] {
+    return this.pedidos
+      .map((country, i) => ({ id: i + 1, ...country }))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
   getPedidos() {
     this.pedidos = [];
     this.viewingListar = true;

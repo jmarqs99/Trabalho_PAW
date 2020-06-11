@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let u of utilizadores; let i=index">
+                <tr *ngFor="let u of utilizadoresP; let i=index">
                     <td (click)="utilizadorInfo(u._id)" title="Clica para veres/esconderes informações deste user!">
                         {{ u.nmrCC}} </td>
                     <td>{{ u.primeiroNome}}</td>
