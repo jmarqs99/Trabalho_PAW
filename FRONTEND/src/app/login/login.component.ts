@@ -27,22 +27,31 @@ export class LoginComponent implements OnInit {
     }
   }
   login(): void {
-    this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {
-      if (user) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigate(['']);
-      }
-    }, (err) => {
+    if (this.nmrCC && this.password) {
+      this.authServive.login(this.nmrCC, this.password).subscribe((user: any) => {
+        if (user) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['']);
+        }
+      }, (err) => {
         alert("Credencias Invalidas!")
-    })
+      })
+    }
+    else {
+      alert("Faltam preencher campos!")
+    }
   }
   register(): void {
-    this.authServive.register(this.nmrCC, this.password, this.primeiroNome, this.ultimoNome).subscribe((user: any) => {
-      this.router.navigate(['/login']);
-      this.isRegistering = false;
-    }, (err) => {
+    if (this.nmrCC && this.password && this.primeiroNome && this.ultimoNome) {
+      this.authServive.register(this.nmrCC, this.password, this.primeiroNome, this.ultimoNome).subscribe((user: any) => {
+        this.router.navigate(['/login']);
+        this.isRegistering = false;
+      }, (err) => {
+        alert("Faltam preencher campos!")
+      })
+    } else {
       alert("Faltam preencher campos!")
-  })
+    }
   }
 }
