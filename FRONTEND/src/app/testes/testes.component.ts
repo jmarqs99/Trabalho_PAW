@@ -66,38 +66,43 @@ export class TestesComponent implements OnInit {
   }
 
   addTeste() {
-    const data = new Date();
-    if (this.teste.date < data) {
-      window.alert("Erro. Apenas é permitido agendamentos a partir do dia " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear());
-    }
-    else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
-      window.alert("Horario permitido da clinica: 8:00 até 17:00");
+    if (this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null) {
+      alert("Campos não preenchidos!");
     }
     else {
-      this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
-        this.addingTeste = false;
-        this.getTestes();
-        this.teste.pedidoId = null;
-        this.teste.date = null;
-      }, (err) => {
-        console.log(err);
-        if (err.error.dayFull) {
-          window.alert("numero maximo de testes diarios alcançado!")
-        }
-        if (err.error.invalidArguments) {
-          window.alert("Argumentos inválidos!");
-        }
-      })
+      const data = new Date();
+      if (this.teste.date < data) {
+        alert("Erro. Apenas é permitido agendamentos a partir do dia " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear());
+      }
+      else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
+        alert("Horario permitido da clinica: 8:00 até 17:00");
+      }
+      else {
+        this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
+          this.addingTeste = false;
+          this.getTestes();
+          this.teste.pedidoId = null;
+          this.teste.date = null;
+        }, (err) => {
+          console.log(err);
+          if (err.error.dayFull) {
+           alert("numero maximo de testes diarios alcançado!")
+          }
+          else if (err.error.invalidArguments) {
+            alert("Argumentos inválidos!");
+          }
+        })
+      }
     }
   }
 
-  validarTeste() {
-    if (this.teste.pedidoId == null || this.teste.pedidoId == '' || this.teste.date == null || this.teste.hora < 8 || this.teste.hora > 17) {
-      window.alert("Faltam preencher campos!");
-    }
-  }
 
   listarID() {
+    if (this.IDpesquisa == null || this.IDpesquisa == '') {
+      window.alert("Não foi introduzido nenhum ID!");
+      return;
+    }
+    else {
     this.rest.verTestes().subscribe((data: {}) => {
       this.testes = data;
       this.viewingPesquisarID = true;
@@ -118,15 +123,15 @@ export class TestesComponent implements OnInit {
       });
     });
   }
-
-  validarId() {
-    if (this.IDpesquisa == null || this.IDpesquisa == '') {
-      window.alert("Faltam preencher campos!");
-      this.getTestes()
-    }
   }
 
+
   pesquisaCC() {
+    if (this.ccpesquisa == null) {
+     alert("Não foi introduzido nenhum ID!");
+     return;
+    }
+    else {
     this.rest.verTestes().subscribe((data: {}) => {
       this.testes = data;
       this.viewingPesquisarCC = true;
@@ -147,14 +152,9 @@ export class TestesComponent implements OnInit {
       });
     });
   }
-
-  validarCC() {
-    if (this.ccpesquisa == null || this.ccpesquisa == '') {
-      window.alert("Faltam preencher campos!");
-      this.getTestes()
-    }
   }
 
+ 
   testeInfo(testeId: string) {
     if (this.viewingTeste && this.currentTeste._id == testeId) {
       this.viewingTeste = false;

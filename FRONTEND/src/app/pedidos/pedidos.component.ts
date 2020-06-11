@@ -74,101 +74,90 @@ export class PedidosComponent implements OnInit {
     this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
       this.addingPedido = false;
       this.getPedidos();
-      
+
       this.pedido.estadoUtilizador = null;
       this.pedido.informacao = null;
-      
+
     }, (err) => {
       console.log(err);
-      if(err.error.invalidArguments) {
-        window.alert("Argumentos inválidos!");
+      if (err.error.invalidArguments) {
+        alert("Faltam preencher campos!");
       }
     })
   }
 
-  validarPedido() {
-    if(this.pedido.informacao == null || this.pedido.informacao == '') {
-      window.alert("Faltam preencher campos!");
-    }
-  }
 
 
   filtroNCC() {
-    this.rest.getPedidos().subscribe((data: {}) => {
 
-      this.pedidos = data;
-      //this.viewingFiltros = false;
-      this.viewingListarCC = true;
-      var pedidosTemp = [];
-      //this.viewingFiltros = true;
-      new Promise((resolve, reject) => {
-        const pedidos = this.pedidos;
+    if (this.ccFiltro == null) {
+      alert("Não foi introduzido nenhum CC!");
+      return;
+    }
+    else {
+      this.rest.getPedidos().subscribe((data: {}) => {
 
-        const resultToSearchcc = this.ccFiltro;
+        this.pedidos = data;
+        this.viewingListarCC = true;
+        var pedidosTemp = [];
+        new Promise((resolve, reject) => {
+          const pedidos = this.pedidos;
 
-        pedidos.forEach(function (pedido, index) {
+          const resultToSearchcc = this.ccFiltro;
 
-          if (pedido.nmrCC == resultToSearchcc) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
+          pedidos.forEach(function (pedido, index) {
 
-          if (index === pedidos.length - 1) resolve();
+            if (pedido.nmrCC == resultToSearchcc) {
+              pedidosTemp.push(pedido);
+              resolve();
+            }
+
+            if (index === pedidos.length - 1) resolve();
+          });
+        }).then(() => {
+
+          this.pedidos = pedidosTemp;
+          this.ccFiltro = null;
         });
-      }).then(() => {
-
-        this.pedidos = pedidosTemp;
-        this.ccFiltro = null;
-
-
       });
-    });
-  }
-
-  validarNcc() {
-    if(this.ccFiltro == null) {
-      window.alert("Faltam preencher campos!");
-      
-      this.getPedidos();
     }
   }
 
   filtroID() {
-    this.rest.getPedidos().subscribe((data: {}) => {
 
-      this.pedidos = data;
-      this.viewingListarID = true;
-      var pedidosTemp = [];
-      new Promise((resolve, reject) => {
-        const pedidos = this.pedidos;
+    if (this.IDfiltro == null) {
+      alert("Não foi introduzido nenhum ID!");
+      return;
+    }
+    else {
 
-        const resultToSearchID = this.IDfiltro;
+      this.rest.getPedidos().subscribe((data: {}) => {
 
-        pedidos.forEach(function (pedido, index) {
+        this.pedidos = data;
+        this.viewingListarID = true;
+        var pedidosTemp = [];
+        new Promise((resolve, reject) => {
+          const pedidos = this.pedidos;
 
-          if (pedido._id == resultToSearchID) {
-            pedidosTemp.push(pedido);
-            resolve();
-          }
+          const resultToSearchID = this.IDfiltro;
 
-          if (index === pedidos.length - 1) resolve();
+          pedidos.forEach(function (pedido, index) {
+
+            if (pedido._id == resultToSearchID) {
+              pedidosTemp.push(pedido);
+              resolve();
+            }
+
+            if (index === pedidos.length - 1) resolve();
+          });
+        }).then(() => {
+
+          this.pedidos = pedidosTemp;
+          this.IDfiltro = null;
         });
-      }).then(() => {
-
-        this.pedidos = pedidosTemp;
-        this.IDfiltro = null;
       });
-    });
-  }
-
-  validarId() {
-    if(this.IDfiltro == null) {
-      window.alert("Faltam preencher campos!");
-      this.getPedidos();
-      
     }
   }
-
 
   filtros() {
     this.rest.getPedidos().subscribe((data: {}) => {
@@ -178,6 +167,7 @@ export class PedidosComponent implements OnInit {
       var pedidosTemp = [];
       this.viewingFiltros = true;
       this.pesquisar = true;
+      
       new Promise((resolve, reject) => {
         const pedidos = this.pedidos;
         const resultToSearch = this.resultado;
@@ -271,7 +261,6 @@ export class PedidosComponent implements OnInit {
             resolve();
           }
 
-
           if (index === pedidos.length - 1) resolve();
         });
       }).then(() => {
@@ -321,8 +310,10 @@ export class PedidosComponent implements OnInit {
   }
 
   uploadFicheiro(pedidoId: String) {
+
     let formData = new FormData();
     formData.append('pdf', this.pdf)
+    
     this.rest.upload(pedidoId, formData).subscribe(res => {
       this.atualizarPedidoUpload = false;
       this.getPedidos();
@@ -331,19 +322,11 @@ export class PedidosComponent implements OnInit {
 
     }, (err) => {
       console.log(err);
-      if(err.error.invalidFile) {
-        window.alert("Ficheiro inválido");
-      }
+      alert("Ficheiro não submetido!");
+      
     });
   }
 
-  verificarUpload() {
-    if(this.pdf == null) {
-      window.alert("Faltam preencher campos!");
-      this.getPedidos();
-      
-    }
-  }
 
   pedidoInfo(pedidoId: String) {
     if (this.viewingPedido && this.currentPedido._id == pedidoId) {
