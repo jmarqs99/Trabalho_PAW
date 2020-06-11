@@ -15,6 +15,7 @@ h2{
 }
 
 .paginacao{
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,8 +42,28 @@ h2{
 
 .criarTeste{
     margin: 3%;
+    width: 30%;
+}
+.criarTeste *{
+    width: 100%;
 }
 
 .pesquisa{
-    margin: 3%
+    margin: 3%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.pesquisa *{
+    margin-right: 5%;
+}
+
+#pedidoButtons{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#pedidoButtons *{
+    width: 35%;
 }

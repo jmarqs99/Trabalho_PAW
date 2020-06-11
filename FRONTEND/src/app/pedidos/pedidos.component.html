@@ -17,22 +17,20 @@
 
             <div class="form-group">
                 <label class="control-label">Informação relevante:
-                    <input class="form-control" style="width:240%;" [(ngModel)]="pedido.informacao" name="informacao"
-                        placeholder="escreva a informação aqui ou selecione uma das opções abaixo" />
+                    <input class="form-control" [(ngModel)]="pedido.informacao" name="informacao"
+                        placeholder="Insira a sua resposta ou selecione uma das abaixo" />
                     <select input class="form-control" [(ngModel)]="pedido.informacao" name="informacao">
                         <option value="saúde 24">Fui encaminhado pela linha Saúde24</option>
                         <option value="local de risco">Trabalho em locais de risco</option>
                         <option value="pessoa de risco">Pertenço a um grupo de risco </option>
                         <input class="form-control" [(ngModel)]="pedido.informacao" name="informacao" type="text"
-                            placeholder="Informação" /><br>
+                            placeholder="Informação" />
                     </select>
-
                 </label>
 
             </div>
 
             <div class="form-group">
-                <br>
                 <label class="control-label">O seu estado de saúde:
                     <select class="form-control" [(ngModel)]="pedido.estadoUtilizador" name="estadoUtilizador">
                         <option value="infetado">Infetado</option>
@@ -40,99 +38,88 @@
                         <option value="saudavel">Saudável</option>
                     </select>
                 </label>
-
             </div>
-            <br>
-            <button class="btn btn-primary" type="submit">Confirmar</button><br>
-            <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
-                (click)="addingPedido = false">Cancelar</button>
+
+            <div id="pedidoButtons">
+                <button class="btn btn-primary" type="submit">Confirmar</button><br>
+                <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
+                    (click)="addingPedido = false">Cancelar</button>
+            </div>
         </form>
 
     </div>
-
-    <div class="filtros">
-
-        <button *ngIf="viewingFiltros == false" class="btn btn-primary" type="button"
-            (click)="viewingFiltros = true">Filtros</button>
-
-        <form *ngIf="viewingFiltros" (submit)="filtros()">
-            <label class="control-label">Filtrar por resultado do teste
-                <select input class="form-control" [(ngModel)]="resultado" name="resultadoTeste">
-                    <option value="positivo">positivo</option>
-                    <option value="negativo">negativo</option>
-                    <option value="indefinido">indefinido</option>
-                </select>
-            </label><br>
-
-            <label class="control-label">Filtrar por estado do teste
-                <select input class="form-control" [(ngModel)]="estadosTeste" name="estadoTeste">
-                    <option value="Por agendar">Por agendar</option>
-                    <option value="agendado">agendado</option>
-                    <option value="finalizado">finalizado</option>
-                </select>
-            </label><br>
-            <label class="control-label">
-                Filtrar por estado do utilizador
-                <select input class="form-control" [(ngModel)]="estadosUser" name="estadoUtilizador">
-                    <option value="infetado">Infetado</option>
-                    <option value="suspeito">Suspeito</option>
-                    <option value="saudavel">Saudável</option>
-                </select>
-            </label>
-            <br>
-            <label class="control-label">
-                Filtrar pela informação do pedido
-                <select input class="form-control" [(ngModel)]="informacaoPedido" name="informacao">
-                    <option value="saúde 24">saúde 24</option>
-                    <option value="local de risco">local de risco</option>
-                    <option value="pessoa de risco">pessoa de risco</option>
-                </select>
-            </label>
-            <br>
-
-            <button class="btn btn-primary" type="submit">listar</button>
-            <button *ngIf="pesquisar == false" class="btn btn-danger" type="button"
-                (click)="viewingFiltros = false">Sair dos filtros</button>
-
-
-        </form>
-        <br>
-        <form *ngIf="pesquisar == true" (submit)="getPedidos()">
-            <button class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de pedidos completa</button>
-        </form>
-    </div>
-
     <div class="pesquisa">
-
-        <h5>Pesquisar pelo ID do pedido </h5>
         <form (submit)="filtroID()">
+            <h5>Pesquisar pelo ID do pedido </h5>
             <div class="form-group">
                 <label class="control-label">
-                    <input class="form-control" [(ngModel)]="IDfiltro"
-                        name="_id" type="text" placeholder="id" />
+                    <input class="form-control" [(ngModel)]="IDfiltro" name="_id" type="text" placeholder="id" />
                 </label>
             </div>
-            <button class="btn btn-primary" type="submit">pesquisar</button>
+            <button class="btn btn-primary" type="submit">Pesquisar</button>
             <button *ngIf="viewingListarID == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
         </form>
 
-        <br>
-
-        <h5>Pesquisar pelo CC do utilizador </h5>
         <form (submit)="filtroNCC()">
+            <h5>Pesquisar pelo CC do utilizador </h5>
             <div class="form-group">
 
                 <label class="control-label">
-                    <input class="form-control" [(ngModel)]="ccFiltro"
-                        name="nmrCC" type="text" placeholder="cartão de cidadão" />
+                    <input class="form-control" [(ngModel)]="ccFiltro" name="nmrCC" type="text"
+                        placeholder="cartão de cidadão" />
                 </label>
 
             </div>
 
-            <button class="btn btn-primary" type="submit">pesquisar</button>
+            <button class="btn btn-primary" type="submit">Pesquisar</button>
             <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
         </form>
 
+        <div class="filtros">
+
+            <button *ngIf="viewingFiltros == false" class="btn btn-primary" type="button"
+                (click)="viewingFiltros = true">Filtrar</button>
+
+            <form *ngIf="viewingFiltros" (submit)="filtros()">
+                <label class="control-label">Filtrar por resultado do teste
+                    <select input class="form-control" [(ngModel)]="resultado" name="resultadoTeste">
+                        <option value="positivo">positivo</option>
+                        <option value="negativo">negativo</option>
+                        <option value="indefinido">indefinido</option>
+                    </select>
+                </label>
+                <label class="control-label">Filtrar por estado do teste
+                    <select input class="form-control" [(ngModel)]="estadosTeste" name="estadoTeste">
+                        <option value="Por agendar">Por agendar</option>
+                        <option value="agendado">agendado</option>
+                        <option value="finalizado">finalizado</option>
+                    </select>
+                </label>
+                <label class="control-label">
+                    Filtrar por estado do utilizador
+                    <select input class="form-control" [(ngModel)]="estadosUser" name="estadoUtilizador">
+                        <option value="infetado">Infetado</option>
+                        <option value="suspeito">Suspeito</option>
+                        <option value="saudavel">Saudável</option>
+                    </select>
+                </label>
+
+                <label class="control-label">
+                    Filtrar pela informação do pedido
+                    <select input class="form-control" [(ngModel)]="informacaoPedido" name="informacao">
+                        <option value="saúde 24">saúde 24</option>
+                        <option value="local de risco">local de risco</option>
+                        <option value="pessoa de risco">pessoa de risco</option>
+                    </select>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Listar</button>
+            </form>
+            <button *ngIf="pesquisar == false && viewingFiltros" class="btn btn-danger" type="button"
+                (click)="viewingFiltros = false">Sair dos filtros</button>
+            <button *ngIf="pesquisar == true" class="btn btn-primary" (click)="getPedidos()">Voltar para a lista de
+                pedidos completa</button>
+        </div>
     </div>
 
     <div class="conteiner">
