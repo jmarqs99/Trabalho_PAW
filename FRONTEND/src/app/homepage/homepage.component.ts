@@ -58,13 +58,14 @@ export class HomepageComponent implements OnInit {
       let chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         exportEnabled: false,
-        theme: "dark2",
+        theme: "light",
         title: {
           text: "Número de testes realizados por dia"
         },
         data: [{
           type: "area",
-          dataPoints: testeData
+          dataPoints: testeData,
+          markerColor: "#FF0000"
         }]
       });
       chart.render();
