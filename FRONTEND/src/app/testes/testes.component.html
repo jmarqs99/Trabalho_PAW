@@ -5,16 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testes</title>
-
-
 </head>
 
 <body>
-
-
     <h2>Testes</h2>
     <div class="criarTeste" *ngIf="user.role != 'UTILIZADOR'">
-
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
         <form *ngIf="addingTeste" (submit)="addTeste()">
@@ -23,17 +18,12 @@
                     <input class="form-control" [(ngModel)]="teste.pedidoId" name="pedidoId" type="text"
                         placeholder="Insira o ID do pedido" />
                 </label>
-
             </div>
-
-
-
             <div class="input-group">
                 <dl-date-time-picker startView="day" maxView="year" minView="hour" [(ngModel)]="teste.date" name="date">
                 </dl-date-time-picker>
             </div>
             <h6>Horário de funcionamento da clínica: 8:00 até 17:00</h6>
-
             <div id="pedidoButtons">
                 <button class="btn btn-primary" type="submit">agendar</button>
 
@@ -41,13 +31,8 @@
                     (click)="addingTeste = false">Cancelar</button>
             </div>
         </form>
-
     </div>
-
-
-    <div class="pesquisa">
-
-        
+    <div class="pesquisa"  *ngIf="user.role != 'UTILIZADOR'">
         <form (submit)="listarID()">
             <h6>Pesquisar pelo ID do teste </h6>
             <div class="form-group">
@@ -58,29 +43,18 @@
             <button class="btn btn-primary" type="submit">Pesquisar</button>
             <button *ngIf="viewingPesquisarID == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
         </form>
-
-        
         <form (submit)="pesquisaCC()">
             <h6>Pesquisar pelo CC do user</h6>
             <div class="form-group">
-
                 <label class="control-label">
                     <input class="form-control" [(ngModel)]="ccpesquisa" name="nmrCC" type="text"
                         placeholder="Insira o nº de CC" />
                 </label>
-
             </div>
-
-
             <button class="btn btn-primary" type="submit">Pesquisar</button>
             <button *ngIf="viewingPesquisarCC == true" class="btn btn-danger" (click)="getTestes()">Voltar</button>
         </form>
-
-
     </div>
-
-
-
     <div class="conteiner">
         <div class="table-div">
             <table class="table table-striped">
