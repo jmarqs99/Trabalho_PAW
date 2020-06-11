@@ -71,13 +71,22 @@ export class TestesComponent implements OnInit {
     }
     else {
       const data = new Date();
-      if (this.teste.date < data) {
-        alert("Erro. Apenas é permitido agendamentos a partir do dia " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear());
+
+      if (this.teste.date < data || this.teste.date.getHours() + 1 < data.getHours()) {
+
+        if (this.teste.date.getHours() + 1 === 17) {
+          alert("Erro. Apenas permitido agendamentos a partir das 8 horas do dia " + (data.getDate() + 1) + "/" + (data.getMonth() + 1) + "/" + data.getFullYear())
+        }
+        else {
+          alert("Erro. Apenas é permitido agendamentos a partir das " + (data.getHours() + 1) + " horas do dia " + data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear());
+        }
       }
-      else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() > 17) {
+
+      else if (this.teste.date.getHours() < 8 || this.teste.date.getHours() >= 17) {
         alert("Horario permitido da clinica: 8:00 até 17:00");
       }
       else {
+
         this.rest.criarTeste(this.teste).subscribe((result: Teste) => {
           this.addingTeste = false;
           this.getTestes();
@@ -85,11 +94,12 @@ export class TestesComponent implements OnInit {
           this.teste.date = null;
         }, (err) => {
           console.log(err);
+          
           if (err.error.dayFull) {
-           alert("numero maximo de testes diarios alcançado!")
+            alert("numero maximo de testes diarios alcançado!")
           }
-          else if (err.error.invalidArguments) {
-            alert("Argumentos inválidos!");
+          if (err.error.invalidArguments) {
+            alert("Campos não preenchidos!");
           }
         })
       }
@@ -103,58 +113,58 @@ export class TestesComponent implements OnInit {
       return;
     }
     else {
-    this.rest.verTestes().subscribe((data: {}) => {
-      this.testes = data;
-      this.viewingPesquisarID = true;
-      var testesTemp = [];
-      new Promise((resolve, reject) => {
-        const testes = this.testes;
-        const resultToSearchID = this.IDpesquisa;
-        testes.forEach(function (teste, index) {
-          if (teste._id == resultToSearchID) {
-            testesTemp.push(teste);
-            resolve();
-          }
-          if (index === testes.length - 1) resolve();
+      this.rest.verTestes().subscribe((data: {}) => {
+        this.testes = data;
+        this.viewingPesquisarID = true;
+        var testesTemp = [];
+        new Promise((resolve, reject) => {
+          const testes = this.testes;
+          const resultToSearchID = this.IDpesquisa;
+          testes.forEach(function (teste, index) {
+            if (teste._id == resultToSearchID) {
+              testesTemp.push(teste);
+              resolve();
+            }
+            if (index === testes.length - 1) resolve();
+          });
+        }).then(() => {
+          this.testes = testesTemp;
+          this.IDpesquisa = null;
         });
-      }).then(() => {
-        this.testes = testesTemp;
-        this.IDpesquisa = null;
       });
-    });
-  }
+    }
   }
 
 
   pesquisaCC() {
     if (this.ccpesquisa == null) {
-     alert("Não foi introduzido nenhum ID!");
-     return;
+      alert("Não foi introduzido nenhum ID!");
+      return;
     }
     else {
-    this.rest.verTestes().subscribe((data: {}) => {
-      this.testes = data;
-      this.viewingPesquisarCC = true;
-      var testesTemp = [];
-      new Promise((resolve, reject) => {
-        const testes = this.testes;
-        const resultToSearchCC = this.ccpesquisa;
-        testes.forEach(function (teste, index) {
-          if (teste.nmrCC == resultToSearchCC) {
-            testesTemp.push(teste);
-            resolve();
-          }
-          if (index === testes.length - 1) resolve();
+      this.rest.verTestes().subscribe((data: {}) => {
+        this.testes = data;
+        this.viewingPesquisarCC = true;
+        var testesTemp = [];
+        new Promise((resolve, reject) => {
+          const testes = this.testes;
+          const resultToSearchCC = this.ccpesquisa;
+          testes.forEach(function (teste, index) {
+            if (teste.nmrCC == resultToSearchCC) {
+              testesTemp.push(teste);
+              resolve();
+            }
+            if (index === testes.length - 1) resolve();
+          });
+        }).then(() => {
+          this.testes = testesTemp;
+          this.ccpesquisa = null;
         });
-      }).then(() => {
-        this.testes = testesTemp;
-        this.ccpesquisa = null;
       });
-    });
-  }
+    }
   }
 
- 
+
   testeInfo(testeId: string) {
     if (this.viewingTeste && this.currentTeste._id == testeId) {
       this.viewingTeste = false;

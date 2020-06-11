@@ -68,22 +68,27 @@ export class PedidosComponent implements OnInit {
 
 
   addPedido() {
-    //console.log(this.pedido)
-    this.pedido.nmrCC = this.user.nmrCC;
-    console.log(this.pedido)
-    this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
-      this.addingPedido = false;
-      this.getPedidos();
 
-      this.pedido.estadoUtilizador = null;
-      this.pedido.informacao = null;
+    if (this.pedido.nmrCC == null || this.pedido.informacao == null) {
+      alert("Faltam preencher campos!");
+    }
+    else {
+      this.pedido.nmrCC = this.user.nmrCC;
+      console.log(this.pedido)
+      this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
+        this.addingPedido = false;
+        this.getPedidos();
 
-    }, (err) => {
-      console.log(err);
-      if (err.error.invalidArguments) {
-        alert("Faltam preencher campos!");
-      }
-    })
+        this.pedido.estadoUtilizador = null;
+        this.pedido.informacao = null;
+
+      }, (err) => {
+        console.log(err);
+        if (err.error.invalidArguments) {
+          alert("Faltam preencher campos!");
+        }
+      })
+    }
   }
 
 
@@ -167,7 +172,7 @@ export class PedidosComponent implements OnInit {
       var pedidosTemp = [];
       this.viewingFiltros = true;
       this.pesquisar = true;
-      
+
       new Promise((resolve, reject) => {
         const pedidos = this.pedidos;
         const resultToSearch = this.resultado;
@@ -310,21 +315,26 @@ export class PedidosComponent implements OnInit {
   }
 
   uploadFicheiro(pedidoId: String) {
-
-    let formData = new FormData();
-    formData.append('pdf', this.pdf)
-    
-    this.rest.upload(pedidoId, formData).subscribe(res => {
-      this.atualizarPedidoUpload = false;
-      this.getPedidos();
-      this.viewingListar = false;
-      this.pedidoInfo(this.currentPedido._id)
-
-    }, (err) => {
-      console.log(err);
+    if (this.pdf == null) {
       alert("Ficheiro não submetido!");
-      
-    });
+    }
+    else {
+      let formData = new FormData();
+      formData.append('pdf', this.pdf)
+
+      this.rest.upload(pedidoId, formData).subscribe(res => {
+        this.atualizarPedidoUpload = false;
+        this.getPedidos();
+        this.viewingListar = false;
+        this.pedidoInfo(this.currentPedido._id)
+
+      }, (err) => {
+        console.log(err);
+        if (err.error.invalidFile) {
+          alert("Ficheiro não submetido!");
+        }
+      });
+    }
   }
 
 
