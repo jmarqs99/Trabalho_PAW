@@ -102,60 +102,7 @@ pedidoController.getOnePedido = function (req, res, next) {
     })
 
 }
-pedidoController.Resultados = function (req, res, next) {
-    Pedido.find({ resultadoTeste: req.params.resultado }, function (err, pedido) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-        }
-    })
-}
 
-
-pedidoController.EstadosTeste = function (req, res, next) {
-    Pedido.find({ estadoTeste: req.params.estadoTeste }, function (err, pedido) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-        }
-    })
-}
-
-pedidoController.EstadosUser = function (req, res, next) {
-    Pedido.find({ estadoUtilizador: req.params.estadoUtilizador }, function (err, pedido) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-        }
-    })
-}
-
-pedidoController.informacao = function (req, res, next) {
-    Pedido.find({ informacao: req.params.informacao }, function (err, pedido) {
-        if (err) {
-            next(err)
-        }
-        else {
-            res.json(pedido)
-        }
-    })
-}
-
-pedidoController.cc = function (req, res, next) {
-    Pedido.find({ nmrCC: req.params.nmrCC }, function (err, pedido) {
-        if (err) {
-            next(err)
-        } else {
-            res.json(pedido)
-        }
-    })
-}
 
 pedidoController.deletePedido = function (req, res, next) {
     Pedido.findOne({ _id: req.params.pedidoId }, function (err, pedido) {
@@ -173,14 +120,5 @@ pedidoController.deletePedido = function (req, res, next) {
         }
     })
 }
-
-
-
-
-
-
-
-
-
 
 module.exports = pedidoController;

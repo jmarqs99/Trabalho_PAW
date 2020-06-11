@@ -12,12 +12,6 @@ router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
 
 router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
 
-//filtrar a lista dos pedidos por parâmetro
-router.get('/resultados/:resultado',authorize(["TECNICO"]), pedidoController.Resultados)
-router.get('/estadosTeste/:estadoTeste',authorize(["TECNICO"]), pedidoController.EstadosTeste)
-router.get('/estadosUtilizador/:estadoUtilizador',authorize(["TECNICO"]), pedidoController.EstadosUser)
-router.get('/informacaoPedido/:informacao',authorize(["TECNICO"]), pedidoController.informacao)
-router.get('/cc/:nmrCC', authorize(["TECNICO"]), pedidoController.cc)
 
 
 module.exports = router;

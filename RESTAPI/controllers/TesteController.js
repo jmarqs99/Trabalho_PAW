@@ -78,7 +78,7 @@ TesteController.verTeste = function (req, res, next) {
 }
 
 TesteController.updateTeste = function (req, res, next) {
-    if (req.body.resultadoTeste){
+    if (req.body.resultadoTeste) {
         req.body.estadoTeste = "Finalizado"
     }
     Teste.findByIdAndUpdate(req.params.testeId, req.body, { new: true },
@@ -87,17 +87,17 @@ TesteController.updateTeste = function (req, res, next) {
                 next(err);
             } else {
                 if (req.body.resultadoTeste == "positivo") {
-                    Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" , estadoUtilizador : "Infetado"}, { new: true },function(err){
-                        if(err){ console.log(err)}
+                    Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado", estadoUtilizador: "Infetado" }, { new: true }, function (err) {
+                        if (err) { console.log(err) }
                     })
-                    Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Infetado" }, { new: true },function(err,teste){
-                        if(err){ console.log(err)}
+                    Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Infetado" }, { new: true }, function (err, teste) {
+                        if (err) { console.log(err) }
                     })
                 } else if (req.body.resultadoTeste == "negativo") {
                     Teste.countDocuments({ pedidoId: teste.pedidoId }, function (err, testesCount) {
                         if (err) { } else {
                             if (testesCount >= 2) {
-                                Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado" , estadoUtilizador : "Saudável"})
+                                Pedido.findByIdAndUpdate(teste.pedidoId, { resultadoTeste: req.body.resultadoTeste, estadoTeste: "finalizado", estadoUtilizador: "Saudável" })
                                 Utilizador.findOneAndUpdate({ nmrCC: teste.nmrCC }, { estado: "Saudável" }, { new: true })
                             } else {
                                 var today = new Date();
@@ -184,13 +184,15 @@ TesteController.totalTestesPorPessoa = function (req, res, next) {
 TesteController.testePorDia = function (req, res, next) {
     const data = new Date(req.params.data);
     const nextDate = new Date(req.params.data)
-    data.setHours(0,0,0,0);
+    data.setHours(0, 0, 0, 0);
     nextDate.setDate(nextDate.getDate() + 1);
-    nextDate.setHours(0,0,0,0);
-    Teste.countDocuments({  date: {
-        "$gte": data,
-        "$lt": nextDate
-    } }, function (err, count) {
+    nextDate.setHours(0, 0, 0, 0);
+    Teste.countDocuments({
+        date: {
+            "$gte": data,
+            "$lt": nextDate
+        }
+    }, function (err, count) {
         res.json(count);
     });
 }
