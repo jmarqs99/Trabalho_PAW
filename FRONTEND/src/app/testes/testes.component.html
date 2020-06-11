@@ -13,7 +13,7 @@
 
 
     <h2>Testes</h2>
-    <div class="criarTeste">
+    <div class="criarTeste" *ngIf="user.role != 'UTILIZADOR'">
 
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
@@ -114,10 +114,10 @@
             <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
             <p>Resultado do Teste : {{currentTeste.resultadoTeste}}</p>
             <p>Data do teste: {{currentTeste.date}}</p>
-            <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
+            <button *ngIf="atualizar == false && user.role != 'UTILIZADOR'" class="btn btn-primary" type="button"
                 (click)="atualizar = true">Atualizar</button>
 
-            <form *ngIf="atualizar" (submit)="update()" class="updateForm">
+            <form *ngIf="atualizar && user.role != 'UTILIZADOR'" (submit)="update()" class="updateForm">
 
                 <label>Resultado do Teste
                     <select input [(ngModel)]="teste.resultadoTeste" name="resultadoTeste">

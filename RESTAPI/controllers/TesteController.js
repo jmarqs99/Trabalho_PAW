@@ -58,9 +58,17 @@ TesteController.verTestes = function (req, res, next) {
         if (err) {
             next(err)
         } else {
-
-            res.json(testes)
-
+            if (req.user.role == "UTILIZADOR") {
+                let result = []
+                testes.forEach(function (teste, index) {
+                    if (req.user.nmrCC == teste.nmrCC) {
+                        result.push(teste);
+                    }
+                })
+                res.json(result)
+            } else {
+                res.json(testes)
+            }
         }
     })
 }

@@ -53,6 +53,7 @@ export class TestesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTestes();
+    this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
   getTestes() {

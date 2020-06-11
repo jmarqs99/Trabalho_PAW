@@ -20,8 +20,7 @@
                         <button routerLink="/pedidos" class="btn btn-dark" type="button">Pedidos</button>
                         <button routerLink="/utilizadores" class="btn btn-warning" *ngIf="havePremission('TECNICO')"
                                 type="button">Utilizadores</button>
-                        <button routerLink="/testes" class="btn btn-info" *ngIf="havePremission('TECNICO')"
-                                type="button">Testes</button>
+                        <button routerLink="/testes" class="btn btn-info" type="button">Testes</button>
                         <button routerLink="/tecnicos" class="btn btn-success" *ngIf="havePremission('ADMIN')"
                                 type="button">Técnicos</button>
                         <button routerLink="/admins" class="btn btn-secondary" *ngIf="havePremission('ADMIN')"
