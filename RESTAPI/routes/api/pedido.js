@@ -11,7 +11,7 @@ router.get('/:pedidoId',authorize(["TECNICO"]), pedidoController.getOnePedido);
 router.put('/:pedidoId',authorize(["TECNICO"]), pedidoController.updatePedido);
 
 router.put('/pedidoUpload/:pedidoId', pedidoController.updateUpload)
-
+router.get('/download/:pedidoId', authorize(["TECNICO"]),pedidoController.downloadFile);
 
 
 module.exports = router;

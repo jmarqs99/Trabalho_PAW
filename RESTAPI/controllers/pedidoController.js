@@ -46,7 +46,7 @@ pedidoController.updateUpload = function (req, res, next) {
                 if (err) {
                     next(err);
                 } else {
-                    file.mv('uploads/' + req.params.pedidoId, function (err, result) {
+                    file.mv('uploads/' + req.params.pedidoId+".pdf", function (err, result) {
                         if (err) {
                             next(err)
                         }
@@ -120,5 +120,26 @@ pedidoController.deletePedido = function (req, res, next) {
         }
     })
 }
+
+pedidoController.downloadFile = function(req, res,next){
+    const file = `./uploads/${req.params.pedidoId}.pdf`;
+    var options = {
+        root: "./uploads",
+        dotfiles: 'deny',
+        headers: {
+          'x-timestamp': Date.now(),
+          'x-sent': true
+        }
+      }
+    
+      var fileName = req.params.pedidoId + ".pdf"
+      res.sendFile(fileName, options, function (err) {
+        if (err) {
+          next(err)
+        } else {
+          console.log('Sent:', fileName)
+        }
+      })
+};
 
 module.exports = pedidoController;

@@ -146,6 +146,7 @@
             <p>Estado do teste deste pedido: {{currentPedido.estadoTeste}}</p>
             <p>Resultado do teste deste pedido: {{currentPedido.resultadoTeste}}</p>
             <p>Foi dado upload com os resultados do teste deste pedido? {{currentPedido.havePDF}}</p>
+            <button class="btn btn-secondary" *ngIf="currentPedido.havePDF" (click)="getPDF(currentPedido._id)">Ver PDF</button>
 
             <button *ngIf="atualizarPedidoUpload == false && atualizarPedido == false && user.role != 'UTILIZADOR'"
                 class="btn btn-primary" type="button" (click)="atualizarPedidoUpload = true">Upload</button>

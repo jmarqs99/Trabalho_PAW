@@ -363,5 +363,11 @@ export class PedidosComponent implements OnInit {
     }
   }
 
+  getPDF(id: String){
+    console.log(id)
+    this.rest.getPDF(id).subscribe((data)=>{
+      console.log("here")
+      window.open(window.URL.createObjectURL(data));});
+  }
 
 }

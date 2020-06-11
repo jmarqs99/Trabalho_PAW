@@ -17,6 +17,12 @@ const httpOptionsFile = {
     'Accept': 'application/json'
   })
 };
+const httpOptionsGetFile = {
+  headers: new HttpHeaders({
+
+    responseType: 'blob'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -120,6 +126,13 @@ export class RestService {
 
   testesPorDia(data: Date): Observable<any> {
     return this.http.get<any>(endpoint + "testes/numeroTestesDia/" + data)
+  }
+
+  getPDF(id: String): Observable<any> {
+    const requestOptions: Object = {
+      responseType: 'blob'
+    }
+    return this.http.get<any>(endpoint + "pedido/download/" + id,requestOptions)
   }
 
 }
