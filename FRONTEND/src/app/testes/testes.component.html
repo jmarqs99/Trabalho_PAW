@@ -17,7 +17,7 @@
 
         <button *ngIf="addingTeste == false" class="btn btn-primary" type="button" (click)="addingTeste = true">Agendar
             Teste</button>
-        <form *ngIf="addingTeste" (submit)="addTeste()" (submit)="validarTeste()">
+        <form *ngIf="addingTeste" (submit)="addTeste()">
             <div class="form-group">
                 <label class="control-label">ID do pedido:
                     <input class="form-control"
@@ -51,7 +51,7 @@
     <div class="pesquisa">
 
         <h6>Pesquisar pelo ID do teste </h6>
-        <form (submit)="listarID()" (submit)="validarId()">
+        <form (submit)="listarID()">
             <div class="form-group">
                 <label class="control-label">
                     <input class="form-control" [(ngModel)]="IDpesquisa"
@@ -65,7 +65,7 @@
         <br>
 
         <h6>Pesquisar pelo cc do user do teste</h6>
-        <form (submit)="pesquisaCC()"  (submit)= "validarCC()">
+        <form (submit)="pesquisaCC()">
             <div class="form-group">
 
                 <label class="control-label">

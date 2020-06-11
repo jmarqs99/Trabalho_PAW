@@ -13,7 +13,7 @@
             Pedido</button>
 
 
-        <form *ngIf="addingPedido" (submit)="addPedido()" (submit)="validarPedido()">
+        <form *ngIf="addingPedido" (submit)="addPedido()">
 
             <div class="form-group">
                 <label class="control-label">Informação relevante:
@@ -47,7 +47,6 @@
             <button *ngIf="addingPedido == true" class="btn btn-danger" type="button"
                 (click)="addingPedido = false">Cancelar</button>
         </form>
-
 
     </div>
 
@@ -103,11 +102,10 @@
         </form>
     </div>
 
-
     <div class="pesquisa">
 
         <h5>Pesquisar pelo ID do pedido </h5>
-        <form (submit)="filtroID()" (submit)="validarId()">
+        <form (submit)="filtroID()">
             <div class="form-group">
                 <label class="control-label">
                     <input class="form-control" [(ngModel)]="IDfiltro"
@@ -121,7 +119,7 @@
         <br>
 
         <h5>Pesquisar pelo CC do utilizador </h5>
-        <form (submit)="filtroNCC()" (submit)="validarNcc()">
+        <form (submit)="filtroNCC()">
             <div class="form-group">
 
                 <label class="control-label">
@@ -131,17 +129,11 @@
 
             </div>
 
-
             <button class="btn btn-primary" type="submit">pesquisar</button>
             <button *ngIf="viewingListarCC == true" class="btn btn-danger" (click)="getPedidos()">Voltar</button>
         </form>
 
-
-
     </div>
-
-
-
 
     <div class="conteiner">
 
@@ -186,9 +178,7 @@
                 class="btn btn-primary" type="button" (click)="atualizarPedidoUpload = true">Upload</button>
 
 
-
-
-            <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)" (submit)="verificarUpload()">
+            <form *ngIf="atualizarPedidoUpload" (submit)="uploadFicheiro(currentPedido._id)">
                 <br>
                 <h6>Anexar ficheiro pdf ao pedido {{currentPedido._id}}</h6>
                 <input type="file" (change)="fileChanged($event)" />
@@ -199,16 +189,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
 
 </body>
 
