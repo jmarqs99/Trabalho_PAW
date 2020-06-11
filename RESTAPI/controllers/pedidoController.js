@@ -8,31 +8,18 @@ const pedidoController = {};
 
 pedidoController.criarPedido = function (req, res, next) {
     if (req.body.nmrCC && req.body.informacao) {
-        Pedido.findOne({ _id: req.body.pedidoId }, function (err, pedido) {
+
+        const newPedido = new Pedido(req.body)
+
+        newPedido.save(function (err) {
             if (err) {
                 next(err);
             } else {
-
-                if (pedido == null) {
-                    const newPedido = new Pedido(req.body)
-
-                    newPedido.save(function (err) {
-                        if (err) {
-                            next(err);
-                        } else {
-                            res.json(newPedido);
-                         
-                        }
-                    })
-
-                    
-                }
-                else {
-                    res.status(400).json({ invalidArguments: 'true' });
-                }
+                res.json(newPedido);
 
             }
-        });
+        })
+
     }
     else {
         res.status(400).json({ invalidArguments: 'true' });
@@ -53,25 +40,25 @@ pedidoController.updatePedido = function (req, res, next) {
 }
 pedidoController.updateUpload = function (req, res, next) {
     const file = req.files.pdf
-    if (file){
-    Pedido.findByIdAndUpdate(req.params.pedidoId, { havePDF: true }, { new: true },
-        function (err, pedido) {
-            if (err) {
-                next(err);
-            } else {
-                file.mv('uploads/' + req.params.pedidoId, function (err, result) {
-                    if (err) {
-                        next(err)
-                    }
-                    else {
-                        res.status(200).send({
-                            success: true,
-                            message: "file uploaded"
-                        })
-                    }
-                })
-            }
-        });
+    if (file) {
+        Pedido.findByIdAndUpdate(req.params.pedidoId, { havePDF: true }, { new: true },
+            function (err, pedido) {
+                if (err) {
+                    next(err);
+                } else {
+                    file.mv('uploads/' + req.params.pedidoId, function (err, result) {
+                        if (err) {
+                            next(err)
+                        }
+                        else {
+                            res.status(200).send({
+                                success: true,
+                                message: "file uploaded"
+                            })
+                        }
+                    })
+                }
+            });
     } else {
         res.status(400).send({
             invalidFile: true
@@ -85,17 +72,17 @@ pedidoController.getAllPedidos = function (req, res, next) {
         if (err) {
             next(err)
         } else {
-            if ( req.user.role == "UTILIZADOR"){
+            if (req.user.role == "UTILIZADOR") {
                 let result = []
-                pedidos.forEach(function(pedido,index){
-                    if (req.user.nmrCC == pedido.nmrCC){
+                pedidos.forEach(function (pedido, index) {
+                    if (req.user.nmrCC == pedido.nmrCC) {
                         result.push(pedido);
                     }
                 })
                 res.json(result)
             } else {
                 res.json(pedidos)
-            }  
+            }
         }
     })
 }
