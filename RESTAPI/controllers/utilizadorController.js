@@ -107,7 +107,7 @@ utilizadorController.verTodosUtilizadores = function (req, res, next) {
 }*/
 
 utilizadorController.numeroInfetados = function (req, res, next) {
-  Utilizador.countDocuments({ estado: 'Infetado' }, function (err, count) {
+  Utilizador.countDocuments({ estado: "Infetado" }, function (err, count) {
     if(err) {} else {
     res.status(200).json(count);
     }
