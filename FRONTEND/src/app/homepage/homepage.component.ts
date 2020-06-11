@@ -15,8 +15,10 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("currentUser"))
-    this.getNumeroInfetados();
-    this.getTestesPorDia();
+    if (this.user.role != 'UTILIZADOR') {
+      this.getNumeroInfetados();
+      this.getTestesPorDia();
+    }
   }
 
   havePremission(roleRequired: string): boolean {
@@ -42,17 +44,17 @@ export class HomepageComponent implements OnInit {
         const data = new Date();
         data.setDate(data.getDate() - index)
         this.rest.testesPorDia(data).subscribe((numTestes: any) => {
-          testeData.push({ y: numTestes, label: (data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear()) })
+          testeData.push({ y: numTestes, label: (data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear()) })
           done++;
           data.setDate(data.getDate() - 1)
           if (done == 10) resolve();
         })
       }
     }).then(() => {
-      testeData.sort(function(a, b) {
-        if (new Date(a.label) > new Date(b.label)){
+      testeData.sort(function (a, b) {
+        if (new Date(a.label) > new Date(b.label)) {
           return 1;
-        }  
+        }
         return -1;
       })
       let chart = new CanvasJS.Chart("chartContainer", {
