@@ -42,6 +42,12 @@ export class TestesComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("currentUser"))
   }
 
+  get testesP(): any[] {
+    return this.testes
+      .map((country, i) => ({ id: i + 1, ...country }))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
   getTestes() {
     this.testes = [];
     this.viewingPesquisarID = false;

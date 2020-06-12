@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let t of admins; let i=index;">
+                    <tr *ngFor="let t of adminsP; let i=index;">
                         <td (click)="adminInfo(t._id)" title="Clica para veres/esconderes informações deste Admin!">
                             {{ t.primeiroNome}} </td>
                         <td>{{ t.ultimoNome }}</td>

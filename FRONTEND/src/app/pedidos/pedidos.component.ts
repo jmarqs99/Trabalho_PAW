@@ -59,6 +59,7 @@ export class PedidosComponent implements OnInit {
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
+
   getPedidos() {
     this.pedidos = [];
     this.viewingListar = true;
