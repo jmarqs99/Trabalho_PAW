@@ -42,7 +42,7 @@
             <p>ID do Utilizador:  <span>{{currentUtilizador._id}}</span></p>
             <p *ngIf="user.role=='ADMIN'">Numero de testes: <span>{{currentUtilizador.NumeroTestes}}</span></p>
             <p>Estado do utilizador : <span>{{currentUtilizador.estado}} </span>
-                <button *ngIf="atualizar == false" class="btn btn-primary" type="button"
+                <button *ngIf="atualizar == false && user.role=='ADMIN'" class="btn btn-primary" type="button"
                     (click)="atualizar = true">Atualizar</button> 
             </p>
         </div>

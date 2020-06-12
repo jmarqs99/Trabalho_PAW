@@ -81,7 +81,6 @@ export class PedidosComponent implements OnInit {
     }
     else {
       this.pedido.nmrCC = this.user.nmrCC;
-      console.log(this.pedido)
       this.rest.addPedido(this.pedido).subscribe((result: Pedido) => {
         this.addingPedido = false;
         this.getPedidos();

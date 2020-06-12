@@ -15,7 +15,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("currentUser"))
-    if (this.user.role != 'UTILIZADOR') {
+    if (this.havePremission('ADMIN')) {
       this.getNumeroInfetados();
       this.getTestesPorDia();
     }

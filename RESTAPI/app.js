@@ -67,13 +67,15 @@ mongoose.connect('mongodb+srv://admin:pawtrabalhopaw2020@cluster0-6uaiy.mongodb.
   .catch((err) => console.error(err));
 
 
+
+
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(sessionMiddleware);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..','FRONTEND','dist','frontend')));
 
 
 app.use('/api/utilizador', apiUtilizadorRouter);
@@ -83,6 +85,14 @@ app.use('/api/admin', adminRouter);
 app.use('/api', sessionRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumment));
 app.use('/api/testes', TesteRouter)
+
+app.use('/*',function(req,res){
+  try{
+    res.sendFile(path.join(__dirname, '..','FRONTEND','dist','frontend','index.html'));
+  } catch(err){
+    console.log(err)
+  }
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -99,5 +109,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message || 'error');
 });
+
+
 
 module.exports = app;

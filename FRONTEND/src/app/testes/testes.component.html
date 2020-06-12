@@ -61,7 +61,7 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th *ngIf="user.role != 'UTILIZADOR'" scope="col">Apagar Pedido</th>
+                        <th *ngIf="user.role != 'UTILIZADOR'" scope="col">Apagar Teste</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +84,7 @@
         </div>
         <div class="info" *ngIf="viewingTeste">
             <p>ID do teste: {{currentTeste._id}}</p>
+            <p>ID do pedido: {{currentTeste.pedidoId}}</p>
             <p>Nr CC do Utilizador: {{currentTeste.nmrCC}}</p>
             <p>Estado do Teste : {{currentTeste.estadoTeste}} </p>
             <p>Resultado do Teste : {{currentTeste.resultadoTeste}}</p>

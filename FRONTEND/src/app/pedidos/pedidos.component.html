@@ -119,13 +119,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let p of pedidosP; let i=index;">
-                        <span (click)="pedidoInfo(p._id)"
-                            title="Clica para veres/esconderes informações deste pedido!">ID:
-                            {{p._id}}&nbsp; &nbsp;</span>
+                    <tr *ngFor="let p of pedidosP; let i=index">
+                        <td (click)="pedidoInfo(p._id)" title="Clica para veres/esconderes informações deste pedido!">
+                            {{ p._id}} </td>
                         <td *ngIf="user.role != 'UTILIZADOR'" (click)="delete(p._id)"> <button class="btn btn-danger">Apagar</button></td>
                     </tr>
-
                 </tbody>
             </table>
             <div class="paginacao">

@@ -22,7 +22,7 @@ export class UtilizadoresComponent implements OnInit {
   pageSize = 10;
   collectionSize;
   numeroTestes: number;
-  user:any
+  user: any
 
 
   constructor(public rest: RestService, private route: ActivatedRoute, private router: Router) { }
@@ -73,11 +73,14 @@ export class UtilizadoresComponent implements OnInit {
         this.currentUtilizador = utilizadorResult;
         this.novoEstado = utilizadorResult.estado;
         this.atualizar = false;
-        
-        this.rest.testesPessoa(this.currentUtilizador.nmrCC).subscribe((data:number) => {
+        if (this.user.role == "ADMIN") {
+          this.rest.testesPessoa(this.currentUtilizador.nmrCC).subscribe((data: number) => {
+            this.viewingUtilizador = true
+            this.currentUtilizador.NumeroTestes = data;
+          })
+        } else {
           this.viewingUtilizador = true
-          this.currentUtilizador.NumeroTestes = data;
-        })
+        }
       });
     }
   }
